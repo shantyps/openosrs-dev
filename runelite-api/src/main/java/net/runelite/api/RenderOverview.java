@@ -45,6 +45,9 @@ public interface RenderOverview
 	 */
 	float getWorldMapZoom();
 
+	void setWorldMapZoomSpeed(int zoomSpeed);
+	void setWorldMapZoom(float zoom);
+
 	/**
 	 * Sets the target position of the world map.
 	 *
