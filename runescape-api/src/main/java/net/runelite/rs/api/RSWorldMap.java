@@ -15,6 +15,14 @@ public interface RSWorldMap extends RenderOverview
 	@Import("zoom")
 	float getWorldMapZoom();
 
+	@Import("zoom")
+	@Override
+	void setWorldMapZoom(float zoom);
+
+	@Import("zoomTarget")
+	float getWorldMapZoomTarget();
+
+
 	@Import("worldMapTargetX")
 	int getWorldMapTargetX();
 
