@@ -53,6 +53,8 @@ public interface ScriptEvent
 	 */
 	ScriptEvent setSource(Widget widget);
 
+	Object[] getArguments();
+
 	/**
 	 * Gets the menu index of the event
 	 *
@@ -86,6 +88,8 @@ public interface ScriptEvent
 	 * @return
 	 */
 	int getTypedKeyChar();
+
+	int type();
 
 	/**
 	 * Executes a cs2 script specified by this event

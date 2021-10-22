@@ -62,4 +62,6 @@ public interface RSScriptEvent extends ScriptEvent
 	@Import("keyPressed")
 		// also a shit name
 	int getTypedKeyChar();
+	@Import("type")
+	int type();
 }
