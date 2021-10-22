@@ -81,6 +81,7 @@ public abstract class SoundEffectMixin implements RSClient
 				SoundEffectPlayed event = new SoundEffectPlayed(lastSoundEffectSourceActor);
 				event.setSoundId(client.getQueuedSoundEffectIDs()[soundIndex]);
 				event.setDelay(client.getQueuedSoundEffectDelays()[soundIndex]);
+				event.setLoops(client.getQueuedSoundEffectLoops()[soundIndex]);
 				client.getCallbacks().post(event);
 				consumed = event.isConsumed();
 			}
@@ -97,6 +98,7 @@ public abstract class SoundEffectMixin implements RSClient
 				event.setSceneX(x);
 				event.setSceneY(y);
 				event.setRange(range);
+				event.setLoops(client.getQueuedSoundEffectLoops()[soundIndex]);
 				event.setDelay(client.getQueuedSoundEffectDelays()[soundIndex]);
 				client.getCallbacks().post(event);
 				consumed = event.isConsumed();
