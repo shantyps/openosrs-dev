@@ -132,6 +132,8 @@ public interface Actor extends Renderable, Locatable
 	 */
 	int getCurrentOrientation();
 
+	int getFacedDirection();
+
 	/**
 	 * Gets the current animation the actor is performing.
 	 *
