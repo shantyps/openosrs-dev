@@ -143,6 +143,7 @@ public class DevToolsPlugin extends Plugin
 	private DevToolsButton widgetInspector;
 	private DevToolsButton varInspector;
 	private DevToolsButton projectileInspector;
+	private DevToolsButton eventInspector;
 	private DevToolsButton soundEffects;
 	private DevToolsButton scriptInspector;
 	private DevToolsButton inventoryInspector;
@@ -191,6 +192,7 @@ public class DevToolsPlugin extends Plugin
 		widgetInspector = new DevToolsButton("Widget Inspector");
 		varInspector = new DevToolsButton("Var Inspector");
 		projectileInspector = new DevToolsButton("Projectile Inspector");
+		eventInspector = new DevToolsButton("Event Inspector");
 		soundEffects = new DevToolsButton("Sound Effects");
 		scriptInspector = new DevToolsButton("Script Inspector");
 		inventoryInspector = new DevToolsButton("Inventory Inspector");
