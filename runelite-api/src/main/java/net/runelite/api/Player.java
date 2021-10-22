@@ -104,4 +104,11 @@ public interface Player extends Actor
 	int getRSSkillLevel();
 
 	String[] getActions();
+	int minX();
+	int maxX();
+	int minY();
+	int maxY();
+	int animationCycleStart();
+	int animationCycleEnd();
+	Model attachedModel();
 }

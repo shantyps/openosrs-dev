@@ -33,10 +33,7 @@ import net.runelite.api.Perspective;
 import net.runelite.api.SkullIcon;
 import static net.runelite.api.SkullIcon.*;
 import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.events.OverheadPrayerChanged;
-import net.runelite.api.events.PlayerChanged;
-import net.runelite.api.events.PlayerCompositionChanged;
-import net.runelite.api.events.PlayerSkullChanged;
+import net.runelite.api.events.*;
 import net.runelite.api.mixins.Copy;
 import net.runelite.api.mixins.FieldHook;
 import net.runelite.api.mixins.Inject;
@@ -117,6 +114,12 @@ public abstract class RSPlayerMixin implements RSPlayer
 				new PlayerSkullChanged(this, skullFromInt(getRsSkullIcon()), skullIcon));
 		}
 		oldSkullIcon = getRsSkullIcon();
+	}
+
+	@Inject
+	@FieldHook("maxY")
+	public void attachedModel(int idx) {
+		client.getCallbacks().post(new AttachedModelEvent(this, minX(), minY(), maxX(), maxY(), animationCycleStart(), animationCycleEnd(), attachedModel()));
 	}
 
 	@Inject

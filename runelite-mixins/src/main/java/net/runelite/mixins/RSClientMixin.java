@@ -997,6 +997,14 @@ public abstract class RSClientMixin implements RSClient
 		}
 	}
 
+	@Copy("updatePendingSpawn")
+	@Replace("updatePendingSpawn")
+	@SuppressWarnings("InfiniteRecursion")
+	public static void copy$updatePendingSpawn(int plane, int x, int y, int type, int id, int var5, int orientation, int delay, int hitpoints) {
+		copy$updatePendingSpawn(plane, x, y, type, id, var5, orientation, delay, hitpoints);
+		client.getCallbacks().post(new PendingSpawnUpdated(plane, x, y, type, id, var5, orientation, delay, hitpoints));
+	}
+
 	@FieldHook("itemDragDuration")
 	@Inject
 	public static void itemPressedDurationChanged(int idx)
