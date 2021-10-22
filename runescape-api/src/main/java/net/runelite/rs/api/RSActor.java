@@ -64,9 +64,17 @@ public interface RSActor extends RSRenderable, Actor
 	@Override
 	int getAnimation();
 
+	@Import("currentSequenceFrameIndex")
+	@Override
+	int getAnimationFrameIndex();
+
 	@Import("sequence")
 	@Override
 	void setAnimation(int animation);
+
+	@Import("sequenceDelay")
+	@Override
+	int getAnimationDelay();
 
 	@Import("sequenceFrame")
 	@Override
@@ -93,6 +101,14 @@ public interface RSActor extends RSRenderable, Actor
 	@Import("spotAnimation")
 	@Override
 	int getGraphic();
+
+	@Import("spotAnimationHeight")
+	@Override
+	int getGraphicHeight();
+
+	@Import("spotAnimationStartCycle")
+	@Override
+	int getGraphicStartCycle();
 
 	@Import("spotAnimation")
 	@Override
