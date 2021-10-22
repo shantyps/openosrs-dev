@@ -381,6 +381,7 @@ public interface Actor extends Renderable, Locatable
 	 * @return the overhead text
 	 */
 	String getOverheadText();
+	boolean showPublicPlayerChat();
 
 	/**
 	 * Sets the overhead text that is displayed above the actor
