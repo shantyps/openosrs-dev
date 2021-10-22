@@ -377,7 +377,7 @@ public final class Player extends Actor {
 				if (!this.isUnanimated && super.spotAnimation != -1 && super.spotAnimationFrame != -1) {
 					var4 = class21.SpotAnimationDefinition_get(super.spotAnimation).getModel(super.spotAnimationFrame);
 					if (var4 != null) {
-						var4.offsetBy(0, -super.field1147, 0);
+						var4.offsetBy(0, -super.spotAnimationHeight, 0);
 						var5 = new Model[]{var3, var4};
 						var3 = new Model(var5, 2);
 					}
@@ -1055,11 +1055,11 @@ public final class Player extends Actor {
 		if ((var3 & 4096) != 0) {
 			var2.spotAnimation = var0.method7059();
 			var5 = var0.method6876();
-			var2.field1147 = var5 >> 16;
-			var2.field1105 = (var5 & 65535) + Client.cycle;
+			var2.spotAnimationHeight = var5 >> 16;
+			var2.spotAnimationStartCycle = (var5 & 65535) + Client.cycle;
 			var2.spotAnimationFrame = 0;
 			var2.spotAnimationFrameCycle = 0;
-			if (var2.field1105 > Client.cycle) {
+			if (var2.spotAnimationStartCycle > Client.cycle) {
 				var2.spotAnimationFrame = -1;
 			}
 

@@ -29,11 +29,11 @@ public final class class318 {
 			if ((var4 & 2) != 0) {
 				var3.spotAnimation = var0.method7059();
 				var5 = var0.method6944();
-				var3.field1147 = var5 >> 16;
-				var3.field1105 = (var5 & 65535) + Client.cycle;
+				var3.spotAnimationHeight = var5 >> 16;
+				var3.spotAnimationStartCycle = (var5 & 65535) + Client.cycle;
 				var3.spotAnimationFrame = 0;
 				var3.spotAnimationFrameCycle = 0;
-				if (var3.field1105 > Client.cycle) {
+				if (var3.spotAnimationStartCycle > Client.cycle) {
 					var3.spotAnimationFrame = -1;
 				}
 
@@ -57,18 +57,18 @@ public final class class318 {
 						var3.sequenceFrame = 0;
 						var3.sequenceFrameCycle = 0;
 						var3.sequenceDelay = var6;
-						var3.field1142 = 0;
+						var3.currentSequenceFrameIndex = 0;
 					}
 
 					if (var7 == 2) {
-						var3.field1142 = 0;
+						var3.currentSequenceFrameIndex = 0;
 					}
 				} else if (var5 == -1 || var3.sequence == -1 || KitDefinition.SequenceDefinition_get(var5).field1955 >= KitDefinition.SequenceDefinition_get(var3.sequence).field1955) {
 					var3.sequence = var5;
 					var3.sequenceFrame = 0;
 					var3.sequenceFrameCycle = 0;
 					var3.sequenceDelay = var6;
-					var3.field1142 = 0;
+					var3.currentSequenceFrameIndex = 0;
 					var3.field1129 = var3.pathLength;
 				}
 			}

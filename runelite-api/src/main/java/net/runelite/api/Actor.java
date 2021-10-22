@@ -140,6 +140,10 @@ public interface Actor extends Renderable, Locatable
 	 */
 	int getAnimation();
 
+	int getAnimationDelay();
+
+	int getAnimationFrameIndex();
+
 	/**
 	 * Gets the secondary animation the actor is performing. Usually an idle animation, or one of the walking ones.
 	 *
@@ -271,6 +275,10 @@ public interface Actor extends Renderable, Locatable
 	 * @see GraphicID
 	 */
 	int getGraphic();
+
+	int getGraphicHeight();
+
+	int getGraphicStartCycle();
 
 	/**
 	 * Set the graphic/spotanim that is currently on the actor.

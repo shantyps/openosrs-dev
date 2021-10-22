@@ -245,18 +245,18 @@ public class SpotAnimationDefinition extends DualNode {
 				var0.sequenceFrame = 0;
 				var0.sequenceFrameCycle = 0;
 				var0.sequenceDelay = var2;
-				var0.field1142 = 0;
+				var0.currentSequenceFrameIndex = 0;
 			}
 
 			if (var3 == 2) {
-				var0.field1142 = 0;
+				var0.currentSequenceFrameIndex = 0;
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || KitDefinition.SequenceDefinition_get(var1).field1955 >= KitDefinition.SequenceDefinition_get(var0.sequence).field1955) {
 			var0.sequence = var1;
 			var0.sequenceFrame = 0;
 			var0.sequenceFrameCycle = 0;
 			var0.sequenceDelay = var2;
-			var0.field1142 = 0;
+			var0.currentSequenceFrameIndex = 0;
 			var0.field1129 = var0.pathLength;
 		}
 

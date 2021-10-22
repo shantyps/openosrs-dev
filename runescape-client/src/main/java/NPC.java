@@ -100,7 +100,7 @@ public final class NPC extends Actor {
 				if (super.spotAnimation != -1 && super.spotAnimationFrame != -1) {
 					Model var4 = class21.SpotAnimationDefinition_get(super.spotAnimation).getModel(super.spotAnimationFrame);
 					if (var4 != null) {
-						var4.offsetBy(0, -super.field1147, 0);
+						var4.offsetBy(0, -super.spotAnimationHeight, 0);
 						Model[] var5 = new Model[]{var3, var4};
 						var3 = new Model(var5, 2);
 					}

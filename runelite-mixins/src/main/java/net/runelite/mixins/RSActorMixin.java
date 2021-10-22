@@ -35,13 +35,8 @@ import net.runelite.api.SpritePixels;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.api.events.ActorDeath;
-import net.runelite.api.events.AnimationChanged;
-import net.runelite.api.events.HitsplatApplied;
-import net.runelite.api.events.HealthBarUpdated;
-import net.runelite.api.events.GraphicChanged;
-import net.runelite.api.events.InteractingChanged;
-import net.runelite.api.events.OverheadTextChanged;
+import net.runelite.api.events.*;
+
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
@@ -194,7 +189,16 @@ public abstract class RSActorMixin implements RSActor
 		client.getCallbacks().post(animationChange);
 	}
 
-	@FieldHook("spotAnimation")
+	@FieldHook("currentSequenceFrameIndex")
+	@Inject
+	public void animationFrameIndexChanged(int idx)
+	{
+		AnimationFrameIndexChanged animationChange = new AnimationFrameIndexChanged();
+		animationChange.setActor(this);
+		client.getCallbacks().post(animationChange);
+	}
+
+	@FieldHook("spotAnimationStartCycle")
 	@Inject
 	public void spotAnimationChanged(int idx)
 	{

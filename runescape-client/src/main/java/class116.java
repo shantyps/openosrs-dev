@@ -256,7 +256,7 @@ public abstract class class116 extends Node {
 			}
 		}
 
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1105) {
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) {
 			if (var0.spotAnimationFrame < 0) {
 				var0.spotAnimationFrame = 0;
 			}
@@ -303,8 +303,8 @@ public abstract class class116 extends Node {
 
 				if (var0.sequenceFrame >= var2.frameIds.length) {
 					var0.sequenceFrame -= var2.frameCount;
-					++var0.field1142;
-					if (var0.field1142 >= var2.field1952) {
+					++var0.currentSequenceFrameIndex;
+					if (var0.currentSequenceFrameIndex >= var2.field1952) {
 						var0.sequence = -1;
 					} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var2.frameIds.length) {
 						class134.method2716(var2, var0.sequenceFrame, var0.x, var0.y);

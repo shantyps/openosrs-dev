@@ -197,7 +197,8 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = 2070977901
 	)
-	int field1142;
+	@Export("currentSequenceFrameIndex")
+	int currentSequenceFrameIndex;
 	@ObfuscatedName("bq")
 	@ObfuscatedGetter(
 		intValue = 1362318977
@@ -220,12 +221,14 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -341495445
 	)
-	int field1105;
+	@Export("spotAnimationStartCycle")
+	int spotAnimationStartCycle;
 	@ObfuscatedName("bn")
 	@ObfuscatedGetter(
 		intValue = 475790425
 	)
-	int field1147;
+	@Export("spotAnimationHeight")
+	int spotAnimationHeight;
 	@ObfuscatedName("bl")
 	@ObfuscatedGetter(
 		intValue = -1307254299
@@ -348,7 +351,7 @@ public abstract class Actor extends Renderable {
 		this.sequenceFrame = 0;
 		this.sequenceFrameCycle = 0;
 		this.sequenceDelay = 0;
-		this.field1142 = 0;
+		this.currentSequenceFrameIndex = 0;
 		this.spotAnimation = -1;
 		this.spotAnimationFrame = 0;
 		this.spotAnimationFrameCycle = 0;
