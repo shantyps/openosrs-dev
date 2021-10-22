@@ -169,6 +169,10 @@ public interface RSActor extends RSRenderable, Actor
 	@Override
 	int getCurrentOrientation();
 
+	@Import("facedDirection")
+	@Override
+	int getFacedDirection();
+
 	// Health stuff
 
 	@Import("healthBars")

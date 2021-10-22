@@ -151,7 +151,8 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -1908710717
 	)
-	int field1134;
+	@Export("facedDirection")
+	int facedDirection;
 	@ObfuscatedName("ba")
 	@ObfuscatedGetter(
 		intValue = -1559878903
@@ -344,7 +345,7 @@ public abstract class Actor extends Renderable {
 		this.healthBars = new IterableNodeDeque();
 		this.targetIndex = -1;
 		this.false0 = false;
-		this.field1134 = -1;
+		this.facedDirection = -1;
 		this.movementSequence = -1;
 		this.movementFrame = 0;
 		this.movementFrameCycle = 0;

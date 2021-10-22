@@ -553,7 +553,7 @@ public final class Player extends Actor {
 			super.sequence = -1;
 		}
 
-		super.field1134 = -1;
+		super.facedDirection = -1;
 		if (var1 >= 0 && var1 < 104 && var2 >= 0 && var2 < 104) {
 			if (super.pathX[0] >= 0 && super.pathX[0] < 104 && super.pathY[0] >= 0 && super.pathY[0] < 104) {
 				if (var3 == 2) {
@@ -1045,10 +1045,10 @@ public final class Player extends Actor {
 		}
 
 		if ((var3 & 1) != 0) {
-			var2.field1134 = var0.method6934();
+			var2.facedDirection = var0.method6934();
 			if (var2.pathLength == 0) {
-				var2.orientation = var2.field1134;
-				var2.field1134 = -1;
+				var2.orientation = var2.facedDirection;
+				var2.facedDirection = -1;
 			}
 		}
 

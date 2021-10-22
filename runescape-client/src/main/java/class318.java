@@ -137,7 +137,7 @@ public final class class318 {
 				var7 = var3.x - (var5 - WorldMapSectionType.baseX - WorldMapSectionType.baseX) * 64;
 				var8 = var3.y - (var6 - PlayerComposition.baseY - PlayerComposition.baseY) * 64;
 				if (var7 != 0 || var8 != 0) {
-					var3.field1134 = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
+					var3.facedDirection = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
 				}
 			}
 

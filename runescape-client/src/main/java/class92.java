@@ -93,8 +93,8 @@ public class class92 {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (WorldMapSectionType.baseX + var4.pathX[0] >> 13 << 14) + (PlayerComposition.baseY + var4.pathY[0] >> 13);
-				if (var4.field1134 != -1) {
-					Players.Players_orientations[var1] = var4.field1134;
+				if (var4.facedDirection != -1) {
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation;
 				}

@@ -30,9 +30,9 @@ public class class328 {
 				}
 			}
 
-			if (var0.field1134 != -1 && (var0.pathLength == 0 || var0.field1164 > 0)) {
-				var0.orientation = var0.field1134;
-				var0.field1134 = -1;
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1164 > 0)) {
+				var0.orientation = var0.facedDirection;
+				var0.facedDirection = -1;
 			}
 
 			int var4 = var0.orientation - var0.rotation & 2047;

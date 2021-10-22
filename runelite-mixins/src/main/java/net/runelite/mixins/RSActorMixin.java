@@ -215,6 +215,14 @@ public abstract class RSActorMixin implements RSActor
 		client.getCallbacks().post(interactingChanged);
 	}
 
+	@FieldHook("facedDirection")
+	@Inject
+	public void facedDirectionChanged(int idx)
+	{
+		FacedDirectionChanged facedDirectionChanged = new FacedDirectionChanged(this, getFacedDirection());
+		client.getCallbacks().post(facedDirectionChanged);
+	}
+
 	@FieldHook("overheadText")
 	@Inject
 	public void overheadTextChanged(int idx)
