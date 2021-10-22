@@ -223,6 +223,15 @@ public abstract class RSActorMixin implements RSActor
 		client.getCallbacks().post(facedDirectionChanged);
 	}
 
+	@FieldHook("exactMoveDirection")
+	@Inject
+	public void exactMoveReceived(int idx)
+	{
+		ExactMoveEvent exactMoveEvent = new ExactMoveEvent(this, exactMoveDeltaX1(), exactMoveDeltaX2(), exactMoveDeltaY1(), exactMoveDeltaY2(),
+				exactMoveArrive1Cycle(), exactMoveArrive2Cycle(), exactMoveDirection());
+		client.getCallbacks().post(exactMoveEvent);
+	}
+
 	@FieldHook("overheadText")
 	@Inject
 	public void overheadTextChanged(int idx)
