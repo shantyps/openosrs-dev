@@ -48,15 +48,15 @@ public abstract class class116 extends Node {
 		int var3;
 		int var4;
 		int var11;
-		if (var0.field1145 >= Client.cycle) {
-			var11 = Math.max(1, var0.field1145 - Client.cycle);
-			var3 = var0.field1109 * 64 + var0.field1148 * 128;
-			var4 = var0.field1109 * 64 + var0.field1126 * 128;
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) {
+			var11 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle);
+			var3 = var0.field1109 * 64 + var0.exactMoveDeltaX1 * 128;
+			var4 = var0.field1109 * 64 + var0.exactMoveDeltaY1 * 128;
 			var0.x += (var3 - var0.x) / var11;
 			var0.y += (var4 - var0.y) / var11;
 			var0.field1164 = 0;
-			var0.orientation = var0.field1151;
-		} else if (var0.field1165 >= Client.cycle) {
+			var0.orientation = var0.exactMoveDirection;
+		} else if (var0.exactMoveArrive2Cycle >= Client.cycle) {
 			Client.method1589(var0);
 		} else {
 			var0.movementSequence = var0.idleSequence;
@@ -217,8 +217,8 @@ public abstract class class116 extends Node {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) {
 			var0.sequence = -1;
 			var0.spotAnimation = -1;
-			var0.field1145 = 0;
-			var0.field1165 = 0;
+			var0.exactMoveArrive1Cycle = 0;
+			var0.exactMoveArrive2Cycle = 0;
 			var0.x = var0.pathX[0] * 128 + var0.field1109 * 64;
 			var0.y = var0.field1109 * 64 + var0.pathY[0] * 128;
 			var0.method2137();
@@ -227,8 +227,8 @@ public abstract class class116 extends Node {
 		if (class67.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) {
 			var0.sequence = -1;
 			var0.spotAnimation = -1;
-			var0.field1145 = 0;
-			var0.field1165 = 0;
+			var0.exactMoveArrive1Cycle = 0;
+			var0.exactMoveArrive2Cycle = 0;
 			var0.x = var0.field1109 * 64 + var0.pathX[0] * 128;
 			var0.y = var0.pathY[0] * 128 + var0.field1109 * 64;
 			var0.method2137();
@@ -285,7 +285,7 @@ public abstract class class116 extends Node {
 
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) {
 			var2 = KitDefinition.SequenceDefinition_get(var0.sequence);
-			if (var2.field1959 == 1 && var0.field1129 > 0 && var0.field1145 <= Client.cycle && var0.field1165 < Client.cycle) {
+			if (var2.field1959 == 1 && var0.field1129 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) {
 				var0.sequenceDelay = 1;
 				return;
 			}

@@ -235,37 +235,44 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -1307254299
 	)
-	int field1148;
+	@Export("exactMoveDeltaX1")
+	int exactMoveDeltaX1;
 	@ObfuscatedName("bk")
 	@ObfuscatedGetter(
 		intValue = -1553617601
 	)
-	int field1149;
+	@Export("exactMoveDeltaX2")
+	int exactMoveDeltaX2;
 	@ObfuscatedName("bp")
 	@ObfuscatedGetter(
 		intValue = -1049240827
 	)
-	int field1126;
+	@Export("exactMoveDeltaY1")
+	int exactMoveDeltaY1;
 	@ObfuscatedName("br")
 	@ObfuscatedGetter(
 		intValue = 401025355
 	)
-	int field1125;
+	@Export("exactMoveDeltaY2")
+	int exactMoveDeltaY2;
 	@ObfuscatedName("ca")
 	@ObfuscatedGetter(
 		intValue = 321143973
 	)
-	int field1145;
+	@Export("exactMoveArrive1Cycle")
+	int exactMoveArrive1Cycle;
 	@ObfuscatedName("ct")
 	@ObfuscatedGetter(
 		intValue = 1090012593
 	)
-	int field1165;
+	@Export("exactMoveArrive2Cycle")
+	int exactMoveArrive2Cycle;
 	@ObfuscatedName("cy")
 	@ObfuscatedGetter(
 		intValue = -2139655667
 	)
-	int field1151;
+	@Export("exactMoveDirection")
+	int exactMoveDirection;
 	@ObfuscatedName("cg")
 	@ObfuscatedGetter(
 		intValue = 492191773

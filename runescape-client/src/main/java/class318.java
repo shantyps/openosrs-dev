@@ -142,19 +142,19 @@ public final class class318 {
 			}
 
 			if ((var4 & 32) != 0) {
-				var3.field1148 = var0.method6915();
-				var3.field1126 = var0.method6915();
-				var3.field1149 = var0.method6958();
-				var3.field1125 = var0.method6958();
-				var3.field1145 = var0.method6934() + Client.cycle;
-				var3.field1165 = var0.method6933() + Client.cycle;
-				var3.field1151 = var0.method7059();
+				var3.exactMoveDeltaX1 = var0.method6915();
+				var3.exactMoveDeltaY1 = var0.method6915();
+				var3.exactMoveDeltaX2 = var0.method6958();
+				var3.exactMoveDeltaY2 = var0.method6958();
+				var3.exactMoveArrive1Cycle = var0.method6934() + Client.cycle;
+				var3.exactMoveArrive2Cycle = var0.method6933() + Client.cycle;
+				var3.exactMoveDirection = var0.method7059();
 				var3.pathLength = 1;
 				var3.field1129 = 0;
-				var3.field1148 += var3.pathX[0];
-				var3.field1126 += var3.pathY[0];
-				var3.field1149 += var3.pathX[0];
-				var3.field1125 += var3.pathY[0];
+				var3.exactMoveDeltaX1 += var3.pathX[0];
+				var3.exactMoveDeltaY1 += var3.pathY[0];
+				var3.exactMoveDeltaX2 += var3.pathX[0];
+				var3.exactMoveDeltaY2 += var3.pathY[0];
 			}
 
 			if ((var4 & 64) != 0) {

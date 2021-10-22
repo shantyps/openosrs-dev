@@ -907,24 +907,24 @@ public final class Player extends Actor {
 		}
 
 		if ((var3 & 256) != 0) {
-			var2.field1148 = var0.method6915();
-			var2.field1126 = var0.method6915();
-			var2.field1149 = var0.method6929();
-			var2.field1125 = var0.method6929();
-			var2.field1145 = var0.method6933() + Client.cycle;
-			var2.field1165 = var0.method6933() + Client.cycle;
-			var2.field1151 = var0.method6934();
+			var2.exactMoveDeltaX1 = var0.method6915();
+			var2.exactMoveDeltaY1 = var0.method6915();
+			var2.exactMoveDeltaX2 = var0.method6929();
+			var2.exactMoveDeltaY2 = var0.method6929();
+			var2.exactMoveArrive1Cycle = var0.method6933() + Client.cycle;
+			var2.exactMoveArrive2Cycle = var0.method6933() + Client.cycle;
+			var2.exactMoveDirection = var0.method6934();
 			if (var2.field1060) {
-				var2.field1148 += var2.tileX;
-				var2.field1126 += var2.tileY;
-				var2.field1149 += var2.tileX;
-				var2.field1125 += var2.tileY;
+				var2.exactMoveDeltaX1 += var2.tileX;
+				var2.exactMoveDeltaY1 += var2.tileY;
+				var2.exactMoveDeltaX2 += var2.tileX;
+				var2.exactMoveDeltaY2 += var2.tileY;
 				var2.pathLength = 0;
 			} else {
-				var2.field1148 += var2.pathX[0];
-				var2.field1126 += var2.pathY[0];
-				var2.field1149 += var2.pathX[0];
-				var2.field1125 += var2.pathY[0];
+				var2.exactMoveDeltaX1 += var2.pathX[0];
+				var2.exactMoveDeltaY1 += var2.pathY[0];
+				var2.exactMoveDeltaX2 += var2.pathX[0];
+				var2.exactMoveDeltaY2 += var2.pathY[0];
 				var2.pathLength = 1;
 			}
 

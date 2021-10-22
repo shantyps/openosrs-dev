@@ -6113,19 +6113,19 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 		garbageValue = "-1157644084"
 	)
 	static final void method1589(Actor var0) {
-		if (var0.field1165 == cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > KitDefinition.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) {
-			int var1 = var0.field1165 - var0.field1145;
-			int var2 = cycle - var0.field1145;
-			int var3 = var0.field1109 * 64 + var0.field1148 * 128;
-			int var4 = var0.field1109 * 64 + var0.field1126 * 128;
-			int var5 = var0.field1109 * 64 + var0.field1149 * 128;
-			int var6 = var0.field1109 * 64 + var0.field1125 * 128;
+		if (var0.exactMoveArrive2Cycle == cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > KitDefinition.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) {
+			int var1 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle;
+			int var2 = cycle - var0.exactMoveArrive1Cycle;
+			int var3 = var0.field1109 * 64 + var0.exactMoveDeltaX1 * 128;
+			int var4 = var0.field1109 * 64 + var0.exactMoveDeltaY1 * 128;
+			int var5 = var0.field1109 * 64 + var0.exactMoveDeltaX2 * 128;
+			int var6 = var0.field1109 * 64 + var0.exactMoveDeltaY2 * 128;
 			var0.x = (var5 * var2 + var3 * (var1 - var2)) / var1;
 			var0.y = (var6 * var2 + var4 * (var1 - var2)) / var1;
 		}
 
 		var0.field1164 = 0;
-		var0.orientation = var0.field1151;
+		var0.orientation = var0.exactMoveDirection;
 		var0.rotation = var0.orientation;
 	}
 }

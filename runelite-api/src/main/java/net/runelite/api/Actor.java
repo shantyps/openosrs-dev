@@ -146,6 +146,16 @@ public interface Actor extends Renderable, Locatable
 
 	int getAnimationFrameIndex();
 
+
+	int exactMoveDeltaX1();
+	int exactMoveDeltaX2();
+	int exactMoveDeltaY1();
+	int exactMoveDeltaY2();
+	int exactMoveArrive1Cycle();
+	int exactMoveArrive2Cycle();
+	int exactMoveDirection();
+
+
 	/**
 	 * Gets the secondary animation the actor is performing. Usually an idle animation, or one of the walking ones.
 	 *
