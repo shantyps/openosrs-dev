@@ -24,6 +24,7 @@
  */
 package net.runelite.rs.api;
 
+import net.runelite.api.Model;
 import net.runelite.api.Player;
 import net.runelite.mapping.Import;
 
@@ -75,4 +76,19 @@ public interface RSPlayer extends RSActor, Player
 
 	@Import("actions")
 	String[] getActions();
+
+	@Import("minX")
+	int minX();
+	@Import("maxX")
+	int maxX();
+	@Import("minY")
+	int minY();
+	@Import("maxY")
+	int maxY();
+	@Import("animationCycleStart")
+	int animationCycleStart();
+	@Import("animationCycleEnd")
+	int animationCycleEnd();
+	@Import("model0")
+	Model attachedModel();
 }

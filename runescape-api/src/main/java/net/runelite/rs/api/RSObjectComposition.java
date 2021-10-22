@@ -1,6 +1,7 @@
 package net.runelite.rs.api;
 
 import net.runelite.api.IterableHashTable;
+import net.runelite.api.Model;
 import net.runelite.api.ObjectComposition;
 import net.runelite.mapping.Import;
 
@@ -48,6 +49,9 @@ public interface RSObjectComposition extends ObjectComposition
 
 	@Import("decodeNext")
 	void decodeNext(RSBuffer buffer, int opcode);
+
+	@Import("getModel")
+	Model getModel(int var1, int var2, int[][] var3, int var4, int var5, int var6);
 
 	@Import("modelIds")
 	int[] getModelIds();
