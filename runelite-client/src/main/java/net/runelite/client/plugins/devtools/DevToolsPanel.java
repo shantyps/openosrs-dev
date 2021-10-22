@@ -56,6 +56,7 @@ class DevToolsPanel extends PluginPanel
 
 	private final WidgetInspector widgetInspector;
 	private final VarInspector varInspector;
+	private final ProjectileInspector projectileInspector;
 	private final ScriptInspector scriptInspector;
 	private final InventoryInspector inventoryInspector;
 	private final InfoBoxManager infoBoxManager;
@@ -68,6 +69,7 @@ class DevToolsPanel extends PluginPanel
 		DevToolsPlugin plugin,
 		WidgetInspector widgetInspector,
 		VarInspector varInspector,
+		ProjectileInspector projectileInspector,
 		ScriptInspector scriptInspector,
 		InventoryInspector inventoryInspector,
 		Notifier notifier,
@@ -80,6 +82,7 @@ class DevToolsPanel extends PluginPanel
 		this.plugin = plugin;
 		this.widgetInspector = widgetInspector;
 		this.varInspector = varInspector;
+		this.projectileInspector = projectileInspector;
 		this.inventoryInspector = inventoryInspector;
 		this.scriptInspector = scriptInspector;
 		this.notifier = notifier;
@@ -139,6 +142,9 @@ class DevToolsPanel extends PluginPanel
 
 		container.add(plugin.getVarInspector());
 		plugin.getVarInspector().addFrame(varInspector);
+
+		container.add(plugin.getProjectileInspector());
+		plugin.getProjectileInspector().addFrame(projectileInspector);
 
 		container.add(plugin.getSoundEffects());
 
