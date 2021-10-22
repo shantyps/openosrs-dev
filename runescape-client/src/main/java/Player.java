@@ -1026,7 +1026,7 @@ public final class Player extends Actor {
 					var2.overheadTextEffect = var5 & 255;
 					var2.overheadTextCyclesRemaining = 150;
 					var2.isAutoChatting = var17;
-					var2.field1121 = var2 != class67.localPlayer && var13.isUser && "" != Client.field550 && var11.toLowerCase().indexOf(Client.field550) == -1;
+					var2.showPublicPlayerChat = var2 != class67.localPlayer && var13.isUser && "" != Client.field550 && var11.toLowerCase().indexOf(Client.field550) == -1;
 					if (var13.isPrivileged) {
 						var12 = var17 ? 91 : 1;
 					} else {

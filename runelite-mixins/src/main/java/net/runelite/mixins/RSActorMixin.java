@@ -227,6 +227,12 @@ public abstract class RSActorMixin implements RSActor
 		}
 	}
 
+	@FieldHook("showPublicPlayerChat")
+	@Inject
+	public void showPublicPlayerChatChanged(int idx) {
+		client.getCallbacks().post(new ShowPublicPlayerChatChanged());
+	}
+
 	@Inject
 	@Override
 	public WorldArea getWorldArea()

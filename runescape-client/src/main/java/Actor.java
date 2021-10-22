@@ -94,7 +94,8 @@ public abstract class Actor extends Renderable {
 	@Export("isAutoChatting")
 	boolean isAutoChatting;
 	@ObfuscatedName("am")
-	boolean field1121;
+	@Export("showPublicPlayerChat")
+	boolean showPublicPlayerChat;
 	@ObfuscatedName("aw")
 	@ObfuscatedGetter(
 		intValue = -1274300065
@@ -330,7 +331,7 @@ public abstract class Actor extends Renderable {
 		this.walkRightSequence = -1;
 		this.runSequence = -1;
 		this.overheadText = null;
-		this.field1121 = false;
+		this.showPublicPlayerChat = false;
 		this.overheadTextCyclesRemaining = 100;
 		this.overheadTextColor = 0;
 		this.overheadTextEffect = 0;

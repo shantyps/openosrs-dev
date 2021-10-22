@@ -568,7 +568,7 @@ public class BufferedFile {
 				}
 			}
 
-			if (var0.overheadText != null && (var1 >= var76 || !var0.field1121 && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) {
+			if (var0.overheadText != null && (var1 >= var76 || !var0.showPublicPlayerChat && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) {
 				var10 = var0.defaultHeight;
 				class124.worldToScreen(var0.x, var0.y, var10);
 				if (Client.viewportTempX > -1 && Client.overheadTextCount < Client.overheadTextLimit) {
