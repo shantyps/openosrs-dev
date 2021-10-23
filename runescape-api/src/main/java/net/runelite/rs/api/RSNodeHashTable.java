@@ -1,6 +1,7 @@
 package net.runelite.rs.api;
 
 import net.runelite.api.HashTable;
+import net.runelite.api.Node;
 import net.runelite.mapping.Import;
 
 public interface RSNodeHashTable extends HashTable
