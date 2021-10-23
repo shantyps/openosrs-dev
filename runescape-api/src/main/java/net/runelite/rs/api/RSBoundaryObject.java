@@ -38,4 +38,11 @@ public interface RSBoundaryObject extends WallObject
 	int getConfig();
 
 	void setPlane(int plane);
+
+	@Import("flags")
+	int getFlags();
+
+	@Import("orientationA")
+	@Override
+	int getModelOrientation();
 }

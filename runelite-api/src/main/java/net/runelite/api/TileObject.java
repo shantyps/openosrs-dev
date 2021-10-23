@@ -113,4 +113,7 @@ public interface TileObject extends Locatable
 	 * Gets the menu actions of the object
 	 */
 	String[] getActions();
+
+	int getFlags();
+	int getModelOrientation();
 }

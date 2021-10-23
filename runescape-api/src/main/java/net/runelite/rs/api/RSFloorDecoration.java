@@ -20,4 +20,12 @@ public interface RSFloorDecoration extends GroundObject
 	RSRenderable getRenderable();
 
 	void setPlane(int plane);
+
+	@Import("flags")
+	int getFlags();
+
+	@Override
+	default int getModelOrientation() {
+		return 0;
+	}
 }

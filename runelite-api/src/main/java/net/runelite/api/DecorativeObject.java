@@ -54,4 +54,6 @@ public interface DecorativeObject extends TileObject
 	 * account for walls of varying widths.
 	 */
 	int getYOffset();
+	int getOrientation();
+	int getModelOrientation();
 }

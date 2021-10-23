@@ -92,6 +92,6 @@ public interface GameObject extends TileObject
 	 *
 	 * @see net.runelite.api.coords.Angle
 	 */
+	@Override
 	int getModelOrientation();
-	int getFlags();
 }
