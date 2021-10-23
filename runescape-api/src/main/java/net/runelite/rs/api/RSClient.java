@@ -857,6 +857,10 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	int cameraMoveToAcceleration();
 
+	@Import("minimapState")
+	@Override
+	int getMinimapState();
+
 	@Import("hintArrowType")
 	void setHintArrowTargetType(int value);
 

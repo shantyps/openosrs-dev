@@ -1544,6 +1544,8 @@ public interface Client extends GameEngine
 	int cameraMoveToSpeed();
 	int cameraMoveToAcceleration();
 
+	int getMinimapState();
+
 	/**
 	 * Gets the type of hint arrow currently displayed.
 	 *
