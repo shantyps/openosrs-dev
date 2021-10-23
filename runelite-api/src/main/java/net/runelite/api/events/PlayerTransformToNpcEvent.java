@@ -1,0 +1,1 @@
+package net.runelite.api.events;import lombok.Data;import net.runelite.api.Player;/** * @author Kris | 23/10/2021 */@Datapublic class PlayerTransformToNpcEvent {    private final Player player;}
