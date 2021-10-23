@@ -43,6 +43,7 @@ public interface Projectile extends Renderable
 	 * @return the target actor, or null if this projectile is an AoE attack
 	 */
 	Actor getInteracting();
+	int getRsInteracting();
 
 	/**
 	 * Gets the original x-axis coordinate that this projectile started from.
