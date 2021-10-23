@@ -1852,6 +1852,30 @@ public abstract class RSClientMixin implements RSClient
 		client.getCallbacks().post(ClientTick.INSTANCE);
 	}
 
+	@Copy("itemContainerSetItem")
+	@Replace("itemContainerSetItem")
+	@SuppressWarnings("InfiniteRecursion")
+	static void copy$itemContainerSetItem(int invId, int slotId, int itemId, int quantity) {
+		copy$itemContainerSetItem(invId, slotId, itemId, quantity);
+		client.getCallbacks().post(new ContainerItemChange(invId, slotId, itemId, quantity));
+	}
+
+	@Inject
+	@MethodHook("getWidget")
+	public static void postGetWidgetCall(int packedWidget) {
+		latestWidgetCall = packedWidget;
+	}
+
+	@Inject
+	static int latestWidgetCall;
+
+	@Override
+	@Inject
+	public int getLatestWidgetCall()
+	{
+		return latestWidgetCall;
+	}
+
 	@Copy("shouldLeftClickOpenMenu")
 	@Replace("shouldLeftClickOpenMenu")
 	@SuppressWarnings("InfiniteRecursion")
