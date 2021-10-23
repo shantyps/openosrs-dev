@@ -1040,6 +1040,12 @@ public abstract class RSClientMixin implements RSClient
 		client.getCallbacks().post(new JinglePlayed(jingleId));
 	}
 
+	@Inject
+	@MethodHook("performPlayerAnimation")
+	public static void performPlayerAnimation(Player var0, int var1, int var2) {
+		client.getCallbacks().post(new PlayerAnimationPlayed(var0, var1, var2));
+	}
+
 	@Copy("updatePendingSpawn")
 	@Replace("updatePendingSpawn")
 	@SuppressWarnings("InfiniteRecursion")
