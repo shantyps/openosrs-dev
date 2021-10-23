@@ -980,6 +980,12 @@ public abstract class RSClientMixin implements RSClient
 				client.cameraLookAtSpeed(), client.cameraLookAtAcceleration()));
 	}
 
+	@FieldHook("minimapState")
+	@Inject
+	public static void changeMinimapState(int idx) {
+		client.getCallbacks().post(new MinimapStateChange(client.getMinimapState()));
+	}
+
 	@Inject
 	public RSSpritePixels createItemSprite(int itemId, int quantity, int border, int shadowColor, int stackable, boolean noted)
 	{
