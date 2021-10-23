@@ -5012,7 +5012,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 					}
 
 					var5 = var3.method6939();
-					PcmPlayer.method741(var17, var5);
+					PcmPlayer.playJingle(var17, var5);
 					var1.serverPacket = null;
 					return true;
 				}

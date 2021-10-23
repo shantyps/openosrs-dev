@@ -997,6 +997,12 @@ public abstract class RSClientMixin implements RSClient
 		}
 	}
 
+	@Inject
+	@MethodHook("playJingle")
+	public static void playJingle(int jingleId, int unused) {
+		client.getCallbacks().post(new JinglePlayed(jingleId));
+	}
+
 	@Copy("updatePendingSpawn")
 	@Replace("updatePendingSpawn")
 	@SuppressWarnings("InfiniteRecursion")

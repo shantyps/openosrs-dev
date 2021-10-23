@@ -110,7 +110,7 @@ public class ScriptEvent extends Node {
 			return 1;
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) {
 			AbstractByteArrayCopier.Interpreter_intStackSize -= 2;
-			PcmPlayer.method741(Interpreter.Interpreter_intStack[AbstractByteArrayCopier.Interpreter_intStackSize], Interpreter.Interpreter_intStack[AbstractByteArrayCopier.Interpreter_intStackSize + 1]);
+			PcmPlayer.playJingle(Interpreter.Interpreter_intStack[AbstractByteArrayCopier.Interpreter_intStackSize], Interpreter.Interpreter_intStack[AbstractByteArrayCopier.Interpreter_intStackSize + 1]);
 			return 1;
 		} else {
 			int var3;

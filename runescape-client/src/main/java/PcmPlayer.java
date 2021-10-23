@@ -627,7 +627,8 @@ public class PcmPlayer {
 		descriptor = "(III)V",
 		garbageValue = "-856147347"
 	)
-	static void method741(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (WorldMapDecorationType.clientPreferences.musicVolume != 0 && var0 != -1) {
 			class67.method1886(class4.archive11, var0, 0, WorldMapDecorationType.clientPreferences.musicVolume, false);
 			Client.field663 = true;
