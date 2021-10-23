@@ -807,7 +807,11 @@ public interface RSClient extends RSGameEngine, Client
 	void setHintArrowTargetType(int value);
 
 	@Import("hintArrowType")
+	@Override
 	int getHintArrowTargetType();
+
+	@Import("hintArrowHeight")
+	int getHintArrowHeight();
 
 	@Import("hintArrowX")
 	void setHintArrowX(int value);
