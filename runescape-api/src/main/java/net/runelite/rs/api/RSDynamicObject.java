@@ -19,4 +19,11 @@ public interface RSDynamicObject extends RSRenderable, DynamicObject
 
 	@Import("sequenceDefinition")
 	RSSequenceDefinition getSequenceDefinition();
+
+	@Import("x")
+	@Override
+	int getX();
+	@Import("y")
+	@Override
+	int getY();
 }

@@ -30,13 +30,8 @@ import static net.runelite.api.Constants.ROOF_FLAG_BETWEEN;
 import static net.runelite.api.Constants.ROOF_FLAG_DESTINATION;
 import static net.runelite.api.Constants.ROOF_FLAG_HOVERED;
 import static net.runelite.api.Constants.ROOF_FLAG_POSITION;
-import net.runelite.api.DecorativeObject;
-import net.runelite.api.GroundObject;
-import net.runelite.api.Perspective;
-import net.runelite.api.SceneTileModel;
-import net.runelite.api.SceneTilePaint;
-import net.runelite.api.Tile;
-import net.runelite.api.WallObject;
+
+import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.hooks.DrawCallbacks;
@@ -1283,5 +1278,29 @@ public abstract class RSSceneMixin implements RSScene
 				}
 			}
 		}
+	}
+
+	@MethodHook("getGameObject")
+	@Inject
+	public void onGameObjectAccess(int var1, int var2, int var3) {
+		client.getCallbacks().post(GetDynamicObjectForAnimationEvent.INSTANCE);
+	}
+
+	@MethodHook("getFloorDecoration")
+	@Inject
+	public void onFloorDecorationAccess(int var1, int var2, int var3) {
+		client.getCallbacks().post(GetDynamicObjectForAnimationEvent.INSTANCE);
+	}
+
+	@MethodHook("getWallObject")
+	@Inject
+	public void onWallObjectAccess(int var1, int var2, int var3) {
+		client.getCallbacks().post(GetDynamicObjectForAnimationEvent.INSTANCE);
+	}
+
+	@MethodHook("getBoundaryObject")
+	@Inject
+	public void onBOundaryObjectAccess(int var1, int var2, int var3) {
+		client.getCallbacks().post(GetDynamicObjectForAnimationEvent.INSTANCE);
 	}
 }

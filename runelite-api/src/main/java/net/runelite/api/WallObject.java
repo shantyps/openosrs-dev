@@ -66,4 +66,6 @@ public interface WallObject extends TileObject
 	 */
 	Shape getConvexHull();
 	Shape getConvexHull2();
+
+	int getModelOrientation();
 }
