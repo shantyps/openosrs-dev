@@ -1516,6 +1516,16 @@ public interface Client extends GameEngine
 	 */
 	boolean hasHintArrow();
 
+	int getHintArrowTargetType();
+
+	int getHintArrowNpcTargetIdx();
+
+	int getHintArrowPlayerTargetIdx();
+
+	int getHintArrowX();
+
+	int getHintArrowY();
+
 	/**
 	 * Gets the type of hint arrow currently displayed.
 	 *
