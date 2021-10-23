@@ -1,3 +1,4 @@
+import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
@@ -8,7 +9,8 @@ public class class120 extends class116 {
 	@ObfuscatedGetter(
 		intValue = -346097947
 	)
-	static int field1408;
+	@Export("cameraMoveToY")
+	static int cameraMoveToY;
 	@ObfuscatedName("l")
 	@ObfuscatedGetter(
 		intValue = -2132840675

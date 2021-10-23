@@ -13,7 +13,8 @@ public class PcmPlayer {
 	@ObfuscatedGetter(
 		intValue = 2053999609
 	)
-	static int field284;
+	@Export("cameraMoveToX")
+	static int cameraMoveToX;
 	@ObfuscatedName("m")
 	@ObfuscatedGetter(
 		intValue = 1333600085

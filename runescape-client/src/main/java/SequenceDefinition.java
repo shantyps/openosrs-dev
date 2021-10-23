@@ -11,7 +11,8 @@ public class SequenceDefinition extends DualNode {
 	@ObfuscatedGetter(
 		intValue = 1752918559
 	)
-	static int field1954;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 	@ObfuscatedName("f")
 	@ObfuscatedSignature(
 		descriptor = "Lkl;"

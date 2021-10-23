@@ -11,7 +11,8 @@ public abstract class AbstractArchive {
 	@ObfuscatedGetter(
 		intValue = -1025807137
 	)
-	static int field3712;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 	@ObfuscatedName("d")
 	@ObfuscatedSignature(
 		descriptor = "Lpt;"

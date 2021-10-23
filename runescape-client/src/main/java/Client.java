@@ -151,7 +151,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 	@Export("isCameraLocked")
 	static boolean isCameraLocked;
 	@ObfuscatedName("sw")
-	static boolean[] field739;
+	@Export("cameraShaking")
+	static boolean[] cameraShaking;
 	@ObfuscatedName("uf")
 	@Export("archiveLoaders")
 	static ArrayList archiveLoaders;
@@ -276,7 +277,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 	)
 	static int field726;
 	@ObfuscatedName("sv")
-	static int[] field741;
+	@Export("cameraMoveIntensity")
+	static int[] cameraMoveIntensity;
 	@ObfuscatedName("sk")
 	@Export("zoomHeight")
 	static short zoomHeight;
@@ -284,11 +286,14 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 	@Export("zoomWidth")
 	static short zoomWidth;
 	@ObfuscatedName("sa")
-	static int[] field740;
+	@Export("cameraShakeIntensity")
+	static int[] cameraShakeIntensity;
 	@ObfuscatedName("sx")
-	static int[] field743;
+	@Export("cameraShakeCycle")
+	static int[] cameraShakeCycle;
 	@ObfuscatedName("sp")
-	static int[] field742;
+	@Export("cameraShakeSpeed")
+	static int[] cameraShakeSpeed;
 	@ObfuscatedName("qd")
 	static int[] field718;
 	@ObfuscatedName("pp")
@@ -1589,11 +1594,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 		soundLocations = new int[50];
 		soundEffects = new SoundEffect[50];
 		isCameraLocked = false;
-		field739 = new boolean[5];
-		field740 = new int[5];
-		field741 = new int[5];
-		field742 = new int[5];
-		field743 = new int[5];
+		cameraShaking = new boolean[5];
+		cameraShakeIntensity = new int[5];
+		cameraMoveIntensity = new int[5];
+		cameraShakeSpeed = new int[5];
+		cameraShakeCycle = new int[5];
 		field744 = 256;
 		field747 = 205;
 		zoomHeight = 256;
@@ -3718,54 +3723,54 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 															}
 
 															if (isCameraLocked) {
-																var4 = PcmPlayer.field284 * 128 + 64;
-																var5 = class120.field1408 * 128 + 64;
-																var6 = MidiPcmStream.getTileHeight(var4, var5, VertexNormal.Client_plane) - PacketBufferNode.field2786;
+																var4 = PcmPlayer.cameraMoveToX * 128 + 64;
+																var5 = class120.cameraMoveToY * 128 + 64;
+																var6 = MidiPcmStream.getTileHeight(var4, var5, VertexNormal.Client_plane) - PacketBufferNode.cameraMoveToHeight;
 																if (Canvas.cameraX < var4) {
-																	Canvas.cameraX = (var4 - Canvas.cameraX) * class281.field3324 / 1000 + Canvas.cameraX + Login.field906;
+																	Canvas.cameraX = (var4 - Canvas.cameraX) * class281.cameraMoveToAcceleration / 1000 + Canvas.cameraX + Login.cameraMoveToSpeed;
 																	if (Canvas.cameraX > var4) {
 																		Canvas.cameraX = var4;
 																	}
 																}
 
 																if (Canvas.cameraX > var4) {
-																	Canvas.cameraX -= class281.field3324 * (Canvas.cameraX - var4) / 1000 + Login.field906;
+																	Canvas.cameraX -= class281.cameraMoveToAcceleration * (Canvas.cameraX - var4) / 1000 + Login.cameraMoveToSpeed;
 																	if (Canvas.cameraX < var4) {
 																		Canvas.cameraX = var4;
 																	}
 																}
 
 																if (class14.cameraY < var6) {
-																	class14.cameraY = (var6 - class14.cameraY) * class281.field3324 / 1000 + class14.cameraY + Login.field906;
+																	class14.cameraY = (var6 - class14.cameraY) * class281.cameraMoveToAcceleration / 1000 + class14.cameraY + Login.cameraMoveToSpeed;
 																	if (class14.cameraY > var6) {
 																		class14.cameraY = var6;
 																	}
 																}
 
 																if (class14.cameraY > var6) {
-																	class14.cameraY -= class281.field3324 * (class14.cameraY - var6) / 1000 + Login.field906;
+																	class14.cameraY -= class281.cameraMoveToAcceleration * (class14.cameraY - var6) / 1000 + Login.cameraMoveToSpeed;
 																	if (class14.cameraY < var6) {
 																		class14.cameraY = var6;
 																	}
 																}
 
 																if (VarpDefinition.cameraZ < var5) {
-																	VarpDefinition.cameraZ = (var5 - VarpDefinition.cameraZ) * class281.field3324 / 1000 + VarpDefinition.cameraZ + Login.field906;
+																	VarpDefinition.cameraZ = (var5 - VarpDefinition.cameraZ) * class281.cameraMoveToAcceleration / 1000 + VarpDefinition.cameraZ + Login.cameraMoveToSpeed;
 																	if (VarpDefinition.cameraZ > var5) {
 																		VarpDefinition.cameraZ = var5;
 																	}
 																}
 
 																if (VarpDefinition.cameraZ > var5) {
-																	VarpDefinition.cameraZ -= class281.field3324 * (VarpDefinition.cameraZ - var5) / 1000 + Login.field906;
+																	VarpDefinition.cameraZ -= class281.cameraMoveToAcceleration * (VarpDefinition.cameraZ - var5) / 1000 + Login.cameraMoveToSpeed;
 																	if (VarpDefinition.cameraZ < var5) {
 																		VarpDefinition.cameraZ = var5;
 																	}
 																}
 
-																var4 = Varcs.field1272 * 128 + 64;
-																var5 = World.field774 * 128 + 64;
-																var6 = MidiPcmStream.getTileHeight(var4, var5, VertexNormal.Client_plane) - class9.field44;
+																var4 = Varcs.cameraLookAtX * 128 + 64;
+																var5 = World.cameraLookAtY * 128 + 64;
+																var6 = MidiPcmStream.getTileHeight(var4, var5, VertexNormal.Client_plane) - class9.cameraLookAtHeight;
 																var7 = var4 - Canvas.cameraX;
 																var8 = var6 - class14.cameraY;
 																var9 = var5 - VarpDefinition.cameraZ;
@@ -3781,14 +3786,14 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 																}
 
 																if (WorldMapIcon_1.cameraPitch < var11) {
-																	WorldMapIcon_1.cameraPitch = (var11 - WorldMapIcon_1.cameraPitch) * AbstractArchive.field3712 / 1000 + WorldMapIcon_1.cameraPitch + SequenceDefinition.field1954;
+																	WorldMapIcon_1.cameraPitch = (var11 - WorldMapIcon_1.cameraPitch) * AbstractArchive.cameraLookAtAcceleration / 1000 + WorldMapIcon_1.cameraPitch + SequenceDefinition.cameraLookAtSpeed;
 																	if (WorldMapIcon_1.cameraPitch > var11) {
 																		WorldMapIcon_1.cameraPitch = var11;
 																	}
 																}
 
 																if (WorldMapIcon_1.cameraPitch > var11) {
-																	WorldMapIcon_1.cameraPitch -= AbstractArchive.field3712 * (WorldMapIcon_1.cameraPitch - var11) / 1000 + SequenceDefinition.field1954;
+																	WorldMapIcon_1.cameraPitch -= AbstractArchive.cameraLookAtAcceleration * (WorldMapIcon_1.cameraPitch - var11) / 1000 + SequenceDefinition.cameraLookAtSpeed;
 																	if (WorldMapIcon_1.cameraPitch < var11) {
 																		WorldMapIcon_1.cameraPitch = var11;
 																	}
@@ -3804,12 +3809,12 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 																}
 
 																if (var27 > 0) {
-																	HealthBarUpdate.cameraYaw = HealthBarUpdate.cameraYaw + SequenceDefinition.field1954 + var27 * AbstractArchive.field3712 / 1000;
+																	HealthBarUpdate.cameraYaw = HealthBarUpdate.cameraYaw + SequenceDefinition.cameraLookAtSpeed + var27 * AbstractArchive.cameraLookAtAcceleration / 1000;
 																	HealthBarUpdate.cameraYaw &= 2047;
 																}
 
 																if (var27 < 0) {
-																	HealthBarUpdate.cameraYaw -= -var27 * AbstractArchive.field3712 / 1000 + SequenceDefinition.field1954;
+																	HealthBarUpdate.cameraYaw -= -var27 * AbstractArchive.cameraLookAtAcceleration / 1000 + SequenceDefinition.cameraLookAtSpeed;
 																	HealthBarUpdate.cameraYaw &= 2047;
 																}
 
@@ -3828,7 +3833,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 															}
 
 															for (var4 = 0; var4 < 5; ++var4) {
-																int var10002 = field743[var4]++;
+																int var10002 = cameraShakeCycle[var4]++;
 															}
 
 															Tile.varcs.tryWrite();
@@ -4485,7 +4490,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 					isCameraLocked = false;
 
 					for (var17 = 0; var17 < 5; ++var17) {
-						field739[var17] = false;
+						cameraShaking[var17] = false;
 					}
 
 					var1.serverPacket = null;
@@ -4590,15 +4595,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 				int var29;
 				if (ServerPacket.field2814 == var1.serverPacket) {
 					isCameraLocked = true;
-					Varcs.field1272 = var3.readUnsignedByte();
-					World.field774 = var3.readUnsignedByte();
-					class9.field44 = var3.readUnsignedShort();
-					SequenceDefinition.field1954 = var3.readUnsignedByte();
-					AbstractArchive.field3712 = var3.readUnsignedByte();
-					if (AbstractArchive.field3712 >= 100) {
-						var17 = Varcs.field1272 * 128 + 64;
-						var5 = World.field774 * 128 + 64;
-						var6 = MidiPcmStream.getTileHeight(var17, var5, VertexNormal.Client_plane) - class9.field44;
+					Varcs.cameraLookAtX = var3.readUnsignedByte();
+					World.cameraLookAtY = var3.readUnsignedByte();
+					class9.cameraLookAtHeight = var3.readUnsignedShort();
+					SequenceDefinition.cameraLookAtSpeed = var3.readUnsignedByte();
+					AbstractArchive.cameraLookAtAcceleration = var3.readUnsignedByte();
+					if (AbstractArchive.cameraLookAtAcceleration >= 100) {
+						var17 = Varcs.cameraLookAtX * 128 + 64;
+						var5 = World.cameraLookAtY * 128 + 64;
+						var6 = MidiPcmStream.getTileHeight(var17, var5, VertexNormal.Client_plane) - class9.cameraLookAtHeight;
 						var7 = var17 - Canvas.cameraX;
 						var8 = var6 - class14.cameraY;
 						var9 = var5 - VarpDefinition.cameraZ;
@@ -5393,11 +5398,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 					var5 = var3.readUnsignedByte();
 					var6 = var3.readUnsignedByte();
 					var7 = var3.readUnsignedByte();
-					field739[var17] = true;
-					field740[var17] = var5;
-					field741[var17] = var6;
-					field742[var17] = var7;
-					field743[var17] = 0;
+					cameraShaking[var17] = true;
+					cameraShakeIntensity[var17] = var5;
+					cameraMoveIntensity[var17] = var6;
+					cameraShakeSpeed[var17] = var7;
+					cameraShakeCycle[var17] = 0;
 					var1.serverPacket = null;
 					return true;
 				}
@@ -5514,15 +5519,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 
 				if (ServerPacket.field2836 == var1.serverPacket) {
 					isCameraLocked = true;
-					PcmPlayer.field284 = var3.readUnsignedByte();
-					class120.field1408 = var3.readUnsignedByte();
-					PacketBufferNode.field2786 = var3.readUnsignedShort();
-					Login.field906 = var3.readUnsignedByte();
-					class281.field3324 = var3.readUnsignedByte();
-					if (class281.field3324 >= 100) {
-						Canvas.cameraX = PcmPlayer.field284 * 128 + 64;
-						VarpDefinition.cameraZ = class120.field1408 * 128 + 64;
-						class14.cameraY = MidiPcmStream.getTileHeight(Canvas.cameraX, VarpDefinition.cameraZ, VertexNormal.Client_plane) - PacketBufferNode.field2786;
+					PcmPlayer.cameraMoveToX = var3.readUnsignedByte();
+					class120.cameraMoveToY = var3.readUnsignedByte();
+					PacketBufferNode.cameraMoveToHeight = var3.readUnsignedShort();
+					Login.cameraMoveToSpeed = var3.readUnsignedByte();
+					class281.cameraMoveToAcceleration = var3.readUnsignedByte();
+					if (class281.cameraMoveToAcceleration >= 100) {
+						Canvas.cameraX = PcmPlayer.cameraMoveToX * 128 + 64;
+						VarpDefinition.cameraZ = class120.cameraMoveToY * 128 + 64;
+						class14.cameraY = MidiPcmStream.getTileHeight(Canvas.cameraX, VarpDefinition.cameraZ, VertexNormal.Client_plane) - PacketBufferNode.cameraMoveToHeight;
 					}
 
 					var1.serverPacket = null;

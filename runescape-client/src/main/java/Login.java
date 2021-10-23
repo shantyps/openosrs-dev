@@ -12,7 +12,8 @@ public class Login {
 	@ObfuscatedGetter(
 		intValue = 1480284863
 	)
-	static int field906;
+	@Export("cameraMoveToSpeed")
+	static int cameraMoveToSpeed;
 	@ObfuscatedName("q")
 	@Export("clearLoginScreen")
 	static boolean clearLoginScreen;

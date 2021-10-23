@@ -132,8 +132,8 @@ public final class PendingSpawn extends Node {
 				var4 = Client.field565 / 256;
 			}
 
-			if (Client.field739[4] && Client.field741[4] + 128 > var4) {
-				var4 = Client.field741[4] + 128;
+			if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var4) {
+				var4 = Client.cameraMoveIntensity[4] + 128;
 			}
 
 			var5 = Client.camAngleY & 2047;
@@ -209,8 +209,8 @@ public final class PendingSpawn extends Node {
 		var9 = HealthBarUpdate.cameraYaw;
 
 		for (var10 = 0; var10 < 5; ++var10) {
-			if (Client.field739[var10]) {
-				var11 = (int)(Math.random() * (double)(Client.field740[var10] * 2 + 1) - (double)Client.field740[var10] + Math.sin((double)Client.field743[var10] * ((double)Client.field742[var10] / 100.0D)) * (double)Client.field741[var10]);
+			if (Client.cameraShaking[var10]) {
+				var11 = (int)(Math.random() * (double)(Client.cameraShakeIntensity[var10] * 2 + 1) - (double)Client.cameraShakeIntensity[var10] + Math.sin((double)Client.cameraShakeCycle[var10] * ((double)Client.cameraShakeSpeed[var10] / 100.0D)) * (double)Client.cameraMoveIntensity[var10]);
 				if (var10 == 0) {
 					Canvas.cameraX += var11;
 				}

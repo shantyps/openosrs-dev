@@ -16,7 +16,8 @@ public class Varcs {
 	@ObfuscatedGetter(
 		intValue = 1235978781
 	)
-	static int field1272;
+	@Export("cameraLookAtX")
+	static int cameraLookAtX;
 	@ObfuscatedName("fo")
 	static String field1264;
 	@ObfuscatedName("f")

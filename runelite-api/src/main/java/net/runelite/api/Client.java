@@ -1525,6 +1525,24 @@ public interface Client extends GameEngine
 	int getHintArrowX();
 
 	int getHintArrowY();
+	boolean isCameraLocked();
+	boolean[] cameraShaking();
+	int[] cameraShakeIntensity();
+	int[] cameraMoveIntensity();
+	int[] cameraShakeSpeed();
+	int[] cameraShakeCycle();
+
+	int cameraLookAtX();
+	int cameraLookAtY();
+	int cameraLookAtHeight();
+	int cameraLookAtSpeed();
+	int cameraLookAtAcceleration();
+
+	int cameraMoveToX();
+	int cameraMoveToY();
+	int cameraMoveToHeight();
+	int cameraMoveToSpeed();
+	int cameraMoveToAcceleration();
 
 	/**
 	 * Gets the type of hint arrow currently displayed.

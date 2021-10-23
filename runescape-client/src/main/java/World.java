@@ -13,7 +13,8 @@ public class World {
 	@ObfuscatedGetter(
 		intValue = -1010823159
 	)
-	static int field774;
+	@Export("cameraLookAtY")
+	static int cameraLookAtY;
 	@ObfuscatedName("k")
 	@ObfuscatedGetter(
 		intValue = -48833233

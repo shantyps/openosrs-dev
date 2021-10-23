@@ -9,7 +9,8 @@ public class class281 {
 	@ObfuscatedGetter(
 		intValue = -1543804789
 	)
-	static int field3324;
+	@Export("cameraMoveToAcceleration")
+	static int cameraMoveToAcceleration;
 	@ObfuscatedName("a")
 	static byte[][][] field3323;
 

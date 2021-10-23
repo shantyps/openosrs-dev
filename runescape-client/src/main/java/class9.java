@@ -9,7 +9,8 @@ public class class9 implements MouseWheel {
 	@ObfuscatedGetter(
 		intValue = 2032857847
 	)
-	static int field44;
+	@Export("cameraLookAtHeight")
+	static int cameraLookAtHeight;
 	@ObfuscatedName("l")
 	@ObfuscatedSignature(
 		descriptor = "Li;"
