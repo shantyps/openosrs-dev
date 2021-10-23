@@ -1004,7 +1004,7 @@ public abstract class RSClientMixin implements RSClient
 	}
 
 	@Inject
-	@MethodHook("performPlayerAnimation")
+	@MethodHook(value = "performPlayerAnimation", end = true)
 	public static void performPlayerAnimation(Player var0, int var1, int var2) {
 		client.getCallbacks().post(new PlayerAnimationPlayed(var0, var1, var2));
 	}
