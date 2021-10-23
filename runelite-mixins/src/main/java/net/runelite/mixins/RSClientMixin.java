@@ -990,6 +990,33 @@ public abstract class RSClientMixin implements RSClient
 		client.getCallbacks().post(draggingWidgetChanged);
 	}
 
+	@FieldHook("cameraShakeSpeed")
+	@Inject
+	public static void cameraShakeSpeedChange(int idx) {
+		client.getCallbacks().post(new CameraShakeEvent(idx, client.cameraShakeIntensity()[idx], client.cameraMoveIntensity()[idx],
+				client.cameraShakeSpeed()[idx]));
+	}
+
+	@FieldHook("cameraShaking")
+	@Inject
+	public static void cameraShakingChange(int idx) {
+		client.getCallbacks().post(new CameraResetEvent(idx));
+	}
+
+	@FieldHook("cameraMoveToAcceleration")
+	@Inject
+	public static void cameraMoveTo(int idx) {
+		client.getCallbacks().post(new CameraMoveToEvent(client.cameraMoveToX(), client.cameraMoveToY(), client.cameraMoveToHeight(),
+				client.cameraMoveToSpeed(), client.cameraMoveToAcceleration()));
+	}
+
+	@FieldHook("cameraLookAtAcceleration")
+	@Inject
+	public static void cameraLookAt(int idx) {
+		client.getCallbacks().post(new CameraLookAtEvent(client.cameraLookAtX(), client.cameraLookAtY(), client.cameraLookAtHeight(),
+				client.cameraLookAtSpeed(), client.cameraLookAtAcceleration()));
+	}
+
 	@Inject
 	public RSSpritePixels createItemSprite(int itemId, int quantity, int border, int shadowColor, int stackable, boolean noted)
 	{

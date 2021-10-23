@@ -805,6 +805,58 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("runScript")
 	void runScript(RSScriptEvent ev, int ex, int var2);
 
+	@Import("isCameraLocked")
+	@Override
+	boolean isCameraLocked();
+
+	@Import("cameraShaking")
+	@Override
+	boolean[] cameraShaking();
+	@Import("cameraShakeIntensity")
+	@Override
+	int[] cameraShakeIntensity();
+	@Import("cameraMoveIntensity")
+	@Override
+	int[] cameraMoveIntensity();
+	@Import("cameraShakeSpeed")
+	@Override
+	int[] cameraShakeSpeed();
+	@Import("cameraShakeCycle")
+	@Override
+	int[] cameraShakeCycle();
+
+	@Import("cameraLookAtX")
+	@Override
+	int cameraLookAtX();
+	@Import("cameraLookAtY")
+	@Override
+	int cameraLookAtY();
+	@Import("cameraLookAtHeight")
+	@Override
+	int cameraLookAtHeight();
+	@Import("cameraLookAtSpeed")
+	@Override
+	int cameraLookAtSpeed();
+	@Import("cameraLookAtAcceleration")
+	@Override
+	int cameraLookAtAcceleration();
+
+	@Import("cameraMoveToX")
+	@Override
+	int cameraMoveToX();
+	@Import("cameraMoveToY")
+	@Override
+	int cameraMoveToY();
+	@Import("cameraMoveToHeight")
+	@Override
+	int cameraMoveToHeight();
+	@Import("cameraMoveToSpeed")
+	@Override
+	int cameraMoveToSpeed();
+	@Import("cameraMoveToAcceleration")
+	@Override
+	int cameraMoveToAcceleration();
+
 	@Import("hintArrowType")
 	void setHintArrowTargetType(int value);
 
