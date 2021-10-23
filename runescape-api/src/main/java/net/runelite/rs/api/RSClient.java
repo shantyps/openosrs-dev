@@ -78,6 +78,7 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("worldId")
 	int getWorld();
 
+
 	@Import("fps")
 	@Override
 	int getFPS();
@@ -120,6 +121,9 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("baseY")
 	@Override
 	int getBaseY();
+
+	@Override
+	int getLatestWidgetCall();
 
 	@Import("currentLevels")
 	@Override
