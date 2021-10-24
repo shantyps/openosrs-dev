@@ -24,12 +24,8 @@
  */
 package net.runelite.mixins;
 
-import net.runelite.api.HashTable;
-import net.runelite.api.Node;
-import net.runelite.api.Point;
-import net.runelite.api.WidgetNode;
-import net.runelite.api.events.WidgetHiddenChanged;
-import net.runelite.api.events.WidgetPositioned;
+import net.runelite.api.*;
+import net.runelite.api.events.*;
 import net.runelite.api.mixins.Copy;
 import net.runelite.api.mixins.FieldHook;
 import net.runelite.api.mixins.Inject;
@@ -73,6 +69,7 @@ public abstract class RSWidgetMixin implements RSWidget
 		rl$parentId = -1;
 		rl$x = -1;
 		rl$y = -1;
+		client.getCallbacks().post(PostWidgetConstructed.INSTANCE);
 	}
 
 	@Inject
@@ -475,6 +472,75 @@ public abstract class RSWidgetMixin implements RSWidget
 		WidgetPositioned widgetPositioned = WidgetPositioned.INSTANCE;
 		client.getCallbacks().postDeferred(widgetPositioned);
 	}
+
+	@FieldHook("scrollY")
+	@Inject
+	public void onScrollYChanged(int idx) {
+		client.getCallbacks().post(new WidgetScrollHeightChanged(getScrollY()));
+	}
+
+	@FieldHook("text")
+	@Inject
+	public void onTextChanged(int idx) {
+		client.getCallbacks().post(new WidgetTextChanged(getRSText()));
+	}
+
+	@FieldHook("sequenceId")
+	@Inject
+	public void onSequenceChanged(int idx) {
+		client.getCallbacks().post(new WidgetSequenceChanged(getAnimationId()));
+	}
+
+	@FieldHook("color")
+	@Inject
+	public void onColorChanged(int idx) {
+		client.getCallbacks().post(new WidgetColorChanged(getTextColor()));
+	}
+
+	@FieldHook("modelZoom")
+	@Inject
+	public void onModelZoomChanged(int idx) {
+		if (getModelType() == 4) {
+			final ItemComposition composition = client.getItemComposition(getModelId());
+			client.getCallbacks().post(new WidgetSetObject(getModelId(), composition.getZoom2d() * 100 / getModelZoom(), false));
+		} else {
+			client.getCallbacks().post(new WidgetZoomChanged(getModelZoom(), getRotationX(), getRotationZ()));
+		}
+	}
+
+	@FieldHook("rawY")
+	@Inject
+	public void onComponentPositionChanged(int idx) {
+		client.getCallbacks().post(new WidgetPositionChanged(getOriginalX(), getOriginalY()));
+	}
+
+	@FieldHook("modelId")
+	@Inject
+	public void onComponentModelIdChanged(int idx) {
+		if (getModelType() == 1) client.getCallbacks().post(new WidgetModelChanged(getModelId()));
+		else if (getModelType() == 3) client.getCallbacks().post(new WidgetSetPlayerHead());
+		else if (getModelType() == 2) client.getCallbacks().post(new WidgetSetNpcHead(getModelId()));
+	}
+
+	@FieldHook("itemQuantity")
+	@Inject
+	public void onItemQuantityChanged(int idx) {
+		client.getCallbacks().post(new WidgetSetObject(getItemId(), getItemQuantity(), true));
+	}
+
+	@FieldHook("modelRotation")
+	@Inject
+	public void onModelRotation(int idx) {
+		client.getCallbacks().post(new WidgetModelRotate(getModelRotation()));
+	}
+
+	@FieldHook("isHidden")
+	@Inject
+	public void onModelVisibilityChange(int idx) {
+		client.getCallbacks().post(new WidgetVisibilityChange(isHidden()));
+	}
+
+
 
 	@Inject
 	@Override

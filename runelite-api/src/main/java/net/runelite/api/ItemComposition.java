@@ -147,6 +147,8 @@ public interface ItemComposition extends ParamHolder
 	 */
 	int getInventoryModel();
 
+	int getZoom2d();
+
 	/**
 	 * Since the client reuses item models, it stores colors that can be replaced.
 	 * This returns what colors the item model will be replaced with.
