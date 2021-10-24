@@ -1,3 +1,5 @@
 package net.runelite.rs.api;
 
-public interface RSServerPacket {}
+import net.runelite.api.ServerPacket;
+
+public interface RSServerPacket extends ServerPacket {}

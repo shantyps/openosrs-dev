@@ -27,6 +27,7 @@ package net.runelite.rs.api;
 import java.math.BigInteger;
 import java.util.Map;
 import net.runelite.api.Client;
+import net.runelite.api.PacketWriter;
 import net.runelite.api.SpritePixels;
 import net.runelite.api.World;
 import net.runelite.api.clan.ClanRank;
@@ -121,6 +122,10 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("baseY")
 	@Override
 	int getBaseY();
+
+	@Import("packetWriter")
+	@Override
+	PacketWriter getPacketWriter();
 
 	@Override
 	int getLatestWidgetCall();

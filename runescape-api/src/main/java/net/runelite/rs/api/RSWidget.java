@@ -211,6 +211,10 @@ public interface RSWidget extends Widget
 	@Override
 	int getModelZoom();
 
+	@Import("modelRotation")
+	@Override
+	int getModelRotation();
+
 	@Import("modelZoom")
 	@Override
 	void setModelZoom(int modelZoom);

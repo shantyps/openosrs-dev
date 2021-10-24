@@ -377,7 +377,8 @@ public class Widget extends Node {
 	@ObfuscatedGetter(
 		intValue = 905870085
 	)
-	public int field3038;
+	@Export("modelRotation")
+	public int modelRotation;
 	@ObfuscatedName("bk")
 	@Export("modelOrthog")
 	public boolean modelOrthog;
@@ -766,7 +767,7 @@ public class Widget extends Node {
 		this.modelAngleZ = 0;
 		this.modelZoom = 100;
 		this.field3102 = 0;
-		this.field3038 = 0;
+		this.modelRotation = 0;
 		this.modelOrthog = false;
 		this.modelTransparency = false;
 		this.itemQuantityMode = 2;

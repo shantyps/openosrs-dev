@@ -5181,7 +5181,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 					var5 = var3.method6933();
 					var6 = var3.method6876();
 					var69 = HealthBarUpdate.getWidget(var6);
-					var69.field3038 = var17 + (var5 << 16);
+					var69.modelRotation = var17 + (var5 << 16);
 					var1.serverPacket = null;
 					return true;
 				}

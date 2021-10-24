@@ -155,9 +155,9 @@ public class class9 implements MouseWheel {
 						}
 					}
 
-					if (var3.field3038 != 0 && !var3.isIf3) {
-						int var8 = var3.field3038 >> 16;
-						var5 = var3.field3038 << 16 >> 16;
+					if (var3.modelRotation != 0 && !var3.isIf3) {
+						int var8 = var3.modelRotation >> 16;
+						var5 = var3.modelRotation << 16 >> 16;
 						var8 *= Client.field536;
 						var5 *= Client.field536;
 						var3.modelAngleX = var8 + var3.modelAngleX & 2047;

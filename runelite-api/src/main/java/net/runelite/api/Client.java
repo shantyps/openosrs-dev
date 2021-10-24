@@ -123,6 +123,8 @@ public interface Client extends GameEngine
 	 */
 	int getTotalLevel();
 
+	PacketWriter getPacketWriter();
+
 	/**
 	 * Adds a new chat message to the chatbox.
 	 *
