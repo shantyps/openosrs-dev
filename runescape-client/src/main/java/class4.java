@@ -53,7 +53,8 @@ public final class class4 {
 		descriptor = "(IIII)Lct;",
 		garbageValue = "-2020922955"
 	)
-	static final InterfaceParent method23(int var0, int var1, int var2) {
+	@Export("ifOpenSub")
+	static final InterfaceParent ifOpenSub(int var0, int var1, int var2) {
 		InterfaceParent var3 = new InterfaceParent();
 		var3.group = var1;
 		var3.type = var2;

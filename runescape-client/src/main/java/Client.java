@@ -4219,7 +4219,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 						WorldMapLabelSize.closeInterface(var20, var17 != var20.group);
 					}
 
-					class4.method23(var6, var17, var5);
+					class4.ifOpenSub(var6, var17, var5);
 					var1.serverPacket = null;
 					return true;
 				}
@@ -5227,7 +5227,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 						}
 
 						if (var10 == null) {
-							var10 = class4.method23(var7, var8, var9);
+							var10 = class4.ifOpenSub(var7, var8, var9);
 						}
 					}
 
