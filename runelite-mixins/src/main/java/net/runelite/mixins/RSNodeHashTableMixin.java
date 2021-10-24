@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import net.runelite.api.events.HashTableNodeGetCall;
 import net.runelite.api.events.HashTableNodePut;
 import net.runelite.api.mixins.*;
 import net.runelite.rs.api.RSClient;
@@ -47,5 +48,11 @@ public abstract class RSNodeHashTableMixin implements RSNodeHashTable
 	public void copy$put(Node node, long value) {
 		copy$put(node, value);
 		client.getCallbacks().post(new HashTableNodePut(this, node, value));
+	}
+
+	@Inject
+	@MethodHook("get")
+	public void hashTableGetCall(long value) {
+		client.getCallbacks().post(new HashTableNodeGetCall(value));
 	}
 }

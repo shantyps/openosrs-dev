@@ -2332,6 +2332,18 @@ public abstract class RSClientMixin implements RSClient
 	}
 
 	@Inject
+	@FieldHook("rootInterface")
+	public static void onRootInterfaceChange(int idx) {
+		client.getCallbacks().post(new IfOpenTopEvent(client.getTopLevelInterfaceId()));
+	}
+
+	@Inject
+	@MethodHook(value = "ifOpenSub", end = true)
+	public static void onSubInterfaceChange(int targetComponent, int interfaceId, int walkType) {
+		client.getCallbacks().post(new IfOpenSubEvent(targetComponent, interfaceId, walkType));
+	}
+
+	@Inject
 	@Override
 	public ClanChannel getClanChannel()
 	{
