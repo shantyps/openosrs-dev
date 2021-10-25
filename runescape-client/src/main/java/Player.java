@@ -290,13 +290,13 @@ public final class Player extends Actor {
 			this.isHidden = false;
 		}
 
-		class150[] var25 = null;
+		PlayerEquipmentItem[] var25 = null;
 		boolean var26 = false;
 		if (var1.offset < var1.array.length) {
 			var8 = var1.readUnsignedShort();
 			var26 = (var8 >> 15 & 1) == 1;
 			if (var8 > 0 && var8 != 32768) {
-				var25 = new class150[12];
+				var25 = new PlayerEquipmentItem[12];
 
 				for (int var9 = 0; var9 < 12; ++var9) {
 					int var10 = var8 >> 12 - var9 & 1;
@@ -305,7 +305,7 @@ public final class Player extends Actor {
 						int var15 = var1.readUnsignedByte();
 						boolean var16 = (var15 & 1) != 0;
 						boolean var17 = (var15 & 2) != 0;
-						class150 var18 = new class150(var14);
+						PlayerEquipmentItem var18 = new PlayerEquipmentItem(var14);
 						int var19;
 						int[] var20;
 						boolean var21;
@@ -314,13 +314,13 @@ public final class Player extends Actor {
 						if (var16) {
 							var19 = var1.readUnsignedByte();
 							var20 = new int[]{var19 & 15, var19 >> 4 & 15};
-							var21 = var18.field1606 != null && var20.length == var18.field1606.length;
+							var21 = var18.recolorTo != null && var20.length == var18.recolorTo.length;
 
 							for (var22 = 0; var22 < 2; ++var22) {
 								if (var20[var22] != 15) {
 									var23 = (short)var1.readUnsignedShort();
 									if (var21) {
-										var18.field1606[var20[var22]] = var23;
+										var18.recolorTo[var20[var22]] = var23;
 									}
 								}
 							}
@@ -329,13 +329,13 @@ public final class Player extends Actor {
 						if (var17) {
 							var19 = var1.readUnsignedByte();
 							var20 = new int[]{var19 & 15, var19 >> 4 & 15};
-							var21 = var18.field1607 != null && var20.length == var18.field1607.length;
+							var21 = var18.retextureTo != null && var20.length == var18.retextureTo.length;
 
 							for (var22 = 0; var22 < 2; ++var22) {
 								if (var20[var22] != 15) {
 									var23 = (short)var1.readUnsignedShort();
 									if (var21) {
-										var18.field1607[var20[var22]] = var23;
+										var18.retextureTo[var20[var22]] = var23;
 									}
 								}
 							}

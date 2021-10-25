@@ -59,6 +59,8 @@ public interface Player extends Actor
 	 */
 	int getTeam();
 
+	boolean getIsHidden();
+
 	/**
 	 * Checks whether this player is a member of the same friends chat
 	 * the local player.

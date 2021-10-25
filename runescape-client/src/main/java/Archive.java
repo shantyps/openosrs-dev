@@ -110,7 +110,7 @@ public class Archive extends AbstractArchive {
 	)
 	@Export("loadRegionFromGroup")
 	void loadRegionFromGroup(int var1) {
-		class150.method2874(this.index, var1);
+		PlayerEquipmentItem.method2874(this.index, var1);
 	}
 
 	@ObfuscatedName("j")
@@ -191,7 +191,7 @@ public class Archive extends AbstractArchive {
 			}
 
 			if (this.masterDisk != null) {
-				class150.method2873(this.index, var2, this.masterDisk);
+				PlayerEquipmentItem.method2873(this.index, var2, this.masterDisk);
 			}
 
 			this.decodeIndex(var2);
@@ -200,7 +200,7 @@ public class Archive extends AbstractArchive {
 			var2[var2.length - 2] = (byte)(super.groupVersions[var1] >> 8);
 			var2[var2.length - 1] = (byte)super.groupVersions[var1];
 			if (this.archiveDisk != null) {
-				class150.method2873(var1, var2, this.archiveDisk);
+				PlayerEquipmentItem.method2873(var1, var2, this.archiveDisk);
 				this.validGroups[var1] = true;
 			}
 

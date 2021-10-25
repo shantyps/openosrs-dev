@@ -252,7 +252,7 @@ public class HealthBarDefinition extends DualNode {
 		Script.Script_cached.clear();
 		ClanChannel.archive0.clearFiles();
 		MouseRecorder.archive1.clearFiles();
-		class150.archive3.clearFiles();
+		PlayerEquipmentItem.archive3.clearFiles();
 		class260.archive4.clearFiles();
 		ApproximateRouteStrategy.archive5.clearFiles();
 		Tiles.archive6.clearFiles();

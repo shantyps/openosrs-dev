@@ -92,7 +92,7 @@ class class11 implements TlsAuthentication {
 			ClanChannel.archive0 = ItemLayer.newArchive(0, false, true, true);
 			MouseRecorder.archive1 = ItemLayer.newArchive(1, false, true, true);
 			RouteStrategy.archive2 = ItemLayer.newArchive(2, true, false, true);
-			class150.archive3 = ItemLayer.newArchive(3, false, true, true);
+			PlayerEquipmentItem.archive3 = ItemLayer.newArchive(3, false, true, true);
 			class260.archive4 = ItemLayer.newArchive(4, false, true, true);
 			ApproximateRouteStrategy.archive5 = ItemLayer.newArchive(5, true, true, true);
 			Tiles.archive6 = ItemLayer.newArchive(6, true, true, true);
@@ -117,7 +117,7 @@ class class11 implements TlsAuthentication {
 			var25 = var43 + ClanChannel.archive0.percentage() * 4 / 100;
 			var25 += MouseRecorder.archive1.percentage() * 4 / 100;
 			var25 += RouteStrategy.archive2.percentage() * 2 / 100;
-			var25 += class150.archive3.percentage() * 2 / 100;
+			var25 += PlayerEquipmentItem.archive3.percentage() * 2 / 100;
 			var25 += class260.archive4.percentage() * 6 / 100;
 			var25 += ApproximateRouteStrategy.archive5.percentage() * 4 / 100;
 			var25 += Tiles.archive6.percentage() * 2 / 100;
@@ -249,7 +249,7 @@ class class11 implements TlsAuthentication {
 						Archive var11 = RouteStrategy.archive2;
 						class351.VarpDefinition_archive = var11;
 						VarpDefinition.VarpDefinition_fileCount = class351.VarpDefinition_archive.getGroupFileCount(16);
-						Archive var12 = class150.archive3;
+						Archive var12 = PlayerEquipmentItem.archive3;
 						Archive var13 = Skeleton.archive7;
 						Archive var14 = class176.archive8;
 						Archive var15 = class54.archive13;
@@ -629,8 +629,8 @@ class class11 implements TlsAuthentication {
 						Client.titleLoadingStage = 130;
 					}
 				} else if (Client.titleLoadingStage == 130) {
-					if (!class150.archive3.isFullyLoaded()) {
-						Login.Login_loadingText = "Loading interfaces - " + class150.archive3.loadPercent() * 4 / 5 + "%";
+					if (!PlayerEquipmentItem.archive3.isFullyLoaded()) {
+						Login.Login_loadingText = "Loading interfaces - " + PlayerEquipmentItem.archive3.loadPercent() * 4 / 5 + "%";
 						Login.Login_loadingPercent = 96;
 					} else if (!UserComparator6.archive12.isFullyLoaded()) {
 						Login.Login_loadingText = "Loading interfaces - " + (80 + UserComparator6.archive12.loadPercent() / 6) + "%";

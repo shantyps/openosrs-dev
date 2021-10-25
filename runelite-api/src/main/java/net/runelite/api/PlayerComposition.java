@@ -80,4 +80,5 @@ public interface PlayerComposition
 
 	void setTransformedNpcId(int id);
 	int getTransformedNpcId();
+	PlayerEquipmentItem[] getPlayerEquipmentItems();
 }

@@ -1,9 +1,11 @@
 import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
 @ObfuscatedName("ed")
-public class class150 {
+@Implements("PlayerEquipmentItem")
+public class PlayerEquipmentItem {
 	@ObfuscatedName("ev")
 	@ObfuscatedSignature(
 		descriptor = "Lky;"
@@ -11,20 +13,22 @@ public class class150 {
 	@Export("archive3")
 	static Archive archive3;
 	@ObfuscatedName("f")
-	public short[] field1606;
+	@Export("recolorTo")
+	public short[] recolorTo;
 	@ObfuscatedName("j")
-	public short[] field1607;
+	@Export("retextureTo")
+	public short[] retextureTo;
 
-	public class150(int var1) {
+	public PlayerEquipmentItem(int var1) {
 		ItemComposition var2 = class87.ItemDefinition_get(var1);
 		if (var2.method3297()) {
-			this.field1606 = new short[var2.recolorTo.length];
-			System.arraycopy(var2.recolorTo, 0, this.field1606, 0, this.field1606.length);
+			this.recolorTo = new short[var2.recolorTo.length];
+			System.arraycopy(var2.recolorTo, 0, this.recolorTo, 0, this.recolorTo.length);
 		}
 
 		if (var2.method3272()) {
-			this.field1607 = new short[var2.retextureTo.length];
-			System.arraycopy(var2.retextureTo, 0, this.field1607, 0, this.field1607.length);
+			this.retextureTo = new short[var2.retextureTo.length];
+			System.arraycopy(var2.retextureTo, 0, this.retextureTo, 0, this.retextureTo.length);
 		}
 
 	}

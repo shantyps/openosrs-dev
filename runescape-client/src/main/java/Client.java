@@ -2662,7 +2662,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthTokens {
 				var6.packetBuffer.writeIntME(class54.archive20.hash);
 				var6.packetBuffer.method6940(RouteStrategy.archive2.hash);
 				var6.packetBuffer.method6942(ClanChannel.archive0.hash);
-				var6.packetBuffer.method6942(class150.archive3.hash);
+				var6.packetBuffer.method6942(PlayerEquipmentItem.archive3.hash);
 				var6.packetBuffer.writeIntME(class12.archive15.hash);
 				var6.packetBuffer.writeIntME(ItemContainer.archive17.hash);
 				var6.packetBuffer.writeIntME(Interpreter.archive9.hash);

@@ -29,4 +29,8 @@ public interface RSPlayerComposition extends PlayerComposition
 	@Import("setHash")
 	@Override
 	void setHash();
+
+	@Import("playerEquipmentItems")
+	@Override
+	RSPlayerEquipmentItem[] getPlayerEquipmentItems();
 }

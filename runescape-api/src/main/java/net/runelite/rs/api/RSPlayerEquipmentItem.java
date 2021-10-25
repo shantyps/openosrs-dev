@@ -1,0 +1,1 @@
+package net.runelite.rs.api;import net.runelite.api.PlayerEquipmentItem;import net.runelite.mapping.Import;/** * @author Kris | 25/10/2021 */public interface RSPlayerEquipmentItem extends PlayerEquipmentItem {    @Import("recolorTo")    @Override    short[] getRecolorTo();    @Import("retextureTo")    @Override    short[] getRetextureTo();}

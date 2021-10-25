@@ -51,6 +51,10 @@ public interface RSPlayer extends RSActor, Player
 	@Override
 	int getTeam();
 
+	@Import("isHidden")
+	@Override
+	boolean getIsHidden();
+
 	@Import("isFriendsChatMember")
 	@Override
 	boolean isFriendsChatMember();
