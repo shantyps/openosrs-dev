@@ -2302,6 +2302,12 @@ public abstract class RSClientMixin implements RSClient
 	}
 
 	@Inject
+	@FieldHook("playerOptionsPriorities")
+	public static void onPlayerMenuOptionChanged(int idx) {
+		client.getCallbacks().post(new PlayerMenuOptionChanged(idx, client.getPlayerOptions()[idx], client.getPlayerOptionsPriorities()[idx]));
+	}
+
+	@Inject
 	@Override
 	public ClanChannel getClanChannel()
 	{
