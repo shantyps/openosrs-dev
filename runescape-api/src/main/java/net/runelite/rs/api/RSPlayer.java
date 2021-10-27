@@ -95,4 +95,14 @@ public interface RSPlayer extends RSActor, Player
 	int animationCycleEnd();
 	@Import("model0")
 	Model attachedModel();
+	@Import("move")
+	@Override
+	void move(int x, int y, byte type);
+	@Import("resetPath")
+	@Override
+	void resetPath(int x, int y);
+
+	@Import("plane")
+	@Override
+	int getPlane();
 }

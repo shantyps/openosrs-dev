@@ -113,4 +113,7 @@ public interface Player extends Actor
 	int animationCycleStart();
 	int animationCycleEnd();
 	Model attachedModel();
+	void move(int x, int y, byte type);
+	void resetPath(int x, int y);
+	int getPlane();
 }
