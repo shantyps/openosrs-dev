@@ -145,7 +145,7 @@ public class class92 {
 					var4.tileY = var7;
 				} else {
 					var4.field1060 = false;
-					var4.method2092(var6, var7, Players.field1245[var1]);
+					var4.move(var6, var7, Players.field1245[var1]);
 				}
 
 			} else if (var3 == 2) {
@@ -205,7 +205,7 @@ public class class92 {
 						var4.tileY = var7;
 					} else {
 						var4.field1060 = false;
-						var4.method2092(var6, var7, Players.field1245[var1]);
+						var4.move(var6, var7, Players.field1245[var1]);
 					}
 				} else {
 					var4.resetPath(var6, var7);
@@ -240,7 +240,7 @@ public class class92 {
 							var4.tileY = var11;
 						} else {
 							var4.field1060 = false;
-							var4.method2092(var10, var11, Players.field1245[var1]);
+							var4.move(var10, var11, Players.field1245[var1]);
 						}
 					} else {
 						var4.resetPath(var10, var11);
@@ -268,7 +268,7 @@ public class class92 {
 						var4.tileY = var11;
 					} else {
 						var4.field1060 = false;
-						var4.method2092(var10, var11, Players.field1245[var1]);
+						var4.move(var10, var11, Players.field1245[var1]);
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3);

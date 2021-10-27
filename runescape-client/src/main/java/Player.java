@@ -548,7 +548,8 @@ public final class Player extends Actor {
 		descriptor = "(IIBB)V",
 		garbageValue = "39"
 	)
-	final void method2092(int var1, int var2, byte var3) {
+	@Export("move")
+	final void move(int var1, int var2, byte var3) {
 		if (super.sequence != -1 && KitDefinition.SequenceDefinition_get(super.sequence).field1960 == 1) {
 			super.sequence = -1;
 		}
@@ -1092,7 +1093,7 @@ public final class Player extends Actor {
 					var16 = Players.field1245[var1];
 				}
 
-				var2.method2092(var2.tileX, var2.tileY, var16);
+				var2.move(var2.tileX, var2.tileY, var16);
 			}
 		}
 

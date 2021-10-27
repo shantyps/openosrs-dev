@@ -272,6 +272,18 @@ public abstract class RSPlayerMixin implements RSPlayer
 	{
 		client.getCallbacks().post(new PlayerChanged(this));
 	}
+
+	@Inject
+	@MethodHook("move")
+	public void onPlayerMovement(int x, int y, byte type) {
+		client.getCallbacks().post(new PlayerMoved(this, x, y, type));
+	}
+
+	@Inject
+	@MethodHook("resetPath")
+	public void onPlayerPathReset(int x, int y) {
+		client.getCallbacks().post(new PlayerMoved(this, x, y, 127));
+	}
 	
 	@Copy("read")
 	@Replace("read")
