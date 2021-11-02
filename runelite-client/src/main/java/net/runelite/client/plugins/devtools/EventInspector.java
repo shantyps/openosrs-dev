@@ -32,6 +32,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * @author Kris | 22/10/2021
@@ -147,6 +148,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox rsCoordFormat = new JCheckBox("RS Coordinate Format", false);
 
     private int maxEventDistance = 104;
+    private int writeInterval = 100;
 
     private File outputFile;
     private final File settingsFile = new File(System.getProperty("user.home") + "/.openosrs/event-inspector-settings.txt");
@@ -202,6 +204,7 @@ public class EventInspector extends DevToolsFrame {
         trackerOpts.add(rsCoordFormat);
 
 
+
         final JPanel sliderPanel = new JPanel(new BorderLayout());
         sliderPanel.setPreferredSize(new Dimension(250, 30));
         /* Manual spacing for string, cba messing around with layouts. */
@@ -218,6 +221,24 @@ public class EventInspector extends DevToolsFrame {
         });
 
         trackerOpts.add(sliderPanel);
+
+        final JPanel intervalSliderPanel = new JPanel(new BorderLayout());
+        intervalSliderPanel.setPreferredSize(new Dimension(250, 30));
+        /* Manual spacing for string, cba messing around with layouts. */
+        final JLabel intervalLabel = new JLabel("  Interval  " + writeInterval);
+        intervalSliderPanel.add(intervalLabel, BorderLayout.WEST);
+        final JSlider intervalSlider = new JSlider(0, 99, 99);
+        intervalSlider.setUI(new SliderUI(intervalSlider));
+        intervalSlider.setPreferredSize(new Dimension(150, 30));
+        intervalSliderPanel.add(intervalSlider, BorderLayout.EAST);
+        intervalSlider.addChangeListener(e -> {
+            writeInterval = intervalSlider.getValue() + 1;
+            intervalLabel.setText("  Interval  " + writeInterval);
+        });
+        intervalSliderPanel.setToolTipText("<html>The interval slider defines how frequently, in server ticks(0.6 seconds each),<br>" +
+                "the logs will be written to the file</html>.");
+
+        trackerOpts.add(intervalSliderPanel);
 
         final JPanel enableButtonPanel = new JPanel(new GridLayout());
 
@@ -393,6 +414,7 @@ public class EventInspector extends DevToolsFrame {
         if (outputFile == null) return;
         try {
             synchronized (eventBuffer) {
+                if (eventBuffer.isEmpty()) return;
                 BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, true));
                 for (String line : eventBuffer) {
                     writer.write(line);
@@ -404,6 +426,13 @@ public class EventInspector extends DevToolsFrame {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Subscribe
+    public void onGameTick(GameTick event) {
+        if (client.getTickCount() % writeInterval == 0) {
+            ForkJoinPool.commonPool().submit(this::writeToFile);
         }
     }
 
