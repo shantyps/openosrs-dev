@@ -146,6 +146,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox localPlayerOnly = new JCheckBox("Local Player Only", false);
     private final JCheckBox pauseButton = new JCheckBox("Pause", false);
     private final JCheckBox rsCoordFormat = new JCheckBox("RS Coordinate Format", false);
+    private JSlider intervalSlider;
 
     private int maxEventDistance = 104;
     private int writeInterval = 100;
@@ -218,6 +219,7 @@ public class EventInspector extends DevToolsFrame {
             distanceLabel.setText("  Distance  " + (slider.getValue() == 15 ? "∞" : slider.getValue()));
             maxEventDistance = slider.getValue();
             if (maxEventDistance == 15) maxEventDistance = 104;
+            writeSettingsFile();
         });
 
         trackerOpts.add(sliderPanel);
@@ -227,13 +229,14 @@ public class EventInspector extends DevToolsFrame {
         /* Manual spacing for string, cba messing around with layouts. */
         final JLabel intervalLabel = new JLabel("  Interval  " + writeInterval);
         intervalSliderPanel.add(intervalLabel, BorderLayout.WEST);
-        final JSlider intervalSlider = new JSlider(0, 99, 99);
+        intervalSlider = new JSlider(0, 99, 99);
         intervalSlider.setUI(new SliderUI(intervalSlider));
         intervalSlider.setPreferredSize(new Dimension(150, 30));
         intervalSliderPanel.add(intervalSlider, BorderLayout.EAST);
         intervalSlider.addChangeListener(e -> {
             writeInterval = intervalSlider.getValue() + 1;
             intervalLabel.setText("  Interval  " + writeInterval);
+            writeSettingsFile();
         });
         intervalSliderPanel.setToolTipText("<html>The interval slider defines how frequently, in server ticks(0.6 seconds each),<br>" +
                 "the logs will be written to the file</html>.");
@@ -1359,7 +1362,6 @@ public class EventInspector extends DevToolsFrame {
         latestServerTick = client.getTickCount();
     }
 
-    @SuppressWarnings("StringBufferReplaceableByString")
     @Subscribe
     public void onAttachedModelReceived(AttachedModelEvent event) {
         /* Always remove the combined objects to ensure valid object add/remove detection. */
@@ -1525,6 +1527,8 @@ public class EventInspector extends DevToolsFrame {
                 writer.newLine();
                 writer.write("width=" + size.getWidth());
                 writer.newLine();
+                writer.write("interval=" + writeInterval);
+                writer.newLine();
                 writer.flush();
                 writer.close();
             }
@@ -1543,12 +1547,16 @@ public class EventInspector extends DevToolsFrame {
                 while ((line = reader.readLine()) != null) {
                     String[] split = line.split("=");
                     String label = split[0];
-                    if (label.equals("height")) {
-                        height = Double.parseDouble(split[1]);
-                        continue;
-                    } else if (label.equals("width")) {
-                        width = Double.parseDouble(split[1]);
-                        continue;
+                    switch (label) {
+                        case "height":
+                            height = Double.parseDouble(split[1]);
+                            continue;
+                        case "width":
+                            width = Double.parseDouble(split[1]);
+                            continue;
+                        case "interval":
+                            writeInterval = Integer.parseInt(split[1]);
+                            continue;
                     }
                     boolean value = Boolean.parseBoolean(split[1]);
                     for (JCheckBox checkBox : allSettings) {
@@ -1575,6 +1583,9 @@ public class EventInspector extends DevToolsFrame {
                     @Override
                     public void componentHidden(ComponentEvent e) {}
                 });
+                if (intervalSlider != null) {
+                    intervalSlider.setValue(writeInterval);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
