@@ -11,7 +11,8 @@ public abstract class Renderable extends DualNode {
 	@ObfuscatedGetter(
 		intValue = 1632556935
 	)
-	static int field2442;
+	@Export("cameraMoveToHeight")
+	static int cameraMoveToHeight;
 	@ObfuscatedName("cu")
 	@ObfuscatedGetter(
 		intValue = 1520356877

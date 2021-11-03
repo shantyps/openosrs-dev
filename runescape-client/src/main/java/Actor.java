@@ -99,7 +99,8 @@ public abstract class Actor extends Renderable {
 	@Export("isAutoChatting")
 	boolean isAutoChatting;
 	@ObfuscatedName("aj")
-	boolean field1099;
+	@Export("showPublicPlayerChat")
+	boolean showPublicPlayerChat;
 	@ObfuscatedName("af")
 	@ObfuscatedGetter(
 		intValue = -1349162329
@@ -155,7 +156,8 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -1484671141
 	)
-	int field1112;
+	@Export("facedDirection")
+	int facedDirection;
 	@ObfuscatedName("bm")
 	boolean field1127;
 	@ObfuscatedName("br")
@@ -204,7 +206,8 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -1810491641
 	)
-	int field1116;
+	@Export("currentSequenceFrameIndex")
+	int currentSequenceFrameIndex;
 	@ObfuscatedName("bk")
 	@ObfuscatedGetter(
 		intValue = -1442456691
@@ -227,47 +230,56 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -577715243
 	)
-	int field1125;
+	@Export("spotAnimationStartCycle")
+	int spotAnimationStartCycle;
 	@ObfuscatedName("bb")
 	@ObfuscatedGetter(
 		intValue = 539982077
 	)
-	int field1126;
+	@Export("spotAnimationHeight")
+	int spotAnimationHeight;
 	@ObfuscatedName("by")
 	@ObfuscatedGetter(
 		intValue = -222009755
 	)
-	int field1083;
+	@Export("exactMoveDeltaX1")
+	int exactMoveDeltaX1;
 	@ObfuscatedName("ba")
 	@ObfuscatedGetter(
 		intValue = 964367307
 	)
-	int field1128;
+	@Export("exactMoveDeltaX2")
+	int exactMoveDeltaX2;
 	@ObfuscatedName("bq")
 	@ObfuscatedGetter(
 		intValue = 646319749
 	)
-	int field1100;
+	@Export("exactMoveDeltaY1")
+	int exactMoveDeltaY1;
 	@ObfuscatedName("ca")
 	@ObfuscatedGetter(
 		intValue = 154596387
 	)
-	int field1130;
+	@Export("exactMoveDeltaY2")
+	int exactMoveDeltaY2;
 	@ObfuscatedName("cq")
 	@ObfuscatedGetter(
 		intValue = -1879657163
 	)
-	int field1131;
+	@Export("exactMoveArrive1Cycle")
+	int exactMoveArrive1Cycle;
 	@ObfuscatedName("ck")
 	@ObfuscatedGetter(
 		intValue = -438636187
 	)
-	int field1132;
+	@Export("exactMoveArrive2Cycle")
+	int exactMoveArrive2Cycle;
 	@ObfuscatedName("ci")
 	@ObfuscatedGetter(
 		intValue = 1091823721
 	)
-	int field1133;
+	@Export("exactMoveDirection")
+	int exactMoveDirection;
 	@ObfuscatedName("cx")
 	@ObfuscatedGetter(
 		intValue = -685467991
@@ -339,7 +351,7 @@ public abstract class Actor extends Renderable {
 		this.walkRightSequence = -1; // L: 21
 		this.runSequence = -1; // L: 22
 		this.overheadText = null; // L: 23
-		this.field1099 = false; // L: 25
+		this.showPublicPlayerChat = false; // L: 25
 		this.overheadTextCyclesRemaining = 100; // L: 26
 		this.overheadTextColor = 0; // L: 27
 		this.overheadTextEffect = 0; // L: 28
@@ -352,7 +364,7 @@ public abstract class Actor extends Renderable {
 		this.healthBars = new IterableNodeDeque(); // L: 36
 		this.targetIndex = -1; // L: 37
 		this.false0 = false; // L: 38
-		this.field1112 = -1; // L: 39
+		this.facedDirection = -1; // L: 39
 		this.movementSequence = -1; // L: 41
 		this.movementFrame = 0; // L: 42
 		this.movementFrameCycle = 0; // L: 43
@@ -360,7 +372,7 @@ public abstract class Actor extends Renderable {
 		this.sequenceFrame = 0; // L: 45
 		this.sequenceFrameCycle = 0; // L: 46
 		this.sequenceDelay = 0; // L: 47
-		this.field1116 = 0; // L: 48
+		this.currentSequenceFrameIndex = 0; // L: 48
 		this.spotAnimation = -1; // L: 49
 		this.spotAnimationFrame = 0; // L: 50
 		this.spotAnimationFrameCycle = 0; // L: 51

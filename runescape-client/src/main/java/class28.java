@@ -321,7 +321,7 @@ public class class28 {
 						if (var1 != -1412584499 && !var10.isScrollBar) { // L: 9716
 							NPC.field1207 = var0; // L: 9717
 							Varcs.field1263 = var6; // L: 9718
-							class150.field1604 = var7; // L: 9719
+							PlayerEquipmentItem.field1604 = var7; // L: 9719
 							continue; // L: 9720
 						}
 

@@ -89,28 +89,28 @@ public class class135 extends class116 {
 		int var2;
 		int var3;
 		int var4;
-		if (var0.field1131 >= Client.cycle) { // L: 4255
-			var2 = Math.max(1, var0.field1131 - Client.cycle); // L: 4256
-			var3 = var0.field1087 * 64 + var0.field1083 * 128; // L: 4257
-			var4 = var0.field1087 * 64 + var0.field1100 * 128; // L: 4258
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) { // L: 4255
+			var2 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle); // L: 4256
+			var3 = var0.field1087 * 64 + var0.exactMoveDeltaX1 * 128; // L: 4257
+			var4 = var0.field1087 * 64 + var0.exactMoveDeltaY1 * 128; // L: 4258
 			var0.x += (var3 - var0.x) / var2; // L: 4259
 			var0.y += (var4 - var0.y) / var2; // L: 4260
 			var0.field1085 = 0; // L: 4261
-			var0.orientation = var0.field1133; // L: 4262
-		} else if (var0.field1132 >= Client.cycle) { // L: 4264
-			if (var0.field1132 == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > MouseHandler.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 4265
-				var2 = var0.field1132 - var0.field1131; // L: 4266
-				var3 = Client.cycle - var0.field1131; // L: 4267
-				var4 = var0.field1087 * 64 + var0.field1083 * 128; // L: 4268
-				int var5 = var0.field1087 * 64 + var0.field1100 * 128; // L: 4269
-				int var6 = var0.field1087 * 64 + var0.field1128 * 128; // L: 4270
-				int var7 = var0.field1087 * 64 + var0.field1130 * 128; // L: 4271
+			var0.orientation = var0.exactMoveDirection; // L: 4262
+		} else if (var0.exactMoveArrive2Cycle >= Client.cycle) { // L: 4264
+			if (var0.exactMoveArrive2Cycle == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > MouseHandler.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 4265
+				var2 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle; // L: 4266
+				var3 = Client.cycle - var0.exactMoveArrive1Cycle; // L: 4267
+				var4 = var0.field1087 * 64 + var0.exactMoveDeltaX1 * 128; // L: 4268
+				int var5 = var0.field1087 * 64 + var0.exactMoveDeltaY1 * 128; // L: 4269
+				int var6 = var0.field1087 * 64 + var0.exactMoveDeltaX2 * 128; // L: 4270
+				int var7 = var0.field1087 * 64 + var0.exactMoveDeltaY2 * 128; // L: 4271
 				var0.x = (var3 * var6 + var4 * (var2 - var3)) / var2; // L: 4272
 				var0.y = (var3 * var7 + var5 * (var2 - var3)) / var2; // L: 4273
 			}
 
 			var0.field1085 = 0; // L: 4275
-			var0.orientation = var0.field1133; // L: 4276
+			var0.orientation = var0.exactMoveDirection; // L: 4276
 			var0.rotation = var0.orientation; // L: 4277
 		} else {
 			class138.method2836(var0); // L: 4279
@@ -119,8 +119,8 @@ public class class135 extends class116 {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) { // L: 4280
 			var0.sequence = -1; // L: 4281
 			var0.spotAnimation = -1; // L: 4282
-			var0.field1131 = 0; // L: 4283
-			var0.field1132 = 0; // L: 4284
+			var0.exactMoveArrive1Cycle = 0; // L: 4283
+			var0.exactMoveArrive2Cycle = 0; // L: 4284
 			var0.x = var0.field1087 * 64 + var0.pathX[0] * 128; // L: 4285
 			var0.y = var0.pathY[0] * 128 + var0.field1087 * 64; // L: 4286
 			var0.method2165(); // L: 4287
@@ -129,8 +129,8 @@ public class class135 extends class116 {
 		if (HealthBarDefinition.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) { // L: 4289 4290
 			var0.sequence = -1; // L: 4291
 			var0.spotAnimation = -1; // L: 4292
-			var0.field1131 = 0; // L: 4293
-			var0.field1132 = 0; // L: 4294
+			var0.exactMoveArrive1Cycle = 0; // L: 4293
+			var0.exactMoveArrive2Cycle = 0; // L: 4294
 			var0.x = var0.pathX[0] * 128 + var0.field1087 * 64; // L: 4295
 			var0.y = var0.field1087 * 64 + var0.pathY[0] * 128; // L: 4296
 			var0.method2165(); // L: 4297
@@ -192,9 +192,9 @@ public class class135 extends class116 {
 						}
 					}
 
-					if (var3.field3165 != 0 && !var3.isIf3) { // L: 11352
-						int var8 = var3.field3165 >> 16; // L: 11353
-						var5 = var3.field3165 << 16 >> 16; // L: 11354
+					if (var3.modelRotation != 0 && !var3.isIf3) { // L: 11352
+						int var8 = var3.modelRotation >> 16; // L: 11353
+						var5 = var3.modelRotation << 16 >> 16; // L: 11354
 						var8 *= Client.field531; // L: 11355
 						var5 *= Client.field531; // L: 11356
 						var3.modelAngleX = var8 + var3.modelAngleX & 2047; // L: 11357

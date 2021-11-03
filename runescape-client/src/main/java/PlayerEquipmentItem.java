@@ -1,30 +1,30 @@
-import net.runelite.mapping.Export;
-import net.runelite.mapping.ObfuscatedGetter;
-import net.runelite.mapping.ObfuscatedName;
-import net.runelite.mapping.ObfuscatedSignature;
+import net.runelite.mapping.*;
 
 @ObfuscatedName("ey")
-public class class150 {
+@Implements("PlayerEquipmentItem")
+public class PlayerEquipmentItem {
 	@ObfuscatedName("os")
 	@ObfuscatedGetter(
 		intValue = 341290279
 	)
 	static int field1604;
 	@ObfuscatedName("s")
-	public short[] field1598;
+	@Export("recolorTo")
+	public short[] recolorTo;
 	@ObfuscatedName("a")
-	public short[] field1600;
+	@Export("retextureTo")
+	public short[] retextureTo;
 
-	class150(int var1) {
+	PlayerEquipmentItem(int var1) {
 		ItemComposition var2 = TaskHandler.ItemDefinition_get(var1); // L: 12
 		if (var2.method3368()) { // L: 13
-			this.field1598 = new short[var2.recolorTo.length];
-			System.arraycopy(var2.recolorTo, 0, this.field1598, 0, this.field1598.length); // L: 15
+			this.recolorTo = new short[var2.recolorTo.length];
+			System.arraycopy(var2.recolorTo, 0, this.recolorTo, 0, this.recolorTo.length); // L: 15
 		}
 
 		if (var2.method3347()) { // L: 17
-			this.field1600 = new short[var2.retextureTo.length]; // L: 18
-			System.arraycopy(var2.retextureTo, 0, this.field1600, 0, this.field1600.length); // L: 19
+			this.retextureTo = new short[var2.retextureTo.length]; // L: 18
+			System.arraycopy(var2.retextureTo, 0, this.retextureTo, 0, this.retextureTo.length); // L: 19
 		}
 
 	} // L: 21

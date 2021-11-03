@@ -239,7 +239,7 @@ public class WorldMapElement extends DualNode {
 					HorizontalAlignment[] var3 = new HorizontalAlignment[]{HorizontalAlignment.field1699, HorizontalAlignment.HorizontalAlignment_centered, HorizontalAlignment.field1694}; // L: 117
 					this.horizontalAlignment = (HorizontalAlignment)UserComparator4.findEnumerated(var3, var1.readUnsignedByte()); // L: 119
 				} else if (var2 == 30) { // L: 121
-					this.verticalAlignment = (VerticalAlignment)UserComparator4.findEnumerated(class150.method2969(), var1.readUnsignedByte()); // L: 122
+					this.verticalAlignment = (VerticalAlignment)UserComparator4.findEnumerated(PlayerEquipmentItem.method2969(), var1.readUnsignedByte()); // L: 122
 				}
 			}
 		}

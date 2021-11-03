@@ -300,7 +300,7 @@ public class LoginType {
 				}
 			}
 
-			if (var0.overheadText != null && (var1 >= var76 || !var0.field1099 && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5307 5308
+			if (var0.overheadText != null && (var1 >= var76 || !var0.showPublicPlayerChat && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5307 5308
 				var79 = var0.defaultHeight; // L: 5309
 				DefaultsGroup.worldToScreen(var0.x, var0.y, var79); // L: 5311
 				if (Client.viewportTempX > -1 && Client.overheadTextCount < Client.overheadTextLimit) { // L: 5313

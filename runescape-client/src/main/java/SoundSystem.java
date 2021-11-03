@@ -12,7 +12,8 @@ public class SoundSystem implements Runnable {
 	@ObfuscatedGetter(
 		intValue = 1952022621
 	)
-	static int field288;
+	@Export("cameraLookAtY")
+	static int cameraLookAtY;
 	@ObfuscatedName("k")
 	@ObfuscatedSignature(
 		descriptor = "Lle;"

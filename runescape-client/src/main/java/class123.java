@@ -68,7 +68,7 @@ public class class123 extends class116 {
 		garbageValue = "1761833612"
 	)
 	public static void method2616(int var0, int var1) {
-		VarbitComposition var2 = class150.method2965(var0); // L: 33
+		VarbitComposition var2 = PlayerEquipmentItem.method2965(var0); // L: 33
 		int var3 = var2.baseVar; // L: 34
 		int var4 = var2.startBit;
 		int var5 = var2.endBit; // L: 36
@@ -105,7 +105,7 @@ public class class123 extends class116 {
 			return 1; // L: 1832
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) { // L: 1834
 			class14.Interpreter_intStackSize -= 2; // L: 1835
-			Friend.method6057(Interpreter.Interpreter_intStack[class14.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class14.Interpreter_intStackSize + 1]); // L: 1836
+			Friend.playJingle(Interpreter.Interpreter_intStack[class14.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class14.Interpreter_intStackSize + 1]); // L: 1836
 			return 1; // L: 1837
 		} else {
 			int var3;
@@ -217,54 +217,54 @@ public class class123 extends class116 {
 		garbageValue = "-980124614"
 	)
 	static final void method2621() {
-		int var0 = SpotAnimationDefinition.field1761 * 128 + 64; // L: 4180
-		int var1 = BuddyRankComparator.field1333 * 128 + 64; // L: 4181
-		int var2 = class392.getTileHeight(var0, var1, GrandExchangeOfferTotalQuantityComparator.Client_plane) - Renderable.field2442; // L: 4182
+		int var0 = SpotAnimationDefinition.cameraMoveToX * 128 + 64; // L: 4180
+		int var1 = BuddyRankComparator.cameraMoveToY * 128 + 64; // L: 4181
+		int var2 = class392.getTileHeight(var0, var1, GrandExchangeOfferTotalQuantityComparator.Client_plane) - Renderable.cameraMoveToHeight; // L: 4182
 		if (WorldMapSectionType.cameraX < var0) { // L: 4183
-			WorldMapSectionType.cameraX = (var0 - WorldMapSectionType.cameraX) * Login.field888 / 1000 + WorldMapSectionType.cameraX + UserComparator8.field1305; // L: 4184
+			WorldMapSectionType.cameraX = (var0 - WorldMapSectionType.cameraX) * Login.cameraMoveToAcceleration / 1000 + WorldMapSectionType.cameraX + UserComparator8.cameraMoveToSpeed; // L: 4184
 			if (WorldMapSectionType.cameraX > var0) { // L: 4185
 				WorldMapSectionType.cameraX = var0;
 			}
 		}
 
 		if (WorldMapSectionType.cameraX > var0) { // L: 4187
-			WorldMapSectionType.cameraX -= Login.field888 * (WorldMapSectionType.cameraX - var0) / 1000 + UserComparator8.field1305; // L: 4188
+			WorldMapSectionType.cameraX -= Login.cameraMoveToAcceleration * (WorldMapSectionType.cameraX - var0) / 1000 + UserComparator8.cameraMoveToSpeed; // L: 4188
 			if (WorldMapSectionType.cameraX < var0) { // L: 4189
 				WorldMapSectionType.cameraX = var0;
 			}
 		}
 
 		if (class174.cameraY < var2) { // L: 4191
-			class174.cameraY = (var2 - class174.cameraY) * Login.field888 / 1000 + class174.cameraY + UserComparator8.field1305; // L: 4192
+			class174.cameraY = (var2 - class174.cameraY) * Login.cameraMoveToAcceleration / 1000 + class174.cameraY + UserComparator8.cameraMoveToSpeed; // L: 4192
 			if (class174.cameraY > var2) { // L: 4193
 				class174.cameraY = var2;
 			}
 		}
 
 		if (class174.cameraY > var2) { // L: 4195
-			class174.cameraY -= Login.field888 * (class174.cameraY - var2) / 1000 + UserComparator8.field1305; // L: 4196
+			class174.cameraY -= Login.cameraMoveToAcceleration * (class174.cameraY - var2) / 1000 + UserComparator8.cameraMoveToSpeed; // L: 4196
 			if (class174.cameraY < var2) { // L: 4197
 				class174.cameraY = var2;
 			}
 		}
 
 		if (class65.cameraZ < var1) { // L: 4199
-			class65.cameraZ = (var1 - class65.cameraZ) * Login.field888 / 1000 + class65.cameraZ + UserComparator8.field1305; // L: 4200
+			class65.cameraZ = (var1 - class65.cameraZ) * Login.cameraMoveToAcceleration / 1000 + class65.cameraZ + UserComparator8.cameraMoveToSpeed; // L: 4200
 			if (class65.cameraZ > var1) { // L: 4201
 				class65.cameraZ = var1;
 			}
 		}
 
 		if (class65.cameraZ > var1) { // L: 4203
-			class65.cameraZ -= Login.field888 * (class65.cameraZ - var1) / 1000 + UserComparator8.field1305; // L: 4204
+			class65.cameraZ -= Login.cameraMoveToAcceleration * (class65.cameraZ - var1) / 1000 + UserComparator8.cameraMoveToSpeed; // L: 4204
 			if (class65.cameraZ < var1) { // L: 4205
 				class65.cameraZ = var1;
 			}
 		}
 
-		var0 = UrlRequest.field1298 * 128 + 64; // L: 4207
-		var1 = SoundSystem.field288 * 128 + 64; // L: 4208
-		var2 = class392.getTileHeight(var0, var1, GrandExchangeOfferTotalQuantityComparator.Client_plane) - ArchiveLoader.field985; // L: 4209
+		var0 = UrlRequest.cameraLookAtX * 128 + 64; // L: 4207
+		var1 = SoundSystem.cameraLookAtY * 128 + 64; // L: 4208
+		var2 = class392.getTileHeight(var0, var1, GrandExchangeOfferTotalQuantityComparator.Client_plane) - ArchiveLoader.cameraLookAtHeight; // L: 4209
 		int var3 = var0 - WorldMapSectionType.cameraX; // L: 4210
 		int var4 = var2 - class174.cameraY; // L: 4211
 		int var5 = var1 - class65.cameraZ; // L: 4212
@@ -280,14 +280,14 @@ public class class123 extends class116 {
 		}
 
 		if (class121.cameraPitch < var7) { // L: 4218
-			class121.cameraPitch = (var7 - class121.cameraPitch) * TextureProvider.field2484 / 1000 + class121.cameraPitch + class269.field3221; // L: 4219
+			class121.cameraPitch = (var7 - class121.cameraPitch) * TextureProvider.cameraLookAtAcceleration / 1000 + class121.cameraPitch + class269.cameraLookAtSpeed; // L: 4219
 			if (class121.cameraPitch > var7) { // L: 4220
 				class121.cameraPitch = var7;
 			}
 		}
 
 		if (class121.cameraPitch > var7) { // L: 4222
-			class121.cameraPitch -= TextureProvider.field2484 * (class121.cameraPitch - var7) / 1000 + class269.field3221; // L: 4223
+			class121.cameraPitch -= TextureProvider.cameraLookAtAcceleration * (class121.cameraPitch - var7) / 1000 + class269.cameraLookAtSpeed; // L: 4223
 			if (class121.cameraPitch < var7) { // L: 4224
 				class121.cameraPitch = var7;
 			}
@@ -303,12 +303,12 @@ public class class123 extends class116 {
 		}
 
 		if (var9 > 0) { // L: 4229
-			WorldMapRegion.cameraYaw = var9 * TextureProvider.field2484 / 1000 + WorldMapRegion.cameraYaw + class269.field3221; // L: 4230
+			WorldMapRegion.cameraYaw = var9 * TextureProvider.cameraLookAtAcceleration / 1000 + WorldMapRegion.cameraYaw + class269.cameraLookAtSpeed; // L: 4230
 			WorldMapRegion.cameraYaw &= 2047; // L: 4231
 		}
 
 		if (var9 < 0) { // L: 4233
-			WorldMapRegion.cameraYaw -= -var9 * TextureProvider.field2484 / 1000 + class269.field3221; // L: 4234
+			WorldMapRegion.cameraYaw -= -var9 * TextureProvider.cameraLookAtAcceleration / 1000 + class269.cameraLookAtSpeed; // L: 4234
 			WorldMapRegion.cameraYaw &= 2047; // L: 4235
 		}
 

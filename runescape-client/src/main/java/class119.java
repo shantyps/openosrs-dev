@@ -110,7 +110,7 @@ public class class119 {
 	)
 	@Export("getVarbit")
 	public static int getVarbit(int var0) {
-		VarbitComposition var1 = class150.method2965(var0); // L: 24
+		VarbitComposition var1 = PlayerEquipmentItem.method2965(var0); // L: 24
 		int var2 = var1.baseVar; // L: 25
 		int var3 = var1.startBit; // L: 26
 		int var4 = var1.endBit; // L: 27

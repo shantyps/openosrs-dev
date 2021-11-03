@@ -331,7 +331,8 @@ public class DynamicObject extends Renderable {
 		descriptor = "(IIII)Lcq;",
 		garbageValue = "-1244172652"
 	)
-	static final InterfaceParent method1997(int var0, int var1, int var2) {
+	@Export("ifOpenSub")
+	static final InterfaceParent ifOpenSub(int var0, int var1, int var2) {
 		InterfaceParent var3 = new InterfaceParent(); // L: 11517
 		var3.group = var1; // L: 11518
 		var3.type = var2; // L: 11519

@@ -290,13 +290,13 @@ public final class Player extends Actor {
 			this.isHidden = false;
 		}
 
-		class150[] var12 = null; // L: 111
+		PlayerEquipmentItem[] var12 = null; // L: 111
 		boolean var13 = false; // L: 112
 		if (var1.offset < var1.array.length) { // L: 113
 			var8 = var1.readUnsignedShort(); // L: 114
 			var13 = (var8 >> 15 & 1) == 1; // L: 115
 			if (var8 > 0 && var8 != 32768) { // L: 116
-				var12 = new class150[12]; // L: 117
+				var12 = new PlayerEquipmentItem[12]; // L: 117
 
 				for (int var9 = 0; var9 < 12; ++var9) { // L: 118
 					int var10 = var8 >> 12 - var9 & 1; // L: 119
@@ -337,7 +337,7 @@ public final class Player extends Actor {
 				if (!this.isUnanimated && super.spotAnimation != -1 && super.spotAnimationFrame != -1) { // L: 196
 					var4 = BZip2State.SpotAnimationDefinition_get(super.spotAnimation).getModel(super.spotAnimationFrame); // L: 197
 					if (var4 != null) { // L: 198
-						var4.offsetBy(0, -super.field1126, 0); // L: 199
+						var4.offsetBy(0, -super.spotAnimationHeight, 0); // L: 199
 						var5 = new Model[]{var3, var4}; // L: 200
 						var3 = new Model(var5, 2); // L: 201
 					}
@@ -508,12 +508,13 @@ public final class Player extends Actor {
 		descriptor = "(IIBI)V",
 		garbageValue = "-1013246003"
 	)
-	final void method2109(int var1, int var2, byte var3) {
+	@Export("move")
+	final void move(int var1, int var2, byte var3) {
 		if (super.sequence != -1 && MouseHandler.SequenceDefinition_get(super.sequence).field1956 == 1) { // L: 239
 			super.sequence = -1;
 		}
 
-		super.field1112 = -1; // L: 240
+		super.facedDirection = -1; // L: 240
 		if (var1 >= 0 && var1 < 104 && var2 >= 0 && var2 < 104) { // L: 241
 			if (super.pathX[0] >= 0 && super.pathX[0] < 104 && super.pathY[0] >= 0 && super.pathY[0] < 104) { // L: 242
 				if (var3 == 2) { // L: 244

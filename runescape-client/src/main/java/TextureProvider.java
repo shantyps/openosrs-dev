@@ -11,7 +11,8 @@ public class TextureProvider implements TextureLoader {
 	@ObfuscatedGetter(
 		intValue = -2090037953
 	)
-	static int field2484;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 	@ObfuscatedName("bj")
 	@ObfuscatedGetter(
 		intValue = -665510381

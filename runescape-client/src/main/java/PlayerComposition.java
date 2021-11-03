@@ -46,7 +46,8 @@ public class PlayerComposition {
 	@ObfuscatedSignature(
 		descriptor = "[Ley;"
 	)
-	class150[] field3027;
+	@Export("playerEquipmentItems")
+	PlayerEquipmentItem[] playerEquipmentItems;
 	@ObfuscatedName("p")
 	boolean field3026;
 
@@ -64,8 +65,8 @@ public class PlayerComposition {
 		descriptor = "([I[Ley;Z[IZII)V",
 		garbageValue = "-1612430375"
 	)
-	public void method5062(int[] var1, class150[] var2, boolean var3, int[] var4, boolean var5, int var6) {
-		this.field3027 = var2; // L: 30
+	public void method5062(int[] var1, PlayerEquipmentItem[] var2, boolean var3, int[] var4, boolean var5, int var6) {
+		this.playerEquipmentItems = var2; // L: 30
 		this.field3026 = var3; // L: 31
 		this.update(var1, var4, var5, var6); // L: 32
 	} // L: 33
@@ -329,19 +330,19 @@ public class PlayerComposition {
 							ItemComposition var22 = TaskHandler.ItemDefinition_get(var13 - 512); // L: 197
 							ModelData var15 = var22.method3397(this.isFemale); // L: 198
 							if (var15 != null) { // L: 199
-								if (this.field3027 != null) { // L: 200
-									class150 var16 = this.field3027[var12]; // L: 201
+								if (this.playerEquipmentItems != null) { // L: 200
+									PlayerEquipmentItem var16 = this.playerEquipmentItems[var12]; // L: 201
 									if (var16 != null) { // L: 202
 										int var17;
-										if (var16.field1598 != null && var22.recolorFrom != null && var22.recolorTo.length == var16.field1598.length) { // L: 203
+										if (var16.recolorTo != null && var22.recolorFrom != null && var22.recolorTo.length == var16.recolorTo.length) { // L: 203
 											for (var17 = 0; var17 < var22.recolorFrom.length; ++var17) { // L: 204
-												var15.recolor(var22.recolorTo[var17], var16.field1598[var17]); // L: 205
+												var15.recolor(var22.recolorTo[var17], var16.recolorTo[var17]); // L: 205
 											}
 										}
 
-										if (var16.field1600 != null && var22.retextureFrom != null && var22.retextureTo.length == var16.field1600.length) { // L: 208
+										if (var16.retextureTo != null && var22.retextureFrom != null && var22.retextureTo.length == var16.retextureTo.length) { // L: 208
 											for (var17 = 0; var17 < var22.retextureFrom.length; ++var17) { // L: 209
-												var15.retexture(var22.retextureTo[var17], var16.field1600[var17]); // L: 210
+												var15.retexture(var22.retextureTo[var17], var16.retextureTo[var17]); // L: 210
 											}
 										}
 									}

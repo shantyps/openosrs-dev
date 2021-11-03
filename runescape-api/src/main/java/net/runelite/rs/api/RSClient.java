@@ -810,10 +810,6 @@ public interface RSClient extends RSGameEngine, Client
 	@Import("runScript")
 	void runScript(RSScriptEvent ev, int ex, int var2);
 
-	@Import("isCameraLocked")
-	@Override
-	boolean isCameraLocked();
-
 	@Import("cameraShaking")
 	@Override
 	boolean[] cameraShaking();

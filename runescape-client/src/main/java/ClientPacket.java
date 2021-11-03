@@ -701,7 +701,7 @@ public class ClientPacket implements class238 {
 			}
 		}
 
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1125) { // L: 4476
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) { // L: 4476
 			if (var0.spotAnimationFrame < 0) { // L: 4477
 				var0.spotAnimationFrame = 0;
 			}
@@ -730,7 +730,7 @@ public class ClientPacket implements class238 {
 
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) { // L: 4496
 			var1 = MouseHandler.SequenceDefinition_get(var0.sequence); // L: 4497
-			if (var1.field1963 == 1 && var0.field1144 > 0 && var0.field1131 <= Client.cycle && var0.field1132 < Client.cycle) { // L: 4498 4499
+			if (var1.field1963 == 1 && var0.field1144 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) { // L: 4498 4499
 				var0.sequenceDelay = 1; // L: 4500
 				return; // L: 4501
 			}
@@ -748,8 +748,8 @@ public class ClientPacket implements class238 {
 
 				if (var0.sequenceFrame >= var1.frameIds.length) { // L: 4514
 					var0.sequenceFrame -= var1.frameCount; // L: 4515
-					++var0.field1116; // L: 4516
-					if (var0.field1116 >= var1.field1962) { // L: 4517
+					++var0.currentSequenceFrameIndex; // L: 4516
+					if (var0.currentSequenceFrameIndex >= var1.field1962) { // L: 4517
 						var0.sequence = -1;
 					} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var1.frameIds.length) { // L: 4518
 						Interpreter.method1872(var1, var0.sequenceFrame, var0.x, var0.y); // L: 4519

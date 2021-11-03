@@ -11,7 +11,8 @@ public class SpotAnimationDefinition extends DualNode {
 	@ObfuscatedGetter(
 		intValue = 1292263875
 	)
-	static int field1761;
+	@Export("cameraMoveToX")
+	static int cameraMoveToX;
 	@ObfuscatedName("i")
 	@ObfuscatedSignature(
 		descriptor = "Lko;"

@@ -113,7 +113,7 @@ public final class NPC extends Actor {
 				if (super.spotAnimation != -1 && super.spotAnimationFrame != -1) { // L: 84
 					Model var4 = BZip2State.SpotAnimationDefinition_get(super.spotAnimation).getModel(super.spotAnimationFrame); // L: 85
 					if (var4 != null) { // L: 86
-						var4.offsetBy(0, -super.field1126, 0); // L: 87
+						var4.offsetBy(0, -super.spotAnimationHeight, 0); // L: 87
 						Model[] var5 = new Model[]{var3, var4}; // L: 88
 						var3 = new Model(var5, 2); // L: 89
 					}

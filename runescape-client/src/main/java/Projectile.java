@@ -263,8 +263,8 @@ public final class Projectile extends Renderable {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (class19.baseX + var4.pathX[0] >> 13 << 14) + (DefaultsGroup.baseY + var4.pathY[0] >> 13); // L: 370
-				if (var4.field1112 != -1) { // L: 371
-					Players.Players_orientations[var1] = var4.field1112;
+				if (var4.facedDirection != -1) { // L: 371
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation; // L: 372
 				}
@@ -315,7 +315,7 @@ public final class Projectile extends Renderable {
 					var4.tileY = var7; // L: 409
 				} else {
 					var4.field1067 = false; // L: 412
-					var4.method2109(var6, var7, Players.field1241[var1]); // L: 413
+					var4.move(var6, var7, Players.field1241[var1]); // L: 413
 				}
 
 			} else if (var3 == 2) { // L: 417
@@ -377,7 +377,7 @@ public final class Projectile extends Renderable {
 					var4.tileY = var7; // L: 480
 				} else {
 					var4.field1067 = false; // L: 483
-					var4.method2109(var6, var7, Players.field1241[var1]); // L: 484
+					var4.move(var6, var7, Players.field1241[var1]); // L: 484
 				}
 
 			} else {
@@ -408,7 +408,7 @@ public final class Projectile extends Renderable {
 							var4.tileY = var11; // L: 505
 						} else {
 							var4.field1067 = false; // L: 508
-							var4.method2109(var10, var11, Players.field1241[var1]); // L: 509
+							var4.move(var10, var11, Players.field1241[var1]); // L: 509
 						}
 					} else {
 						var4.resetPath(var10, var11); // L: 499
@@ -436,7 +436,7 @@ public final class Projectile extends Renderable {
 						var4.tileY = var11; // L: 528
 					} else {
 						var4.field1067 = false; // L: 531
-						var4.method2109(var10, var11, Players.field1241[var1]); // L: 532
+						var4.move(var10, var11, Players.field1241[var1]); // L: 532
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 534
@@ -519,8 +519,8 @@ public final class Projectile extends Renderable {
 				var28 = Client.field556 / 256;
 			}
 
-			if (Client.field718[4] && Client.field598[4] + 128 > var28) { // L: 4710
-				var28 = Client.field598[4] + 128;
+			if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var28) { // L: 4710
+				var28 = Client.cameraMoveIntensity[4] + 128;
 			}
 
 			var5 = Client.camAngleY & 2047; // L: 4711
@@ -664,8 +664,8 @@ public final class Projectile extends Renderable {
 		var9 = WorldMapRegion.cameraYaw; // L: 4807
 
 		for (var10 = 0; var10 < 5; ++var10) { // L: 4808
-			if (Client.field718[var10]) { // L: 4809
-				var11 = (int)(Math.random() * (double)(Client.field719[var10] * 2 + 1) - (double)Client.field719[var10] + Math.sin((double)Client.field721[var10] / 100.0D * (double)Client.field722[var10]) * (double)Client.field598[var10]); // L: 4810
+			if (Client.cameraShaking[var10]) { // L: 4809
+				var11 = (int)(Math.random() * (double)(Client.cameraShakeIntensity[var10] * 2 + 1) - (double)Client.cameraShakeIntensity[var10] + Math.sin((double)Client.cameraShakeSpeed[var10] / 100.0D * (double)Client.cameraShakeCycle[var10]) * (double)Client.cameraMoveIntensity[var10]); // L: 4810
 				if (var10 == 0) { // L: 4811
 					WorldMapSectionType.cameraX += var11;
 				}
@@ -904,7 +904,7 @@ public final class Projectile extends Renderable {
 		garbageValue = "2132181355"
 	)
 	static final void method1957(int var0, int var1, int var2, int var3, int var4, int var5, int var6) {
-		var5 = class150.method2971(var5, var6); // L: 5664
+		var5 = PlayerEquipmentItem.method2971(var5, var6); // L: 5664
 		int var7 = 2048 - var3 & 2047; // L: 5665
 		int var8 = 2048 - var4 & 2047; // L: 5666
 		int var9 = 0; // L: 5667

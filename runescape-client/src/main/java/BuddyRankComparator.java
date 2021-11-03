@@ -17,7 +17,8 @@ public class BuddyRankComparator extends AbstractUserComparator {
 	@ObfuscatedGetter(
 		intValue = 31962043
 	)
-	static int field1333;
+	@Export("cameraMoveToY")
+	static int cameraMoveToY;
 	@ObfuscatedName("p")
 	@Export("ItemDefinition_inMembersWorld")
 	public static boolean ItemDefinition_inMembersWorld;

@@ -12,7 +12,8 @@ public class UrlRequest {
 	@ObfuscatedGetter(
 		intValue = -669025737
 	)
-	static int field1298;
+	@Export("cameraLookAtX")
+	static int cameraLookAtX;
 	@ObfuscatedName("i")
 	@Export("url")
 	final URL url;

@@ -12,7 +12,8 @@ public class UserComparator8 extends AbstractUserComparator {
 	@ObfuscatedGetter(
 		intValue = -1318815651
 	)
-	static int field1305;
+	@Export("cameraMoveToSpeed")
+	static int cameraMoveToSpeed;
 	@ObfuscatedName("i")
 	@Export("reversed")
 	final boolean reversed;

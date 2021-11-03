@@ -118,7 +118,7 @@ public enum HorizontalAlignment implements MouseWheel {
 			NPC.field1207 = null; // L: 9683
 			class28.drawInterface(WorldMapSection1.Widget_interfaceComponents[var0], -1, var1, var2, var3, var4, var5, var6, var7); // L: 9684
 			if (NPC.field1207 != null) { // L: 9685
-				class28.drawInterface(NPC.field1207, -1412584499, var1, var2, var3, var4, Varcs.field1263, class150.field1604, var7); // L: 9686
+				class28.drawInterface(NPC.field1207, -1412584499, var1, var2, var3, var4, Varcs.field1263, PlayerEquipmentItem.field1604, var7); // L: 9686
 				NPC.field1207 = null; // L: 9687
 			}
 

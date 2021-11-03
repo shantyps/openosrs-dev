@@ -140,7 +140,7 @@ public class SpriteMask extends DualNode {
 				int var10 = var9 * 32 + 15 + 128; // L: 5019
 				int var11 = var10 * 3 + 600; // L: 5022
 				int var13 = Rasterizer3D.Rasterizer3D_sine[var10]; // L: 5025
-				int var12 = class150.method2971(var11, var3); // L: 5026
+				int var12 = PlayerEquipmentItem.method2971(var11, var3); // L: 5026
 				var14[var9] = var12 * var13 >> 16; // L: 5027
 			}
 

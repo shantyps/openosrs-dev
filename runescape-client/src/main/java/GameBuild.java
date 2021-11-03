@@ -211,10 +211,10 @@ public class GameBuild {
 							}
 
 							if ((var6 & 32) != 0) { // L: 184
-								var5.field1112 = var0.method7120(); // L: 185
+								var5.facedDirection = var0.method7120(); // L: 185
 								if (var5.pathLength == 0) { // L: 186
-									var5.orientation = var5.field1112; // L: 187
-									var5.field1112 = -1; // L: 188
+									var5.orientation = var5.facedDirection; // L: 187
+									var5.facedDirection = -1; // L: 188
 								}
 							}
 
@@ -244,7 +244,7 @@ public class GameBuild {
 										var5.overheadTextEffect = var8 & 255; // L: 209
 										var5.overheadTextCyclesRemaining = 150; // L: 210
 										var5.isAutoChatting = var10; // L: 211
-										var5.field1099 = var5 != HealthBarDefinition.localPlayer && var9.isUser && "" != Client.field692 && var14.toLowerCase().indexOf(Client.field692) == -1; // L: 212
+										var5.showPublicPlayerChat = var5 != HealthBarDefinition.localPlayer && var9.isUser && "" != Client.field692 && var14.toLowerCase().indexOf(Client.field692) == -1; // L: 212
 										if (var9.isPrivileged) { // L: 214
 											var15 = var10 ? 91 : 1;
 										} else {
@@ -304,24 +304,24 @@ public class GameBuild {
 							}
 
 							if ((var6 & 512) != 0) { // L: 253
-								var5.field1083 = var0.method6973(); // L: 254
-								var5.field1100 = var0.readByte(); // L: 255
-								var5.field1128 = var0.readByte(); // L: 256
-								var5.field1130 = var0.readByte(); // L: 257
-								var5.field1131 = var0.method7004() + Client.cycle; // L: 258
-								var5.field1132 = var0.method7120() + Client.cycle; // L: 259
-								var5.field1133 = var0.readUnsignedShort(); // L: 260
+								var5.exactMoveDeltaX1 = var0.method6973(); // L: 254
+								var5.exactMoveDeltaY1 = var0.readByte(); // L: 255
+								var5.exactMoveDeltaX2 = var0.readByte(); // L: 256
+								var5.exactMoveDeltaY2 = var0.readByte(); // L: 257
+								var5.exactMoveArrive1Cycle = var0.method7004() + Client.cycle; // L: 258
+								var5.exactMoveArrive2Cycle = var0.method7120() + Client.cycle; // L: 259
+								var5.exactMoveDirection = var0.readUnsignedShort(); // L: 260
 								if (var5.field1067) { // L: 261
-									var5.field1083 += var5.tileX; // L: 262
-									var5.field1100 += var5.tileY; // L: 263
-									var5.field1128 += var5.tileX; // L: 264
-									var5.field1130 += var5.tileY; // L: 265
+									var5.exactMoveDeltaX1 += var5.tileX; // L: 262
+									var5.exactMoveDeltaY1 += var5.tileY; // L: 263
+									var5.exactMoveDeltaX2 += var5.tileX; // L: 264
+									var5.exactMoveDeltaY2 += var5.tileY; // L: 265
 									var5.pathLength = 0; // L: 266
 								} else {
-									var5.field1083 += var5.pathX[0]; // L: 269
-									var5.field1100 += var5.pathY[0]; // L: 270
-									var5.field1128 += var5.pathX[0]; // L: 271
-									var5.field1130 += var5.pathY[0]; // L: 272
+									var5.exactMoveDeltaX1 += var5.pathX[0]; // L: 269
+									var5.exactMoveDeltaY1 += var5.pathY[0]; // L: 270
+									var5.exactMoveDeltaX2 += var5.pathX[0]; // L: 271
+									var5.exactMoveDeltaY2 += var5.pathY[0]; // L: 272
 									var5.pathLength = 1; // L: 273
 								}
 
@@ -335,11 +335,11 @@ public class GameBuild {
 							if ((var6 & 256) != 0) { // L: 280
 								var5.spotAnimation = var0.method7004(); // L: 281
 								var8 = var0.readInt(); // L: 282
-								var5.field1126 = var8 >> 16; // L: 283
-								var5.field1125 = (var8 & 65535) + Client.cycle; // L: 284
+								var5.spotAnimationHeight = var8 >> 16; // L: 283
+								var5.spotAnimationStartCycle = (var8 & 65535) + Client.cycle; // L: 284
 								var5.spotAnimationFrame = 0; // L: 285
 								var5.spotAnimationFrameCycle = 0; // L: 286
-								if (var5.field1125 > Client.cycle) { // L: 287
+								if (var5.spotAnimationStartCycle > Client.cycle) { // L: 287
 									var5.spotAnimationFrame = -1;
 								}
 
@@ -407,7 +407,7 @@ public class GameBuild {
 										var22 = Players.field1241[var4]; // L: 336
 									}
 
-									var5.method2109(var5.tileX, var5.tileY, var22); // L: 337
+									var5.move(var5.tileX, var5.tileY, var22); // L: 337
 								}
 							}
 						}

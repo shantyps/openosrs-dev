@@ -35,7 +35,8 @@ public enum class269 implements MouseWheel {
 	@ObfuscatedGetter(
 		intValue = 681305729
 	)
-	static int field3221;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 	@ObfuscatedName("g")
 	@ObfuscatedGetter(
 		intValue = -833696691

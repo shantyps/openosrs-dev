@@ -11,7 +11,8 @@ public class ArchiveLoader {
 	@ObfuscatedGetter(
 		intValue = 1501018991
 	)
-	static int field985;
+	@Export("cameraLookAtHeight")
+	static int cameraLookAtHeight;
 	@ObfuscatedName("aa")
 	@Export("client")
 	@ObfuscatedSignature(

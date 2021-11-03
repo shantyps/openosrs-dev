@@ -352,7 +352,7 @@ public class class21 {
 							var9 = Client.field530[var7]; // L: 7432
 							if (var4 >= 0 && var5 >= 0 && var4 < 103 && var5 < 103) { // L: 7433
 								if (var9 == 0) { // L: 7434
-									BoundaryObject var31 = GameBuild.scene.method4301(GrandExchangeOfferTotalQuantityComparator.Client_plane, var4, var5); // L: 7435
+									BoundaryObject var31 = GameBuild.scene.getBoundaryObject(GrandExchangeOfferTotalQuantityComparator.Client_plane, var4, var5); // L: 7435
 									if (var31 != null) { // L: 7436
 										var11 = Entity_unpackID(var31.tag); // L: 7437
 										if (var7 == 2) { // L: 7438
@@ -365,7 +365,7 @@ public class class21 {
 								}
 
 								if (var9 == 1) { // L: 7445
-									WallDecoration var43 = GameBuild.scene.method4410(GrandExchangeOfferTotalQuantityComparator.Client_plane, var4, var5); // L: 7446
+									WallDecoration var43 = GameBuild.scene.getWallObject(GrandExchangeOfferTotalQuantityComparator.Client_plane, var4, var5); // L: 7446
 									if (var43 != null) { // L: 7447
 										var11 = Entity_unpackID(var43.tag); // L: 7448
 										if (var7 != 4 && var7 != 5) { // L: 7449

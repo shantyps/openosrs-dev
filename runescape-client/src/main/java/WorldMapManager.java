@@ -515,9 +515,9 @@ public final class WorldMapManager {
 				}
 			}
 
-			if (var0.field1112 != -1 && (var0.pathLength == 0 || var0.field1085 > 0)) { // L: 4415
-				var0.orientation = var0.field1112; // L: 4416
-				var0.field1112 = -1; // L: 4417
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1085 > 0)) { // L: 4415
+				var0.orientation = var0.facedDirection; // L: 4416
+				var0.facedDirection = -1; // L: 4417
 			}
 
 			int var4 = var0.orientation - var0.rotation & 2047; // L: 4419

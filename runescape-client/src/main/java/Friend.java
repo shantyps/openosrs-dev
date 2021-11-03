@@ -61,7 +61,8 @@ public class Friend extends Buddy {
 		descriptor = "(III)V",
 		garbageValue = "1293240706"
 	)
-	static void method6057(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (class408.clientPreferences.musicVolume != 0 && var0 != -1) { // L: 4098
 			Archive var2 = AbstractWorldMapIcon.archive11; // L: 4099
 			int var3 = class408.clientPreferences.musicVolume; // L: 4100

@@ -981,7 +981,7 @@ public class ItemComposition extends DualNode {
 	@Export("runIntfCloseListeners")
 	static final void runIntfCloseListeners(int var0, int var1) {
 		if (class174.loadInterface(var0)) { // L: 11121
-			class150.runComponentCloseListeners(WorldMapSection1.Widget_interfaceComponents[var0], var1); // L: 11122
+			PlayerEquipmentItem.runComponentCloseListeners(WorldMapSection1.Widget_interfaceComponents[var0], var1); // L: 11122
 		}
 	} // L: 11123
 

@@ -388,24 +388,24 @@ public class class16 implements ThreadFactory {
 				var8 = var4.x - (var6 - class19.baseX - class19.baseX) * 64; // L: 7925
 				var9 = var4.y - (var7 - DefaultsGroup.baseY - DefaultsGroup.baseY) * 64; // L: 7926
 				if (var8 != 0 || var9 != 0) { // L: 7927
-					var4.field1112 = (int)(Math.atan2((double)var8, (double)var9) * 325.949D) & 2047;
+					var4.facedDirection = (int)(Math.atan2((double)var8, (double)var9) * 325.949D) & 2047;
 				}
 			}
 
 			if (Players.field1254 && (var5 & 256) != 0 || !Players.field1254 && (var5 & 128) != 0) { // L: 7929
-				var4.field1083 = var1.method7128(); // L: 7930
-				var4.field1100 = var1.method6973(); // L: 7931
-				var4.field1128 = var1.method7128(); // L: 7932
-				var4.field1130 = var1.method6999(); // L: 7933
-				var4.field1131 = var1.method7120() + Client.cycle; // L: 7934
-				var4.field1132 = var1.readUnsignedShort() + Client.cycle; // L: 7935
-				var4.field1133 = var1.method7004(); // L: 7936
+				var4.exactMoveDeltaX1 = var1.method7128(); // L: 7930
+				var4.exactMoveDeltaY1 = var1.method6973(); // L: 7931
+				var4.exactMoveDeltaX2 = var1.method7128(); // L: 7932
+				var4.exactMoveDeltaY2 = var1.method6999(); // L: 7933
+				var4.exactMoveArrive1Cycle = var1.method7120() + Client.cycle; // L: 7934
+				var4.exactMoveArrive2Cycle = var1.readUnsignedShort() + Client.cycle; // L: 7935
+				var4.exactMoveDirection = var1.method7004(); // L: 7936
 				var4.pathLength = 1; // L: 7937
 				var4.field1144 = 0; // L: 7938
-				var4.field1083 += var4.pathX[0]; // L: 7939
-				var4.field1100 += var4.pathY[0]; // L: 7940
-				var4.field1128 += var4.pathX[0]; // L: 7941
-				var4.field1130 += var4.pathY[0]; // L: 7942
+				var4.exactMoveDeltaX1 += var4.pathX[0]; // L: 7939
+				var4.exactMoveDeltaY1 += var4.pathY[0]; // L: 7940
+				var4.exactMoveDeltaX2 += var4.pathX[0]; // L: 7941
+				var4.exactMoveDeltaY2 += var4.pathY[0]; // L: 7942
 			}
 
 			if ((var5 & 32) != 0) { // L: 7944
@@ -421,18 +421,18 @@ public class class16 implements ThreadFactory {
 						var4.sequenceFrame = 0; // L: 7951
 						var4.sequenceFrameCycle = 0; // L: 7952
 						var4.sequenceDelay = var7; // L: 7953
-						var4.field1116 = 0; // L: 7954
+						var4.currentSequenceFrameIndex = 0; // L: 7954
 					}
 
 					if (var8 == 2) { // L: 7956
-						var4.field1116 = 0; // L: 7957
+						var4.currentSequenceFrameIndex = 0; // L: 7957
 					}
 				} else if (var6 == -1 || var4.sequence == -1 || MouseHandler.SequenceDefinition_get(var6).field1959 >= MouseHandler.SequenceDefinition_get(var4.sequence).field1959) { // L: 7960
 					var4.sequence = var6; // L: 7961
 					var4.sequenceFrame = 0; // L: 7962
 					var4.sequenceFrameCycle = 0; // L: 7963
 					var4.sequenceDelay = var7; // L: 7964
-					var4.field1116 = 0; // L: 7965
+					var4.currentSequenceFrameIndex = 0; // L: 7965
 					var4.field1144 = var4.pathLength; // L: 7966
 				}
 			}
@@ -440,11 +440,11 @@ public class class16 implements ThreadFactory {
 			if ((var5 & 64) != 0) { // L: 7970
 				var4.spotAnimation = var1.readUnsignedShort(); // L: 7971
 				var6 = var1.method7044(); // L: 7972
-				var4.field1126 = var6 >> 16; // L: 7973
-				var4.field1125 = (var6 & 65535) + Client.cycle; // L: 7974
+				var4.spotAnimationHeight = var6 >> 16; // L: 7973
+				var4.spotAnimationStartCycle = (var6 & 65535) + Client.cycle; // L: 7974
 				var4.spotAnimationFrame = 0; // L: 7975
 				var4.spotAnimationFrameCycle = 0; // L: 7976
-				if (var4.field1125 > Client.cycle) { // L: 7977
+				if (var4.spotAnimationStartCycle > Client.cycle) { // L: 7977
 					var4.spotAnimationFrame = -1;
 				}
 

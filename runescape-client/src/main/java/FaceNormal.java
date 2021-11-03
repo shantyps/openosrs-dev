@@ -42,18 +42,18 @@ public class FaceNormal {
 				var0.sequenceFrame = 0; // L: 4532
 				var0.sequenceFrameCycle = 0; // L: 4533
 				var0.sequenceDelay = var2; // L: 4534
-				var0.field1116 = 0; // L: 4535
+				var0.currentSequenceFrameIndex = 0; // L: 4535
 			}
 
 			if (var3 == 2) { // L: 4537
-				var0.field1116 = 0; // L: 4538
+				var0.currentSequenceFrameIndex = 0; // L: 4538
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || MouseHandler.SequenceDefinition_get(var1).field1959 >= MouseHandler.SequenceDefinition_get(var0.sequence).field1959) { // L: 4541
 			var0.sequence = var1; // L: 4542
 			var0.sequenceFrame = 0; // L: 4543
 			var0.sequenceFrameCycle = 0; // L: 4544
 			var0.sequenceDelay = var2; // L: 4545
-			var0.field1116 = 0; // L: 4546
+			var0.currentSequenceFrameIndex = 0; // L: 4546
 			var0.field1144 = var0.pathLength; // L: 4547
 		}
 
