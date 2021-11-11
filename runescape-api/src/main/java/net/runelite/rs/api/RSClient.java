@@ -131,6 +131,8 @@ public interface RSClient extends RSGameEngine, Client
 
 	@Override
 	int getLatestWidgetCall();
+	@Override
+	void setLatestWidgetCall(int value);
 
 	@Import("currentLevels")
 	@Override

@@ -940,6 +940,7 @@ public class EventInspector extends DevToolsFrame {
 
     @Subscribe
     public void onServerPacketReadStartedEvent(ServerPacketReadStartedEvent event) {
+        client.setLatestWidgetCall(-1);
         resetTrackedVariables();
     }
 
@@ -1342,7 +1343,9 @@ public class EventInspector extends DevToolsFrame {
         final int value = ((event.getItemId() & 0xFFFF) << 16) | (event.getQuantity() & 0xFFFF);
         if (latestInventoryId != event.getInventoryId()) {
             final int latestWidgetCall = client.getLatestWidgetCall();
-            addLine("Inventory update", "InvComponent(interfaceId = " + (latestWidgetCall >> 16) + ", componentId = " + (latestWidgetCall & 0xFFFF) + ")",
+            final int interfaceId = latestWidgetCall == -1 ? -1 : (latestWidgetCall >> 16);
+            final int componentId = latestWidgetCall == -1 ? -1 : (latestWidgetCall & 0xFFFF);
+            addLine("Inventory update", "InvComponent(interfaceId = " + interfaceId + ", componentId = " + componentId + ")",
                     true, inventoryChanges);
             latestInventoryId = event.getInventoryId();
         }

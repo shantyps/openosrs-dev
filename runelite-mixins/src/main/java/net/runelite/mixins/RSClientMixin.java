@@ -1934,6 +1934,13 @@ public abstract class RSClientMixin implements RSClient
 		return latestWidgetCall;
 	}
 
+	@Override
+	@Inject
+	public void setLatestWidgetCall(int value)
+	{
+		latestWidgetCall = value;
+	}
+
 	@Copy("shouldLeftClickOpenMenu")
 	@Replace("shouldLeftClickOpenMenu")
 	@SuppressWarnings("InfiniteRecursion")

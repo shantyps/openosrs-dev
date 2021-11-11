@@ -245,6 +245,7 @@ public interface Client extends GameEngine
 	int getFPS();
 
 	int getLatestWidgetCall();
+	void setLatestWidgetCall(int value);
 
 	/**
 	 * Gets the x-axis coordinate of the camera.
