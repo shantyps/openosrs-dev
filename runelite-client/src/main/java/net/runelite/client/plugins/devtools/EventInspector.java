@@ -1345,15 +1345,15 @@ public class EventInspector extends DevToolsFrame {
             final int latestWidgetCall = client.getLatestWidgetCall();
             final int interfaceId = latestWidgetCall == -1 ? -1 : (latestWidgetCall >> 16);
             final int componentId = latestWidgetCall == -1 ? -1 : (latestWidgetCall & 0xFFFF);
-            addLine("Inventory update", "InvComponent(interfaceId = " + interfaceId + ", componentId = " + componentId + ")",
+            addLine("Inventory update", "InvComponent(interfaceId = " + interfaceId + ", componentId = " + componentId + ", inventoryId = "
+                    + event.getInventoryId() + ")",
                     true, inventoryChanges);
             latestInventoryId = event.getInventoryId();
         }
         if (Objects.equals(inventoryDiffs.get(key), value)) return;
         inventoryDiffs.put(key, value);
         addLine("Inventory change",
-                "Inv(inventoryId = " + event.getInventoryId() + ", "
-                    + "slotId = " + event.getSlotId() + ", "
+                "Inv(slotId = " + event.getSlotId() + ", "
                     + "itemId = " + event.getItemId() + ", "
                     + "amount = " + event.getQuantity() + ")", true, inventoryChanges);
     }
