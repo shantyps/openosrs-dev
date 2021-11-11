@@ -1340,14 +1340,14 @@ public class EventInspector extends DevToolsFrame {
     public void onContainerItemChanged(ContainerItemChange event) {
         final int key = ((event.getInventoryId() & 0xFFFF) << 16) | (event.getSlotId() & 0xFFFF);
         final int value = ((event.getItemId() & 0xFFFF) << 16) | (event.getQuantity() & 0xFFFF);
-        if (Objects.equals(inventoryDiffs.get(key), value)) return;
-        inventoryDiffs.put(key, value);
         if (latestInventoryId != event.getInventoryId()) {
             final int latestWidgetCall = client.getLatestWidgetCall();
             addLine("Inventory update", "InvComponent(interfaceId = " + (latestWidgetCall >> 16) + ", componentId = " + (latestWidgetCall & 0xFFFF) + ")",
                     true, inventoryChanges);
             latestInventoryId = event.getInventoryId();
         }
+        if (Objects.equals(inventoryDiffs.get(key), value)) return;
+        inventoryDiffs.put(key, value);
         addLine("Inventory change",
                 "Inv(inventoryId = " + event.getInventoryId() + ", "
                     + "slotId = " + event.getSlotId() + ", "
