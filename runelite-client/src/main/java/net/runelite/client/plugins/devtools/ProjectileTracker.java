@@ -73,6 +73,7 @@ public class ProjectileTracker {
         final WorldArea sourceArea = !sourceNpcs.isEmpty() ? sourceNpcs.get(0).getWorldArea() : new WorldArea(sourceWorldPoint, 1, 1);
         final WorldArea destinationArea = target != null ? target.getWorldArea() : new WorldArea(destWorldPoint, 1, 1);
         final int distance = sourceArea.distanceTo2D(destinationArea);
+        final int tileToTileDistance = new WorldArea(sourceWorldPoint, 1, 1).distanceTo2D(new WorldArea(destWorldPoint, 1, 1));
 
         final EarlyProjectileInfo earlyProjectile = new EarlyProjectileInfo(id, startHeight, endHeight, angle, distOffset, startCycle);
         final DynamicProjectileInfo dynamicInfo = new DynamicProjectileInfo(sourcePoint, destinationPoint, endCycle - startCycle, distance);
@@ -80,11 +81,15 @@ public class ProjectileTracker {
 
         final String sourcePointString = formatLocation(sourceWorldPoint.getX(), sourceWorldPoint.getY(), sourceWorldPoint.getPlane(), rsFormat);
         final String destPointString = formatLocation(destWorldPoint.getX(), destWorldPoint.getY(), destWorldPoint.getPlane(), rsFormat);
-        final String targetString = target instanceof Player ? ("Player(" + (target.getName() + " - " + destPointString + ")")) : target instanceof NPC ?
-                ("Npc(" + (target.getName() + " - " + destPointString + ")")) : ("Unknown(" + destPointString + ")");
-        final String projectileText = getProjectileText(earlyProjectile, dynamicInfo);
+        final String targetString = target instanceof Player ? ("Player(" + (target.getName() + " - " + destPointString + ")"))
+                : target instanceof NPC ? ("Npc(" + (target.getName() + " - " + destPointString + ")"))
+                : ("Unknown(" + destPointString + ")");
+        final String excessInfo =
+                " - tile to tile distance: " + tileToTileDistance + ", source to destination distance: " + distance + ", flight time: " + (endCycle - startCycle);
+        final String projectileText = getProjectileText(earlyProjectile, dynamicInfo) + excessInfo;
         if (sourcePlayers.size() == 1 && sourceNpcs.isEmpty()) {
-            consumer.accept(earlyProjectile, dynamicInfo, "Player(" + sourcePlayers.get(0).getName() + " - " + sourcePointString + ") -> " + targetString,
+            consumer.accept(earlyProjectile, dynamicInfo,
+                    "Player(" + sourcePlayers.get(0).getName() + " - " + sourcePointString + ") -> " + targetString,
                     projectileText);
         } else if (sourceNpcs.size() == 1 && sourcePlayers.isEmpty()) {
             consumer.accept(earlyProjectile, dynamicInfo, "Npc(" + sourceNpcs.get(0).getName() + " - " + sourcePointString + ") -> " + targetString,
