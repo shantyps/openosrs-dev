@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
 import net.runelite.client.callback.ClientThread;
@@ -140,6 +141,8 @@ public class EventInspector extends DevToolsFrame {
 
     private final JCheckBox movement = new JCheckBox("Player Walk & Run", true);
     private final JCheckBox teleportation = new JCheckBox("Player Teleportation", true);
+    private final JCheckBox playerCount = new JCheckBox("Player Count", true);
+    private final JCheckBox npcCount = new JCheckBox("NPC Count", true);
 
     private final List<JCheckBox> allSettings = new ArrayList<>();
 
@@ -396,6 +399,8 @@ public class EventInspector extends DevToolsFrame {
         panel.add(playerMenuOptions);
         panel.add(movement);
         panel.add(teleportation);
+        panel.add(playerCount);
+        panel.add(npcCount);
         panel.add(new JSeparator());
         camera.setToolTipText("<html>Camera packets include:<br>" +
                 "CamReset<br>" +
@@ -407,6 +412,8 @@ public class EventInspector extends DevToolsFrame {
                 "due to how spammy the packet itself is in the events it transmits.</html>");
         movement.setToolTipText("<html>Movement will only record walking and running, and only within 15 tile radius around the local player.</html>");
         teleportation.setToolTipText("<html>Teleportation will only record teleports that happen within 15 tile radius of the local player.</html>");
+        playerCount.setToolTipText("<html>Shows the total number of players and the distance to the farthest one after each tick.</html>");
+        npcCount.setToolTipText("<html>Shows the total number of NPCs and the distance to the farthest one after each tick.</html>");
     }
 
     private void addLine(String prefix, String text, boolean addToConsole, final JCheckBox checkBox) {
@@ -437,6 +444,24 @@ public class EventInspector extends DevToolsFrame {
         if (client.getTickCount() % writeInterval == 0) {
             ForkJoinPool.commonPool().submit(this::writeToFile);
         }
+        final Player localPlayer = client.getLocalPlayer();
+        if (localPlayer == null) return;
+        List<Player> players = client.getPlayers();
+        int farthestDistance = 0;
+        final WorldArea localPlayerArea = localPlayer.getWorldArea();
+        for (Player player : players) {
+            final int distance = player.getWorldLocation().distanceTo(localPlayerArea);
+            if (distance > farthestDistance) farthestDistance = distance;
+        }
+        addLine("Player count", "Count: " + players.size() + ", farthest distance: " + farthestDistance, true, playerCount);
+
+        List<NPC> npcs = client.getNpcs();
+        farthestDistance = 0;
+        for (NPC npc : npcs) {
+            final int distance = npc.getWorldLocation().distanceTo(localPlayerArea);
+            if (distance > farthestDistance) farthestDistance = distance;
+        }
+        addLine("NPC count", "Count: " + npcs.size() + ", farthest distance: " + farthestDistance, true, npcCount);
     }
 
     private void addLine(String prefix, String text, int tick, boolean addToConsole, final JCheckBox checkBox) {
