@@ -10,6 +10,7 @@ import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.ProjectileMoved;
 
+import javax.inject.Inject;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +24,12 @@ public class ProjectileTracker {
     private final Set<Projectile> inspectedProjectiles = Collections.synchronizedSet(new HashSet<>());
     private final Map<EarlyProjectileInfo, List<DynamicProjectileInfo>> trackedProjectiles = Collections.synchronizedMap(new HashMap<>());
     private final Map<EarlyProjectileInfo, Integer> identifiedProjectiles = Collections.synchronizedMap(new HashMap<>());
+    private final Client client;
+
+    @Inject
+    public ProjectileTracker(Client client) {
+        this.client = client;
+    }
 
     void clearCache() {
         inspectedProjectiles.clear();
@@ -31,7 +38,7 @@ public class ProjectileTracker {
     }
 
     void submitProjectileMoved(Client client, ProjectileMoved event, boolean rsFormat, QuadConsumer<EarlyProjectileInfo, DynamicProjectileInfo, String,
-                               String> consumer) {
+                               String> consumer, boolean translateCoordsInInstance) {
         Projectile projectile = event.getProjectile();
         /* No need to run the calculations for every tick that the projectile moves - just the first, on spawn, is enough. */
         if (!inspectedProjectiles.add(projectile)) return;
@@ -79,8 +86,8 @@ public class ProjectileTracker {
         final DynamicProjectileInfo dynamicInfo = new DynamicProjectileInfo(sourcePoint, destinationPoint, endCycle - startCycle, distance);
 
 
-        final String sourcePointString = formatLocation(sourceWorldPoint.getX(), sourceWorldPoint.getY(), sourceWorldPoint.getPlane(), rsFormat);
-        final String destPointString = formatLocation(destWorldPoint.getX(), destWorldPoint.getY(), destWorldPoint.getPlane(), rsFormat);
+        final String sourcePointString = formatLocation(sourceWorldPoint.getX(), sourceWorldPoint.getY(), sourceWorldPoint.getPlane(), rsFormat, translateCoordsInInstance);
+        final String destPointString = formatLocation(destWorldPoint.getX(), destWorldPoint.getY(), destWorldPoint.getPlane(), rsFormat, translateCoordsInInstance);
         final String targetString = target instanceof Player ? ("Player(" + (target.getName() + " - " + destPointString + ")"))
                 : target instanceof NPC ? ("Npc(" + (target.getName() + " - " + destPointString + ")"))
                 : ("Unknown(" + destPointString + ")");
@@ -99,15 +106,30 @@ public class ProjectileTracker {
         }
     }
 
-    private String formatLocation(final int x, final int y, final int z, boolean rsFormat) {
+    private String formatLocation(final int x, final int y, final int z, boolean rsFormat, boolean translateCoordsInInstance) {
+        LocalPoint localPoint = LocalPoint.fromWorld(client, x, y);
+        final boolean isInInstance = x >= 6400;
+        final WorldPoint baseMapPoint = localPoint == null ? null : WorldPoint.fromLocalInstance(client, localPoint, z);
         if (rsFormat) {
-            final int msqx = x >> 6;
-            final int msqz = y >> 6;
-            final int tx = x & 0x3F;
-            final int tz = y & 0x3F;
-            return "level = " + z + ", msqx = " + msqx + ", msqz = " + msqz + ", tx = " + tx + ", tz = " + tz;
+            if (isInInstance && baseMapPoint != null && translateCoordsInInstance) {
+                final int msqx = baseMapPoint.getX() >> 6;
+                final int msqz = baseMapPoint.getY() >> 6;
+                final int tx = baseMapPoint.getX() & 0x3F;
+                final int tz = baseMapPoint.getY() & 0x3F;
+                return "level = " + z + ", msqx = " + msqx + ", msqz = " + msqz + ", tx = " + tx + ", tz = " + tz + ", instanced = true";
+            } else {
+                final int msqx = x >> 6;
+                final int msqz = y >> 6;
+                final int tx = x & 0x3F;
+                final int tz = y & 0x3F;
+                return "level = " + z + ", msqx = " + msqx + ", msqz = " + msqz + ", tx = " + tx + ", tz = " + tz;
+            }
         } else {
-            return "x = " + x + ", y = " + y + ", z = " + z;
+            if (isInInstance && baseMapPoint != null && translateCoordsInInstance) {
+                return "x = " + baseMapPoint.getX() + ", y = " + baseMapPoint.getY() + ", z = " + baseMapPoint.getPlane() + ", instanced = true";
+            } else {
+                return "x = " + x + ", y = " + y + ", z = " + z;
+            }
         }
     }
 

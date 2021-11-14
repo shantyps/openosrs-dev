@@ -553,7 +553,7 @@ public class EventInspector extends DevToolsFrame {
                             Math.max(getDistance(dynamicProjectileInfo.getStartPoint()), getDistance(dynamicProjectileInfo.getEndPoint())) <= maxEventDistance;
                     final boolean console = inDistance && prefix.contains("Player(" + Objects.requireNonNull(client.getLocalPlayer()).getName());
                     addLine(prefix, text, console, projectiles);
-                });
+                }, translateCoordsInInstance.isSelected());
     }
 
     @Subscribe

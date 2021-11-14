@@ -192,7 +192,7 @@ public class ProjectileInspector extends DevToolsFrame {
 
     @Subscribe
     public void onProjectileMoved(ProjectileMoved event) {
-        projectileTracker.submitProjectileMoved(client, event, false, this::addEntry);
+        projectileTracker.submitProjectileMoved(client, event, false, this::addEntry, false);
     }
 
     @Override
