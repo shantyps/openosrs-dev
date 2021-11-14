@@ -3,6 +3,7 @@ package net.runelite.client.plugins.devtools;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
+import com.openosrs.client.game.WorldLocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -149,6 +150,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox localPlayerOnly = new JCheckBox("Local Player Only", false);
     private final JCheckBox pauseButton = new JCheckBox("Pause", false);
     private final JCheckBox rsCoordFormat = new JCheckBox("RS Coordinate Format", false);
+    private final JCheckBox translateCoordsInInstance = new JCheckBox("Translate Instance Coords");
     private JSlider intervalSlider;
 
     private int maxEventDistance = 104;
@@ -206,6 +208,9 @@ public class EventInspector extends DevToolsFrame {
         trackerOpts.add(pauseButton);
         trackerOpts.add(localPlayerOnly);
         trackerOpts.add(rsCoordFormat);
+        trackerOpts.add(translateCoordsInInstance);
+        translateCoordsInInstance.setToolTipText("<html>When an event happens inside an instanced zone, the coordinates<br>" +
+                "will be translated to where they would be on the static game map.</html>");
 
 
 
@@ -604,21 +609,39 @@ public class EventInspector extends DevToolsFrame {
     }
 
     private String formatLocation(final int x, final int y, final int z, boolean omitDecorations) {
+        LocalPoint localPoint = LocalPoint.fromWorld(client, x, y);
+        final boolean isInInstance = x >= 6400;
+        final WorldPoint baseMapPoint = localPoint == null ? null : WorldPoint.fromLocalInstance(client, localPoint, z);
         if (rsCoordFormat.isSelected()) {
-            final int msqx = x >> 6;
-            final int msqz = y >> 6;
-            final int tx = x & 0x3F;
-            final int tz = y & 0x3F;
             final StringBuilder builder = new StringBuilder();
             if (!omitDecorations) builder.append("Location(");
-            builder.append("level = ").append(z).append(", msqx = ").append(msqx)
-                    .append(", msqz = ").append(msqz).append(", tx = ").append(tx).append(", tz = ").append(tz);
+            if (isInInstance && baseMapPoint != null && translateCoordsInInstance.isSelected()) {
+                final int msqx = baseMapPoint.getX() >> 6;
+                final int msqz = baseMapPoint.getY() >> 6;
+                final int tx = baseMapPoint.getX() & 0x3F;
+                final int tz = baseMapPoint.getY() & 0x3F;
+                builder.append("level = ").append(z).append(", msqx = ").append(msqx)
+                        .append(", msqz = ").append(msqz).append(", tx = ").append(tx).append(", tz = ").append(tz);
+                builder.append(", instanced = true");
+            } else {
+                final int msqx = x >> 6;
+                final int msqz = y >> 6;
+                final int tx = x & 0x3F;
+                final int tz = y & 0x3F;
+                builder.append("level = ").append(z).append(", msqx = ").append(msqx)
+                        .append(", msqz = ").append(msqz).append(", tx = ").append(tx).append(", tz = ").append(tz);
+            }
             if (!omitDecorations) builder.append(")");
             return builder.toString();
         } else {
             final StringBuilder builder = new StringBuilder();
             if (!omitDecorations) builder.append("Location(");
-            builder.append("x = ").append(x).append(", y = ").append(y).append(", z = ").append(z);
+            if (isInInstance && baseMapPoint != null && translateCoordsInInstance.isSelected()) {
+                builder.append("x = ").append(baseMapPoint.getX()).append(", y = ").append(baseMapPoint.getY()).append(", z = ").append(baseMapPoint.getPlane());
+                builder.append(", instanced = true");
+            } else {
+                builder.append("x = ").append(x).append(", y = ").append(y).append(", z = ").append(z);
+            }
             if (!omitDecorations) builder.append(")");
             return builder.toString();
         }
