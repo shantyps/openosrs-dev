@@ -825,7 +825,7 @@ public class EventInspector extends DevToolsFrame {
                         locDelBuilder.append("LocDel(");
                         locDelBuilder.append("slot = ").append(update.getType()).append(", ");
                         locDelBuilder.append("rotation = ").append(update.getOrientation()).append(", ");
-                        locDelBuilder.append(formatLocation(location)).append(location.getPlane()).append(")");
+                        locDelBuilder.append(formatLocation(location)).append(")");
                         addLine("Delete map object", locDelBuilder.toString(), latestServerTick, inEventDistance(localPoint), mapObjectDel);
                     }
                 } else if (mapObjectAdd.isSelected()) {
@@ -834,7 +834,7 @@ public class EventInspector extends DevToolsFrame {
                     locAddBuilder.append("id = ").append(update.getId()).append(", ");
                     locAddBuilder.append("slot = ").append(update.getType()).append(", ");
                     locAddBuilder.append("rotation = ").append(update.getOrientation()).append(", ");
-                    locAddBuilder.append(formatLocation(location)).append(location.getPlane()).append(")");
+                    locAddBuilder.append(formatLocation(location)).append(")");
                     addLine("Add map object", locAddBuilder.toString(), latestServerTick, inEventDistance(localPoint), mapObjectAdd);
                 }
             }
