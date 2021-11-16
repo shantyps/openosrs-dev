@@ -209,9 +209,8 @@ public class EventInspector extends DevToolsFrame {
         trackerOpts.add(localPlayerOnly);
         trackerOpts.add(rsCoordFormat);
         trackerOpts.add(translateCoordsInInstance);
-        translateCoordsInInstance.setToolTipText("<html>When an event happens inside an instanced zone, the coordinates<br>" +
-                "will be translated to where they would be on the static game map.</html>");
-
+        translateCoordsInInstance.setToolTipText("<html>When an event happens inside an instanced zone, the coordinates<br>" + "will be translated to where " +
+                "they would be on the static game map.</html>");
 
 
         final JPanel sliderPanel = new JPanel(new BorderLayout());
@@ -246,8 +245,8 @@ public class EventInspector extends DevToolsFrame {
             intervalLabel.setText("  Interval  " + writeInterval);
             writeSettingsFile();
         });
-        intervalSliderPanel.setToolTipText("<html>The interval slider defines how frequently, in server ticks(0.6 seconds each),<br>" +
-                "the logs will be written to the file</html>.");
+        intervalSliderPanel.setToolTipText("<html>The interval slider defines how frequently, in server ticks(0.6 seconds each),<br>" + "the logs will be " +
+                "written to the file</html>.");
 
         trackerOpts.add(intervalSliderPanel);
 
@@ -327,12 +326,11 @@ public class EventInspector extends DevToolsFrame {
         panel.add(groundItemDel);
         panel.add(groundItemUpdate);
 
-        projectiles.setToolTipText("<html>The projectile inspector will require each unique projectile to be received from two" +
-                "<br>different distances in order for it to be able to identify all of the projectile parameters." +
-                "<br>This is due to one of the properties of projectile being the equivalent of" +
-                "<br>lengthAdjustment + (chebyshevDistance * stepMultiplier).</html>");
-        combinedObjects.setToolTipText("<html>Combined Objects refer to objects which have their models merged with the players' model" +
-                " to fix model priority issues.<br>This is commonly used for agility shortcuts and obstacles, such as pipes.</html>");
+        projectiles.setToolTipText("<html>The projectile inspector will require each unique projectile to be received from two" + "<br>different distances in" +
+                " order for it to be able to identify all of the projectile parameters." + "<br>This is due to one of the properties of projectile being the " +
+                "equivalent of" + "<br>lengthAdjustment + (chebyshevDistance * stepMultiplier).</html>");
+        combinedObjects.setToolTipText("<html>Combined Objects refer to objects which have their models merged with the players' model" + " to fix model " +
+                "priority issues.<br>This is commonly used for agility shortcuts and obstacles, such as pipes.</html>");
     }
 
     private void addMasksPanel(JPanel panel) {
@@ -349,12 +347,12 @@ public class EventInspector extends DevToolsFrame {
         panel.add(tileFacing);
         panel.add(exactMove);
         panel.add(transformations);
-        appearancesCheckbox.setToolTipText("<html>Appearances will only track changes done to a player's appearance.<br>" +
-                "Therefore, on initial login/render of a character, everything about their appearance is logged, however,<br>" +
-                "if they then equip an item for example, it'll only display differences in the equipment/body, as nothing else would be different.</html>");
-        tileFacing.setToolTipText("<html>Tile facing will only display the direction that the character is facing, not the precise coordinate<br>" +
-                "they were sent to face. This is because it is impossible to accurately determine which coordinate they're facing,<br>" +
-                "as for example, facing south sends a direction of 0 - this could mean a coordinate 1 tile south of the character, or 10 tiles.</html>");
+        appearancesCheckbox.setToolTipText("<html>Appearances will only track changes done to a player's appearance.<br>" + "Therefore, on initial " +
+                "login/render of a character, everything about their appearance is logged, however,<br>" + "if they then equip an item for example, it'll " +
+                "only display differences in the equipment/body, as nothing else would be different.</html>");
+        tileFacing.setToolTipText("<html>Tile facing will only display the direction that the character is facing, not the precise coordinate<br>" + "they " +
+                "were sent to face. This is because it is impossible to accurately determine which coordinate they're facing,<br>" + "as for example, facing " +
+                "south sends a direction of 0 - this could mean a coordinate 1 tile south of the character, or 10 tiles.</html>");
         say.setToolTipText("<html>Say will only display actual \"forced chat\" messages, not player-invoked public chat.</html>");
     }
 
@@ -371,19 +369,8 @@ public class EventInspector extends DevToolsFrame {
         panel.add(ifCloseSub);
         panel.add(ifMoveSub);
         panel.add(miscInterfacePackets);
-        miscInterfacePackets.setToolTipText("<html>Miscellaneous interface packets refer to the following packets:<br>" +
-                "IfSetHide<br>" +
-                "IfSetPosition<br>" +
-                "IfSetScrollPos<br>" +
-                "IfSetText<br>" +
-                "IfSetAngle<br>" +
-                "IfSetAnim<br>" +
-                "IfSetColor<br>" +
-                "IfSetModel<br>" +
-                "IfSetObject<br>" +
-                "IfModelRotate<br>" +
-                "IfSetPlayerHead<br>" +
-                "IfSetNpcHead</html>");
+        miscInterfacePackets.setToolTipText("<html>Miscellaneous interface packets refer to the following packets:<br>" + "IfSetHide<br>" + "IfSetPosition<br" +
+                ">" + "IfSetScrollPos<br>" + "IfSetText<br>" + "IfSetAngle<br>" + "IfSetAnim<br>" + "IfSetColor<br>" + "IfSetModel<br>" + "IfSetObject<br>" + "IfModelRotate<br>" + "IfSetPlayerHead<br>" + "IfSetNpcHead</html>");
         messages.setToolTipText("<html>Messages may include plugin-created messages, and messages which plugins alter.</html>");
     }
 
@@ -407,14 +394,10 @@ public class EventInspector extends DevToolsFrame {
         panel.add(playerCount);
         panel.add(npcCount);
         panel.add(new JSeparator());
-        camera.setToolTipText("<html>Camera packets include:<br>" +
-                "CamReset<br>" +
-                "CamShake<br>" +
-                "CamLookAt<br>" +
-                "CamMoveTo<br></html>");
+        camera.setToolTipText("<html>Camera packets include:<br>" + "CamReset<br>" + "CamShake<br>" + "CamLookAt<br>" + "CamMoveTo<br></html>");
         playerMenuOptions.setToolTipText("<html>Player menu option's index is 0-indexed, therefore the first option will have an index of 0.</html>");
-        inventoryChanges.setToolTipText("<html>Inventories will only send differences compared to the cached version of the inventory<br>" +
-                "due to how spammy the packet itself is in the events it transmits.</html>");
+        inventoryChanges.setToolTipText("<html>Inventories will only send differences compared to the cached version of the inventory<br>" + "due to how " +
+                "spammy the packet itself is in the events it transmits.</html>");
         movement.setToolTipText("<html>Movement will only record walking and running, and only within 15 tile radius around the local player.</html>");
         teleportation.setToolTipText("<html>Teleportation will only record teleports that happen within 15 tile radius of the local player.</html>");
         playerCount.setToolTipText("<html>Shows the total number of players and the distance to the farthest one after each tick.</html>");
@@ -458,7 +441,8 @@ public class EventInspector extends DevToolsFrame {
             final int distance = player.getWorldLocation().distanceTo(localPlayerArea);
             if (distance > farthestDistance) farthestDistance = distance;
         }
-        addLine("Player count", "Count: " + players.size() + ", farthest distance: " + farthestDistance, true, playerCount);
+        addLine("Player count", "Count: " + players.size() + ", farthest distance: " + farthestDistance, client.getTickCount(), true, playerCount,
+                playerCount.isSelected());
 
         List<NPC> npcs = client.getNpcs();
         farthestDistance = 0;
@@ -466,18 +450,24 @@ public class EventInspector extends DevToolsFrame {
             final int distance = npc.getWorldLocation().distanceTo(localPlayerArea);
             if (distance > farthestDistance) farthestDistance = distance;
         }
-        addLine("NPC count", "Count: " + npcs.size() + ", farthest distance: " + farthestDistance, true, npcCount);
+        addLine("NPC count", "Count: " + npcs.size() + ", farthest distance: " + farthestDistance, client.getTickCount(), true, npcCount,
+                npcCount.isSelected());
     }
 
     private void addLine(String prefix, String text, int tick, boolean addToConsole, final JCheckBox checkBox) {
+        addLine(prefix, text, tick, addToConsole, checkBox, true);
+    }
+
+    private void addLine(String prefix, String text, int tick, boolean addToConsole, final JCheckBox checkBox, final boolean logToFile) {
         final Date date = new Date();
 
         SwingUtilities.invokeLater(() -> {
-            synchronized (eventBuffer) {
-                eventBuffer.add(String.format(rsCoordFormat.isSelected() ? "%-125s" : "%-100s",
-                        "[" + tick + "] " + new SimpleDateFormat("yyyy-MM-dd HH:mm:sss").format(date) + " " + prefix) + text);
-                if (eventBuffer.size() >= 500) {
-                    writeToFile();
+            if (logToFile) {
+                synchronized (eventBuffer) {
+                    eventBuffer.add(String.format(rsCoordFormat.isSelected() ? "%-125s" : "%-100s", "[" + tick + "] " + new SimpleDateFormat("yyyy-MM-dd " + "HH:mm:sss").format(date) + " " + prefix) + text);
+                    if (eventBuffer.size() >= 500) {
+                        writeToFile();
+                    }
                 }
             }
             /* Log it externally here anyways */
@@ -547,13 +537,12 @@ public class EventInspector extends DevToolsFrame {
 
     @Subscribe
     public void onProjectileMoved(ProjectileMoved event) {
-        projectileTracker.submitProjectileMoved(client, event, rsCoordFormat.isSelected(),
-                (earlyProjectileInfo, dynamicProjectileInfo, prefix, text) -> {
-                    final boolean inDistance =
-                            Math.max(getDistance(dynamicProjectileInfo.getStartPoint()), getDistance(dynamicProjectileInfo.getEndPoint())) <= maxEventDistance;
-                    final boolean console = inDistance && prefix.contains("Player(" + Objects.requireNonNull(client.getLocalPlayer()).getName());
-                    addLine(prefix, text, console, projectiles);
-                }, translateCoordsInInstance.isSelected());
+        projectileTracker.submitProjectileMoved(client, event, rsCoordFormat.isSelected(), (earlyProjectileInfo, dynamicProjectileInfo, prefix, text) -> {
+            final boolean inDistance =
+                    Math.max(getDistance(dynamicProjectileInfo.getStartPoint()), getDistance(dynamicProjectileInfo.getEndPoint())) <= maxEventDistance;
+            final boolean console = inDistance && prefix.contains("Player(" + Objects.requireNonNull(client.getLocalPlayer()).getName());
+            addLine(prefix, text, console, projectiles);
+        }, translateCoordsInInstance.isSelected());
     }
 
     @Subscribe
@@ -579,7 +568,8 @@ public class EventInspector extends DevToolsFrame {
     @Subscribe
     public void npcSequenceChanged(AnimationFrameIndexChanged event) {
         Actor actor = event.getActor();
-        if (actor == null || actor instanceof Player || actor.getAnimationFrameIndex() != 0 || actor.getName() == null || isActorPositionUninitialized(actor)) return;
+        if (actor == null || actor instanceof Player || actor.getAnimationFrameIndex() != 0 || actor.getName() == null || isActorPositionUninitialized(actor))
+            return;
         postSequenceUpdate(actor, actor.getAnimation() == 65535 ? -1 : actor.getAnimation(), actor.getAnimationDelay());
     }
 
@@ -620,16 +610,16 @@ public class EventInspector extends DevToolsFrame {
                 final int msqz = baseMapPoint.getY() >> 6;
                 final int tx = baseMapPoint.getX() & 0x3F;
                 final int tz = baseMapPoint.getY() & 0x3F;
-                builder.append("level = ").append(z).append(", msqx = ").append(msqx)
-                        .append(", msqz = ").append(msqz).append(", tx = ").append(tx).append(", tz = ").append(tz);
+                builder.append("level = ").append(z).append(", msqx = ").append(msqx).append(", msqz = ").append(msqz).append(", tx = ").append(tx).append("," +
+                        " tz = ").append(tz);
                 builder.append(", instanced = true");
             } else {
                 final int msqx = x >> 6;
                 final int msqz = y >> 6;
                 final int tx = x & 0x3F;
                 final int tz = y & 0x3F;
-                builder.append("level = ").append(z).append(", msqx = ").append(msqx)
-                        .append(", msqz = ").append(msqz).append(", tx = ").append(tx).append(", tz = ").append(tz);
+                builder.append("level = ").append(z).append(", msqx = ").append(msqx).append(", msqz = ").append(msqz).append(", tx = ").append(tx).append("," +
+                        " tz = ").append(tz);
             }
             if (!omitDecorations) builder.append(")");
             return builder.toString();
@@ -666,9 +656,7 @@ public class EventInspector extends DevToolsFrame {
             default:
                 final LocalPoint localPoint = LocalPoint.fromScene(event.getHintArrowX(), event.getHintArrowY());
                 final WorldPoint worldPoint = WorldPoint.fromLocal(client, localPoint);
-                addLine("Hint arrow" + type, "HintArrow(type = " + type
-                        + ", " + formatLocation(worldPoint) + ")",
-                        inEventDistance(localPoint), hintArrows);
+                addLine("Hint arrow" + type, "HintArrow(type = " + type + ", " + formatLocation(worldPoint) + ")", inEventDistance(localPoint), hintArrows);
                 break;
         }
     }
@@ -682,10 +670,8 @@ public class EventInspector extends DevToolsFrame {
 
     @Subscribe
     public void cameraShakeEvent(CameraShakeEvent event) {
-        addLine("Camera shake", "CamShake(type = " + event.getType()
-                + ", shakeIntensity = " + event.getShakeIntensity()
-                + ", movementIntensity = " + event.getMovementIntensity()
-                + ", speed = " + event.getSpeed() + ")", true, camera);
+        addLine("Camera shake",
+                "CamShake(type = " + event.getType() + ", shakeIntensity = " + event.getShakeIntensity() + ", movementIntensity = " + event.getMovementIntensity() + ", speed = " + event.getSpeed() + ")", true, camera);
     }
 
     @Subscribe
@@ -693,18 +679,16 @@ public class EventInspector extends DevToolsFrame {
         final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraLookAtX(), event.getCameraLookAtY());
         final WorldPoint worldPoint = WorldPoint.fromLocal(client, localPoint);
 
-        addLine("Camera look at", "CamLookAt(" + formatLocation(worldPoint) + ", "
-        + "height = " + event.getCameraLookAtHeight() + ", speed = " + event.getCameraLookAtSpeed() + ", "
-        + "acceleration = " + event.getCameraLookAtAcceleration() + ")", true, camera);
+        addLine("Camera look at",
+                "CamLookAt(" + formatLocation(worldPoint) + ", " + "height = " + event.getCameraLookAtHeight() + ", speed = " + event.getCameraLookAtSpeed() + ", " + "acceleration = " + event.getCameraLookAtAcceleration() + ")", true, camera);
     }
 
     @Subscribe
     public void cameraMoveToEvent(CameraMoveToEvent event) {
         final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraMoveToX(), event.getCameraMoveToY());
         final WorldPoint worldPoint = WorldPoint.fromLocal(client, localPoint);
-        addLine("Camera move to", "CamMoveTo(" + formatLocation(worldPoint) + ", "
-                + "height = " + event.getCameraMoveToHeight() + ", speed = " + event.getCameraMoveToSpeed() + ", "
-                + "acceleration = " + event.getCameraMoveToAcceleration() + ")", true, camera);
+        addLine("Camera move to",
+                "CamMoveTo(" + formatLocation(worldPoint) + ", " + "height = " + event.getCameraMoveToHeight() + ", speed = " + event.getCameraMoveToSpeed() + ", " + "acceleration = " + event.getCameraMoveToAcceleration() + ")", true, camera);
     }
 
     @Subscribe
@@ -869,10 +853,7 @@ public class EventInspector extends DevToolsFrame {
                     final long fromTopInterfacePacked = value.getLeft();
                     final long packedInterface = value.getRight();
                     addLine("Move interface (id = " + node.getId() + ", walkType = " + node.getModalMode() + ")",
-                            "IfMoveSub("
-                                    + "fromTopInterface = " + (fromTopInterfacePacked >> 16) + ", " + "fromTopComponent = " + (fromTopInterfacePacked & 0xFFFF)
-                                    + ", " + "toTopInterface = " + (packedInterface >> 16) + ", " + "toTopComponent = " + (packedInterface & 0xFFFF) + ")",
-                            latestServerTick, true, ifMoveSub);
+                            "IfMoveSub(" + "fromTopInterface = " + (fromTopInterfacePacked >> 16) + ", " + "fromTopComponent = " + (fromTopInterfacePacked & 0xFFFF) + ", " + "toTopInterface = " + (packedInterface >> 16) + ", " + "toTopComponent = " + (packedInterface & 0xFFFF) + ")", latestServerTick, true, ifMoveSub);
                 });
             }
             ifMoveSubs.clear();
@@ -890,13 +871,11 @@ public class EventInspector extends DevToolsFrame {
                 /* Any players that were just added to the tracked players list can't be relied on for valid info. */
                 if (!isLocalPlayer && movementTrackedPlayers.add(movementEvent.getPlayer())) continue;
                 if (movementEvent.getType() == 127) {
-                    addLine(formatActor(movementEvent.getPlayer(), previousLocation),
-                            "Teleport(" + formatLocation(destination) + ")",
+                    addLine(formatActor(movementEvent.getPlayer(), previousLocation), "Teleport(" + formatLocation(destination) + ")",
                             isActorConsoleLogged(movementEvent.getPlayer()), teleportation);
                 } else {
-                    addLine(formatActor(movementEvent.getPlayer(), previousLocation),
-                            "Movement(type = " + (movementEvent.getType() == 1 ? "Walk" : "Run") + ", " + formatLocation(destination) + ")",
-                            isActorConsoleLogged(movementEvent.getPlayer()), movement);
+                    addLine(formatActor(movementEvent.getPlayer(), previousLocation), "Movement(type = " + (movementEvent.getType() == 1 ? "Walk" : "Run") +
+                            ", " + formatLocation(destination) + ")", isActorConsoleLogged(movementEvent.getPlayer()), movement);
                 }
             }
             movementEvents.clear();
@@ -948,10 +927,8 @@ public class EventInspector extends DevToolsFrame {
             ifMoveSubs.remove(lastMoveSub);
             lastMoveSub = null;
         }
-        addLine("Sub interface", "IfOpenSub(id = " + event.getInterfaceId()
-                + ", topInterface = " + (event.getTargetComponent() >> 16)
-                + ", topComponent = " + (event.getTargetComponent() & 0xFFFF)
-                + ", walkType = " + event.getWalkType() + ")", true, ifOpenSub);
+        addLine("Sub interface",
+                "IfOpenSub(id = " + event.getInterfaceId() + ", topInterface = " + (event.getTargetComponent() >> 16) + ", topComponent = " + (event.getTargetComponent() & 0xFFFF) + ", walkType = " + event.getWalkType() + ")", true, ifOpenSub);
     }
 
     @Subscribe
@@ -995,7 +972,8 @@ public class EventInspector extends DevToolsFrame {
     @Subscribe
     public void onServerPacketReadCompleteEvent(ServerPacketReadCompleteEvent event) {
         if (widgetScrollY != -1) {
-            addLine("Interface Scroll Position", "IfSetScrollPos(" + formatLatestWidgetCall() + ", scrollHeight = " + widgetScrollY + ")", true, miscInterfacePackets);
+            addLine("Interface Scroll Position", "IfSetScrollPos(" + formatLatestWidgetCall() + ", scrollHeight = " + widgetScrollY + ")", true,
+                    miscInterfacePackets);
         } else if (widgetText != null) {
             addLine("Interface Text", "IfSetText(" + formatLatestWidgetCall() + ", text = \"" + widgetText + "\")", true, miscInterfacePackets);
         } else if (widgetSequence != -1) {
@@ -1004,22 +982,26 @@ public class EventInspector extends DevToolsFrame {
             final int red = (widgetColor >> 19) & 0x1F;
             final int green = (widgetColor >> 11) & 0x1F;
             final int blue = (widgetColor >> 3) & 0x1F;
-            addLine("Interface Text Colour", "IfSetColor(" + formatLatestWidgetCall() + ", red = " + red + ", green = " + green + ", blue = " + blue + ")", true, miscInterfacePackets);
+            addLine("Interface Text Colour", "IfSetColor(" + formatLatestWidgetCall() + ", red = " + red + ", green = " + green + ", blue = " + blue + ")",
+                    true, miscInterfacePackets);
         } else if (widgetZoom != -1 && widgetAngleX != -1 && widgetAngleY != -1) {
-            addLine("Interface Angle", "IfSetAngle(" + formatLatestWidgetCall()
-                    + ", zoom = " + widgetZoom + ", angleX = " + widgetAngleX + ", angleY = " + widgetAngleY + ")", true, miscInterfacePackets);
+            addLine("Interface Angle",
+                    "IfSetAngle(" + formatLatestWidgetCall() + ", zoom = " + widgetZoom + ", angleX = " + widgetAngleX + ", angleY = " + widgetAngleY + ")",
+                    true, miscInterfacePackets);
         } else if (widgetPositionX != -1 && widgetPositionY != -1) {
-            addLine("Interface Position", "IfSetPosition(" + formatLatestWidgetCall()
-                    + ", x = " + widgetPositionX + ", y = " + widgetPositionY + ")", true, miscInterfacePackets);
+            addLine("Interface Position", "IfSetPosition(" + formatLatestWidgetCall() + ", x = " + widgetPositionX + ", y = " + widgetPositionY + ")", true,
+                    miscInterfacePackets);
         } else if (widgetModelId != -1) {
             addLine("Interface Model", "IfSetModel(" + formatLatestWidgetCall() + ", modelId = " + widgetModelId + ")", true, miscInterfacePackets);
         } else if (widgetItemId != -1 && widgetItemQuantityOrModelId != -1) {
             if (widgetObjectType) {
                 addLine("Interface Object",
-                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", itemQuantity = " + widgetItemQuantityOrModelId + ")", true, miscInterfacePackets);
+                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", itemQuantity = " + widgetItemQuantityOrModelId + ")",
+                        true, miscInterfacePackets);
             } else {
                 addLine("Interface Object",
-                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", modelZoom = " + widgetItemQuantityOrModelId + ")", true, miscInterfacePackets);
+                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", modelZoom = " + widgetItemQuantityOrModelId + ")", true
+                        , miscInterfacePackets);
             }
         } else if (widgetSetPlayerHead) {
             addLine("Interface Player Head", "IfSetPlayerHead(" + formatLatestWidgetCall() + ")", true, miscInterfacePackets);
@@ -1035,8 +1017,7 @@ public class EventInspector extends DevToolsFrame {
 
     private String formatLatestWidgetCall() {
         final int latestWidgetCall = client.getLatestWidgetCall();
-        return "interfaceId = " + (latestWidgetCall >> 16)
-                + ", componentId = " + (latestWidgetCall & 0xFFFF);
+        return "interfaceId = " + (latestWidgetCall >> 16) + ", componentId = " + (latestWidgetCall & 0xFFFF);
     }
 
     @Subscribe
@@ -1164,8 +1145,7 @@ public class EventInspector extends DevToolsFrame {
         if (sourceActor == null || isActorPositionUninitialized(sourceActor)) return;
         boolean log = sourceActor instanceof Player ? isActorConsoleLogged(sourceActor) : targetActor instanceof Player ? isActorConsoleLogged(sourceActor) :
                 (isActorConsoleLogged(sourceActor) || isActorConsoleLogged(targetActor));
-        addLine(formatActor(sourceActor), "FaceEntity(" + (targetActor == null ? "null" : formatActor(targetActor)) + ")",
-                log, interacting);
+        addLine(formatActor(sourceActor), "FaceEntity(" + (targetActor == null ? "null" : formatActor(targetActor)) + ")", log, interacting);
     }
 
     @Subscribe
@@ -1297,10 +1277,8 @@ public class EventInspector extends DevToolsFrame {
         }
         final LocalPoint localPoint = LocalPoint.fromScene(event.getX(), event.getY());
         final WorldPoint location = WorldPoint.fromLocal(client, localPoint);
-        addLine("Map Object Animation", "LocAnim(animation = " + event.getAnimation()
-                + ", object = MapObject(id = " + object.getId() + ", type = " + type +
-                ", rotation = " + rotation + ", " + formatLocation(location) + ")",
-                inEventDistance(localPoint), mapObjectAnim);
+        addLine("Map Object Animation", "LocAnim(animation = " + event.getAnimation() + ", object = MapObject(id = " + object.getId() + ", type = " + type +
+                ", rotation = " + rotation + ", " + formatLocation(location) + ")", inEventDistance(localPoint), mapObjectAnim);
     }
 
     @Subscribe
@@ -1326,8 +1304,9 @@ public class EventInspector extends DevToolsFrame {
 
     @Subscribe
     public void onPlayerMenuOptionChanged(PlayerMenuOptionChanged event) {
-        addLine("Player Context Menu", "PlayerOption(index = " + event.getIndex() + ", priority = " + event.isPriority()
-                + ", option = " + "\"" + event.getOption() + "\")", true, playerMenuOptions);
+        addLine("Player Context Menu",
+                "PlayerOption(index = " + event.getIndex() + ", priority = " + event.isPriority() + ", option = " + "\"" + event.getOption() + "\")", true,
+                playerMenuOptions);
     }
 
     @Subscribe
@@ -1338,14 +1317,12 @@ public class EventInspector extends DevToolsFrame {
         final StringBuilder exactMoveBuilder = new StringBuilder();
         final WorldPoint actorWorldLocation = actor.getWorldLocation();
         exactMoveBuilder.append("ExactMove(");
-        exactMoveBuilder.append("startLocation = ")
-                .append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX2(), actorWorldLocation.getY() - event.getExactMoveDeltaY2(),
-                        client.getPlane(), false));
+        exactMoveBuilder.append("startLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX2(),
+                actorWorldLocation.getY() - event.getExactMoveDeltaY2(), client.getPlane(), false));
         exactMoveBuilder.append(", ");
         exactMoveBuilder.append("startDelay = ").append(event.getExactMoveArrive1Cycle() - currentCycle).append(", ");
-        exactMoveBuilder.append("endLocation = ")
-                .append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX1(), actorWorldLocation.getY() - event.getExactMoveDeltaY1(),
-                        client.getPlane(), false));
+        exactMoveBuilder.append("endLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX1(),
+                actorWorldLocation.getY() - event.getExactMoveDeltaY1(), client.getPlane(), false));
         exactMoveBuilder.append(", ");
         exactMoveBuilder.append("endDelay = ").append(event.getExactMoveArrive2Cycle() - currentCycle).append(", ");
         exactMoveBuilder.append("direction = ").append(event.getExactMoveDirection()).append(")");
@@ -1358,8 +1335,7 @@ public class EventInspector extends DevToolsFrame {
         final NPCComposition oldComposition = event.getOld();
         final WorldPoint actorWorldLocation = npc.getWorldLocation();
         final String coordinateString = formatLocation(actorWorldLocation);
-        final String actorName =
-                "Npc(" + npc.getName() + ", idx: " + npc.getIndex() + ", id: " + oldComposition.getId() + ", " + coordinateString + ")";
+        final String actorName = "Npc(" + npc.getName() + ", idx: " + npc.getIndex() + ", id: " + oldComposition.getId() + ", " + coordinateString + ")";
         addLine(actorName, "Transformation(" + npc.getComposition().getId() + ")", isActorConsoleLogged(npc), transformations);
     }
 
@@ -1393,17 +1369,16 @@ public class EventInspector extends DevToolsFrame {
             final int latestWidgetCall = client.getLatestWidgetCall();
             final int interfaceId = latestWidgetCall == -1 ? -1 : (latestWidgetCall >> 16);
             final int componentId = latestWidgetCall == -1 ? -1 : (latestWidgetCall & 0xFFFF);
-            addLine("Inventory update", "InvComponent(interfaceId = " + interfaceId + ", componentId = " + componentId + ", inventoryId = "
-                    + event.getInventoryId() + ")",
-                    true, inventoryChanges);
+            addLine("Inventory update",
+                    "InvComponent(interfaceId = " + interfaceId + ", componentId = " + componentId + ", inventoryId = " + event.getInventoryId() + ")", true,
+                    inventoryChanges);
             latestInventoryId = event.getInventoryId();
         }
         if (Objects.equals(inventoryDiffs.get(key), value)) return;
         inventoryDiffs.put(key, value);
         addLine("Inventory change",
-                "Inv(slotId = " + event.getSlotId() + ", "
-                    + "itemId = " + event.getItemId() + ", "
-                    + "amount = " + event.getQuantity() + ")", true, inventoryChanges);
+                "Inv(slotId = " + event.getSlotId() + ", " + "itemId = " + event.getItemId() + ", " + "amount = " + event.getQuantity() + ")", true,
+                inventoryChanges);
     }
 
     @Subscribe
@@ -1425,7 +1400,8 @@ public class EventInspector extends DevToolsFrame {
         Scene scene = client.getScene();
         Tile[][][] tiles = scene.getTiles();
         Tile localTile = tiles[client.getPlane()][latestPendingSpawn.getX()][latestPendingSpawn.getY()];
-        /* Let's assume that any object that uses this packet is a main game object. Decorations and other objects can rarely ever be clicked, let alone this. */
+        /* Let's assume that any object that uses this packet is a main game object. Decorations and other objects can rarely ever be clicked, let alone this
+        . */
         Optional<GameObject> attachedObject = Arrays.stream(localTile.getGameObjects()).filter(obj -> {
             if (obj == null) return false;
             final int rotation = obj.getOrientation().getAngle() >> 9;
@@ -1452,8 +1428,7 @@ public class EventInspector extends DevToolsFrame {
         final int endTime = event.getAnimationCycleEnd() - clientTime;
         final StringBuilder locCombineBuilder = new StringBuilder();
         locCombineBuilder.append("LocCombine(");
-        locCombineBuilder.append("mapObject = MapObject(id = ").append(obj.getId()).append(", type = ").append(type)
-                .append(", rotation = ").append(rotation).append(", ").append(formatLocation(objectLocation)).append("), ");
+        locCombineBuilder.append("mapObject = MapObject(id = ").append(obj.getId()).append(", type = ").append(type).append(", rotation = ").append(rotation).append(", ").append(formatLocation(objectLocation)).append("), ");
         locCombineBuilder.append("startTime = ").append(startTime).append(", ");
         locCombineBuilder.append("endTime = ").append(endTime).append(", ");
         if (rsCoordFormat.isSelected()) {
@@ -1554,8 +1529,7 @@ public class EventInspector extends DevToolsFrame {
     private void resetOutputFile() {
         File folder = new File(System.getProperty("user.home") + "/.openosrs/event-inspector-logs/");
         folder.mkdirs();
-        outputFile =
-                new File(folder, new SimpleDateFormat("yyyy-MM-dd HH-mm-sss").format(new Date()) + ".txt");
+        outputFile = new File(folder, new SimpleDateFormat("yyyy-MM-dd HH-mm-sss").format(new Date()) + ".txt");
     }
 
     @Subscribe
@@ -1628,11 +1602,16 @@ public class EventInspector extends DevToolsFrame {
                     }
 
                     @Override
-                    public void componentMoved(ComponentEvent e) {}
+                    public void componentMoved(ComponentEvent e) {
+                    }
+
                     @Override
-                    public void componentShown(ComponentEvent e) {}
+                    public void componentShown(ComponentEvent e) {
+                    }
+
                     @Override
-                    public void componentHidden(ComponentEvent e) {}
+                    public void componentHidden(ComponentEvent e) {
+                    }
                 });
                 if (intervalSlider != null) {
                     intervalSlider.setValue(writeInterval);
@@ -1680,14 +1659,11 @@ public class EventInspector extends DevToolsFrame {
 
     private PlayerAppearance getPlayerAppearance(Player player) {
         final PlayerComposition composition = player.getPlayerComposition();
-        return new PlayerAppearance(player.getCombatLevel(),
-                composition == null ? null : composition.isFemale(),
-                composition == null ? null : composition.getColors(),
-                composition == null ? null : composition.getEquipmentIds(),
-                composition == null ? null : composition.getTransformedNpcId(), player.getOverheadIcon(), player.getSkullIcon(),
-                player.getRSSkillLevel(), player.getIsHidden(), player.getRunAnimation(), player.getWalkAnimation(), player.getWalkRotate180(),
-                player.getWalkRotateLeft(), player.getWalkRotateRight(), player.getIdlePoseAnimation(), player.getIdleRotateLeft(),
-                composition == null ? null : composition.getPlayerEquipmentItems());
+        return new PlayerAppearance(player.getCombatLevel(), composition == null ? null : composition.isFemale(), composition == null ? null :
+                composition.getColors(), composition == null ? null : composition.getEquipmentIds(), composition == null ? null :
+                composition.getTransformedNpcId(), player.getOverheadIcon(), player.getSkullIcon(), player.getRSSkillLevel(), player.getIsHidden(),
+                player.getRunAnimation(), player.getWalkAnimation(), player.getWalkRotate180(), player.getWalkRotateLeft(), player.getWalkRotateRight(),
+                player.getIdlePoseAnimation(), player.getIdleRotateLeft(), composition == null ? null : composition.getPlayerEquipmentItems());
     }
 
     @Data
@@ -1735,7 +1711,8 @@ public class EventInspector extends DevToolsFrame {
             }
             if (previous == null || runAnim != previous.runAnim) builder.append("runAnim = ").append(runAnim).append(", ");
             if (previous == null || walkForwardAnim != previous.walkForwardAnim) builder.append("walkForwardAnim = ").append(walkForwardAnim).append(", ");
-            if (previous == null || walkBackwardsAnim != previous.walkBackwardsAnim) builder.append("walkBackwardsAnim = ").append(walkBackwardsAnim).append(", ");
+            if (previous == null || walkBackwardsAnim != previous.walkBackwardsAnim)
+                builder.append("walkBackwardsAnim = ").append(walkBackwardsAnim).append(", ");
             if (previous == null || walkLeftAnim != previous.walkLeftAnim) builder.append("walkLeftAnim = ").append(walkLeftAnim).append(", ");
             if (previous == null || walkRightAnim != previous.walkRightAnim) builder.append("walkRightAnim = ").append(walkRightAnim).append(", ");
             if (previous == null || standAnim != previous.standAnim) builder.append("standAnim = ").append(standAnim).append(", ");
@@ -1778,8 +1755,7 @@ public class EventInspector extends DevToolsFrame {
         }
 
         private boolean shouldFormatEquipmentColours(PlayerAppearance previous) {
-            if (previous == null || (recolouredEquipmentItems == null && previous.recolouredEquipmentItems != null)
-            || (recolouredEquipmentItems != null && previous.recolouredEquipmentItems == null)) {
+            if (previous == null || (recolouredEquipmentItems == null && previous.recolouredEquipmentItems != null) || (recolouredEquipmentItems != null && previous.recolouredEquipmentItems == null)) {
                 return true;
             }
             if (recolouredEquipmentItems != null) {
