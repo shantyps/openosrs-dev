@@ -141,6 +141,11 @@ public abstract class RSTileMixin implements RSTile
 		int[][] collisionDataFlags = collisionData[z].getFlags();
 
 		Point p1 = this.getSceneLocation();
+
+		if ((collisionDataFlags[p1.getX()][p1.getY()] & CollisionDataFlag.BLOCK_MOVEMENT_OBJECT) != 0) {
+			return false;
+		}
+
 		Point p2 = other.getSceneLocation();
 		if (p1.getX() == p2.getX() && p1.getY() == p2.getY())
 		{
