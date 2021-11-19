@@ -1089,25 +1089,22 @@ public class EventInspector extends DevToolsFrame {
     public void onVarbitChanged(VarbitChanged varbitChanged) {
         int index = varbitChanged.getIndex();
         int[] varps = client.getVarps();
-        boolean isVarbit = false;
         for (int i : varbits.get(index)) {
             int old = client.getVarbitValue(oldVarps, i);
             int newValue = client.getVarbitValue(varps, i);
-            String name = null;
-            for (Varbits varbit : Varbits.values()) {
-                if (varbit.getId() == i) {
-                    name = varbit.name();
-                    break;
-                }
-            }
             if (old != newValue) {
                 client.setVarbitValue(oldVarps2, i, newValue);
+                String name = null;
+                for (Varbits varbit : Varbits.values()) {
+                    if (varbit.getId() == i) {
+                        name = varbit.name();
+                        break;
+                    }
+                }
                 String prefix = name == null ? "Varbit" : ("Varbit \"" + name + "\"");
                 addLine(prefix + " (varpId: " + index + ", oldValue: " + old + ")", "Varbit(id = " + i + ", value = " + newValue + ")", true, varbitsCheckBox);
-                isVarbit = true;
             }
         }
-        if (isVarbit) return;
 
         int old = oldVarps2[index];
         int newValue = varps[index];
