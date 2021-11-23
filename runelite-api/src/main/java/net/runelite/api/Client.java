@@ -2374,6 +2374,7 @@ public interface Client extends GameEngine
 	ClanSettings getClanSettings(int clanId);
 
 	void setUnlockedFps(boolean unlock);
+	void setUnlockedFpsTarget(int fps);
 
 	/**
 	 * Gets the ambient sound effects
