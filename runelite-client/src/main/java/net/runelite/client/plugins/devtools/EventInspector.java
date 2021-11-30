@@ -996,6 +996,16 @@ public class EventInspector extends DevToolsFrame {
             final int blue = (widgetColor >> 3) & 0x1F;
             addLine("Interface Text Colour", "IfSetColor(" + formatLatestWidgetCall() + ", red = " + red + ", green = " + green + ", blue = " + blue + ")",
                     true, miscInterfacePackets);
+        } else if (widgetItemId != -1 && widgetItemQuantityOrModelId != -1) {
+            if (widgetObjectType) {
+                addLine("Interface Object",
+                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", modelZoom = " + widgetItemQuantityOrModelId + ")", true
+                        , miscInterfacePackets);
+            } else {
+                addLine("Interface Object",
+                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", itemQuantity = " + widgetItemQuantityOrModelId + ")",
+                        true, miscInterfacePackets);
+            }
         } else if (widgetZoom != -1 && widgetAngleX != -1 && widgetAngleY != -1) {
             addLine("Interface Angle",
                     "IfSetAngle(" + formatLatestWidgetCall() + ", zoom = " + widgetZoom + ", angleX = " + widgetAngleX + ", angleY = " + widgetAngleY + ")",
@@ -1005,16 +1015,6 @@ public class EventInspector extends DevToolsFrame {
                     miscInterfacePackets);
         } else if (widgetModelId != -1) {
             addLine("Interface Model", "IfSetModel(" + formatLatestWidgetCall() + ", modelId = " + widgetModelId + ")", true, miscInterfacePackets);
-        } else if (widgetItemId != -1 && widgetItemQuantityOrModelId != -1) {
-            if (widgetObjectType) {
-                addLine("Interface Object",
-                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", itemQuantity = " + widgetItemQuantityOrModelId + ")",
-                        true, miscInterfacePackets);
-            } else {
-                addLine("Interface Object",
-                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", modelZoom = " + widgetItemQuantityOrModelId + ")", true
-                        , miscInterfacePackets);
-            }
         } else if (widgetSetPlayerHead) {
             addLine("Interface Player Head", "IfSetPlayerHead(" + formatLatestWidgetCall() + ")", true, miscInterfacePackets);
         } else if (widgetModelRotation != -1) {
