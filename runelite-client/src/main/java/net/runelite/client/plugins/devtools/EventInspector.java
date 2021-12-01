@@ -508,7 +508,7 @@ public class EventInspector extends DevToolsFrame {
     }
 
     private int getDistance(LocalPoint localPoint) {
-        return getDistance(WorldPoint.fromLocal(client, localPoint));
+        return getDistance(fromLocal(client, localPoint));
     }
 
     private int getDistance(WorldPoint worldPoint) {
@@ -598,7 +598,19 @@ public class EventInspector extends DevToolsFrame {
         return formatLocation(point.getX(), point.getY(), point.getPlane(), true);
     }
 
-    private String formatLocation(final int x, final int y, final int z, boolean omitDecorations) {
+    private WorldPoint fromLocal(Client client, LocalPoint localPoint) {
+        WorldPoint point = WorldPoint.fromLocal(client, localPoint);
+        /* The above function seems to return invalid coordinates during teleportations, therefore let's sanitize the values. */
+        int x = point.getX() & 0x3FFF;
+        int y = point.getY() & 0x3FFF;
+        int z = point.getPlane() & 0x3;
+        return new WorldPoint(x, y, z);
+    }
+
+    private String formatLocation(final int dirtyX, final int dirtyY, final int z, boolean omitDecorations) {
+        /* The RL functions for getting coordinates can return invalid values during map reload, therefore sanitize these. */
+        final int x = dirtyX & 0x3FFF;
+        final int y = dirtyY & 0x3FFF;
         LocalPoint localPoint = LocalPoint.fromWorld(client, x, y);
         final boolean isInInstance = x >= 6400;
         final WorldPoint baseMapPoint = localPoint == null ? null : WorldPoint.fromLocalInstance(client, localPoint, z);
@@ -606,8 +618,8 @@ public class EventInspector extends DevToolsFrame {
             final StringBuilder builder = new StringBuilder();
             if (!omitDecorations) builder.append("Location(");
             if (isInInstance && baseMapPoint != null && translateCoordsInInstance.isSelected()) {
-                final int msqx = baseMapPoint.getX() >> 6;
-                final int msqz = baseMapPoint.getY() >> 6;
+                final int msqx = (baseMapPoint.getX() & 0x3FFF) >> 6;
+                final int msqz = (baseMapPoint.getY() & 0x3FFF) >> 6;
                 final int tx = baseMapPoint.getX() & 0x3F;
                 final int tz = baseMapPoint.getY() & 0x3F;
                 builder.append("level = ").append(z).append(", msqx = ").append(msqx).append(", msqz = ").append(msqz).append(", tx = ").append(tx).append("," +
@@ -655,7 +667,7 @@ public class EventInspector extends DevToolsFrame {
                 break;
             default:
                 final LocalPoint localPoint = LocalPoint.fromScene(event.getHintArrowX(), event.getHintArrowY());
-                final WorldPoint worldPoint = WorldPoint.fromLocal(client, localPoint);
+                final WorldPoint worldPoint = fromLocal(client, localPoint);
                 addLine("Hint arrow" + type, "HintArrow(type = " + type + ", " + formatLocation(worldPoint) + ")", inEventDistance(localPoint), hintArrows);
                 break;
         }
@@ -677,7 +689,7 @@ public class EventInspector extends DevToolsFrame {
     @Subscribe
     public void cameraLookAtEvent(CameraLookAtEvent event) {
         final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraLookAtX(), event.getCameraLookAtY());
-        final WorldPoint worldPoint = WorldPoint.fromLocal(client, localPoint);
+        final WorldPoint worldPoint = fromLocal(client, localPoint);
 
         addLine("Camera look at",
                 "CamLookAt(" + formatLocation(worldPoint) + ", " + "height = " + event.getCameraLookAtHeight() + ", speed = " + event.getCameraLookAtSpeed() + ", " + "acceleration = " + event.getCameraLookAtAcceleration() + ")", true, camera);
@@ -686,7 +698,7 @@ public class EventInspector extends DevToolsFrame {
     @Subscribe
     public void cameraMoveToEvent(CameraMoveToEvent event) {
         final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraMoveToX(), event.getCameraMoveToY());
-        final WorldPoint worldPoint = WorldPoint.fromLocal(client, localPoint);
+        final WorldPoint worldPoint = fromLocal(client, localPoint);
         addLine("Camera move to",
                 "CamMoveTo(" + formatLocation(worldPoint) + ", " + "height = " + event.getCameraMoveToHeight() + ", speed = " + event.getCameraMoveToSpeed() + ", " + "acceleration = " + event.getCameraMoveToAcceleration() + ")", true, camera);
     }
@@ -726,7 +738,7 @@ public class EventInspector extends DevToolsFrame {
         if (delay != 0) soundEffectBuilder.append(", delay = ").append(delay);
         if (loops != 1) soundEffectBuilder.append(", repetitions = ").append(loops);
         soundEffectBuilder.append(")");
-        WorldPoint location = WorldPoint.fromLocal(client, LocalPoint.fromScene(event.getSceneX(), event.getSceneY()));
+        WorldPoint location = fromLocal(client, LocalPoint.fromScene(event.getSceneX(), event.getSceneY()));
         Optional<Player> sourcePlayer = client.getPlayers().stream().filter(player -> player.getWorldLocation().distanceTo(location) == 0).findAny();
         Optional<NPC> sourceNpc = client.getNpcs().stream().filter(npc -> npc.getWorldLocation().distanceTo(location) == 0).findAny();
         if (sourcePlayer.isPresent() && sourceNpc.isEmpty()) {
@@ -824,7 +836,7 @@ public class EventInspector extends DevToolsFrame {
         if (!pendingSpawnList.isEmpty()) {
             for (PendingSpawnUpdated update : pendingSpawnList) {
                 final LocalPoint localPoint = LocalPoint.fromScene(update.getX(), update.getY());
-                final WorldPoint location = WorldPoint.fromLocal(client, localPoint);
+                final WorldPoint location = fromLocal(client, localPoint);
                 /* Object id -1 implies an object removal. */
                 if (update.getId() == -1) {
                     if (mapObjectDel.isSelected()) {
@@ -864,7 +876,7 @@ public class EventInspector extends DevToolsFrame {
                 final PlayerMoved movementEvent = pair.getLeft();
                 final WorldPoint previousLocation = pair.getRight();
                 final LocalPoint localDestination = LocalPoint.fromScene(movementEvent.getX(), movementEvent.getY());
-                final WorldPoint destination = WorldPoint.fromLocal(client, localDestination);
+                final WorldPoint destination = fromLocal(client, localDestination);
                 final int distance = getDistance(localDestination);
                 final boolean isLocalPlayer = movementEvent.getPlayer() == client.getLocalPlayer();
                 if (!isLocalPlayer && (distance > 15 || movementEvent.getPlayer().getPlane() != client.getPlane())) continue;
@@ -984,6 +996,16 @@ public class EventInspector extends DevToolsFrame {
             final int blue = (widgetColor >> 3) & 0x1F;
             addLine("Interface Text Colour", "IfSetColor(" + formatLatestWidgetCall() + ", red = " + red + ", green = " + green + ", blue = " + blue + ")",
                     true, miscInterfacePackets);
+        } else if (widgetItemId != -1 && widgetItemQuantityOrModelId != -1) {
+            if (widgetObjectType) {
+                addLine("Interface Object",
+                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", modelZoom = " + widgetItemQuantityOrModelId + ")", true
+                        , miscInterfacePackets);
+            } else {
+                addLine("Interface Object",
+                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", itemQuantity = " + widgetItemQuantityOrModelId + ")",
+                        true, miscInterfacePackets);
+            }
         } else if (widgetZoom != -1 && widgetAngleX != -1 && widgetAngleY != -1) {
             addLine("Interface Angle",
                     "IfSetAngle(" + formatLatestWidgetCall() + ", zoom = " + widgetZoom + ", angleX = " + widgetAngleX + ", angleY = " + widgetAngleY + ")",
@@ -993,16 +1015,6 @@ public class EventInspector extends DevToolsFrame {
                     miscInterfacePackets);
         } else if (widgetModelId != -1) {
             addLine("Interface Model", "IfSetModel(" + formatLatestWidgetCall() + ", modelId = " + widgetModelId + ")", true, miscInterfacePackets);
-        } else if (widgetItemId != -1 && widgetItemQuantityOrModelId != -1) {
-            if (widgetObjectType) {
-                addLine("Interface Object",
-                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", itemQuantity = " + widgetItemQuantityOrModelId + ")",
-                        true, miscInterfacePackets);
-            } else {
-                addLine("Interface Object",
-                        "IfSetObject(" + formatLatestWidgetCall() + ", itemId = " + widgetItemId + ", modelZoom = " + widgetItemQuantityOrModelId + ")", true
-                        , miscInterfacePackets);
-            }
         } else if (widgetSetPlayerHead) {
             addLine("Interface Player Head", "IfSetPlayerHead(" + formatLatestWidgetCall() + ")", true, miscInterfacePackets);
         } else if (widgetModelRotation != -1) {
@@ -1273,7 +1285,7 @@ public class EventInspector extends DevToolsFrame {
             rotation = (rotation - 2 & 0x3);
         }
         final LocalPoint localPoint = LocalPoint.fromScene(event.getX(), event.getY());
-        final WorldPoint location = WorldPoint.fromLocal(client, localPoint);
+        final WorldPoint location = fromLocal(client, localPoint);
         addLine("Map Object Animation", "LocAnim(animation = " + event.getAnimation() + ", object = MapObject(id = " + object.getId() + ", type = " + type +
                 ", rotation = " + rotation + ", " + formatLocation(location) + ")", inEventDistance(localPoint), mapObjectAnim);
     }
@@ -1281,7 +1293,7 @@ public class EventInspector extends DevToolsFrame {
     @Subscribe
     public void onGraphicsObjectCreated(GraphicsObjectCreated event) {
         final GraphicsObject obj = event.getGraphicsObject();
-        final WorldPoint location = WorldPoint.fromLocal(client, obj.getLocation());
+        final WorldPoint location = fromLocal(client, obj.getLocation());
         final int delay = obj.getStartCycle() - client.getGameCycle();
         final int tileHeight = Perspective.getTileHeight(client, obj.getLocation(), client.getPlane());
         final StringBuilder builder = new StringBuilder();
