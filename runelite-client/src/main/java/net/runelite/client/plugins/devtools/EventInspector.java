@@ -1638,6 +1638,10 @@ public class EventInspector extends DevToolsFrame {
             readSettingsFile();
         }
         eventBus.register(this);
+        for (Skill skill : Skill.values()) {
+            int xp = client.getSkillExperience(skill);
+            cachedExperienceMap.put(skill, xp);
+        }
         if (oldVarps == null) {
             oldVarps = new int[client.getVarps().length];
             oldVarps2 = new int[client.getVarps().length];
