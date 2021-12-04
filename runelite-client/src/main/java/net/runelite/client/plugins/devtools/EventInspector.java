@@ -1010,9 +1010,6 @@ public class EventInspector extends DevToolsFrame {
             addLine("Interface Angle",
                     "IfSetAngle(" + formatLatestWidgetCall() + ", zoom = " + widgetZoom + ", angleX = " + widgetAngleX + ", angleY = " + widgetAngleY + ")",
                     true, miscInterfacePackets);
-        } else if (widgetPositionX != -1 && widgetPositionY != -1) {
-            addLine("Interface Position", "IfSetPosition(" + formatLatestWidgetCall() + ", x = " + widgetPositionX + ", y = " + widgetPositionY + ")", true,
-                    miscInterfacePackets);
         } else if (widgetModelId != -1) {
             addLine("Interface Model", "IfSetModel(" + formatLatestWidgetCall() + ", modelId = " + widgetModelId + ")", true, miscInterfacePackets);
         } else if (widgetSetPlayerHead) {
@@ -1024,6 +1021,9 @@ public class EventInspector extends DevToolsFrame {
             addLine("Interface Visibility", "IfSetHide(" + formatLatestWidgetCall() + ", hidden = " + widgetHidden + ")", true, miscInterfacePackets);
         } else if (widgetNpcId != -1) {
             addLine("Interface Npc Head", "IfSetNpcHead(" + formatLatestWidgetCall() + ", npcId = " + widgetNpcId + ")", true, miscInterfacePackets);
+        } else if (widgetPositionX != -1 && widgetPositionY != -1) {
+            addLine("Interface Position", "IfSetPosition(" + formatLatestWidgetCall() + ", x = " + widgetPositionX + ", y = " + widgetPositionY + ")", true,
+                    miscInterfacePackets);
         }
     }
 
