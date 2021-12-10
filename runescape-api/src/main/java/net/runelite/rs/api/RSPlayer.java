@@ -25,6 +25,7 @@
 package net.runelite.rs.api;
 
 import net.runelite.api.Model;
+import net.runelite.api.MoveSpeed;
 import net.runelite.api.Player;
 import net.runelite.mapping.Import;
 
@@ -97,7 +98,7 @@ public interface RSPlayer extends RSActor, Player
 	Model attachedModel();
 	@Import("move")
 	@Override
-	void move(int x, int y, byte type);
+	void move(int x, int y, MoveSpeed type);
 	@Import("resetPath")
 	@Override
 	void resetPath(int x, int y);

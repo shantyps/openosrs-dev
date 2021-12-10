@@ -41,11 +41,7 @@ import net.runelite.api.mixins.MethodHook;
 import net.runelite.api.mixins.Mixin;
 import net.runelite.api.mixins.Replace;
 import net.runelite.api.mixins.Shadow;
-import net.runelite.rs.api.RSBuffer;
-import net.runelite.rs.api.RSClient;
-import net.runelite.rs.api.RSModel;
-import net.runelite.rs.api.RSPlayer;
-import net.runelite.rs.api.RSUsername;
+import net.runelite.rs.api.*;
 
 @Mixin(RSPlayer.class)
 public abstract class RSPlayerMixin implements RSPlayer
@@ -275,8 +271,8 @@ public abstract class RSPlayerMixin implements RSPlayer
 
 	@Inject
 	@MethodHook("move")
-	public void onPlayerMovement(int x, int y, byte type) {
-		client.getCallbacks().post(new PlayerMoved(this, x, y, type));
+	public void onPlayerMovement(int x, int y, RSMoveSpeed type) {
+		client.getCallbacks().post(new PlayerMoved(this, x, y, type.speed()));
 	}
 
 	@Inject
