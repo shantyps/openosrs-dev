@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Adam <Adam@sigterm.info>
+ * Copyright (c) 2016-2017, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,64 +22,34 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.http.api.cache;
+package net.runelite.mixins;
 
-public class CacheIndex
+import net.runelite.api.mixins.Inject;
+import net.runelite.api.mixins.Mixin;
+import net.runelite.rs.api.RSFriendLoginUpdate;
+import net.runelite.rs.api.RSUsername;
+
+@Mixin(RSFriendLoginUpdate.class)
+public abstract class RSFriendLoginUpdatesMixin implements RSFriendLoginUpdate
 {
-	private final int indexId;
-	private final int revision;
-
-	public CacheIndex(int indexId, int revision)
-	{
-		this.indexId = indexId;
-		this.revision = revision;
-	}
-
+	@Inject
 	@Override
-	public String toString()
+	public String getName()
 	{
-		return "CacheIndex{" + "indexId=" + indexId + ", revision=" + revision + '}';
-	}
+		final RSUsername rsName = getRsName();
 
-	@Override
-	public int hashCode()
-	{
-		int hash = 5;
-		hash = 61 * hash + this.indexId;
-		hash = 61 * hash + this.revision;
-		return hash;
-	}
+		if (rsName == null)
+		{
+			return null;
+		}
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final CacheIndex other = (CacheIndex) obj;
-		if (this.indexId != other.indexId)
-		{
-			return false;
-		}
-		if (this.revision != other.revision)
-		{
-			return false;
-		}
-		return true;
-	}
+		String name = rsName.getName();
 
-	public int getIndexId()
-	{
-		return indexId;
-	}
+		if (name == null)
+		{
+			return null;
+		}
 
-	public int getRevision()
-	{
-		return revision;
+		return name.replace('\u00A0', ' ');
 	}
 }

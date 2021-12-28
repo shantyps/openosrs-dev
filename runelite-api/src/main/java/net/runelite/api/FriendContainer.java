@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, Bram91 <https://github.com/bram91>
+ * Copyright (c) 2021, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,12 +22,16 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.http.api.hiscore;
+package net.runelite.api;
 
-public enum HiscoreSkillType
+/**
+ * A nameable container of friends
+ */
+public interface FriendContainer extends NameableContainer<Friend>
 {
-	OVERALL,
-	SKILL,
-	ACTIVITY,
-	BOSS
+	/**
+	 * Get the recent logins/logouts of friends from the last few seconds
+	 * @return
+	 */
+	Deque<PendingLogin> getPendingLogins();
 }
