@@ -35,8 +35,8 @@ public enum MoveSpeed implements MouseWheel {
 	public byte speed;
 
 	MoveSpeed(byte var3) {
-		this.speed = var3; // L: 14
-	} // L: 15
+		this.speed = var3;
+	}
 
 	@ObfuscatedName("b")
 	@ObfuscatedSignature(
@@ -45,7 +45,7 @@ public enum MoveSpeed implements MouseWheel {
 	)
 	@Export("rsOrdinal")
 	public int rsOrdinal() {
-		return this.speed; // L: 19
+		return this.speed;
 	}
 
 	@ObfuscatedName("w")
@@ -54,22 +54,22 @@ public enum MoveSpeed implements MouseWheel {
 		garbageValue = "964558054"
 	)
 	static void method3731(boolean var0) {
-		byte var1 = 0; // L: 1047
-		if (!AttackOption.method2356()) { // L: 1048
-			var1 = 12; // L: 1049
-		} else if (class295.client.method1154()) { // L: 1051
-			var1 = 10; // L: 1052
+		byte var1 = 0;
+		if (!AttackOption.method2356()) {
+			var1 = 12;
+		} else if (class295.client.method1154()) {
+			var1 = 10;
 		}
 
-		PlayerType.method5521(var1); // L: 1054
-		if (var0) { // L: 1055
-			Login.Login_username = ""; // L: 1056
-			Login.Login_password = ""; // L: 1057
-			class148.field1651 = 0; // L: 1058
-			BufferedSource.otp = ""; // L: 1059
+		PlayerType.method5521(var1);
+		if (var0) {
+			Login.Login_username = "";
+			Login.Login_password = "";
+			class148.field1651 = 0;
+			BufferedSource.otp = "";
 		}
 
-		HealthBar.method2311(); // L: 1061
-		WorldMapID.method4805(); // L: 1062
-	} // L: 1063
+		HealthBar.method2311();
+		WorldMapID.method4805();
+	}
 }

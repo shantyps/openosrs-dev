@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017, Adam <Adam@sigterm.info>
+ * Copyright (c) 2016-2017, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,83 +22,30 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.http.api.cache;
+package net.runelite.mixins;
 
-import java.time.Instant;
-import java.util.Objects;
+import net.runelite.api.mixins.Inject;
+import net.runelite.api.mixins.Mixin;
+import net.runelite.rs.api.RSLink;
+import net.runelite.rs.api.RSLinkDeque;
 
-public class Cache
+@Mixin(RSLinkDeque.class)
+public abstract class RSLinkDequeMixin implements RSLinkDeque
 {
-	private final int id;
-	private final int revision;
-	private final Instant date;
-
-	public Cache(int id, int revision, Instant date)
-	{
-		this.id = id;
-		this.revision = revision;
-		this.date = date;
-	}
-
+	@Inject
 	@Override
-	public String toString()
+	public void clear()
 	{
-		return "Cache{" + "id=" + id + ", revision=" + revision + ", date=" + date + '}';
-	}
+		while (true)
+		{
+			RSLink rsLink = getSentinel().getPrevious();
+			if (rsLink == getSentinel())
+			{
+				setCurrent(null);
+				return;
+			}
 
-	@Override
-	public int hashCode()
-	{
-		int hash = 5;
-		hash = 29 * hash + this.id;
-		hash = 29 * hash + this.revision;
-		hash = 29 * hash + Objects.hashCode(this.date);
-		return hash;
-	}
-
-	@Override
-	public boolean equals(Object obj)
-	{
-		if (this == obj)
-		{
-			return true;
+			rsLink.remove();
 		}
-		if (obj == null)
-		{
-			return false;
-		}
-		if (getClass() != obj.getClass())
-		{
-			return false;
-		}
-		final Cache other = (Cache) obj;
-		if (this.id != other.id)
-		{
-			return false;
-		}
-		if (this.revision != other.revision)
-		{
-			return false;
-		}
-		if (!Objects.equals(this.date, other.date))
-		{
-			return false;
-		}
-		return true;
-	}
-
-	public int getId()
-	{
-		return id;
-	}
-
-	public int getRevision()
-	{
-		return revision;
-	}
-
-	public Instant getDate()
-	{
-		return date;
 	}
 }
