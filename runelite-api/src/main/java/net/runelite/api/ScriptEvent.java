@@ -55,11 +55,6 @@ public interface ScriptEvent
 
 	Object[] getArguments();
 
-	/**
-	 * Arguments passed to the script. Index 0 is the script being run and is not an argument.
-	 * @return
-	 */
-	Object[] getArguments();
 
 	/**
 	 * Gets the menu index of the event
