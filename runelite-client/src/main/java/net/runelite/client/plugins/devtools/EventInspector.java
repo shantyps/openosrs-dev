@@ -117,6 +117,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox tileFacing = new JCheckBox("Tile Facing", false);
     private final JCheckBox clientScripts = new JCheckBox("Clientscripts", false);
     private final JCheckBox exactMove = new JCheckBox("Exact Move", true);
+    private final JCheckBox recolour = new JCheckBox("Recolour", true);
     private final JCheckBox combinedObjects = new JCheckBox("Combined Objects", true);
     private final JCheckBox transformations = new JCheckBox("Transformations", true);
     private final JCheckBox appearancesCheckbox = new JCheckBox("Appearances", true);
@@ -346,6 +347,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(interacting);
         panel.add(tileFacing);
         panel.add(exactMove);
+        panel.add(recolour);
         panel.add(transformations);
         appearancesCheckbox.setToolTipText("<html>Appearances will only track changes done to a player's appearance.<br>" + "Therefore, on initial " +
                 "login/render of a character, everything about their appearance is logged, however,<br>" + "if they then equip an item for example, it'll " +
@@ -353,6 +355,8 @@ public class EventInspector extends DevToolsFrame {
         tileFacing.setToolTipText("<html>Tile facing will only display the direction that the character is facing, not the precise coordinate<br>" + "they " +
                 "were sent to face. This is because it is impossible to accurately determine which coordinate they're facing,<br>" + "as for example, facing " +
                 "south sends a direction of 0 - this could mean a coordinate 1 tile south of the character, or 10 tiles.</html>");
+        recolour.setToolTipText("<html>Recolour is used for Nex during the blood phase, to display the targeted player. It is also used for the " +
+                "ancient godsword special attack.</html>");
         say.setToolTipText("<html>Say will only display actual \"forced chat\" messages, not player-invoked public chat.</html>");
     }
 
@@ -1336,6 +1340,16 @@ public class EventInspector extends DevToolsFrame {
         exactMoveBuilder.append("endDelay = ").append(event.getExactMoveArrive2Cycle() - currentCycle).append(", ");
         exactMoveBuilder.append("direction = ").append(event.getExactMoveDirection()).append(")");
         addLine(formatActor(actor), exactMoveBuilder.toString(), isActorConsoleLogged(actor), exactMove);
+    }
+
+    @Subscribe
+    public void onRecolourReceived(RecolourEvent event) {
+        final Actor actor = event.getActor();
+        if (actor == null || isActorPositionUninitialized(actor)) return;
+        final int currentCycle = client.getGameCycle();
+        String recolourBuilder = "Recolour(" + "hue = " + event.getRecolourHue() + ", " + "saturation = " + event.getRecolourSaturation() + ", " + "luminance"
+                + " = " + event.getRecolourLuminance() + ", " + "startDelay = " + (event.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (event.getRecolourStartCycle() - currentCycle) + ")";
+        addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), recolour);
     }
 
     @Subscribe

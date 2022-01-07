@@ -428,12 +428,12 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 				}
 
 				if ((var5 & 256) != 0) {
-					var15.field1141 = Client.cycle + var1.readUnsignedShort();
-					var15.field1140 = Client.cycle + var1.method7401();
-					var15.field1143 = var1.readByte();
-					var15.field1144 = var1.method7396();
-					var15.field1095 = var1.method7396();
-					var15.field1146 = (byte)var1.readUnsignedByte();
+					var15.recolourStartCycle = Client.cycle + var1.readUnsignedShort();
+					var15.recolourEndCycle = Client.cycle + var1.method7401();
+					var15.recolourHue = var1.readByte();
+					var15.recolourSaturation = var1.method7396();
+					var15.recolourLuminance = var1.method7396();
+					var15.recolourAmount = (byte)var1.readUnsignedByte();
 				}
 
 				if ((var5 & 32) != 0) {

@@ -232,6 +232,14 @@ public abstract class RSActorMixin implements RSActor
 		client.getCallbacks().post(exactMoveEvent);
 	}
 
+	@FieldHook("recolourAmount")
+	@Inject
+	public void recolourReceived(int idx) {
+		RecolourEvent event = new RecolourEvent(this, recolourStartCycle(), recolourEndCycle(), recolourHue(), recolourSaturation(), recolourLuminance(),
+				recolourAmount());
+		client.getCallbacks().post(event);
+	}
+
 	@FieldHook("overheadText")
 	@Inject
 	public void overheadTextChanged(int idx)

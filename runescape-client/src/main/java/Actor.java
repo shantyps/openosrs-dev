@@ -297,20 +297,26 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -529478277
 	)
-	int field1141;
+	@Export("recolourStartCycle")
+	int recolourStartCycle;
 	@ObfuscatedName("cn")
 	@ObfuscatedGetter(
 		intValue = 1020348289
 	)
-	int field1140;
+	@Export("recolourEndCycle")
+	int recolourEndCycle;
 	@ObfuscatedName("cv")
-	byte field1143;
+	@Export("recolourHue")
+	byte recolourHue;
 	@ObfuscatedName("co")
-	byte field1144;
+	@Export("recolourSaturation")
+	byte recolourSaturation;
 	@ObfuscatedName("cc")
-	byte field1095;
+	@Export("recolourLuminance")
+	byte recolourLuminance;
 	@ObfuscatedName("cs")
-	byte field1146;
+	@Export("recolourAmount")
+	byte recolourAmount;
 	@ObfuscatedName("cr")
 	@ObfuscatedGetter(
 		intValue = 592803175
@@ -400,8 +406,8 @@ public abstract class Actor extends Renderable {
 		this.spotAnimationFrameCycle = 0;
 		this.npcCycle = 0;
 		this.defaultHeight = 200;
-		this.field1141 = -1;
-		this.field1140 = -1;
+		this.recolourStartCycle = -1;
+		this.recolourEndCycle = -1;
 		this.field1148 = 0;
 		this.field1149 = 32;
 		this.pathLength = 0;

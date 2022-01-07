@@ -201,6 +201,25 @@ public interface RSActor extends RSRenderable, Actor
 	@Override
 	int exactMoveDirection();
 
+	@Import("recolourStartCycle")
+	@Override
+	int recolourStartCycle();
+	@Import("recolourEndCycle")
+	@Override
+	int recolourEndCycle();
+	@Import("recolourHue")
+	@Override
+	byte recolourHue();
+	@Import("recolourSaturation")
+	@Override
+	byte recolourSaturation();
+	@Import("recolourLuminance")
+	@Override
+	byte recolourLuminance();
+	@Import("recolourAmount")
+	@Override
+	byte recolourAmount();
+
 
 	// Health stuff
 

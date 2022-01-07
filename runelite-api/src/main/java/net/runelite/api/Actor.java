@@ -155,6 +155,13 @@ public interface Actor extends Renderable, Locatable
 	int exactMoveArrive2Cycle();
 	int exactMoveDirection();
 
+	int recolourStartCycle();
+	int recolourEndCycle();
+	byte recolourHue();
+	byte recolourSaturation();
+	byte recolourLuminance();
+	byte recolourAmount();
+
 
 	/**
 	 * Gets the secondary animation the actor is performing. Usually an idle animation, or one of the walking ones.

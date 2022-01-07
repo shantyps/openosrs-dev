@@ -194,12 +194,12 @@ public class class65 {
 		}
 
 		if ((var3 & 512) != 0) {
-			var2.field1141 = Client.cycle + var0.method7403();
-			var2.field1140 = Client.cycle + var0.method7499();
-			var2.field1143 = var0.readByte();
-			var2.field1144 = var0.method7397();
-			var2.field1095 = var0.readByte();
-			var2.field1146 = (byte)var0.readUnsignedByte();
+			var2.recolourStartCycle = Client.cycle + var0.method7403();
+			var2.recolourEndCycle = Client.cycle + var0.method7499();
+			var2.recolourHue = var0.readByte();
+			var2.recolourSaturation = var0.method7397();
+			var2.recolourLuminance = var0.readByte();
+			var2.recolourAmount = (byte)var0.readUnsignedByte();
 		}
 
 		if ((var3 & 64) != 0) {
