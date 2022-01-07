@@ -220,6 +220,10 @@ public interface RSActor extends RSRenderable, Actor
 	@Override
 	byte recolourAmount();
 
+	@Import("combatLevelChange")
+	@Override
+	int getCombatLevelOverride();
+
 
 	// Health stuff
 

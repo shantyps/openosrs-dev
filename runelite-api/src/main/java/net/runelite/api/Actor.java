@@ -46,6 +46,8 @@ public interface Actor extends Renderable, Locatable
 	 */
 	int getCombatLevel();
 
+	int getCombatLevelOverride();
+
 	/**
 	 * Gets the name of the actor.
 	 *

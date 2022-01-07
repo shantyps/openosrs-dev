@@ -372,7 +372,7 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 				}
 
 				if ((var5 & 512) != 0) {
-					var15.field1119 = var1.method7411();
+					var15.combatLevelChange = var1.method7411();
 				}
 
 				if ((var5 & 64) != 0) {

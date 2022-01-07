@@ -118,6 +118,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox clientScripts = new JCheckBox("Clientscripts", false);
     private final JCheckBox exactMove = new JCheckBox("Exact Move", true);
     private final JCheckBox recolour = new JCheckBox("Recolour", true);
+    private final JCheckBox combatChange = new JCheckBox("Combat Level Change", true);
     private final JCheckBox combinedObjects = new JCheckBox("Combined Objects", true);
     private final JCheckBox transformations = new JCheckBox("Transformations", true);
     private final JCheckBox appearancesCheckbox = new JCheckBox("Appearances", true);
@@ -348,6 +349,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(tileFacing);
         panel.add(exactMove);
         panel.add(recolour);
+        panel.add(combatChange);
         panel.add(transformations);
         appearancesCheckbox.setToolTipText("<html>Appearances will only track changes done to a player's appearance.<br>" + "Therefore, on initial " +
                 "login/render of a character, everything about their appearance is logged, however,<br>" + "if they then equip an item for example, it'll " +
@@ -1350,6 +1352,14 @@ public class EventInspector extends DevToolsFrame {
         String recolourBuilder = "Recolour(" + "hue = " + event.getRecolourHue() + ", " + "saturation = " + event.getRecolourSaturation() + ", " + "luminance"
                 + " = " + event.getRecolourLuminance() + ", " + "startDelay = " + (event.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (event.getRecolourStartCycle() - currentCycle) + ")";
         addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), recolour);
+    }
+
+    @Subscribe
+    public void onCombatLevelChanged(CombatLevelChangeEvent event) {
+        final Actor actor = event.getActor();
+        if (actor == null || isActorPositionUninitialized(actor)) return;
+        String combatChange = "CombatLevelChange(previousLevel = " + actor.getCombatLevel() + ", newLevel = " + actor.getCombatLevel() + ")";
+        addLine(formatActor(actor), combatChange, isActorConsoleLogged(actor), this.combatChange);
     }
 
     @Subscribe

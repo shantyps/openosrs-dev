@@ -240,6 +240,14 @@ public abstract class RSActorMixin implements RSActor
 		client.getCallbacks().post(event);
 	}
 
+
+	@FieldHook("combatLevelChange")
+	@Inject
+	public void combatLevelChange(int idx) {
+		CombatLevelChangeEvent event = new CombatLevelChangeEvent(this, getCombatLevelOverride());
+		client.getCallbacks().post(event);
+	}
+
 	@FieldHook("overheadText")
 	@Inject
 	public void overheadTextChanged(int idx)
