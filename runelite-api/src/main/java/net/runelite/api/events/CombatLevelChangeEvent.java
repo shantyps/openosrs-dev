@@ -9,5 +9,6 @@ import net.runelite.api.Actor;
 @Data
 public class CombatLevelChangeEvent {
     private final Actor actor;
+    private final int oldCombatLevel;
     private final int newCombatLevel;
 }

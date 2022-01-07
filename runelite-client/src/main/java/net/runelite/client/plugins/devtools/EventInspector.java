@@ -65,6 +65,8 @@ public class EventInspector extends DevToolsFrame {
     private final Map<WidgetNode, Pair<Long, Long>> ifMoveSubs = new HashMap<>();
     private final Map<Player, PlayerAppearance> appearances = new HashMap<>();
     private final Map<Integer, Integer> inventoryDiffs = new HashMap<>();
+    private final Map<Actor, CombatLevelChangeEvent> combatLevelChanges = new HashMap<>();
+    private final Map<Actor, RecolourEvent> recolourChanges = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
     private final Set<Player> movementTrackedPlayers = new HashSet<>();
     private WidgetNode lastMoveSub;
@@ -142,7 +144,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox miscInterfacePackets = new JCheckBox("Misc. Interface Packets", true);
     private final JCheckBox playerMenuOptions = new JCheckBox("Player Menu Options", true);
 
-    private final JCheckBox movement = new JCheckBox("Player Walk & Run", true);
+    private final JCheckBox movement = new JCheckBox("Player Walk, Run and Crawl", true);
     private final JCheckBox teleportation = new JCheckBox("Player Teleportation", true);
     private final JCheckBox playerCount = new JCheckBox("Player Count", true);
     private final JCheckBox npcCount = new JCheckBox("NPC Count", true);
@@ -404,7 +406,8 @@ public class EventInspector extends DevToolsFrame {
         playerMenuOptions.setToolTipText("<html>Player menu option's index is 0-indexed, therefore the first option will have an index of 0.</html>");
         inventoryChanges.setToolTipText("<html>Inventories will only send differences compared to the cached version of the inventory<br>" + "due to how " +
                 "spammy the packet itself is in the events it transmits.</html>");
-        movement.setToolTipText("<html>Movement will only record walking and running, and only within 15 tile radius around the local player.</html>");
+        movement.setToolTipText("<html>Movement will only record walking, running and crawling, and only within 15 tile radius around the local player" +
+                ".</html>");
         teleportation.setToolTipText("<html>Teleportation will only record teleports that happen within 15 tile radius of the local player.</html>");
         playerCount.setToolTipText("<html>Shows the total number of players and the distance to the farthest one after each tick.</html>");
         npcCount.setToolTipText("<html>Shows the total number of NPCs and the distance to the farthest one after each tick.</html>");
@@ -819,6 +822,25 @@ public class EventInspector extends DevToolsFrame {
             }
             overheadChatList.clear();
         }
+        if (!combatLevelChanges.isEmpty()) {
+            combatLevelChanges.forEach((actor, change) -> {
+                if (actor == null || isActorPositionUninitialized(actor)) return;
+                String combatChange = "CombatLevelChange(previousLevel = " + change.getOldCombatLevel() + ", newLevel = " + change.getNewCombatLevel() + ")";
+                addLine(formatActor(actor), combatChange, isActorConsoleLogged(actor), this.combatChange);
+            });
+            combatLevelChanges.clear();
+        }
+
+        if (!recolourChanges.isEmpty()) {
+            recolourChanges.forEach((actor, change) -> {
+                if (actor == null || isActorPositionUninitialized(actor)) return;
+                final int currentCycle = client.getGameCycle();
+                String recolourBuilder = "Recolour(" + "hue = " + change.getRecolourHue() + ", " + "saturation = " + change.getRecolourSaturation() + ", " + "luminance"
+                        + " = " + change.getRecolourLuminance() + ", " + "startDelay = " + (change.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (change.getRecolourStartCycle() - currentCycle) + ")";
+                addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), recolour);
+            });
+            recolourChanges.clear();
+        }
         if (!updatedIfEvents.isEmpty()) {
             updatedIfEvents.forEach((packedKey, slots) -> {
                 final int events = packedKey.intValue();
@@ -892,7 +914,9 @@ public class EventInspector extends DevToolsFrame {
                     addLine(formatActor(movementEvent.getPlayer(), previousLocation), "Teleport(" + formatLocation(destination) + ")",
                             isActorConsoleLogged(movementEvent.getPlayer()), teleportation);
                 } else {
-                    addLine(formatActor(movementEvent.getPlayer(), previousLocation), "Movement(type = " + (movementEvent.getType() == 1 ? "Walk" : "Run") +
+                    String type = movementEvent.getType() == 0 ? "Crawl" : movementEvent.getType() == 1 ? "Walk" : movementEvent.getType() == 2 ? "Run" :
+                            "Teleport";
+                    addLine(formatActor(movementEvent.getPlayer(), previousLocation), "Movement(type = " + (type) +
                             ", " + formatLocation(destination) + ")", isActorConsoleLogged(movementEvent.getPlayer()), movement);
                 }
             }
@@ -1346,20 +1370,12 @@ public class EventInspector extends DevToolsFrame {
 
     @Subscribe
     public void onRecolourReceived(RecolourEvent event) {
-        final Actor actor = event.getActor();
-        if (actor == null || isActorPositionUninitialized(actor)) return;
-        final int currentCycle = client.getGameCycle();
-        String recolourBuilder = "Recolour(" + "hue = " + event.getRecolourHue() + ", " + "saturation = " + event.getRecolourSaturation() + ", " + "luminance"
-                + " = " + event.getRecolourLuminance() + ", " + "startDelay = " + (event.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (event.getRecolourStartCycle() - currentCycle) + ")";
-        addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), recolour);
+        recolourChanges.put(event.getActor(), event);
     }
 
     @Subscribe
     public void onCombatLevelChanged(CombatLevelChangeEvent event) {
-        final Actor actor = event.getActor();
-        if (actor == null || isActorPositionUninitialized(actor)) return;
-        String combatChange = "CombatLevelChange(previousLevel = " + actor.getCombatLevel() + ", newLevel = " + actor.getCombatLevel() + ")";
-        addLine(formatActor(actor), combatChange, isActorConsoleLogged(actor), this.combatChange);
+        combatLevelChanges.put(event.getActor(), event);
     }
 
     @Subscribe
@@ -1553,7 +1569,9 @@ public class EventInspector extends DevToolsFrame {
         if (actor instanceof Player) {
             return ("Player(" + (actor.getName() + ", idx: " + ((Player) actor).getPlayerId() + ", " + coordinateString + ")"));
         } else if (actor instanceof NPC) {
-            return ("Npc(" + (actor.getName() + ", idx: " + ((NPC) actor).getIndex() + ", id: " + ((NPC) actor).getComposition().getId() + ", " + coordinateString + ")"));
+            NPCComposition composition = ((NPC) actor).getComposition();
+            String id = composition == null ? "unidentified" : composition.getId() + "";
+            return ("Npc(" + (actor.getName() + ", idx: " + ((NPC) actor).getIndex() + ", id: " + id + ", " + coordinateString + ")"));
         }
         return ("Unknown(" + coordinateString + ")");
     }

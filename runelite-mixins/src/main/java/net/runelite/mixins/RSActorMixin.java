@@ -244,7 +244,8 @@ public abstract class RSActorMixin implements RSActor
 	@FieldHook("combatLevelChange")
 	@Inject
 	public void combatLevelChange(int idx) {
-		CombatLevelChangeEvent event = new CombatLevelChangeEvent(this, getCombatLevelOverride());
+		if (getCombatLevelOverride() == -1) return;
+		CombatLevelChangeEvent event = new CombatLevelChangeEvent(this, getCombatLevel(), getCombatLevelOverride());
 		client.getCallbacks().post(event);
 	}
 
