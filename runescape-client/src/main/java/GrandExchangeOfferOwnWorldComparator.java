@@ -297,7 +297,7 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 					var6 = var1.method7401();
 					var7 = var1.method7403();
 					if (class12.field72) {
-						var15.field1118 = var1.method7394() == 1;
+						var15.instantTurn = var1.method7394() == 1;
 					}
 
 					var8 = var15.x - (var6 - class131.baseX - class131.baseX) * 64;

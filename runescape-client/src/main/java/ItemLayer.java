@@ -293,14 +293,14 @@ public final class ItemLayer {
 				++var0.field1148;
 				boolean var14;
 				if (var11 > 1024) {
-					var0.rotation -= var0.field1118 ? var11 : var0.field1149 * -771997279 * 1637605985;
+					var0.rotation -= var0.instantTurn ? var11 : var0.field1149 * -771997279 * 1637605985;
 					var14 = true;
 					if (var11 < var0.field1149 || var11 > 2048 - var0.field1149) {
 						var0.rotation = var0.orientation;
 						var14 = false;
 					}
 
-					if (!var0.field1118 && var0.idleSequence == var0.movementSequence && (var0.field1148 > 25 || var14)) {
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1148 > 25 || var14)) {
 						if (var0.turnLeftSequence != -1) {
 							var0.movementSequence = var0.turnLeftSequence;
 						} else {
@@ -308,14 +308,14 @@ public final class ItemLayer {
 						}
 					}
 				} else {
-					var0.rotation += var0.field1118 ? var11 : -771997279 * var0.field1149 * 1637605985;
+					var0.rotation += var0.instantTurn ? var11 : -771997279 * var0.field1149 * 1637605985;
 					var14 = true;
 					if (var11 < var0.field1149 || var11 > 2048 - var0.field1149) {
 						var0.rotation = var0.orientation;
 						var14 = false;
 					}
 
-					if (!var0.field1118 && var0.movementSequence == var0.idleSequence && (var0.field1148 > 25 || var14)) {
+					if (!var0.instantTurn && var0.movementSequence == var0.idleSequence && (var0.field1148 > 25 || var14)) {
 						if (var0.turnRightSequence != -1) {
 							var0.movementSequence = var0.turnRightSequence;
 						} else {
@@ -325,7 +325,7 @@ public final class ItemLayer {
 				}
 
 				var0.rotation &= 2047;
-				var0.field1118 = false;
+				var0.instantTurn = false;
 			} else {
 				var0.field1148 = 0;
 			}

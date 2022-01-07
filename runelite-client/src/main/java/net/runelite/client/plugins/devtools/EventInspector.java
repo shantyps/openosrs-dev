@@ -58,7 +58,7 @@ public class EventInspector extends DevToolsFrame {
     private boolean accessedObjectForAnimation = false;
     private Multimap<Integer, Integer> varbits;
     private final Set<Actor> facedActors = new HashSet<>();
-    private final Map<Actor, Integer> facedDirectionActors = new HashMap<>();
+    private final Map<Actor, FaceTile> facedDirectionActors = new HashMap<>();
     private final Map<Player, Integer> playerTransformations = new HashMap<>();
     private final Map<Long, Set<Integer>> updatedIfEvents = new HashMap<>();
     private final List<PendingSpawnUpdated> pendingSpawnList = new ArrayList<>();
@@ -807,8 +807,8 @@ public class EventInspector extends DevToolsFrame {
         if (!facedDirectionActors.isEmpty()) {
             facedDirectionActors.forEach((faceDirectionActor, value) -> {
                 if (faceDirectionActor == null || isActorPositionUninitialized(faceDirectionActor)) return;
-                addLine(formatActor(faceDirectionActor), "FaceCoordinate(direction = " + value + ")", latestServerTick,
-                        isActorConsoleLogged(faceDirectionActor), tileFacing);
+                addLine(formatActor(faceDirectionActor), "FaceCoordinate(direction = " + value.direction + ", instant = " + value.instant + ")",
+                        latestServerTick, isActorConsoleLogged(faceDirectionActor), tileFacing);
             });
             facedDirectionActors.clear();
         }
@@ -1168,7 +1168,7 @@ public class EventInspector extends DevToolsFrame {
         if (event.getDirection() == -1) return;
         Actor sourceActor = event.getSource();
         latestServerTick = client.getTickCount();
-        if (!facedDirectionActors.containsKey(sourceActor)) facedDirectionActors.put(sourceActor, event.getDirection());
+        if (!facedDirectionActors.containsKey(sourceActor)) facedDirectionActors.put(sourceActor, new FaceTile(event.getDirection(), event.isInstant()));
     }
 
     @Subscribe
@@ -1701,6 +1701,13 @@ public class EventInspector extends DevToolsFrame {
                 composition.getTransformedNpcId(), player.getOverheadIcon(), player.getSkullIcon(), player.getRSSkillLevel(), player.getIsHidden(),
                 player.getRunAnimation(), player.getWalkAnimation(), player.getWalkRotate180(), player.getWalkRotateLeft(), player.getWalkRotateRight(),
                 player.getIdlePoseAnimation(), player.getIdleRotateLeft(), composition == null ? null : composition.getPlayerEquipmentItems());
+    }
+
+    @Data
+    @AllArgsConstructor
+    private static class FaceTile {
+        private int direction;
+        private boolean instant;
     }
 
     @Data

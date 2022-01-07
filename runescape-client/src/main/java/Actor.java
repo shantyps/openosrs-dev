@@ -160,7 +160,8 @@ public abstract class Actor extends Renderable {
 	@Export("facedDirection")
 	int facedDirection;
 	@ObfuscatedName("bl")
-	boolean field1118;
+	@Export("instantTurn")
+	boolean instantTurn;
 	@ObfuscatedName("bz")
 	@ObfuscatedGetter(
 		intValue = 1411460693

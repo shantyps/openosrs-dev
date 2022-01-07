@@ -48,6 +48,8 @@ public interface Actor extends Renderable, Locatable
 
 	int getCombatLevelOverride();
 
+	boolean instantTurn();
+
 	/**
 	 * Gets the name of the actor.
 	 *

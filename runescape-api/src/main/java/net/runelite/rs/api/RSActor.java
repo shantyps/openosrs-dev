@@ -225,6 +225,10 @@ public interface RSActor extends RSRenderable, Actor
 	int getCombatLevelOverride();
 
 
+	@Import("instantTurn")
+	@Override
+	boolean instantTurn();
+
 	// Health stuff
 
 	@Import("healthBars")

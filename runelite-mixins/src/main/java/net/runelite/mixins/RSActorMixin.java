@@ -219,7 +219,7 @@ public abstract class RSActorMixin implements RSActor
 	@Inject
 	public void facedDirectionChanged(int idx)
 	{
-		FacedDirectionChanged facedDirectionChanged = new FacedDirectionChanged(this, getFacedDirection());
+		FacedDirectionChanged facedDirectionChanged = new FacedDirectionChanged(this, getFacedDirection(), instantTurn());
 		client.getCallbacks().post(facedDirectionChanged);
 	}
 
