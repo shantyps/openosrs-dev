@@ -837,7 +837,7 @@ public class EventInspector extends DevToolsFrame {
                 final int currentCycle = change.getCurrentCycle();
                 String recolourBuilder = "Recolour(" + "hue = " + change.getRecolourHue() + ", " + "saturation = " + change.getRecolourSaturation() + ", "
                         + "luminance = " + change.getRecolourLuminance() + ", "
-                        + "amount = " + change.getRecolourAmount() + ", "
+                        + "opacity = " + change.getRecolourAmount() + ", "
                         + "startDelay = " + (change.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (change.getRecolourEndCycle() - currentCycle) + ")";
                 addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), recolour);
             });
