@@ -236,7 +236,7 @@ public abstract class RSActorMixin implements RSActor
 	@Inject
 	public void recolourReceived(int idx) {
 		RecolourEvent event = new RecolourEvent(this, recolourStartCycle(), recolourEndCycle(), recolourHue(), recolourSaturation(), recolourLuminance(),
-				recolourAmount());
+				recolourAmount(), client.getGameCycle());
 		client.getCallbacks().post(event);
 	}
 

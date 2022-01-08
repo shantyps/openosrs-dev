@@ -15,4 +15,5 @@ public class RecolourEvent {
     private final int recolourSaturation;
     private final int recolourLuminance;
     private final int recolourAmount;
+    private final int currentCycle;
 }

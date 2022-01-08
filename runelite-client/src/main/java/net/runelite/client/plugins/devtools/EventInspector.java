@@ -834,11 +834,11 @@ public class EventInspector extends DevToolsFrame {
         if (!recolourChanges.isEmpty()) {
             recolourChanges.forEach((actor, change) -> {
                 if (actor == null || isActorPositionUninitialized(actor)) return;
-                final int currentCycle = client.getGameCycle();
+                final int currentCycle = change.getCurrentCycle();
                 String recolourBuilder = "Recolour(" + "hue = " + change.getRecolourHue() + ", " + "saturation = " + change.getRecolourSaturation() + ", "
                         + "luminance = " + change.getRecolourLuminance() + ", "
                         + "amount = " + change.getRecolourAmount() + ", "
-                        + "startDelay = " + (change.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (change.getRecolourStartCycle() - currentCycle) + ")";
+                        + "startDelay = " + (change.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (change.getRecolourEndCycle() - currentCycle) + ")";
                 addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), recolour);
             });
             recolourChanges.clear();
