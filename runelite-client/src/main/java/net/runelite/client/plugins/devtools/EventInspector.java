@@ -31,6 +31,8 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
@@ -285,6 +287,17 @@ public class EventInspector extends DevToolsFrame {
         splitAndClearPanel.add(clearBtn);
 
         trackerOpts.add(splitAndClearPanel);
+
+        final JButton openLogs = new JButton("Open Logs");
+        openLogs.addActionListener(e -> {
+            try {
+                Path path = Paths.get(System.getProperty("user.home"), ".openosrs", "event-inspector-logs");
+                Desktop.getDesktop().open(path.toFile());
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        trackerOpts.add(openLogs);
 
         add(trackerOpts, BorderLayout.EAST);
 
