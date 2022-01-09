@@ -3,7 +3,6 @@ package net.runelite.client.plugins.devtools;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
-import com.openosrs.client.game.WorldLocation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -68,7 +67,7 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Player, PlayerAppearance> appearances = new HashMap<>();
     private final Map<Integer, Integer> inventoryDiffs = new HashMap<>();
     private final Map<Actor, CombatLevelChangeEvent> combatLevelChanges = new HashMap<>();
-    private final Map<Actor, RecolourEvent> recolourChanges = new HashMap<>();
+    private final Map<Actor, RecolourEvent> tintingChanges = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
     private final Set<Player> movementTrackedPlayers = new HashSet<>();
     private WidgetNode lastMoveSub;
@@ -121,7 +120,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox tileFacing = new JCheckBox("Tile Facing", false);
     private final JCheckBox clientScripts = new JCheckBox("Clientscripts", false);
     private final JCheckBox exactMove = new JCheckBox("Exact Move", true);
-    private final JCheckBox recolour = new JCheckBox("Recolour", true);
+    private final JCheckBox tinting = new JCheckBox("Tinting", true);
     private final JCheckBox combatChange = new JCheckBox("Combat Level Change", true);
     private final JCheckBox combinedObjects = new JCheckBox("Combined Objects", true);
     private final JCheckBox transformations = new JCheckBox("Transformations", true);
@@ -363,7 +362,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(interacting);
         panel.add(tileFacing);
         panel.add(exactMove);
-        panel.add(recolour);
+        panel.add(tinting);
         panel.add(combatChange);
         panel.add(transformations);
         appearancesCheckbox.setToolTipText("<html>Appearances will only track changes done to a player's appearance.<br>" + "Therefore, on initial " +
@@ -372,7 +371,7 @@ public class EventInspector extends DevToolsFrame {
         tileFacing.setToolTipText("<html>Tile facing will only display the direction that the character is facing, not the precise coordinate<br>" + "they " +
                 "were sent to face. This is because it is impossible to accurately determine which coordinate they're facing,<br>" + "as for example, facing " +
                 "south sends a direction of 0 - this could mean a coordinate 1 tile south of the character, or 10 tiles.</html>");
-        recolour.setToolTipText("<html>Recolour is used for Nex during the blood phase, to display the targeted player. It is also used for the " +
+        tinting.setToolTipText("<html>Tinting is used for Nex during the blood phase, to display the targeted player. It is also used for the " +
                 "ancient godsword special attack.</html>");
         say.setToolTipText("<html>Say will only display actual \"forced chat\" messages, not player-invoked public chat.</html>");
     }
@@ -844,17 +843,20 @@ public class EventInspector extends DevToolsFrame {
             combatLevelChanges.clear();
         }
 
-        if (!recolourChanges.isEmpty()) {
-            recolourChanges.forEach((actor, change) -> {
+        if (!tintingChanges.isEmpty()) {
+            tintingChanges.forEach((actor, change) -> {
                 if (actor == null || isActorPositionUninitialized(actor)) return;
                 final int currentCycle = change.getCurrentCycle();
-                String recolourBuilder = "Recolour(" + "hue = " + change.getRecolourHue() + ", " + "saturation = " + change.getRecolourSaturation() + ", "
+                final int delay = change.getRecolourStartCycle() - currentCycle;
+                final int duration = (change.getRecolourEndCycle() - currentCycle) - delay;
+                String recolourBuilder = "Tinting(" + "hue = " + change.getRecolourHue() + ", " + "saturation = " + change.getRecolourSaturation() + ", "
                         + "luminance = " + change.getRecolourLuminance() + ", "
                         + "opacity = " + change.getRecolourAmount() + ", "
-                        + "startDelay = " + (change.getRecolourStartCycle() - currentCycle) + ", " + "endDelay = " + (change.getRecolourEndCycle() - currentCycle) + ")";
-                addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), recolour);
+                        + "delay = " + delay + ", "
+                        + "duration = " + duration + ")";
+                addLine(formatActor(actor), recolourBuilder, isActorConsoleLogged(actor), tinting);
             });
-            recolourChanges.clear();
+            tintingChanges.clear();
         }
         if (!updatedIfEvents.isEmpty()) {
             updatedIfEvents.forEach((packedKey, slots) -> {
@@ -1385,7 +1387,7 @@ public class EventInspector extends DevToolsFrame {
 
     @Subscribe
     public void onRecolourReceived(RecolourEvent event) {
-        recolourChanges.put(event.getActor(), event);
+        tintingChanges.put(event.getActor(), event);
     }
 
     @Subscribe
