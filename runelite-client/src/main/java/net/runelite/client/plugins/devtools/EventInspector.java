@@ -1490,13 +1490,13 @@ public class EventInspector extends DevToolsFrame {
         final int minY = event.getMinY() - latestPendingSpawn.getY();
         final int maxX = event.getMaxX() - latestPendingSpawn.getX();
         final int maxY = event.getMaxY() - latestPendingSpawn.getY();
-        final int startTime = event.getAnimationCycleStart() - clientTime;
-        final int endTime = event.getAnimationCycleEnd() - clientTime;
+        final int delay = event.getAnimationCycleStart() - clientTime;
+        final int duration = (event.getAnimationCycleEnd() - clientTime) - delay;
         final StringBuilder locCombineBuilder = new StringBuilder();
         locCombineBuilder.append("LocCombine(");
         locCombineBuilder.append("mapObject = MapObject(id = ").append(obj.getId()).append(", type = ").append(type).append(", rotation = ").append(rotation).append(", ").append(formatLocation(objectLocation)).append("), ");
-        locCombineBuilder.append("startTime = ").append(startTime).append(", ");
-        locCombineBuilder.append("endTime = ").append(endTime).append(", ");
+        locCombineBuilder.append("delay = ").append(delay).append(", ");
+        locCombineBuilder.append("duration = ").append(duration).append(", ");
         if (rsCoordFormat.isSelected()) {
             locCombineBuilder.append("minXOffset = ").append(minX).append(", ");
             locCombineBuilder.append("maxXOffset = ").append(maxX).append(", ");
