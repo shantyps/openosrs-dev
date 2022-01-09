@@ -42,6 +42,10 @@ public interface RSGameObject extends GameObject
 	@Override
 	int getConfig();
 
+	@Import("flags")
+	@Override
+	int getFlags();
+
 	int getPlane();
 
 	void setPlane(int plane);

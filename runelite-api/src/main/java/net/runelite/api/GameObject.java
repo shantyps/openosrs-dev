@@ -95,6 +95,8 @@ public interface GameObject extends TileObject
 	@Override
 	int getModelOrientation();
 
+	int getFlags();
+
 	/**
 	 * A bitfield containing various flags:
 	 * <pre>{@code
