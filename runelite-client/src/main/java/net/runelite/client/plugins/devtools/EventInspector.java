@@ -1373,14 +1373,16 @@ public class EventInspector extends DevToolsFrame {
         final StringBuilder exactMoveBuilder = new StringBuilder();
         final WorldPoint actorWorldLocation = actor.getWorldLocation();
         exactMoveBuilder.append("ExactMove(");
-        exactMoveBuilder.append("startLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX2(),
+        exactMoveBuilder.append("firstLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX2(),
                 actorWorldLocation.getY() - event.getExactMoveDeltaY2(), client.getPlane(), false));
         exactMoveBuilder.append(", ");
-        exactMoveBuilder.append("startDelay = ").append(event.getExactMoveArrive1Cycle() - currentCycle).append(", ");
-        exactMoveBuilder.append("endLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX1(),
+        final int firstDuration = event.getExactMoveArrive1Cycle() - currentCycle;
+        exactMoveBuilder.append("firstDuration = ").append(firstDuration).append(", ");
+        exactMoveBuilder.append("secondLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX1(),
                 actorWorldLocation.getY() - event.getExactMoveDeltaY1(), client.getPlane(), false));
         exactMoveBuilder.append(", ");
-        exactMoveBuilder.append("endDelay = ").append(event.getExactMoveArrive2Cycle() - currentCycle).append(", ");
+        final int secondDuration = (event.getExactMoveArrive2Cycle() - currentCycle) - firstDuration;
+        exactMoveBuilder.append("secondDuration = ").append(secondDuration).append(", ");
         exactMoveBuilder.append("direction = ").append(event.getExactMoveDirection()).append(")");
         addLine(formatActor(actor), exactMoveBuilder.toString(), isActorConsoleLogged(actor), exactMove);
     }
