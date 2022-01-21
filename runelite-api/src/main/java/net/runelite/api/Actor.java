@@ -299,8 +299,6 @@ public interface Actor extends Renderable, Locatable
 	 */
 	int getGraphic();
 
-	int getGraphicHeight();
-
 	int getGraphicStartCycle();
 
 	/**

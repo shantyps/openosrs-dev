@@ -106,10 +106,6 @@ public interface RSActor extends RSRenderable, Actor
 	@Override
 	int getGraphic();
 
-	@Import("spotAnimationHeight")
-	@Override
-	int getGraphicHeight();
-
 	@Import("spotAnimationStartCycle")
 	@Override
 	int getGraphicStartCycle();

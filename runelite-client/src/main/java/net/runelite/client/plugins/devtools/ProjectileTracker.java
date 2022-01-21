@@ -55,7 +55,7 @@ public class ProjectileTracker {
         final LocalPoint sourcePoint = new LocalPoint(localSrcPointX, localSrcPointY);
         final int tileHeight = Perspective.getTileHeight(client, sourcePoint, projectile.getFloor());
         final int currentCycle = client.getGameCycle();
-        final int startCycle = projectile.getStartMovementCycle() - currentCycle;
+        final int startCycle = projectile.getStartCycle() - currentCycle;
         final int endCycle = projectile.getEndCycle() - currentCycle;
 
         final WorldPoint sourceWorldPoint = WorldPoint.fromLocal(client, sourcePoint);
