@@ -106,10 +106,6 @@ public interface RSActor extends RSRenderable, Actor
 	@Override
 	int getGraphic();
 
-	@Import("spotAnimationHeight")
-	@Override
-	int getGraphicHeight();
-
 	@Import("spotAnimationStartCycle")
 	@Override
 	int getGraphicStartCycle();
@@ -117,6 +113,14 @@ public interface RSActor extends RSRenderable, Actor
 	@Import("spotAnimation")
 	@Override
 	void setGraphic(int id);
+
+	@Import("spotAnimationHeight")
+	@Override
+	int getGraphicHeight();
+
+	@Import("spotAnimationHeight")
+	@Override
+	void setGraphicHeight(int id);
 
 	@Import("spotAnimationFrame")
 	int getSpotAnimFrame();
@@ -201,6 +205,33 @@ public interface RSActor extends RSRenderable, Actor
 	@Override
 	int exactMoveDirection();
 
+	@Import("recolourStartCycle")
+	@Override
+	int recolourStartCycle();
+	@Import("recolourEndCycle")
+	@Override
+	int recolourEndCycle();
+	@Import("recolourHue")
+	@Override
+	byte recolourHue();
+	@Import("recolourSaturation")
+	@Override
+	byte recolourSaturation();
+	@Import("recolourLuminance")
+	@Override
+	byte recolourLuminance();
+	@Import("recolourAmount")
+	@Override
+	byte recolourAmount();
+
+	@Import("combatLevelChange")
+	@Override
+	int getCombatLevelOverride();
+
+
+	@Import("instantTurn")
+	@Override
+	boolean instantTurn();
 
 	// Health stuff
 

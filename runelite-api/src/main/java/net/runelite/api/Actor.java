@@ -46,6 +46,10 @@ public interface Actor extends Renderable, Locatable
 	 */
 	int getCombatLevel();
 
+	int getCombatLevelOverride();
+
+	boolean instantTurn();
+
 	/**
 	 * Gets the name of the actor.
 	 *
@@ -154,6 +158,13 @@ public interface Actor extends Renderable, Locatable
 	int exactMoveArrive1Cycle();
 	int exactMoveArrive2Cycle();
 	int exactMoveDirection();
+
+	int recolourStartCycle();
+	int recolourEndCycle();
+	byte recolourHue();
+	byte recolourSaturation();
+	byte recolourLuminance();
+	byte recolourAmount();
 
 
 	/**
@@ -288,8 +299,6 @@ public interface Actor extends Renderable, Locatable
 	 */
 	int getGraphic();
 
-	int getGraphicHeight();
-
 	int getGraphicStartCycle();
 
 	/**
@@ -299,6 +308,18 @@ public interface Actor extends Renderable, Locatable
 	 * @see GraphicID
 	 */
 	void setGraphic(int graphic);
+
+	/**
+	 * Get the height of the graphic/spotanim on the actor
+	 * @return
+	 */
+	int getGraphicHeight();
+
+	/**
+	 * Set the height of the graphic/spotanim on the actor
+	 * @param height
+	 */
+	void setGraphicHeight(int height);
 
 	/**
 	 * Get the frame of the currently playing spotanim

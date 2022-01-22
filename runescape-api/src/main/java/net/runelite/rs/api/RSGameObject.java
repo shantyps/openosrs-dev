@@ -39,6 +39,11 @@ public interface RSGameObject extends GameObject
 	long getHash();
 
 	@Import("flags")
+	@Override
+	int getConfig();
+
+	@Import("flags")
+	@Override
 	int getFlags();
 
 	int getPlane();

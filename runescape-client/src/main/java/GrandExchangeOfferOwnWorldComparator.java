@@ -297,7 +297,7 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 					var6 = var1.method7401();
 					var7 = var1.method7403();
 					if (class12.field72) {
-						var15.field1118 = var1.method7394() == 1;
+						var15.instantTurn = var1.method7394() == 1;
 					}
 
 					var8 = var15.x - (var6 - class131.baseX - class131.baseX) * 64;
@@ -372,7 +372,7 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 				}
 
 				if ((var5 & 512) != 0) {
-					var15.field1119 = var1.method7411();
+					var15.combatLevelChange = var1.method7411();
 				}
 
 				if ((var5 & 64) != 0) {
@@ -428,12 +428,12 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 				}
 
 				if ((var5 & 256) != 0) {
-					var15.field1141 = Client.cycle + var1.readUnsignedShort();
-					var15.field1140 = Client.cycle + var1.method7401();
-					var15.field1143 = var1.readByte();
-					var15.field1144 = var1.method7396();
-					var15.field1095 = var1.method7396();
-					var15.field1146 = (byte)var1.readUnsignedByte();
+					var15.recolourStartCycle = Client.cycle + var1.readUnsignedShort();
+					var15.recolourEndCycle = Client.cycle + var1.method7401();
+					var15.recolourHue = var1.readByte();
+					var15.recolourSaturation = var1.method7396();
+					var15.recolourLuminance = var1.method7396();
+					var15.recolourAmount = (byte)var1.readUnsignedByte();
 				}
 
 				if ((var5 & 32) != 0) {

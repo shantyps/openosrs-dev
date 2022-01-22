@@ -219,7 +219,7 @@ public abstract class RSActorMixin implements RSActor
 	@Inject
 	public void facedDirectionChanged(int idx)
 	{
-		FacedDirectionChanged facedDirectionChanged = new FacedDirectionChanged(this, getFacedDirection());
+		FacedDirectionChanged facedDirectionChanged = new FacedDirectionChanged(this, getFacedDirection(), instantTurn());
 		client.getCallbacks().post(facedDirectionChanged);
 	}
 
@@ -230,6 +230,23 @@ public abstract class RSActorMixin implements RSActor
 		ExactMoveEvent exactMoveEvent = new ExactMoveEvent(this, exactMoveDeltaX1(), exactMoveDeltaX2(), exactMoveDeltaY1(), exactMoveDeltaY2(),
 				exactMoveArrive1Cycle(), exactMoveArrive2Cycle(), exactMoveDirection());
 		client.getCallbacks().post(exactMoveEvent);
+	}
+
+	@FieldHook("recolourAmount")
+	@Inject
+	public void recolourReceived(int idx) {
+		RecolourEvent event = new RecolourEvent(this, recolourStartCycle(), recolourEndCycle(), recolourHue(), recolourSaturation(), recolourLuminance(),
+				recolourAmount(), client.getGameCycle());
+		client.getCallbacks().post(event);
+	}
+
+
+	@FieldHook("combatLevelChange")
+	@Inject
+	public void combatLevelChange(int idx) {
+		if (getCombatLevelOverride() == -1) return;
+		CombatLevelChangeEvent event = new CombatLevelChangeEvent(this, getCombatLevel(), getCombatLevelOverride());
+		client.getCallbacks().post(event);
 	}
 
 	@FieldHook("overheadText")

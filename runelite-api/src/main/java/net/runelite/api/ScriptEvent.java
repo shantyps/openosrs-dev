@@ -55,6 +55,7 @@ public interface ScriptEvent
 
 	Object[] getArguments();
 
+
 	/**
 	 * Gets the menu index of the event
 	 *
@@ -74,6 +75,11 @@ public interface ScriptEvent
 	 * Parent relative x coordinate for mouse related events
 	 */
 	int getMouseX();
+
+	/**
+	 * Parent relative y coordinate for mouse related events
+	 */
+	int getMouseY();
 
 	/**
 	 * Jagex typed keycode
