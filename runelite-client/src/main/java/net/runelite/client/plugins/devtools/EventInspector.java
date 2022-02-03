@@ -731,10 +731,10 @@ public class EventInspector extends DevToolsFrame {
     }
 
     @Subscribe
-    public void soundEffectPlayed(SoundEffectPlayed event) {
-        final int soundId = event.getSoundId();
+    public void soundEffectReceived(SoundEffectReceived event) {
+        final int soundId = event.getId();
         final int delay = event.getDelay();
-        final int loops = event.getLoops();
+        final int loops = event.getRepetitions();
         StringBuilder soundEffectBuilder = new StringBuilder();
         soundEffectBuilder.append("SoundEffect(");
         soundEffectBuilder.append("id = ").append(soundId);
