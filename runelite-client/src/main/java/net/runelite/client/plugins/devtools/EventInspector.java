@@ -18,6 +18,7 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.DynamicGridLayout;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.components.SliderUI;
+import net.runelite.client.util.SwingUtil;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.NotNull;
 
@@ -98,6 +99,8 @@ public class EventInspector extends DevToolsFrame {
     private int widgetModelRotation = -1;
 
     private Boolean widgetHidden = null;
+
+    private boolean dirty = false;
 
     private int widgetNpcId = -1;
 
@@ -518,13 +521,7 @@ public class EventInspector extends DevToolsFrame {
             labelPanel.add(prefixLabel, BorderLayout.WEST);
             labelPanel.add(textLabel);
             tracker.add(labelPanel);
-
-            // Cull very old stuff
-            while (tracker.getComponentCount() > MAX_LOG_ENTRIES) {
-                tracker.remove(0);
-            }
-
-            tracker.revalidate();
+            dirty = true;
         });
     }
 
@@ -815,6 +812,17 @@ public class EventInspector extends DevToolsFrame {
     @SuppressWarnings("StringBufferReplaceableByString")
     @Subscribe
     public void onClientTick(ClientTick event) {
+        if (dirty) {
+            dirty = false;
+            SwingUtilities.invokeLater(() -> {
+                // Cull very old stuff
+                while (tracker.getComponentCount() > MAX_LOG_ENTRIES) {
+                    tracker.remove(0);
+                }
+
+                tracker.revalidate();
+            });
+        }
         latestInventoryId = -1;
         /* Reset animation access as it may not have been reset manually due to a null check in the function. */
         accessedObjectForAnimation = false;
