@@ -11,6 +11,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
+import net.runelite.client.RuneLite;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
@@ -71,6 +72,7 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Actor, RecolourEvent> tintingChanges = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
     private final Set<Player> movementTrackedPlayers = new HashSet<>();
+    private final Map<Integer, String> soundEffectNames = new HashMap<>(5000);
     private WidgetNode lastMoveSub;
     private long hashTableNodeGet1 = -1;
     private long hashTableNodeGet2 = -1;
@@ -734,11 +736,19 @@ public class EventInspector extends DevToolsFrame {
         final int loops = event.getRepetitions();
         StringBuilder soundEffectBuilder = new StringBuilder();
         soundEffectBuilder.append("SoundEffect(");
-        soundEffectBuilder.append("id = ").append(soundId);
+        String name = soundEffectNames.get(soundId);
+        String prefix;
+        if (name == null) {
+            prefix = "Local sound";
+            soundEffectBuilder.append("id = ").append(soundId);
+        } else {
+            prefix = "Local sound(id = " + soundId + ")";
+            soundEffectBuilder.append("name = \"").append(name).append('"');
+        }
         if (delay != 0) soundEffectBuilder.append(", delay = ").append(delay);
         if (loops != 1) soundEffectBuilder.append(", repetitions = ").append(loops);
         soundEffectBuilder.append(")");
-        addLine("Local", soundEffectBuilder.toString(), true, soundEffects);
+        addLine(prefix, soundEffectBuilder.toString(), true, soundEffects);
     }
 
     @Subscribe
@@ -751,7 +761,15 @@ public class EventInspector extends DevToolsFrame {
         final int radius = event.getRange();
         StringBuilder soundEffectBuilder = new StringBuilder();
         soundEffectBuilder.append("SoundEffect(");
-        soundEffectBuilder.append("id = ").append(soundId);
+        String name = soundEffectNames.get(soundId);
+        String prefix;
+        if (name == null) {
+            prefix = "Area sound";
+            soundEffectBuilder.append("id = ").append(soundId);
+        } else {
+            prefix = "Area sound(id = " + soundId + ")";
+            soundEffectBuilder.append("name = \"").append(name).append('"');
+        }
         if (radius != 0) soundEffectBuilder.append(", radius = ").append(radius);
         if (delay != 0) soundEffectBuilder.append(", delay = ").append(delay);
         if (loops != 1) soundEffectBuilder.append(", repetitions = ").append(loops);
@@ -760,11 +778,11 @@ public class EventInspector extends DevToolsFrame {
         Optional<Player> sourcePlayer = client.getPlayers().stream().filter(player -> player.getWorldLocation().distanceTo(location) == 0).findAny();
         Optional<NPC> sourceNpc = client.getNpcs().stream().filter(npc -> npc.getWorldLocation().distanceTo(location) == 0).findAny();
         if (sourcePlayer.isPresent() && sourceNpc.isEmpty()) {
-            addLine(formatActor(sourcePlayer.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourcePlayer.get()), areaSoundEffects);
+            addLine(prefix + ", " + formatActor(sourcePlayer.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourcePlayer.get()), areaSoundEffects);
         } else if (sourceNpc.isPresent() && sourcePlayer.isEmpty()) {
-            addLine(formatActor(sourceNpc.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourceNpc.get()), areaSoundEffects);
+            addLine(prefix + ", " + formatActor(sourceNpc.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourceNpc.get()), areaSoundEffects);
         } else {
-            addLine("Unknown(" + formatLocation(location) + ")", soundEffectBuilder.toString(), inEventDistance(location), areaSoundEffects);
+            addLine(prefix + ", " + "Unknown(" + formatLocation(location) + ")", soundEffectBuilder.toString(), inEventDistance(location), areaSoundEffects);
         }
     }
 
@@ -1706,6 +1724,28 @@ public class EventInspector extends DevToolsFrame {
         if (settingsFile.exists()) {
             readSettingsFile();
         }
+        try {
+            InputStream soundsInput = RuneLite.class.getResourceAsStream("/sound_effects.txt");
+            if (soundsInput != null) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(soundsInput));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] split = line.split(":");
+                    if (split.length == 2) {
+                        try {
+                            String name = split[0];
+                            int id = Integer.parseInt(split[1]);
+                            soundEffectNames.put(id, name);
+                        } catch (Exception e) {
+                            log.error("Error reading sound name: " + Arrays.toString(split), e);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error loading sound names", e);
+        }
+
         eventBus.register(this);
         for (Skill skill : Skill.values()) {
             int xp = client.getSkillExperience(skill);
