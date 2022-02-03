@@ -45,7 +45,7 @@ import java.util.concurrent.ForkJoinPool;
 @Slf4j
 public class EventInspector extends DevToolsFrame {
 
-    private final static int MAX_LOG_ENTRIES = 2500;
+    private final static int MAX_LOG_ENTRIES = 1000;
     private static final int VARBITS_ARCHIVE_ID = 14;
     private final Client client;
     private final EventBus eventBus;
