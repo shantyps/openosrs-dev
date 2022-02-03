@@ -319,7 +319,7 @@ public class EventInspector extends DevToolsFrame {
 
     private void changeJCheckBoxStatus(JPanel parent, boolean value) {
         for (Component component : parent.getComponents()) {
-            if (component == pauseButton || component == localPlayerOnly || component == rsCoordFormat) continue;
+            if (component == pauseButton || component == localPlayerOnly || component == rsCoordFormat || component == translateCoordsInInstance) continue;
             if (component instanceof JCheckBox) {
                 ((JCheckBox) component).setSelected(value);
             } else if (component instanceof JPanel) {
