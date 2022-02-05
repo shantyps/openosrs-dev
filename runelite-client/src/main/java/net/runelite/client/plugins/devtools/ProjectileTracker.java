@@ -8,48 +8,33 @@ import net.runelite.api.*;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
-import net.runelite.api.events.ProjectileMoved;
+import net.runelite.api.events.ProjectileSpawned;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
+import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 
 import javax.inject.Inject;
 import java.util.*;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @author Kris | 22/10/2021
+ * @author Kris | 05/02/2022
  */
+@SuppressWarnings("ALL")
 @Slf4j
 public class ProjectileTracker {
-
-    private final Set<Projectile> inspectedProjectiles = Collections.synchronizedSet(new HashSet<>());
-    private final Map<EarlyProjectileInfo, List<DynamicProjectileInfo>> trackedProjectiles = Collections.synchronizedMap(new HashMap<>());
-    private final Map<EarlyProjectileInfo, Integer> identifiedProjectiles = Collections.synchronizedMap(new HashMap<>());
     private final Client client;
+    private final Map<StaticProjectileInfo, List<DynamicProjectileInfo>> trackedProjectiles = Collections.synchronizedMap(new HashMap<>());
 
     @Inject
     public ProjectileTracker(Client client) {
         this.client = client;
     }
 
-    void clearCache() {
-        inspectedProjectiles.clear();
-        trackedProjectiles.clear();
-        identifiedProjectiles.clear();
-    }
-
-    void submitProjectileMoved(Client client, ProjectileMoved event, boolean rsFormat, QuadConsumer<EarlyProjectileInfo, DynamicProjectileInfo, String,
-                               String> consumer, boolean translateCoordsInInstance) {
+    public Triple<StaticProjectileInfo, DynamicProjectileInfo, List<DynamicProjectileInfo>> addEvent(ProjectileSpawned event, Map<Player,
+            Pair<Integer, WorldPoint>> playerMovements) {
         Projectile projectile = event.getProjectile();
-        /* No need to run the calculations for every tick that the projectile moves - just the first, on spawn, is enough. */
-        if (!inspectedProjectiles.add(projectile)) return;
-        /* If target idx isn't 0 but actor is null, we cannot accurately measure the projectile's info so discard it. */
-        final int targetIdx = event.getProjectile().getRsInteracting();
-        final Actor target = projectile.getInteracting();
-        if (targetIdx != 0 && target == null) {
-            log.info("Ambiguous target size - unable to determine source size which is necessary for real distance calculations.");
-            return;
-        }
-        final LocalPoint destinationPoint = target != null ? target.getLocalLocation() : event.getPosition();
         final int localSrcPointX = projectile.getX1();
         final int localSrcPointY = projectile.getY1();
         final LocalPoint sourcePoint = new LocalPoint(localSrcPointX, localSrcPointY);
@@ -57,136 +42,134 @@ public class ProjectileTracker {
         final int currentCycle = client.getGameCycle();
         final int startCycle = projectile.getStartCycle() - currentCycle;
         final int endCycle = projectile.getEndCycle() - currentCycle;
-
-        final WorldPoint sourceWorldPoint = WorldPoint.fromLocal(client, sourcePoint);
-        final WorldPoint destWorldPoint = target != null ? target.getWorldLocation() : WorldPoint.fromLocal(client, event.getPosition());
-        final List<Player> sourcePlayers =
-                client.getPlayers().stream().filter(player -> player.getWorldLocation().distanceTo(sourceWorldPoint) == 0).collect(Collectors.toList());
-        final List<NPC> sourceNpcs =
-                client.getNpcs().stream().filter(npc -> npc.getWorldLocation().distanceTo(sourceWorldPoint) == 0).collect(Collectors.toList());
-
-        final long largeNpcCount = sourceNpcs.stream().filter(npc -> npc.getComposition().getSize() != 1).count();
-        if (largeNpcCount > 0 && (!sourcePlayers.isEmpty() || sourceNpcs.size() != largeNpcCount)) {
-            log.info("Ambiguous source size - unable to determine source size which is necessary for real distance calculations.");
-            return;
-        }
-
         final int id = projectile.getId();
         final int startHeight = -((projectile.getHeight() - tileHeight) / 4);
         final int endHeight = projectile.getEndHeight() / 4;
         final int angle = projectile.getSlope();
         final int distOffset = projectile.getStartHeight();
 
-        final WorldArea sourceArea = !sourceNpcs.isEmpty() ? sourceNpcs.get(0).getWorldArea() : new WorldArea(sourceWorldPoint, 1, 1);
-        final WorldArea destinationArea = target != null ? target.getWorldArea() : new WorldArea(destWorldPoint, 1, 1);
-        final int distance = sourceArea.distanceTo2D(destinationArea);
-        final int tileToTileDistance = new WorldArea(sourceWorldPoint, 1, 1).distanceTo2D(new WorldArea(destWorldPoint, 1, 1));
-
-        final EarlyProjectileInfo earlyProjectile = new EarlyProjectileInfo(id, startHeight, endHeight, angle, distOffset, startCycle);
-        final DynamicProjectileInfo dynamicInfo = new DynamicProjectileInfo(sourcePoint, destinationPoint, endCycle - startCycle, distance);
-
-
-        final String sourcePointString = formatLocation(sourceWorldPoint.getX(), sourceWorldPoint.getY(), sourceWorldPoint.getPlane(), rsFormat, translateCoordsInInstance);
-        final String destPointString = formatLocation(destWorldPoint.getX(), destWorldPoint.getY(), destWorldPoint.getPlane(), rsFormat, translateCoordsInInstance);
-        final String targetString = target instanceof Player ? ("Player(" + (target.getName() + " - " + destPointString + ")"))
-                : target instanceof NPC ? ("Npc(" + (target.getName() + " - " + destPointString + ")"))
-                : ("Unknown(" + destPointString + ")");
-        final String excessInfo =
-                " - tile to tile distance: " + tileToTileDistance + ", source to destination distance: " + distance + ", flight time: " + (endCycle - startCycle);
-        final String projectileText = getProjectileText(earlyProjectile, dynamicInfo) + excessInfo;
-        if (sourcePlayers.size() == 1 && sourceNpcs.isEmpty()) {
-            consumer.accept(earlyProjectile, dynamicInfo,
-                    "Player(" + sourcePlayers.get(0).getName() + " - " + sourcePointString + ") -> " + targetString,
-                    projectileText);
-        } else if (sourceNpcs.size() == 1 && sourcePlayers.isEmpty()) {
-            consumer.accept(earlyProjectile, dynamicInfo, "Npc(" + sourceNpcs.get(0).getName() + " - " + sourcePointString + ") -> " + targetString,
-                    projectileText);
-        } else {
-            consumer.accept(earlyProjectile, dynamicInfo, "Unknown(" + sourcePointString + ") -> " + targetString, projectileText);
+        final Pair<Actor, WorldPoint> source = getSource(event);
+        final WorldPoint sourceTile = source.getRight();
+        final Actor sourceActor = source.getLeft();
+        final Pair<Actor, WorldPoint> destination = getDestination(event);
+        WorldPoint destinationTile = destination.getRight();
+        final Actor destinationActor = destination.getLeft();
+        // If the projectile shoots from a npc to a player, it is calculated before the player has taken a step, so it must be ran against the player's
+        // previous tile.
+        if (sourceActor instanceof NPC && destinationActor instanceof Player) {
+            final int clientTick = client.getTickCount();
+            final Pair<Integer, WorldPoint> previousLocation = playerMovements.get(destinationActor);
+            if (previousLocation != null && previousLocation.getLeft() == clientTick) {
+                destinationTile = previousLocation.getRight();
+            }
         }
+
+        final WorldArea sourceWorldArea = sourceActor != null ? sourceActor.getWorldArea() : new WorldArea(sourceTile, 1, 1);
+        final int destinationActorSize = destinationActor != null ? destinationActor.getWorldArea().getWidth() : 1;
+        final WorldArea destinationWorldArea = new WorldArea(destinationTile, destinationActorSize, destinationActorSize);
+        final int distance2D = sourceWorldArea.distanceTo2D(destinationWorldArea);
+
+        final StaticProjectileInfo staticInfo = new StaticProjectileInfo(id, startHeight, endHeight, angle, distOffset, startCycle);
+        final DynamicProjectileInfo dynamicInfo = new DynamicProjectileInfo(sourceActor, destinationActor, sourceWorldArea,
+                destinationWorldArea, endCycle - startCycle, distance2D, sourceWorldArea.distanceTo(destinationTile));
+        final List<DynamicProjectileInfo> trackedInformation = trackedProjectiles.computeIfAbsent(staticInfo, s -> new ArrayList<>());
+        final Set<Integer> distinctDistances = new HashSet<>();
+        distinctDistances.add(dynamicInfo.swDistance);
+        final List<DynamicProjectileInfo> comparisonPoints =
+                trackedInformation.stream().filter(element -> distinctDistances.add(element.swDistance)).collect(Collectors.toList());
+        trackedInformation.add(0, dynamicInfo); // Add to the front.
+        return new ImmutableTriple<>(staticInfo, dynamicInfo, comparisonPoints);
     }
 
-    private String formatLocation(final int x, final int y, final int z, boolean rsFormat, boolean translateCoordsInInstance) {
-        LocalPoint localPoint = LocalPoint.fromWorld(client, x, y);
-        final boolean isInInstance = x >= 6400;
-        final WorldPoint baseMapPoint = localPoint == null ? null : WorldPoint.fromLocalInstance(client, localPoint, z);
-        if (rsFormat) {
-            if (isInInstance && baseMapPoint != null && translateCoordsInInstance) {
-                final int msqx = baseMapPoint.getX() >> 6;
-                final int msqz = baseMapPoint.getY() >> 6;
-                final int tx = baseMapPoint.getX() & 0x3F;
-                final int tz = baseMapPoint.getY() & 0x3F;
-                return "level = " + z + ", msqx = " + msqx + ", msqz = " + msqz + ", tx = " + tx + ", tz = " + tz + ", instanced = true";
+    private Pair<Actor, WorldPoint> getDestination(ProjectileSpawned event) {
+        Projectile projectile = event.getProjectile();
+        /* If target idx isn't 0 but actor is null, we cannot accurately measure the projectile's info so discard it. */
+        final int targetIdx = event.getProjectile().getRsInteracting();
+        final Actor target = projectile.getInteracting();
+        /* If the project is locked onto the target, but we cannot see the target as they're too far from us, we have to estimate the destination. */
+        if (target == null) {
+            return Pair.of(null, WorldPoint.fromLocal(client, projectile.getTarget()));
+        }
+        return Pair.of(target, target.getWorldLocation());
+    }
+
+    private Pair<Actor, WorldPoint> getSource(ProjectileSpawned event) {
+        Projectile projectile = event.getProjectile();
+        final int localSrcPointX = projectile.getX1();
+        final int localSrcPointY = projectile.getY1();
+        final LocalPoint sourcePoint = new LocalPoint(localSrcPointX, localSrcPointY);
+        final WorldPoint worldPoint = WorldPoint.fromLocal(client, sourcePoint);
+        final List<NPC> potentialNPCs = getIntersectingActors(worldPoint, client.getNpcs());
+        final List<NPC> filteredNPCs = potentialNPCs.stream().filter(npc -> {
+            // For size <= 2 NPCs specifically, the projectile _always_ shoots out from the south-western tile, regardless of the angle.
+            if (npc.getComposition().getSize() <= 2) {
+                return worldPoint.equals(npc.getWorldLocation());
+            }
+            /* For all the other sizes, it is rather ambiguous and works on a per-npc basis. */
+            return true;
+        }).collect(Collectors.toList());
+        if (filteredNPCs.size() > 1) {
+            final List<NPC> attackableNPCs = filteredNPCs.stream()
+                    .filter(npc -> ArrayUtils.contains(npc.getComposition().getActions(), "Attack")) // Separate logic filter if there are too many matches.
+                    .collect(Collectors.toList());
+            /* If there are multiple potential NPCs, but only one of them is attackable, it's probably that. */
+            if (attackableNPCs.size() == 1) {
+                return Pair.of(attackableNPCs.get(0), attackableNPCs.get(0).getWorldLocation()); // Use single attackable npc.
             } else {
-                final int msqx = x >> 6;
-                final int msqz = y >> 6;
-                final int tx = x & 0x3F;
-                final int tz = y & 0x3F;
-                return "level = " + z + ", msqx = " + msqx + ", msqz = " + msqz + ", tx = " + tx + ", tz = " + tz;
+                final NPC baseNPC = filteredNPCs.get(0);
+                // If all the potential NPCs are equal size, and all of them are standing on the exact same tile, we just pick one of the npcs and use that -
+                // it won't matter if it's not the actual source, the projectile will get properly deciphered.
+                final boolean identicalPosition = filteredNPCs.stream()
+                        .allMatch(npc -> npc.getComposition().getSize() == baseNPC.getComposition().getSize() && npc.getLocalLocation().equals(baseNPC.getLocalLocation()));
+                if (identicalPosition) {
+                    return Pair.of(baseNPC, baseNPC.getWorldLocation());
+                } else {
+                    /* Ambiguous. */
+                    return Pair.of(null, worldPoint);
+                }
             }
+        } else if (filteredNPCs.size() == 1) {
+            return Pair.of(filteredNPCs.get(0), filteredNPCs.get(0).getWorldLocation());
+        }
+
+        final List<Player> potentialPlayers = getIntersectingActors(worldPoint, client.getPlayers());
+        if (potentialPlayers.isEmpty()) {
+            return Pair.of(null, worldPoint);
         } else {
-            if (isInInstance && baseMapPoint != null && translateCoordsInInstance) {
-                return "x = " + baseMapPoint.getX() + ", y = " + baseMapPoint.getY() + ", z = " + baseMapPoint.getPlane() + ", instanced = true";
-            } else {
-                return "x = " + x + ", y = " + y + ", z = " + z;
-            }
+            return Pair.of(potentialPlayers.get(0), potentialPlayers.get(0).getWorldLocation());
         }
     }
 
-    String getProjectileText(EarlyProjectileInfo earlyProjectile, DynamicProjectileInfo dynamicInfo) {
-        Integer identifiedProjectileDuration = identifiedProjectiles.get(earlyProjectile);
-        if (identifiedProjectileDuration == null) {
-            /* Check if this projectile already has information on it, if so, we can provide in-depth values for that projectile. */
-            List<DynamicProjectileInfo> existingDynamicInfos = trackedProjectiles.computeIfAbsent(earlyProjectile, k -> new ArrayList<>());
-            Optional<DynamicProjectileInfo> diffDistanceInfo =
-                    existingDynamicInfos.stream().filter(dynamicProjectileInfo -> dynamicProjectileInfo.distance != dynamicInfo.distance).findFirst();
-
-            existingDynamicInfos.add(dynamicInfo);
-
-            if (diffDistanceInfo.isPresent()) {
-                DynamicProjectileInfo existingDynamicInfo = diffDistanceInfo.get();
-                final int distanceDiff = dynamicInfo.distance - existingDynamicInfo.distance;
-                final int durationDiff = dynamicInfo.flightDuration - existingDynamicInfo.flightDuration;
-                final int durationPerTileDistance = Math.abs(durationDiff / distanceDiff);
-                identifiedProjectiles.put(earlyProjectile, durationPerTileDistance);
-                /* Since identified projectile now tracks this, we no longer need to keep a hold of these projectiles. */
-                trackedProjectiles.remove(earlyProjectile);
-                return formatFullProjectileEntry(earlyProjectile, dynamicInfo, durationPerTileDistance);
-            }
-            return formatIncompleteProjectileEntry(earlyProjectile, dynamicInfo);
-        }
-        return formatFullProjectileEntry(earlyProjectile, dynamicInfo, identifiedProjectileDuration);
-    }
-
-    private String formatIncompleteProjectileEntry(EarlyProjectileInfo earlyProjectileInfo, DynamicProjectileInfo dynamicProjectileInfo) {
-        return "IncompleteProjectile(id = " + earlyProjectileInfo.getId() + ", startHeight = " + earlyProjectileInfo.getStartHeight() + ", endHeight = " + earlyProjectileInfo.getEndHeight() + ", delay = " + earlyProjectileInfo.getDelay() + ", angle = " + earlyProjectileInfo.getAngle() + ", distOffset = " + earlyProjectileInfo.getDistanceOffset() + ") - Distance: " + dynamicProjectileInfo.getDistance() + ", flight duration: " + dynamicProjectileInfo.getFlightDuration();
-    }
-
-    private String formatFullProjectileEntry(EarlyProjectileInfo earlyProjectileInfo, DynamicProjectileInfo dynamicProjectileInfo, int stepMultiplier) {
-        final int duration = dynamicProjectileInfo.getFlightDuration();
-        final int distance = dynamicProjectileInfo.getDistance();
-        final int lengthAdjustment = duration - (distance * stepMultiplier);
-        return "Projectile(id = " + earlyProjectileInfo.getId() + ", startHeight = " + earlyProjectileInfo.getStartHeight() + ", endHeight = " + earlyProjectileInfo.getEndHeight() + ", delay = " + earlyProjectileInfo.getDelay() + ", angle = " + earlyProjectileInfo.getAngle() + ", lengthAdjustment = " + lengthAdjustment + ", distOffset = " + earlyProjectileInfo.getDistanceOffset() + ", stepMultiplier = " + stepMultiplier + ")";
+    private <T extends Actor> List<T> getIntersectingActors(WorldPoint point, List<T> actors) {
+        return actors.stream()
+                .filter(actor -> actor.getAnimation() > 0) // Actor needs to be playing an animation to send out a projectile; should never be decoupled.
+                .filter(actor -> actor.getWorldArea().intersectsWith(new WorldArea(point, 1, 1))) // Projectile has to come from inside the actor.
+                .collect(Collectors.toList());
     }
 
     @EqualsAndHashCode
     @Getter
     static class DynamicProjectileInfo {
-        private final LocalPoint startPoint;
-        private final LocalPoint endPoint;
+        private final Actor startActor;
+        private final Actor endActor;
+        private final WorldArea startPoint;
+        private final WorldArea endPoint;
         private final int flightDuration;
         private final int distance;
-
-        DynamicProjectileInfo(LocalPoint startPoint, LocalPoint endPoint, int flightDuration, int distance) {
+        private final int swDistance;
+        DynamicProjectileInfo(Actor startActor, Actor endActor, WorldArea startPoint, WorldArea endPoint, int flightDuration, int distance, int swDistance) {
+            this.startActor = startActor;
+            this.endActor = endActor;
             this.startPoint = startPoint;
             this.endPoint = endPoint;
             this.flightDuration = flightDuration;
             this.distance = distance;
+            this.swDistance = swDistance;
         }
     }
 
     @Data
-    static class EarlyProjectileInfo {
+    static class StaticProjectileInfo {
         private final int id;
         private final int startHeight;
         private final int endHeight;
@@ -194,10 +177,4 @@ public class ProjectileTracker {
         private final int distanceOffset;
         private final int delay;
     }
-
-    @FunctionalInterface
-    public interface QuadConsumer<X, Y, T, U> {
-        void accept(X x, Y y, T t, U u);
-    }
-
 }

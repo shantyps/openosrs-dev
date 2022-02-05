@@ -19,8 +19,8 @@ import net.runelite.client.ui.ColorScheme;
 import net.runelite.client.ui.DynamicGridLayout;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.components.SliderUI;
-import net.runelite.client.util.SwingUtil;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -61,6 +61,7 @@ public class EventInspector extends DevToolsFrame {
     private boolean accessedObjectForAnimation = false;
     private Multimap<Integer, Integer> varbits;
     private final Set<Actor> facedActors = new HashSet<>();
+    private final List<ProjectileSpawned> projectileSpawnedList = new ArrayList<>();
     private final Map<Actor, FaceTile> facedDirectionActors = new HashMap<>();
     private final Map<Player, Integer> playerTransformations = new HashMap<>();
     private final Map<Long, Set<Integer>> updatedIfEvents = new HashMap<>();
@@ -70,6 +71,7 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Integer, Integer> inventoryDiffs = new HashMap<>();
     private final Map<Actor, CombatLevelChangeEvent> combatLevelChanges = new HashMap<>();
     private final Map<Actor, RecolourEvent> tintingChanges = new HashMap<>();
+    private final Map<Player, Pair<Integer, WorldPoint>> playerMovements = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
     private final Set<Player> movementTrackedPlayers = new HashSet<>();
     private final Map<Integer, String> soundEffectNames = new HashMap<>(5000);
@@ -556,13 +558,8 @@ public class EventInspector extends DevToolsFrame {
     }
 
     @Subscribe
-    public void onProjectileMoved(ProjectileMoved event) {
-        projectileTracker.submitProjectileMoved(client, event, rsCoordFormat.isSelected(), (earlyProjectileInfo, dynamicProjectileInfo, prefix, text) -> {
-            final boolean inDistance =
-                    Math.max(getDistance(dynamicProjectileInfo.getStartPoint()), getDistance(dynamicProjectileInfo.getEndPoint())) <= maxEventDistance;
-            final boolean console = inDistance && prefix.contains("Player(" + Objects.requireNonNull(client.getLocalPlayer()).getName());
-            addLine(prefix, text, console, projectiles);
-        }, translateCoordsInInstance.isSelected());
+    public void onProjectileSpawned(ProjectileSpawned event) {
+        projectileSpawnedList.add(event);
     }
 
     @Subscribe
@@ -948,6 +945,7 @@ public class EventInspector extends DevToolsFrame {
                 final WorldPoint previousLocation = pair.getRight();
                 final LocalPoint localDestination = LocalPoint.fromScene(movementEvent.getX(), movementEvent.getY());
                 final WorldPoint destination = fromLocal(client, localDestination);
+                playerMovements.put(movementEvent.getPlayer(), Pair.of(client.getTickCount(), previousLocation));
                 final int distance = getDistance(localDestination);
                 final boolean isLocalPlayer = movementEvent.getPlayer() == client.getLocalPlayer();
                 if (!isLocalPlayer && (distance > 15 || movementEvent.getPlayer().getPlane() != client.getPlane())) continue;
@@ -964,6 +962,76 @@ public class EventInspector extends DevToolsFrame {
                 }
             }
             movementEvents.clear();
+        }
+        if (!projectileSpawnedList.isEmpty()) {
+            projectileSpawnedList.forEach(projectileSpawned -> {
+                Triple<ProjectileTracker.StaticProjectileInfo, ProjectileTracker.DynamicProjectileInfo, List<ProjectileTracker.DynamicProjectileInfo>> info  =
+                        projectileTracker.addEvent(projectileSpawned, playerMovements);
+                final List<ProjectileTracker.DynamicProjectileInfo> comparisonPoints = info.getRight();
+                final ProjectileTracker.DynamicProjectileInfo dynamicInfo = info.getMiddle();
+                final ProjectileTracker.StaticProjectileInfo staticInfo = info.getLeft();
+                final StringBuilder productBuilder = new StringBuilder();
+                if (!comparisonPoints.isEmpty()) {
+                    final ProjectileTracker.DynamicProjectileInfo comparisonPoint = comparisonPoints.get(0);
+                    final int durDiff = dynamicInfo.getFlightDuration() - comparisonPoint.getFlightDuration();
+                    int distDiff;
+                    if (comparisonPoints.size() == 1) {
+                        // If we only have one entry, we cannot really tell if this is a sw-based or real distance based projectile, so let's assume based on size.
+                        if (dynamicInfo.getStartActor() != null) {
+                            final int size = dynamicInfo.getStartActor() instanceof NPC ? ((NPC) dynamicInfo.getStartActor()).getComposition().getSize() : 1;
+                            final boolean southWestBased = size >= 3;
+                            if (southWestBased) {
+                                distDiff = dynamicInfo.getSwDistance() - comparisonPoint.getSwDistance();
+                            } else {
+                                distDiff = dynamicInfo.getDistance() - comparisonPoint.getDistance();
+                            }
+                        } else {
+                            distDiff = dynamicInfo.getDistance() - comparisonPoint.getDistance();
+                        }
+                    } else {
+                        final int distanceDiff = dynamicInfo.getSwDistance() - comparisonPoint.getSwDistance();
+                        final int durationDiff = dynamicInfo.getFlightDuration() - comparisonPoint.getFlightDuration();
+                        final int durationPerTileDistance = Math.abs(durationDiff / distanceDiff);
+                        final boolean swBased = comparisonPoints.stream().allMatch(entry -> {
+                            final int otherDisDiff = dynamicInfo.getSwDistance() - comparisonPoint.getSwDistance();
+                            final int otherDurDiff = dynamicInfo.getFlightDuration() - comparisonPoint.getFlightDuration();
+                            return Math.abs(otherDurDiff / otherDisDiff) == durationPerTileDistance;
+                        });
+                        if (swBased) {
+                            distDiff = distanceDiff;
+                        } else {
+                            distDiff = dynamicInfo.getDistance() - comparisonPoint.getDistance();
+                        }
+                    }
+                    final int durationPerTileDistance = Math.abs(durDiff / distDiff);
+                    final int duration = dynamicInfo.getFlightDuration();
+                    final int distance = dynamicInfo.getDistance();
+                    final int lengthAdjustment = duration - (distance * durationPerTileDistance);
+                    productBuilder.append("Projectile(id = ").append(staticInfo.getId()).append(", ");
+                    productBuilder.append("startHeight = ").append(staticInfo.getStartHeight()).append(", ");
+                    productBuilder.append("endHeight = ").append(staticInfo.getEndHeight()).append(", ");
+                    productBuilder.append("delay = ").append(staticInfo.getDelay()).append(", ");
+                    productBuilder.append("angle = ").append(staticInfo.getAngle()).append(", ");
+                    productBuilder.append("lengthAdjustment = ").append(lengthAdjustment).append(", ");
+                    productBuilder.append("distOffset = ").append(staticInfo.getDistanceOffset()).append(", ");
+                    productBuilder.append("stepMultiplier = ").append(durationPerTileDistance).append(")");
+                } else {
+                    productBuilder.append("Projectile(id = ").append(staticInfo.getId()).append(", ");
+                    productBuilder.append("startHeight = ").append(staticInfo.getStartHeight()).append(", ");
+                    productBuilder.append("endHeight = ").append(staticInfo.getEndHeight()).append(", ");
+                    productBuilder.append("delay = ").append(staticInfo.getDelay()).append(", ");
+                    productBuilder.append("angle = ").append(staticInfo.getAngle()).append(", ");
+                    productBuilder.append("distOffset = ").append(staticInfo.getDistanceOffset()).append(")");
+                }
+                productBuilder.append("\t| ").append("distance = ").append(dynamicInfo.getDistance()).append(", ");
+                productBuilder.append("flightDuration = ").append(dynamicInfo.getFlightDuration());
+
+                final String from = formatActor(dynamicInfo.getStartActor(), dynamicInfo.getStartPoint().toWorldPoint());
+                final String to = formatActor(dynamicInfo.getEndActor(), dynamicInfo.getEndPoint().toWorldPoint());
+                final boolean console = isActorConsoleLogged(dynamicInfo.getStartActor()) || isActorConsoleLogged(dynamicInfo.getEndActor());
+                addLine(from + " -> " + to, productBuilder.toString(), console, projectiles);
+            });
+            projectileSpawnedList.clear();
         }
     }
 
