@@ -349,9 +349,23 @@ public class EventInspector extends DevToolsFrame {
         panel.add(groundItemDel);
         panel.add(groundItemUpdate);
 
-        projectiles.setToolTipText("<html>The projectile inspector will require each unique projectile to be received from two" + "<br>different distances in" +
-                " order for it to be able to identify all of the projectile parameters." + "<br>This is due to one of the properties of projectile being the " +
-                "equivalent of" + "<br>lengthAdjustment + (chebyshevDistance * stepMultiplier).</html>");
+        projectiles.setToolTipText("<html>" +
+                "Projectile tracking works best from different distances with non-moving entities.<br>" +
+                "Due to projectiles being pid-dependent, it is impossible to accurately decode their original values.<br>" +
+                "There are simple heuristics used to determine the source of the projectile, which mostly comes down to<br>" +
+                "ensuring the projectile's starting position collides with the given creature and that the creature us playing<br>" +
+                "an animation at the time. There are other conditions at play.<br>" +
+                "When a projectile is shot from a npc towards a player, the player's previous position is used to determine the distance<br>." +
+                "For npc -> npc, or player -> player, it assumes the target has the higher pid(as in is processed first).<br>" +
+                "The inspector uses most recent projectile data when decoding projectile's original values, so even if it messes up,<br>" +
+                "it will simply need new data from different positions to give it another shot.<br>" +
+                "With NPCs, it is unclear where the projectile calculations are done server-side, as it is often times from the south-western<br>" +
+                "corner of the npc, but it can also be based on the actual difference between the two creatures, keeping their size in mind.<br>" +
+                "With all these criteria in mind, the data provided by the tool should be taken with a grain of salt, as there are several things<br>" +
+                "that can go wrong when decoding the original projectile values.<br>" +
+                "It should be kept in mind however, that only the 'lengthAdjustment' and 'stepMultiplier' values could be off. Everything<br>" +
+                "else provided by this tool will be accurate based on the packet's original values." +
+                "</html>");
         combinedObjects.setToolTipText("<html>Combined Objects refer to objects which have their models merged with the players' model" + " to fix model " +
                 "priority issues.<br>This is commonly used for agility shortcuts and obstacles, such as pipes.</html>");
     }
@@ -514,8 +528,8 @@ public class EventInspector extends DevToolsFrame {
             JTextField prefixLabel = new JTextField(prefix);
             prefixLabel.setEditable(false);
             prefixLabel.setBackground(null);
-            prefixLabel.setBorder(null);
             prefixLabel.setToolTipText(prefix);
+            prefixLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, new Color(52, 52, 52)));
             JTextField textLabel = new JTextField(text);
             textLabel.setEditable(false);
             textLabel.setBackground(null);
@@ -1016,7 +1030,7 @@ public class EventInspector extends DevToolsFrame {
                     productBuilder.append("distOffset = ").append(staticInfo.getDistanceOffset()).append(", ");
                     productBuilder.append("stepMultiplier = ").append(durationPerTileDistance).append(")");
                 } else {
-                    productBuilder.append("Projectile(id = ").append(staticInfo.getId()).append(", ");
+                    productBuilder.append("IncompleteProjectile(id = ").append(staticInfo.getId()).append(", ");
                     productBuilder.append("startHeight = ").append(staticInfo.getStartHeight()).append(", ");
                     productBuilder.append("endHeight = ").append(staticInfo.getEndHeight()).append(", ");
                     productBuilder.append("delay = ").append(staticInfo.getDelay()).append(", ");
