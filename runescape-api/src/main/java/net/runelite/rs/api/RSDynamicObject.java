@@ -18,7 +18,7 @@ public interface RSDynamicObject extends RSRenderable, DynamicObject
 	int getAnimCycleCount();
 
 	@Import("sequenceDefinition")
-	RSSequenceDefinition getSequenceDefinition();
+	RSSequenceDefinition getAnimation();
 
 	@Import("x")
 	@Override
