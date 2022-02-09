@@ -485,11 +485,11 @@ public class PcmPlayer {
 		descriptor = "(ILpi;S)Lff;",
 		garbageValue = "27127"
 	)
-	public static class160 method744(int var0, Buffer var1) {
+	public static PlayerEquipmentItem method744(int var0, Buffer var1) {
 		int var2 = var1.readUnsignedByte();
 		boolean var3 = (var2 & 1) != 0;
 		boolean var4 = (var2 & 2) != 0;
-		class160 var5 = new class160(var0);
+		PlayerEquipmentItem var5 = new PlayerEquipmentItem(var0);
 		int var6;
 		int[] var7;
 		boolean var8;
@@ -498,13 +498,13 @@ public class PcmPlayer {
 		if (var3) {
 			var6 = var1.readUnsignedByte();
 			var7 = new int[]{var6 & 15, var6 >> 4 & 15}; // L: 30 31 32
-			var8 = var5.field1745 != null && var7.length == var5.field1745.length; // L: 33
+			var8 = var5.recolorTo != null && var7.length == var5.recolorTo.length; // L: 33
 
 			for (var9 = 0; var9 < 2; ++var9) { // L: 34
 				if (var7[var9] != 15) {
 					var10 = (short)var1.readUnsignedShort();
 					if (var8) { // L: 37
-						var5.field1745[var7[var9]] = var10; // L: 38
+						var5.recolorTo[var7[var9]] = var10; // L: 38
 					}
 				}
 			}
@@ -513,13 +513,13 @@ public class PcmPlayer {
 		if (var4) { // L: 43
 			var6 = var1.readUnsignedByte(); // L: 44
 			var7 = new int[]{var6 & 15, var6 >> 4 & 15}; // L: 45 46 47
-			var8 = var5.field1746 != null && var7.length == var5.field1746.length;
+			var8 = var5.retextureTo != null && var7.length == var5.retextureTo.length;
 
 			for (var9 = 0; var9 < 2; ++var9) {
 				if (var7[var9] != 15) {
 					var10 = (short)var1.readUnsignedShort(); // L: 51
 					if (var8) { // L: 52
-						var5.field1746[var7[var9]] = var10;
+						var5.retextureTo[var7[var9]] = var10;
 					}
 				}
 			}

@@ -340,7 +340,7 @@ public class Decimator {
 						Archive var9 = KitDefinition.archive13; // L: 1664
 						UserComparator6.Widget_archive = var23; // L: 1666
 						Widget.Widget_modelsArchive = var28; // L: 1667
-						class160.Widget_spritesArchive = var8; // L: 1668
+						PlayerEquipmentItem.Widget_spritesArchive = var8; // L: 1668
 						class222.Widget_fontsArchive = var9; // L: 1669
 						Widget.Widget_interfaceComponents = new Widget[UserComparator6.Widget_archive.getGroupCount()][]; // L: 1670
 						class145.Widget_loadedInterfaces = new boolean[UserComparator6.Widget_archive.getGroupCount()]; // L: 1671

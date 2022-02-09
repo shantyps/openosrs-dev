@@ -11,7 +11,8 @@ public final class WallDecoration {
 	@ObfuscatedGetter(
 		intValue = 720856761
 	)
-	static int field2573;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 	@ObfuscatedName("c")
 	@ObfuscatedGetter(
 		intValue = -358335925

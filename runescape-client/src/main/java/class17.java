@@ -178,7 +178,7 @@ class class17 implements SSLSession {
 				var0.orientation = 0;
 			}
 
-			class185 var5 = var0.pathTraversed[var0.pathLength - 1]; // L: 3934
+			MoveSpeed var5 = var0.pathTraversed[var0.pathLength - 1]; // L: 3934
 			if (var3 - var10 <= 256 && var3 - var10 >= -256 && var4 - var2 <= 256 && var4 - var2 >= -256) { // L: 3935
 				int var6 = var0.orientation - var0.rotation & 2047; // L: 3942
 				if (var6 > 1024) { // L: 3943
@@ -237,9 +237,9 @@ class class17 implements SSLSession {
 					}
 				}
 
-				if (var5 == class185.field2132) { // L: 3970
+				if (var5 == MoveSpeed.field2132) { // L: 3970
 					var8 <<= 1;
-				} else if (var5 == class185.field2133) { // L: 3971
+				} else if (var5 == MoveSpeed.field2133) { // L: 3971
 					var8 >>= 1;
 				}
 

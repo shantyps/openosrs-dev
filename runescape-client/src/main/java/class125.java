@@ -278,7 +278,7 @@ public class class125 extends class126 {
 		descriptor = "(Lcw;IILgl;I)V",
 		garbageValue = "-864027006"
 	)
-	static final void method2742(Player var0, int var1, int var2, class185 var3) {
+	static final void method2742(Player var0, int var1, int var2, MoveSpeed var3) {
 		int var4 = var0.pathX[0]; // L: 7869
 		int var5 = var0.pathY[0]; // L: 7870
 		int var6 = var0.transformedSize(); // L: 7871

@@ -55,7 +55,8 @@ public enum class121 implements MouseWheel {
 	@ObfuscatedGetter(
 		intValue = -1405922867
 	)
-	static int field1492;
+	@Export("cameraMoveToHeight")
+	static int cameraMoveToHeight;
 	@ObfuscatedName("m")
 	@Export("cacheSubPaths")
 	static String[] cacheSubPaths;

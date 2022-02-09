@@ -15,7 +15,8 @@ public class class21 {
 	@ObfuscatedGetter(
 		intValue = 23217011
 	)
-	static int field119;
+	@Export("cameraLookAtY")
+	static int cameraLookAtY;
 	@ObfuscatedName("y")
 	public static short[] field120;
 	@ObfuscatedName("c")

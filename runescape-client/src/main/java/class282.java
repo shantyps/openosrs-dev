@@ -125,8 +125,8 @@ public class class282 {
 			var4 = Client.field590 / 256;
 		}
 
-		if (Client.field753[4] && Client.field733[4] + 128 > var4) { // L: 4320
-			var4 = Client.field733[4] + 128;
+		if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var4) { // L: 4320
+			var4 = Client.cameraMoveIntensity[4] + 128;
 		}
 
 		int var37 = Client.camAngleY & 2047; // L: 4321
@@ -285,8 +285,8 @@ public class class282 {
 		var17 = class7.cameraYaw; // L: 4431
 
 		for (var18 = 0; var18 < 5; ++var18) { // L: 4432
-			if (Client.field753[var18]) { // L: 4433
-				var19 = (int)(Math.random() * (double)(Client.field754[var18] * 2 + 1) - (double)Client.field754[var18] + Math.sin((double)Client.field757[var18] * ((double)Client.field500[var18] / 100.0D)) * (double)Client.field733[var18]); // L: 4434
+			if (Client.cameraShaking[var18]) { // L: 4433
+				var19 = (int)(Math.random() * (double)(Client.cameraShakeIntensity[var18] * 2 + 1) - (double)Client.cameraShakeIntensity[var18] + Math.sin((double)Client.cameraShakeCycle[var18] * ((double)Client.cameraShakeSpeed[var18] / 100.0D)) * (double)Client.cameraMoveIntensity[var18]); // L: 4434
 				if (var18 == 0) { // L: 4435
 					class414.cameraX += var19;
 				}

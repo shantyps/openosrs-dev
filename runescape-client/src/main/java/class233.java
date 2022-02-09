@@ -1,3 +1,4 @@
+import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
@@ -8,7 +9,8 @@ public class class233 {
 		descriptor = "(IIII)Lcf;",
 		garbageValue = "-852839339"
 	)
-	static final InterfaceParent method4772(int var0, int var1, int var2) {
+	@Export("ifOpenSub")
+	static final InterfaceParent ifOpenSub(int var0, int var1, int var2) {
 		InterfaceParent var3 = new InterfaceParent(); // L: 11685
 		var3.group = var1; // L: 11686
 		var3.type = var2; // L: 11687

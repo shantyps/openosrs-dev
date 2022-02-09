@@ -267,8 +267,8 @@ public class class113 {
 		descriptor = "(B)[Lgl;",
 		garbageValue = "0"
 	)
-	public static class185[] method2601() {
-		return new class185[]{class185.field2135, class185.field2132, class185.field2137, class185.field2133}; // L: 14
+	public static MoveSpeed[] method2601() {
+		return new MoveSpeed[]{MoveSpeed.field2135, MoveSpeed.field2132, MoveSpeed.field2137, MoveSpeed.field2133}; // L: 14
 	}
 
 	@ObfuscatedName("u")

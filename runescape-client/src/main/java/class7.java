@@ -12,7 +12,8 @@ public class class7 {
 	@ObfuscatedGetter(
 		intValue = -495360995
 	)
-	static int field33;
+	@Export("cameraLookAtX")
+	static int cameraLookAtX;
 	@ObfuscatedName("o")
 	@ObfuscatedGetter(
 		intValue = 1430198081

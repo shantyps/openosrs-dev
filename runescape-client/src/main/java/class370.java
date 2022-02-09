@@ -137,7 +137,7 @@ public final class class370 {
 			if (KeyHandler.field144 == KeyHandler.field140) { // L: 162
 				return false;
 			} else {
-				class160.field1749 = KeyHandler.field132[KeyHandler.field140]; // L: 163
+				PlayerEquipmentItem.field1749 = KeyHandler.field132[KeyHandler.field140]; // L: 163
 				ClanSettings.field1610 = KeyHandler.field136[KeyHandler.field140]; // L: 164
 				KeyHandler.field140 = KeyHandler.field140 + 1 & 127; // L: 165
 				return true; // L: 166

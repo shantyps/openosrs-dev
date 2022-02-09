@@ -124,7 +124,7 @@ class class11 implements TlsAuthentication {
 		} else if (var0 < 5400) { // L: 463
 			return ClientPacket.method4976(var0, var1, var2);
 		} else if (var0 < 5600) { // L: 464
-			return class185.method3686(var0, var1, var2);
+			return MoveSpeed.method3686(var0, var1, var2);
 		} else if (var0 < 5700) { // L: 465
 			return WorldMapData_1.method4635(var0, var1, var2);
 		} else if (var0 < 6300) { // L: 466
@@ -132,7 +132,7 @@ class class11 implements TlsAuthentication {
 		} else if (var0 < 6600) { // L: 467
 			return Players.method2305(var0, var1, var2);
 		} else if (var0 < 6700) { // L: 468
-			return class160.method3129(var0, var1, var2);
+			return PlayerEquipmentItem.method3129(var0, var1, var2);
 		} else if (var0 < 6800) { // L: 469
 			return WorldMapID.method4767(var0, var1, var2);
 		} else if (var0 < 6900) { // L: 470

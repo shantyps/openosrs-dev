@@ -40,8 +40,8 @@ public class ApproximateRouteStrategy extends RouteStrategy {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (class118.baseY + var4.pathY[0] >> 13) + (Canvas.baseX + var4.pathX[0] >> 13 << 14); // L: 201
-				if (var4.field1138 != -1) { // L: 202
-					Players.Players_orientations[var1] = var4.field1138;
+				if (var4.facedDirection != -1) { // L: 202
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation; // L: 203
 				}
@@ -92,7 +92,7 @@ public class ApproximateRouteStrategy extends RouteStrategy {
 					var4.tileY = var7; // L: 240
 				} else {
 					var4.field1067 = false; // L: 243
-					var4.method2122(var6, var7, Players.field1277[var1]); // L: 244
+					var4.move(var6, var7, Players.field1277[var1]); // L: 244
 				}
 
 			} else if (var3 == 2) { // L: 248
@@ -154,7 +154,7 @@ public class ApproximateRouteStrategy extends RouteStrategy {
 					var4.tileY = var7; // L: 311
 				} else {
 					var4.field1067 = false; // L: 314
-					var4.method2122(var6, var7, Players.field1277[var1]); // L: 315
+					var4.move(var6, var7, Players.field1277[var1]); // L: 315
 				}
 
 			} else {
@@ -187,7 +187,7 @@ public class ApproximateRouteStrategy extends RouteStrategy {
 						var4.tileY = var11; // L: 336
 					} else {
 						var4.field1067 = false; // L: 339
-						var4.method2122(var10, var11, Players.field1277[var1]); // L: 340
+						var4.move(var10, var11, Players.field1277[var1]); // L: 340
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 342
@@ -211,7 +211,7 @@ public class ApproximateRouteStrategy extends RouteStrategy {
 						var4.tileY = var11; // L: 359
 					} else {
 						var4.field1067 = false; // L: 362
-						var4.method2122(var10, var11, Players.field1277[var1]); // L: 363
+						var4.move(var10, var11, Players.field1277[var1]); // L: 363
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 365

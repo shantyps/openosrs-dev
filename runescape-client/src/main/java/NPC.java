@@ -34,7 +34,7 @@ public final class NPC extends Actor {
 		descriptor = "(ILgl;I)V",
 		garbageValue = "-1216199003"
 	)
-	final void method2265(int var1, class185 var2) {
+	final void method2265(int var1, MoveSpeed var2) {
 		int var3 = super.pathX[0]; // L: 15
 		int var4 = super.pathY[0]; // L: 16
 		if (var1 == 0) { // L: 17
@@ -123,11 +123,11 @@ public final class NPC extends Actor {
 					var3.isSingleTile = true;
 				}
 
-				if (super.field1167 != 0 && Client.cycle >= super.field1162 && Client.cycle < super.field1163) { // L: 93
-					var3.overrideHue = super.field1164; // L: 94
-					var3.overrideSaturation = super.field1155; // L: 95
-					var3.overrideLuminance = super.field1166; // L: 96
-					var3.overrideAmount = super.field1167; // L: 97
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) { // L: 93
+					var3.overrideHue = super.recolourHue; // L: 94
+					var3.overrideSaturation = super.recolourSaturation; // L: 95
+					var3.overrideLuminance = super.recolourLuminance; // L: 96
+					var3.overrideAmount = super.recolourAmount; // L: 97
 				} else {
 					var3.overrideAmount = 0; // L: 100
 				}
@@ -163,7 +163,7 @@ public final class NPC extends Actor {
 
 				super.pathX[0] = var1; // L: 61
 				super.pathY[0] = var2; // L: 62
-				super.pathTraversed[0] = class185.field2135; // L: 63
+				super.pathTraversed[0] = MoveSpeed.field2135; // L: 63
 				return; // L: 64
 			}
 		}

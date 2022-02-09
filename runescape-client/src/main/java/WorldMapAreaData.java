@@ -140,8 +140,8 @@ public class WorldMapAreaData extends WorldMapArea {
 						String var5 = var4.name; // L: 9548
 						int var6;
 						int var9;
-						if (var4.combatLevel != 0 && var0.field1135 != 0) { // L: 9549
-							var6 = var0.field1135 != -1 ? var0.field1135 * -1122712175 * 1607900017 : var4.combatLevel * 1860615845 * 475724077; // L: 9550
+						if (var4.combatLevel != 0 && var0.combatLevelChange != 0) { // L: 9549
+							var6 = var0.combatLevelChange != -1 ? var0.combatLevelChange * -1122712175 * 1607900017 : var4.combatLevel * 1860615845 * 475724077; // L: 9550
 							var9 = WorldMapSprite.localPlayer.combatLevel; // L: 9553
 							int var10 = var9 - var6; // L: 9555
 							String var8;

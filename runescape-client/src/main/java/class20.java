@@ -101,8 +101,8 @@ public class class20 implements Callable {
 				var3.itemQuantityMode = 2; // L: 823
 			}
 
-			if (var3.field3310 > 0) { // L: 824
-				var3.modelZoom = var3.modelZoom * 32 / var3.field3310;
+			if (var3.modelRotation > 0) { // L: 824
+				var3.modelZoom = var3.modelZoom * 32 / var3.modelRotation;
 			} else if (var3.rawWidth > 0) { // L: 825
 				var3.modelZoom = var3.modelZoom * 32 / var3.rawWidth;
 			}

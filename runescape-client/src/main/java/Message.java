@@ -11,7 +11,8 @@ public class Message extends DualNode {
 	@ObfuscatedGetter(
 		intValue = 1210639323
 	)
-	static int field478;
+	@Export("cameraMoveToX")
+	static int cameraMoveToX;
 	@ObfuscatedName("ej")
 	@ObfuscatedSignature(
 		descriptor = "Lkz;"

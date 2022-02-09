@@ -15,7 +15,8 @@ public final class SceneTilePaint {
 	@ObfuscatedGetter(
 		intValue = -757547801
 	)
-	static int field2543;
+	@Export("cameraMoveToSpeed")
+	static int cameraMoveToSpeed;
 	@ObfuscatedName("c")
 	@ObfuscatedGetter(
 		intValue = -931774183
@@ -110,42 +111,42 @@ public final class SceneTilePaint {
 	)
 	static final void method4270(int var0, int var1, int var2) {
 		if (class414.cameraX < var0) { // L: 3621
-			class414.cameraX = (var0 - class414.cameraX) * class4.field17 / 1000 + class414.cameraX + field2543; // L: 3622
+			class414.cameraX = (var0 - class414.cameraX) * class4.cameraMoveToAcceleration / 1000 + class414.cameraX + cameraMoveToSpeed; // L: 3622
 			if (class414.cameraX > var0) { // L: 3623
 				class414.cameraX = var0;
 			}
 		}
 
 		if (class414.cameraX > var0) { // L: 3625
-			class414.cameraX -= (class414.cameraX - var0) * class4.field17 / 1000 + field2543; // L: 3626
+			class414.cameraX -= (class414.cameraX - var0) * class4.cameraMoveToAcceleration / 1000 + cameraMoveToSpeed; // L: 3626
 			if (class414.cameraX < var0) { // L: 3627
 				class414.cameraX = var0;
 			}
 		}
 
 		if (WorldMapDecoration.cameraY < var1) { // L: 3629
-			WorldMapDecoration.cameraY = (var1 - WorldMapDecoration.cameraY) * class4.field17 / 1000 + WorldMapDecoration.cameraY + field2543; // L: 3630
+			WorldMapDecoration.cameraY = (var1 - WorldMapDecoration.cameraY) * class4.cameraMoveToAcceleration / 1000 + WorldMapDecoration.cameraY + cameraMoveToSpeed; // L: 3630
 			if (WorldMapDecoration.cameraY > var1) { // L: 3631
 				WorldMapDecoration.cameraY = var1;
 			}
 		}
 
 		if (WorldMapDecoration.cameraY > var1) { // L: 3633
-			WorldMapDecoration.cameraY -= (WorldMapDecoration.cameraY - var1) * class4.field17 / 1000 + field2543; // L: 3634
+			WorldMapDecoration.cameraY -= (WorldMapDecoration.cameraY - var1) * class4.cameraMoveToAcceleration / 1000 + cameraMoveToSpeed; // L: 3634
 			if (WorldMapDecoration.cameraY < var1) { // L: 3635
 				WorldMapDecoration.cameraY = var1;
 			}
 		}
 
 		if (GrandExchangeOfferOwnWorldComparator.cameraZ < var2) { // L: 3637
-			GrandExchangeOfferOwnWorldComparator.cameraZ = (var2 - GrandExchangeOfferOwnWorldComparator.cameraZ) * class4.field17 / 1000 + GrandExchangeOfferOwnWorldComparator.cameraZ + field2543; // L: 3638
+			GrandExchangeOfferOwnWorldComparator.cameraZ = (var2 - GrandExchangeOfferOwnWorldComparator.cameraZ) * class4.cameraMoveToAcceleration / 1000 + GrandExchangeOfferOwnWorldComparator.cameraZ + cameraMoveToSpeed; // L: 3638
 			if (GrandExchangeOfferOwnWorldComparator.cameraZ > var2) { // L: 3639
 				GrandExchangeOfferOwnWorldComparator.cameraZ = var2;
 			}
 		}
 
 		if (GrandExchangeOfferOwnWorldComparator.cameraZ > var2) { // L: 3641
-			GrandExchangeOfferOwnWorldComparator.cameraZ -= (GrandExchangeOfferOwnWorldComparator.cameraZ - var2) * class4.field17 / 1000 + field2543; // L: 3642
+			GrandExchangeOfferOwnWorldComparator.cameraZ -= (GrandExchangeOfferOwnWorldComparator.cameraZ - var2) * class4.cameraMoveToAcceleration / 1000 + cameraMoveToSpeed; // L: 3642
 			if (GrandExchangeOfferOwnWorldComparator.cameraZ < var2) { // L: 3643
 				GrandExchangeOfferOwnWorldComparator.cameraZ = var2;
 			}

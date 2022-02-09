@@ -71,10 +71,10 @@ public abstract class class142 extends Node {
 				var3.spotAnimation = var0.method7562(); // L: 7748
 				var5 = var0.readInt(); // L: 7749
 				var3.spotAnimationHeight = var5 >> 16; // L: 7750
-				var3.field1177 = (var5 & 65535) + Client.cycle; // L: 7751
+				var3.spotAnimationStartCycle = (var5 & 65535) + Client.cycle; // L: 7751
 				var3.spotAnimationFrame = 0; // L: 7752
 				var3.spotAnimationFrameCycle = 0; // L: 7753
-				if (var3.field1177 > Client.cycle) { // L: 7754
+				if (var3.spotAnimationStartCycle > Client.cycle) { // L: 7754
 					var3.spotAnimationFrame = -1;
 				}
 
@@ -84,32 +84,32 @@ public abstract class class142 extends Node {
 			}
 
 			if ((var4 & 512) != 0) { // L: 7757
-				var3.field1135 = var0.method7416(); // L: 7758
+				var3.combatLevelChange = var0.method7416(); // L: 7758
 			}
 
 			if (HealthBarUpdate.field1178 && (var4 & 1024) != 0 || !HealthBarUpdate.field1178 && (var4 & 16) != 0) { // L: 7760
-				var3.field1153 = var0.readByte(); // L: 7761
-				var3.field1144 = var0.readByte(); // L: 7762
-				var3.field1147 = var0.method7365(); // L: 7763
-				var3.field1156 = var0.method7400(); // L: 7764
-				var3.field1157 = var0.method7408() + Client.cycle; // L: 7765
-				var3.field1158 = var0.method7562() + Client.cycle; // L: 7766
-				var3.field1159 = var0.readUnsignedShort(); // L: 7767
+				var3.exactMoveDeltaX1 = var0.readByte(); // L: 7761
+				var3.exactMoveDeltaX2 = var0.readByte(); // L: 7762
+				var3.exactMoveDeltaY1 = var0.method7365(); // L: 7763
+				var3.exactMoveDeltaY2 = var0.method7400(); // L: 7764
+				var3.exactMoveArrive1Cycle = var0.method7408() + Client.cycle; // L: 7765
+				var3.exactMoveArrive2Cycle = var0.method7562() + Client.cycle; // L: 7766
+				var3.exactMoveDirection = var0.readUnsignedShort(); // L: 7767
 				var3.pathLength = 1; // L: 7768
 				var3.field1176 = 0; // L: 7769
-				var3.field1153 += var3.pathX[0]; // L: 7770
-				var3.field1144 += var3.pathY[0]; // L: 7771
-				var3.field1147 += var3.pathX[0]; // L: 7772
-				var3.field1156 += var3.pathY[0]; // L: 7773
+				var3.exactMoveDeltaX1 += var3.pathX[0]; // L: 7770
+				var3.exactMoveDeltaX2 += var3.pathY[0]; // L: 7771
+				var3.exactMoveDeltaY1 += var3.pathX[0]; // L: 7772
+				var3.exactMoveDeltaY2 += var3.pathY[0]; // L: 7773
 			}
 
 			if ((var4 & 256) != 0) { // L: 7775
-				var3.field1162 = Client.cycle + var0.method7562(); // L: 7776
-				var3.field1163 = Client.cycle + var0.readUnsignedShort(); // L: 7777
-				var3.field1164 = var0.method7401(); // L: 7778
-				var3.field1155 = var0.method7400(); // L: 7779
-				var3.field1166 = var0.readByte(); // L: 7780
-				var3.field1167 = (byte)var0.method7399(); // L: 7781
+				var3.recolourStartCycle = Client.cycle + var0.method7562(); // L: 7776
+				var3.recolourEndCycle = Client.cycle + var0.readUnsignedShort(); // L: 7777
+				var3.recolourHue = var0.method7401(); // L: 7778
+				var3.recolourSaturation = var0.method7400(); // L: 7779
+				var3.recolourLuminance = var0.readByte(); // L: 7780
+				var3.recolourAmount = (byte)var0.method7399(); // L: 7781
 			}
 
 			if ((var4 & 64) != 0) { // L: 7783
@@ -179,18 +179,18 @@ public abstract class class142 extends Node {
 						var3.sequenceFrame = 0; // L: 7832
 						var3.sequenceFrameCycle = 0; // L: 7833
 						var3.sequenceDelay = var6; // L: 7834
-						var3.field1129 = 0; // L: 7835
+						var3.currentSequenceFrameIndex = 0; // L: 7835
 					}
 
 					if (var7 == 2) { // L: 7837
-						var3.field1129 = 0; // L: 7838
+						var3.currentSequenceFrameIndex = 0; // L: 7838
 					}
 				} else if (var5 == -1 || var3.sequence == -1 || class78.SequenceDefinition_get(var5).field2095 >= class78.SequenceDefinition_get(var3.sequence).field2095) { // L: 7841
 					var3.sequence = var5; // L: 7842
 					var3.sequenceFrame = 0; // L: 7843
 					var3.sequenceFrameCycle = 0; // L: 7844
 					var3.sequenceDelay = var6; // L: 7845
-					var3.field1129 = 0; // L: 7846
+					var3.currentSequenceFrameIndex = 0; // L: 7846
 					var3.field1176 = var3.pathLength; // L: 7847
 				}
 			}
@@ -204,13 +204,13 @@ public abstract class class142 extends Node {
 				var5 = var0.readUnsignedShort(); // L: 7856
 				var6 = var0.method7562(); // L: 7857
 				if (HealthBarUpdate.field1178) { // L: 7858
-					var3.field1139 = var0.readUnsignedByte() == 1; // L: 7859
+					var3.instantTurn = var0.readUnsignedByte() == 1; // L: 7859
 				}
 
 				var7 = var3.x - (var5 - Canvas.baseX - Canvas.baseX) * 64; // L: 7861
 				var8 = var3.y - (var6 - class118.baseY - class118.baseY) * 64; // L: 7862
 				if (var7 != 0 || var8 != 0) { // L: 7863
-					var3.field1138 = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
+					var3.facedDirection = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
 				}
 			}
 		}

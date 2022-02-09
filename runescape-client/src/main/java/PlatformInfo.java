@@ -179,8 +179,8 @@ public class PlatformInfo extends Node {
 	@Export("size")
 	public int size() {
 		byte var1 = 39; // L: 124
-		int var17 = var1 + class160.method3126(this.field4326); // L: 125
-		var17 += class160.method3126(this.field4333); // L: 126
+		int var17 = var1 + PlayerEquipmentItem.method3126(this.field4326); // L: 125
+		var17 += PlayerEquipmentItem.method3126(this.field4333); // L: 126
 		String var4 = this.field4328; // L: 129
 		int var3 = var4.length() + 2; // L: 131
 		var17 += var3; // L: 133

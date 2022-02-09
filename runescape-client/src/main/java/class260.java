@@ -48,14 +48,14 @@ public final class class260 {
 		}
 
 		if (class7.cameraPitch < var0) { // L: 3650
-			class7.cameraPitch = (var0 - class7.cameraPitch) * WallDecoration.field2573 / 1000 + class7.cameraPitch + WorldMapSectionType.field2723; // L: 3651
+			class7.cameraPitch = (var0 - class7.cameraPitch) * WallDecoration.cameraLookAtAcceleration / 1000 + class7.cameraPitch + WorldMapSectionType.cameraLookAtSpeed; // L: 3651
 			if (class7.cameraPitch > var0) { // L: 3652
 				class7.cameraPitch = var0;
 			}
 		}
 
 		if (class7.cameraPitch > var0) { // L: 3654
-			class7.cameraPitch -= (class7.cameraPitch - var0) * WallDecoration.field2573 / 1000 + WorldMapSectionType.field2723; // L: 3655
+			class7.cameraPitch -= (class7.cameraPitch - var0) * WallDecoration.cameraLookAtAcceleration / 1000 + WorldMapSectionType.cameraLookAtSpeed; // L: 3655
 			if (class7.cameraPitch < var0) { // L: 3656
 				class7.cameraPitch = var0;
 			}
@@ -71,12 +71,12 @@ public final class class260 {
 		}
 
 		if (var2 > 0) { // L: 3661
-			class7.cameraYaw = class7.cameraYaw + WorldMapSectionType.field2723 + var2 * WallDecoration.field2573 / 1000; // L: 3662
+			class7.cameraYaw = class7.cameraYaw + WorldMapSectionType.cameraLookAtSpeed + var2 * WallDecoration.cameraLookAtAcceleration / 1000; // L: 3662
 			class7.cameraYaw &= 2047; // L: 3663
 		}
 
 		if (var2 < 0) { // L: 3665
-			class7.cameraYaw -= -var2 * WallDecoration.field2573 / 1000 + WorldMapSectionType.field2723; // L: 3666
+			class7.cameraYaw -= -var2 * WallDecoration.cameraLookAtAcceleration / 1000 + WorldMapSectionType.cameraLookAtSpeed; // L: 3666
 			class7.cameraYaw &= 2047; // L: 3667
 		}
 

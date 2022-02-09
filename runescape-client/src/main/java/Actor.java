@@ -95,7 +95,8 @@ public abstract class Actor extends Renderable {
 	@Export("isAutoChatting")
 	boolean isAutoChatting;
 	@ObfuscatedName("aw")
-	boolean field1125;
+	@Export("showPublicPlayerChat")
+	boolean showPublicPlayerChat;
 	@ObfuscatedName("aj")
 	@ObfuscatedGetter(
 		intValue = -1970261047
@@ -151,9 +152,11 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -1033132539
 	)
-	int field1138;
+	@Export("facedDirection")
+	int facedDirection;
 	@ObfuscatedName("bw")
-	boolean field1139;
+	@Export("instantTurn")
+	boolean instantTurn;
 	@ObfuscatedName("bu")
 	@ObfuscatedGetter(
 		intValue = -1663876733
@@ -200,7 +203,8 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = 1322705901
 	)
-	int field1129;
+	@Export("currentSequenceFrameIndex")
+	int currentSequenceFrameIndex;
 	@ObfuscatedName("bv")
 	@ObfuscatedGetter(
 		intValue = 396275835
@@ -223,7 +227,8 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = 1845348051
 	)
-	int field1177;
+	@Export("spotAnimationStartCycle")
+	int spotAnimationStartCycle;
 	@ObfuscatedName("bo")
 	@ObfuscatedGetter(
 		intValue = -467239947
@@ -234,37 +239,44 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -416942467
 	)
-	int field1153;
+	@Export("exactMoveDeltaX1")
+	int exactMoveDeltaX1;
 	@ObfuscatedName("bk")
 	@ObfuscatedGetter(
 		intValue = -543666705
 	)
-	int field1147;
+	@Export("exactMoveDeltaY1")
+	int exactMoveDeltaY1;
 	@ObfuscatedName("bp")
 	@ObfuscatedGetter(
 		intValue = -205198277
 	)
-	int field1144;
+	@Export("exactMoveDeltaX2")
+	int exactMoveDeltaX2;
 	@ObfuscatedName("ch")
 	@ObfuscatedGetter(
 		intValue = -201847185
 	)
-	int field1156;
+	@Export("exactMoveDeltaY2")
+	int exactMoveDeltaY2;
 	@ObfuscatedName("cf")
 	@ObfuscatedGetter(
 		intValue = 673923399
 	)
-	int field1157;
+	@Export("exactMoveArrive1Cycle")
+	int exactMoveArrive1Cycle;
 	@ObfuscatedName("cg")
 	@ObfuscatedGetter(
 		intValue = -1026665477
 	)
-	int field1158;
+	@Export("exactMoveArrive2Cycle")
+	int exactMoveArrive2Cycle;
 	@ObfuscatedName("cu")
 	@ObfuscatedGetter(
 		intValue = 697476967
 	)
-	int field1159;
+	@Export("exactMoveDirection")
+	int exactMoveDirection;
 	@ObfuscatedName("cw")
 	@ObfuscatedGetter(
 		intValue = -689072625
@@ -281,20 +293,26 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -289145949
 	)
-	int field1162;
+	@Export("recolourStartCycle")
+	int recolourStartCycle;
 	@ObfuscatedName("cd")
 	@ObfuscatedGetter(
 		intValue = -1244014409
 	)
-	int field1163;
+	@Export("recolourEndCycle")
+	int recolourEndCycle;
 	@ObfuscatedName("cc")
-	byte field1164;
+	@Export("recolourHue")
+	byte recolourHue;
 	@ObfuscatedName("cs")
-	byte field1155;
+	@Export("recolourSaturation")
+	byte recolourSaturation;
 	@ObfuscatedName("cl")
-	byte field1166;
+	@Export("recolourLuminance")
+	byte recolourLuminance;
 	@ObfuscatedName("ck")
-	byte field1167;
+	@Export("recolourAmount")
+	byte recolourAmount;
 	@ObfuscatedName("cy")
 	@ObfuscatedGetter(
 		intValue = -95170499
@@ -328,7 +346,7 @@ public abstract class Actor extends Renderable {
 		descriptor = "[Lgl;"
 	)
 	@Export("pathTraversed")
-	class185[] pathTraversed;
+	MoveSpeed[] pathTraversed;
 	@ObfuscatedName("ca")
 	@ObfuscatedGetter(
 		intValue = 1133647813
@@ -343,7 +361,8 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = 1607900017
 	)
-	int field1135;
+	@Export("combatLevelChange")
+	int combatLevelChange;
 
 	Actor() {
 		this.isWalking = false; // L: 13
@@ -357,7 +376,7 @@ public abstract class Actor extends Renderable {
 		this.walkRightSequence = -1; // L: 22
 		this.runSequence = -1; // L: 23
 		this.overheadText = null; // L: 24
-		this.field1125 = false; // L: 26
+		this.showPublicPlayerChat = false; // L: 26
 		this.overheadTextCyclesRemaining = 100; // L: 27
 		this.overheadTextColor = 0; // L: 28
 		this.overheadTextEffect = 0; // L: 29
@@ -370,7 +389,7 @@ public abstract class Actor extends Renderable {
 		this.healthBars = new IterableNodeDeque(); // L: 37
 		this.targetIndex = -1; // L: 38
 		this.false0 = false; // L: 39
-		this.field1138 = -1; // L: 40
+		this.facedDirection = -1; // L: 40
 		this.movementSequence = -1; // L: 42
 		this.movementFrame = 0; // L: 43
 		this.movementFrameCycle = 0; // L: 44
@@ -378,23 +397,23 @@ public abstract class Actor extends Renderable {
 		this.sequenceFrame = 0; // L: 46
 		this.sequenceFrameCycle = 0; // L: 47
 		this.sequenceDelay = 0; // L: 48
-		this.field1129 = 0; // L: 49
+		this.currentSequenceFrameIndex = 0; // L: 49
 		this.spotAnimation = -1; // L: 50
 		this.spotAnimationFrame = 0; // L: 51
 		this.spotAnimationFrameCycle = 0; // L: 52
 		this.npcCycle = 0; // L: 62
 		this.defaultHeight = 200; // L: 63
-		this.field1162 = -1; // L: 64
-		this.field1163 = -1; // L: 65
+		this.recolourStartCycle = -1; // L: 64
+		this.recolourEndCycle = -1; // L: 65
 		this.field1169 = 0; // L: 71
 		this.field1170 = 32; // L: 72
 		this.pathLength = 0; // L: 73
 		this.pathX = new int[10]; // L: 74
 		this.pathY = new int[10]; // L: 75
-		this.pathTraversed = new class185[10]; // L: 76
+		this.pathTraversed = new MoveSpeed[10]; // L: 76
 		this.field1175 = 0; // L: 77
 		this.field1176 = 0; // L: 78
-		this.field1135 = -1; // L: 79
+		this.combatLevelChange = -1; // L: 79
 	} // L: 81
 
 	@ObfuscatedName("d")

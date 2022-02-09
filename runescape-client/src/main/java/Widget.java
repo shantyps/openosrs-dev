@@ -367,7 +367,8 @@ public class Widget extends Node {
 	@ObfuscatedGetter(
 		intValue = -2040675921
 	)
-	public int field3310;
+	@Export("modelRotation")
+	public int modelRotation;
 	@ObfuscatedName("bo")
 	@ObfuscatedGetter(
 		intValue = -1540032617
@@ -760,7 +761,7 @@ public class Widget extends Node {
 		this.modelAngleY = 0; // L: 89
 		this.modelAngleZ = 0; // L: 90
 		this.modelZoom = 100; // L: 91
-		this.field3310 = 0; // L: 92
+		this.modelRotation = 0; // L: 92
 		this.field3320 = 0; // L: 93
 		this.modelOrthog = false; // L: 94
 		this.modelTransparency = false; // L: 95
@@ -1130,7 +1131,7 @@ public class Widget extends Node {
 			this.modelOrthog = var1.readUnsignedByte() == 1; // L: 456
 			var1.readUnsignedShort(); // L: 457
 			if (this.widthAlignment != 0) { // L: 458
-				this.field3310 = var1.readUnsignedShort();
+				this.modelRotation = var1.readUnsignedShort();
 			}
 
 			if (this.heightAlignment != 0) { // L: 459
@@ -1288,7 +1289,7 @@ public class Widget extends Node {
 			if (var5 != null) { // L: 557
 				return var5;
 			} else {
-				var5 = class126.SpriteBuffer_getSprite(class160.Widget_spritesArchive, var2, 0); // L: 558
+				var5 = class126.SpriteBuffer_getSprite(PlayerEquipmentItem.Widget_spritesArchive, var2, 0); // L: 558
 				if (var5 == null) { // L: 559
 					field3262 = true; // L: 560
 					return null; // L: 561
@@ -1339,7 +1340,7 @@ public class Widget extends Node {
 			if (var1 != null) { // L: 577
 				return var1;
 			} else {
-				AbstractArchive var3 = class160.Widget_spritesArchive; // L: 579
+				AbstractArchive var3 = PlayerEquipmentItem.Widget_spritesArchive; // L: 579
 				AbstractArchive var4 = class222.Widget_fontsArchive; // L: 580
 				int var5 = this.fontId; // L: 581
 				Font var2;
@@ -1377,7 +1378,7 @@ public class Widget extends Node {
 				if (var3 != null) { // L: 601
 					return var3;
 				} else {
-					var3 = class126.SpriteBuffer_getSprite(class160.Widget_spritesArchive, var2, 0); // L: 602
+					var3 = class126.SpriteBuffer_getSprite(PlayerEquipmentItem.Widget_spritesArchive, var2, 0); // L: 602
 					if (var3 != null) { // L: 603
 						Widget_cachedSprites.put(var3, (long)var2);
 					} else {

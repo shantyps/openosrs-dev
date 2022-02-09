@@ -684,7 +684,7 @@ public class ClientPacket implements class253 {
 
 		for (int var0 = 0; var0 < 2048; ++var0) { // L: 627
 			Players.field1278[var0] = null; // L: 628
-			Players.field1277[var0] = class185.field2135; // L: 629
+			Players.field1277[var0] = MoveSpeed.field2135; // L: 629
 		}
 
 	} // L: 631

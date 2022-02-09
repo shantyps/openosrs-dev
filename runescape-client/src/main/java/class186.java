@@ -67,7 +67,8 @@ public class class186 {
 		descriptor = "(III)V",
 		garbageValue = "1541497261"
 	)
-	static void method3695(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (class424.clientPreferences.musicVolume != 0 && var0 != -1) { // L: 3465
 			MenuAction.method1894(class252.archive11, var0, 0, class424.clientPreferences.musicVolume, false); // L: 3466
 			Client.field744 = true; // L: 3467

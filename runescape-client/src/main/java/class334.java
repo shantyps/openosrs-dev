@@ -9,7 +9,8 @@ public class class334 {
 	@ObfuscatedGetter(
 		intValue = -1671308737
 	)
-	static int field4057;
+	@Export("cameraLookAtHeight")
+	static int cameraLookAtHeight;
 	@ObfuscatedName("c")
 	static char[] field4052;
 	@ObfuscatedName("l")
@@ -149,28 +150,28 @@ public class class334 {
 		int var2;
 		int var3;
 		int var4;
-		if (var0.field1157 >= Client.cycle) { // L: 3796
-			var2 = Math.max(1, var0.field1157 - Client.cycle); // L: 3797
-			var3 = var0.field1113 * 64 + var0.field1153 * 128; // L: 3798
-			var4 = var0.field1113 * 64 + var0.field1144 * 128; // L: 3799
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) { // L: 3796
+			var2 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle); // L: 3797
+			var3 = var0.field1113 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3798
+			var4 = var0.field1113 * 64 + var0.exactMoveDeltaX2 * 128; // L: 3799
 			var0.x += (var3 - var0.x) / var2; // L: 3800
 			var0.y += (var4 - var0.y) / var2; // L: 3801
 			var0.field1175 = 0; // L: 3802
-			var0.orientation = var0.field1159; // L: 3803
-		} else if (var0.field1158 >= Client.cycle) { // L: 3805
-			if (var0.field1158 == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > class78.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 3806
-				var2 = var0.field1158 - var0.field1157; // L: 3807
-				var3 = Client.cycle - var0.field1157; // L: 3808
-				var4 = var0.field1113 * 64 + var0.field1153 * 128; // L: 3809
-				int var5 = var0.field1113 * 64 + var0.field1144 * 128; // L: 3810
-				int var6 = var0.field1113 * 64 + var0.field1147 * 128; // L: 3811
-				int var7 = var0.field1113 * 64 + var0.field1156 * 128; // L: 3812
+			var0.orientation = var0.exactMoveDirection; // L: 3803
+		} else if (var0.exactMoveArrive2Cycle >= Client.cycle) { // L: 3805
+			if (var0.exactMoveArrive2Cycle == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > class78.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 3806
+				var2 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle; // L: 3807
+				var3 = Client.cycle - var0.exactMoveArrive1Cycle; // L: 3808
+				var4 = var0.field1113 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3809
+				int var5 = var0.field1113 * 64 + var0.exactMoveDeltaX2 * 128; // L: 3810
+				int var6 = var0.field1113 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3811
+				int var7 = var0.field1113 * 64 + var0.exactMoveDeltaY2 * 128; // L: 3812
 				var0.x = (var3 * var6 + var4 * (var2 - var3)) / var2; // L: 3813
 				var0.y = (var7 * var3 + var5 * (var2 - var3)) / var2; // L: 3814
 			}
 
 			var0.field1175 = 0; // L: 3816
-			var0.orientation = var0.field1159; // L: 3817
+			var0.orientation = var0.exactMoveDirection; // L: 3817
 			var0.rotation = var0.orientation; // L: 3818
 		} else {
 			class17.method219(var0); // L: 3820
@@ -179,8 +180,8 @@ public class class334 {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) { // L: 3821
 			var0.sequence = -1; // L: 3822
 			var0.spotAnimation = -1; // L: 3823
-			var0.field1157 = 0; // L: 3824
-			var0.field1158 = 0; // L: 3825
+			var0.exactMoveArrive1Cycle = 0; // L: 3824
+			var0.exactMoveArrive2Cycle = 0; // L: 3825
 			var0.x = var0.field1113 * 64 + var0.pathX[0] * 128; // L: 3826
 			var0.y = var0.field1113 * 64 + var0.pathY[0] * 128; // L: 3827
 			var0.method2163(); // L: 3828
@@ -189,8 +190,8 @@ public class class334 {
 		if (WorldMapSprite.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) { // L: 3830 3831
 			var0.sequence = -1; // L: 3832
 			var0.spotAnimation = -1; // L: 3833
-			var0.field1157 = 0; // L: 3834
-			var0.field1158 = 0; // L: 3835
+			var0.exactMoveArrive1Cycle = 0; // L: 3834
+			var0.exactMoveArrive2Cycle = 0; // L: 3835
 			var0.x = var0.pathX[0] * 128 + var0.field1113 * 64; // L: 3836
 			var0.y = var0.pathY[0] * 128 + var0.field1113 * 64; // L: 3837
 			var0.method2163(); // L: 3838
@@ -217,9 +218,9 @@ public class class334 {
 				}
 			}
 
-			if (var0.field1138 != -1 && (var0.pathLength == 0 || var0.field1175 > 0)) { // L: 3857
-				var0.orientation = var0.field1138; // L: 3858
-				var0.field1138 = -1; // L: 3859
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1175 > 0)) { // L: 3857
+				var0.orientation = var0.facedDirection; // L: 3858
+				var0.facedDirection = -1; // L: 3859
 			}
 
 			var2 = var0.orientation - var0.rotation & 2047; // L: 3861
@@ -232,14 +233,14 @@ public class class334 {
 				++var0.field1169; // L: 3867
 				boolean var10;
 				if (var2 > 1024) { // L: 3868
-					var0.rotation -= var0.field1139 ? var2 : var0.field1170 * 416354727 * -1787394537; // L: 3869
+					var0.rotation -= var0.instantTurn ? var2 : var0.field1170 * 416354727 * -1787394537; // L: 3869
 					var10 = true; // L: 3870
 					if (var2 < var0.field1170 || var2 > 2048 - var0.field1170) { // L: 3871
 						var0.rotation = var0.orientation; // L: 3872
 						var10 = false; // L: 3873
 					}
 
-					if (!var0.field1139 && var0.idleSequence == var0.movementSequence && (var0.field1169 > 25 || var10)) { // L: 3875
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1169 > 25 || var10)) { // L: 3875
 						if (var0.turnLeftSequence != -1) { // L: 3876
 							var0.movementSequence = var0.turnLeftSequence;
 						} else {
@@ -247,14 +248,14 @@ public class class334 {
 						}
 					}
 				} else {
-					var0.rotation += var0.field1139 ? var2 : 416354727 * var0.field1170 * -1787394537; // L: 3881
+					var0.rotation += var0.instantTurn ? var2 : 416354727 * var0.field1170 * -1787394537; // L: 3881
 					var10 = true; // L: 3882
 					if (var2 < var0.field1170 || var2 > 2048 - var0.field1170) { // L: 3883
 						var0.rotation = var0.orientation; // L: 3884
 						var10 = false; // L: 3885
 					}
 
-					if (!var0.field1139 && var0.idleSequence == var0.movementSequence && (var0.field1169 > 25 || var10)) { // L: 3887
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1169 > 25 || var10)) { // L: 3887
 						if (var0.turnRightSequence != -1) { // L: 3888
 							var0.movementSequence = var0.turnRightSequence;
 						} else {
@@ -264,7 +265,7 @@ public class class334 {
 				}
 
 				var0.rotation &= 2047; // L: 3893
-				var0.field1139 = false; // L: 3894
+				var0.instantTurn = false; // L: 3894
 			} else {
 				var0.field1169 = 0; // L: 3896
 			}

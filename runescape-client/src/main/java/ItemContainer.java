@@ -70,18 +70,18 @@ public class ItemContainer extends Node {
 				var0.sequenceFrame = 0; // L: 4114
 				var0.sequenceFrameCycle = 0; // L: 4115
 				var0.sequenceDelay = var2; // L: 4116
-				var0.field1129 = 0; // L: 4117
+				var0.currentSequenceFrameIndex = 0; // L: 4117
 			}
 
 			if (var3 == 2) { // L: 4119
-				var0.field1129 = 0; // L: 4120
+				var0.currentSequenceFrameIndex = 0; // L: 4120
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || class78.SequenceDefinition_get(var1).field2095 >= class78.SequenceDefinition_get(var0.sequence).field2095) { // L: 4123
 			var0.sequence = var1; // L: 4124
 			var0.sequenceFrame = 0; // L: 4125
 			var0.sequenceFrameCycle = 0; // L: 4126
 			var0.sequenceDelay = var2; // L: 4127
-			var0.field1129 = 0; // L: 4128
+			var0.currentSequenceFrameIndex = 0; // L: 4128
 			var0.field1176 = var0.pathLength; // L: 4129
 		}
 

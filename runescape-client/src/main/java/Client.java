@@ -97,7 +97,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("currentTrackGroupId")
 	static int currentTrackGroupId;
 	@ObfuscatedName("tl")
-	static boolean[] field753;
+	@Export("cameraShaking")
+	static boolean[] cameraShaking;
 	@ObfuscatedName("vn")
 	static int[] field782;
 	@ObfuscatedName("vt")
@@ -265,7 +266,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@ObfuscatedName("sa")
 	static boolean field755;
 	@ObfuscatedName("ti")
-	static int[] field733;
+	@Export("cameraMoveIntensity")
+	static int[] cameraMoveIntensity;
 	@ObfuscatedName("th")
 	@Export("zoomWidth")
 	static short zoomWidth;
@@ -279,11 +281,14 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("grandExchangeOffers")
 	static GrandExchangeOffer[] grandExchangeOffers;
 	@ObfuscatedName("tc")
-	static int[] field754;
+	@Export("cameraShakeIntensity")
+	static int[] cameraShakeIntensity;
 	@ObfuscatedName("ts")
-	static int[] field757;
+	@Export("cameraShakeCycle")
+	static int[] cameraShakeCycle;
 	@ObfuscatedName("tq")
-	static int[] field500;
+	@Export("cameraShakeSpeed")
+	static int[] cameraShakeSpeed;
 	@ObfuscatedName("qg")
 	static String field726;
 	@ObfuscatedName("ui")
@@ -1595,11 +1600,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		soundEffects = new SoundEffect[50]; // L: 586
 		isCameraLocked = false; // L: 588
 		field755 = false; // L: 599
-		field753 = new boolean[5]; // L: 607
-		field754 = new int[5]; // L: 608
-		field733 = new int[5]; // L: 609
-		field500 = new int[5]; // L: 610
-		field757 = new int[5]; // L: 611
+		cameraShaking = new boolean[5]; // L: 607
+		cameraShakeIntensity = new int[5]; // L: 608
+		cameraMoveIntensity = new int[5]; // L: 609
+		cameraShakeSpeed = new int[5]; // L: 610
+		cameraShakeCycle = new int[5]; // L: 611
 		field775 = 256; // L: 612
 		field759 = 205; // L: 613
 		zoomHeight = 256; // L: 614
@@ -3498,11 +3503,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						field729 = 0; // L: 3187
 
 						while (class370.isKeyDown() && field729 < 128) { // L: 3188
-							if (staffModLevel >= 2 && KeyHandler.KeyHandler_pressedKeys[82] && class160.field1749 == 66) { // L: 3189
+							if (staffModLevel >= 2 && KeyHandler.KeyHandler_pressedKeys[82] && PlayerEquipmentItem.field1749 == 66) { // L: 3189
 								String var40 = ClanChannelMember.method2769(); // L: 3190
 								class414.client.method448(var40); // L: 3191
 							} else if (oculusOrbState != 1 || ClanSettings.field1610 <= 0) { // L: 3194
-								field731[field729] = class160.field1749; // L: 3197
+								field731[field729] = PlayerEquipmentItem.field1749; // L: 3197
 								field684[field729] = ClanSettings.field1610; // L: 3198
 								++field729; // L: 3199
 							}
@@ -3669,13 +3674,13 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 															if (field755) { // L: 3354
 																class291.method5478();
 															} else if (isCameraLocked) { // L: 3355
-																var3 = Message.field478 * 128 + 64; // L: 3356
-																var4 = class12.field75 * 128 + 64; // L: 3357
-																var5 = class92.getTileHeight(var3, var4, SoundSystem.Client_plane) - class121.field1492; // L: 3358
+																var3 = Message.cameraMoveToX * 128 + 64; // L: 3356
+																var4 = class12.cameraMoveToY * 128 + 64; // L: 3357
+																var5 = class92.getTileHeight(var3, var4, SoundSystem.Client_plane) - class121.cameraMoveToHeight; // L: 3358
 																SceneTilePaint.method4270(var3, var5, var4); // L: 3359
-																var3 = class7.field33 * 128 + 64; // L: 3360
-																var4 = class21.field119 * 128 + 64; // L: 3361
-																var5 = class92.getTileHeight(var3, var4, SoundSystem.Client_plane) - class334.field4057; // L: 3362
+																var3 = class7.cameraLookAtX * 128 + 64; // L: 3360
+																var4 = class21.cameraLookAtY * 128 + 64; // L: 3361
+																var5 = class92.getTileHeight(var3, var4, SoundSystem.Client_plane) - class334.cameraLookAtHeight; // L: 3362
 																var6 = var3 - class414.cameraX; // L: 3363
 																var7 = var5 - WorldMapDecoration.cameraY; // L: 3364
 																var8 = var4 - GrandExchangeOfferOwnWorldComparator.cameraZ; // L: 3365
@@ -3686,7 +3691,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 															}
 
 															for (var3 = 0; var3 < 5; ++var3) { // L: 3371
-																var10002 = field757[var3]++;
+																var10002 = cameraShakeCycle[var3]++;
 															}
 
 															JagexCache.varcs.tryWrite(); // L: 3372
@@ -4010,7 +4015,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					isCameraLocked = false; // L: 5889
 
 					for (var17 = 0; var17 < 5; ++var17) { // L: 5890
-						field753[var17] = false;
+						cameraShaking[var17] = false;
 					}
 
 					var1.serverPacket = null; // L: 5891
@@ -4278,7 +4283,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						var5 = -1;
 					}
 
-					class186.method3695(var5, var17); // L: 6081
+					class186.playJingle(var5, var17); // L: 6081
 					var1.serverPacket = null; // L: 6082
 					return true; // L: 6083
 				}
@@ -4527,8 +4532,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 							var53.itemQuantityMode = 2; // L: 6266
 						}
 
-						if (var53.field3310 > 0) { // L: 6267
-							var53.modelZoom = var53.modelZoom * 32 / var53.field3310;
+						if (var53.modelRotation > 0) { // L: 6267
+							var53.modelZoom = var53.modelZoom * 32 / var53.modelRotation;
 						} else if (var53.rawWidth > 0) { // L: 6268
 							var53.modelZoom = var53.modelZoom * 32 / var53.rawWidth;
 						}
@@ -4656,7 +4661,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						class127.closeInterface(var7, var5 != var7.group);
 					}
 
-					class233.method4772(var17, var5, var6); // L: 6355
+					class233.ifOpenSub(var17, var5, var6); // L: 6355
 					var1.serverPacket = null; // L: 6356
 					return true; // L: 6357
 				}
@@ -4780,19 +4785,22 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					return true; // L: 6446
 				}
 
+				//.writeShort(height)
+				//.writeByte(speed)
+				//.writeByte(acceleration)
 				int var39;
 				if (ServerPacket.field3036 == var1.serverPacket) { // L: 6448
 					isCameraLocked = true; // L: 6449
 					field755 = false; // L: 6450
-					class7.field33 = var3.readUnsignedByte(); // L: 6451
-					class21.field119 = var3.readUnsignedByte(); // L: 6452
-					class334.field4057 = var3.readUnsignedShort(); // L: 6453
-					WorldMapSectionType.field2723 = var3.readUnsignedByte(); // L: 6454
-					WallDecoration.field2573 = var3.readUnsignedByte(); // L: 6455
-					if (WallDecoration.field2573 >= 100) { // L: 6456
-						var17 = class7.field33 * 128 + 64; // L: 6457
-						var5 = class21.field119 * 128 + 64; // L: 6458
-						var6 = class92.getTileHeight(var17, var5, SoundSystem.Client_plane) - class334.field4057; // L: 6459
+					class7.cameraLookAtX = var3.readUnsignedByte(); // L: 6451
+					class21.cameraLookAtY = var3.readUnsignedByte(); // L: 6452
+					class334.cameraLookAtHeight = var3.readUnsignedShort(); // L: 6453
+					WorldMapSectionType.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 6454
+					WallDecoration.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 6455
+					if (WallDecoration.cameraLookAtAcceleration >= 100) { // L: 6456
+						var17 = class7.cameraLookAtX * 128 + 64; // L: 6457
+						var5 = class21.cameraLookAtY * 128 + 64; // L: 6458
+						var6 = class92.getTileHeight(var17, var5, SoundSystem.Client_plane) - class334.cameraLookAtHeight; // L: 6459
 						var25 = var17 - class414.cameraX; // L: 6460
 						var8 = var6 - WorldMapDecoration.cameraY; // L: 6461
 						var28 = var5 - GrandExchangeOfferOwnWorldComparator.cameraZ; // L: 6462
@@ -5186,7 +5194,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						}
 
 						if (var29 == null) { // L: 6763
-							var29 = class233.method4772(var25, var8, var28);
+							var29 = class233.ifOpenSub(var25, var8, var28);
 						}
 					}
 
@@ -5304,18 +5312,23 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					return true; // L: 6854
 				}
 
+				//.writeByte(localX)
+				//.writeByte(localY)
+				//.writeShort(height)
+				//.writeByte(speed)
+				//.writeByte(acceleration)
 				if (ServerPacket.field3035 == var1.serverPacket) { // L: 6856
 					isCameraLocked = true; // L: 6857
 					field755 = false; // L: 6858
-					Message.field478 = var3.readUnsignedByte(); // L: 6859
-					class12.field75 = var3.readUnsignedByte(); // L: 6860
-					class121.field1492 = var3.readUnsignedShort(); // L: 6861
-					SceneTilePaint.field2543 = var3.readUnsignedByte(); // L: 6862
-					class4.field17 = var3.readUnsignedByte(); // L: 6863
-					if (class4.field17 >= 100) { // L: 6864
-						class414.cameraX = Message.field478 * 128 + 64; // L: 6865
-						GrandExchangeOfferOwnWorldComparator.cameraZ = class12.field75 * 128 + 64; // L: 6866
-						WorldMapDecoration.cameraY = class92.getTileHeight(class414.cameraX, GrandExchangeOfferOwnWorldComparator.cameraZ, SoundSystem.Client_plane) - class121.field1492; // L: 6867
+					Message.cameraMoveToX = var3.readUnsignedByte(); // L: 6859
+					class12.cameraMoveToY = var3.readUnsignedByte(); // L: 6860
+					class121.cameraMoveToHeight = var3.readUnsignedShort(); // L: 6861
+					SceneTilePaint.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 6862
+					class4.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 6863
+					if (class4.cameraMoveToAcceleration >= 100) { // L: 6864
+						class414.cameraX = Message.cameraMoveToX * 128 + 64; // L: 6865
+						GrandExchangeOfferOwnWorldComparator.cameraZ = class12.cameraMoveToY * 128 + 64; // L: 6866
+						WorldMapDecoration.cameraY = class92.getTileHeight(class414.cameraX, GrandExchangeOfferOwnWorldComparator.cameraZ, SoundSystem.Client_plane) - class121.cameraMoveToHeight; // L: 6867
 					}
 
 					var1.serverPacket = null; // L: 6869
@@ -5338,13 +5351,13 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 
 				if (ServerPacket.field3002 == var1.serverPacket && isCameraLocked) { // L: 6885 6886
 					field755 = true; // L: 6887
-					SceneTilePaint.field2543 = var3.readUnsignedByte(); // L: 6888
-					class4.field17 = var3.readUnsignedByte(); // L: 6889
-					WorldMapSectionType.field2723 = var3.readUnsignedByte(); // L: 6890
-					WallDecoration.field2573 = var3.readUnsignedByte(); // L: 6891
+					SceneTilePaint.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 6888
+					class4.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 6889
+					WorldMapSectionType.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 6890
+					WallDecoration.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 6891
 
 					for (var17 = 0; var17 < 5; ++var17) { // L: 6892
-						field753[var17] = false;
+						cameraShaking[var17] = false;
 					}
 
 					var1.serverPacket = null; // L: 6893
@@ -5415,11 +5428,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					var5 = var3.readUnsignedByte(); // L: 6947
 					var6 = var3.readUnsignedByte(); // L: 6948
 					var25 = var3.readUnsignedByte(); // L: 6949
-					field753[var17] = true; // L: 6950
-					field754[var17] = var5; // L: 6951
-					field733[var17] = var6; // L: 6952
-					field500[var17] = var25; // L: 6953
-					field757[var17] = 0; // L: 6954
+					cameraShaking[var17] = true; // L: 6950
+					cameraShakeIntensity[var17] = var5; // L: 6951
+					cameraMoveIntensity[var17] = var6; // L: 6952
+					cameraShakeSpeed[var17] = var25; // L: 6953
+					cameraShakeCycle[var17] = 0; // L: 6954
 					var1.serverPacket = null; // L: 6955
 					return true; // L: 6956
 				}
@@ -6029,7 +6042,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 			return 1; // L: 1836
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) { // L: 1838
 			Interpreter.Interpreter_intStackSize -= 2; // L: 1839
-			class186.method3695(Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize], Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize + 1]); // L: 1840
+			class186.playJingle(Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize], Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize + 1]); // L: 1840
 			return 1; // L: 1841
 		} else {
 			int var3;

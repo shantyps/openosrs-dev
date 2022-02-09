@@ -144,16 +144,16 @@ public class UserComparator7 extends AbstractUserComparator {
 					break;
 				}
 
-				if (class160.field1749 == 13) { // L: 322
+				if (PlayerEquipmentItem.field1749 == 13) { // L: 322
 					class120.method2699(); // L: 323
 					break; // L: 324
 				}
 
-				if (class160.field1749 == 96) { // L: 326
+				if (PlayerEquipmentItem.field1749 == 96) { // L: 326
 					if (Login.worldSelectPage > 0 && class186.worldSelectLeftSprite != null) { // L: 327
 						--Login.worldSelectPage; // L: 328
 					}
-				} else if (class160.field1749 == 97 && Login.worldSelectPage < Login.worldSelectPagesCount && DirectByteArrayCopier.worldSelectRightSprite != null) { // L: 331 332
+				} else if (PlayerEquipmentItem.field1749 == 97 && Login.worldSelectPage < Login.worldSelectPagesCount && DirectByteArrayCopier.worldSelectRightSprite != null) { // L: 331 332
 					++Login.worldSelectPage; // L: 333
 				}
 			}
@@ -243,7 +243,7 @@ public class UserComparator7 extends AbstractUserComparator {
 						boolean var55 = false; // L: 463
 
 						while (class370.isKeyDown()) { // L: 464
-							if (class160.field1749 == 84) { // L: 465
+							if (PlayerEquipmentItem.field1749 == 84) { // L: 465
 								var55 = true; // L: 466
 							}
 						}
@@ -307,9 +307,9 @@ public class UserComparator7 extends AbstractUserComparator {
 									break;
 								}
 
-								if (class160.field1749 == 84) { // L: 514
+								if (PlayerEquipmentItem.field1749 == 84) { // L: 514
 									Archive.Login_promptCredentials(false); // L: 515
-								} else if (class160.field1749 == 13) { // L: 517
+								} else if (PlayerEquipmentItem.field1749 == 13) { // L: 517
 									Player.method2159(0); // L: 518
 								}
 							}
@@ -410,17 +410,17 @@ public class UserComparator7 extends AbstractUserComparator {
 											do {
 												while (true) {
 													while (class370.isKeyDown()) { // L: 605
-														if (class160.field1749 != 13) { // L: 606
+														if (PlayerEquipmentItem.field1749 != 13) { // L: 606
 															if (Login.currentLoginField != 0) { // L: 615
 																continue label1483;
 															}
 
 															Players.method2308(ClanSettings.field1610); // L: 616
-															if (class160.field1749 == 85 && Login.Login_username.length() > 0) { // L: 617
+															if (PlayerEquipmentItem.field1749 == 85 && Login.Login_username.length() > 0) { // L: 617
 																Login.Login_username = Login.Login_username.substring(0, Login.Login_username.length() - 1);
 															}
 
-															if (class160.field1749 == 84 || class160.field1749 == 80) { // L: 618
+															if (PlayerEquipmentItem.field1749 == 84 || PlayerEquipmentItem.field1749 == 80) { // L: 618
 																Login.currentLoginField = 1;
 															}
 
@@ -441,11 +441,11 @@ public class UserComparator7 extends AbstractUserComparator {
 												}
 											} while(Login.currentLoginField != 1); // L: 621
 
-											if (class160.field1749 == 85 && Login.Login_password.length() > 0) { // L: 622
+											if (PlayerEquipmentItem.field1749 == 85 && Login.Login_password.length() > 0) { // L: 622
 												Login.Login_password = Login.Login_password.substring(0, Login.Login_password.length() - 1); // L: 623
-											} else if (class160.field1749 == 84 || class160.field1749 == 80) { // L: 625
+											} else if (PlayerEquipmentItem.field1749 == 84 || PlayerEquipmentItem.field1749 == 80) { // L: 625
 												Login.currentLoginField = 0; // L: 626
-												if (class160.field1749 == 84) { // L: 627
+												if (PlayerEquipmentItem.field1749 == 84) { // L: 627
 													Login.Login_username = Login.Login_username.trim(); // L: 628
 													if (Login.Login_username.length() == 0) { // L: 629
 														setLoginResponseString("", "Please enter your username/email address.", ""); // L: 630
@@ -464,7 +464,7 @@ public class UserComparator7 extends AbstractUserComparator {
 												}
 											}
 
-											if ((KeyHandler.KeyHandler_pressedKeys[82] || KeyHandler.KeyHandler_pressedKeys[87]) && class160.field1749 == 67) { // L: 643
+											if ((KeyHandler.KeyHandler_pressedKeys[82] || KeyHandler.KeyHandler_pressedKeys[87]) && PlayerEquipmentItem.field1749 == 67) { // L: 643
 												Clipboard var50 = Toolkit.getDefaultToolkit().getSystemClipboard(); // L: 644
 												var51 = var50.getContents(class414.client); // L: 645
 												var13 = 20 - Login.Login_password.length(); // L: 646
@@ -597,18 +597,18 @@ public class UserComparator7 extends AbstractUserComparator {
 											}
 										}
 
-										if (class160.field1749 == 13) { // L: 770
+										if (PlayerEquipmentItem.field1749 == 13) { // L: 770
 											Player.method2159(0); // L: 771
 											Login.Login_username = ""; // L: 772
 											Login.Login_password = ""; // L: 773
 											GameObject.field2588 = 0; // L: 774
 											class145.otp = ""; // L: 775
 										} else {
-											if (class160.field1749 == 85 && class145.otp.length() > 0) { // L: 778
+											if (PlayerEquipmentItem.field1749 == 85 && class145.otp.length() > 0) { // L: 778
 												class145.otp = class145.otp.substring(0, class145.otp.length() - 1);
 											}
 
-											if (class160.field1749 == 84) { // L: 779
+											if (PlayerEquipmentItem.field1749 == 84) { // L: 779
 												class145.otp.trim(); // L: 780
 												if (class145.otp.length() != 6) { // L: 781
 													setLoginResponseString("", "Please enter a 6-digit PIN.", ""); // L: 782
@@ -661,14 +661,14 @@ public class UserComparator7 extends AbstractUserComparator {
 												}
 											}
 
-											if (class160.field1749 == 13) { // L: 822
+											if (PlayerEquipmentItem.field1749 == 13) { // L: 822
 												Archive.Login_promptCredentials(true); // L: 823
 											} else {
-												if (class160.field1749 == 85 && Login.Login_username.length() > 0) { // L: 826
+												if (PlayerEquipmentItem.field1749 == 85 && Login.Login_username.length() > 0) { // L: 826
 													Login.Login_username = Login.Login_username.substring(0, Login.Login_username.length() - 1);
 												}
 
-												if (class160.field1749 == 84) { // L: 827
+												if (PlayerEquipmentItem.field1749 == 84) { // L: 827
 													class125.method2745(); // L: 828
 													return; // L: 829
 												}
@@ -798,11 +798,11 @@ public class UserComparator7 extends AbstractUserComparator {
 												}
 
 												while (class370.isKeyDown()) { // L: 954
-													if (class160.field1749 == 101) { // L: 955
+													if (PlayerEquipmentItem.field1749 == 101) { // L: 955
 														Login.field911[Login.field910] = null; // L: 956
 													}
 
-													if (class160.field1749 == 85) { // L: 958
+													if (PlayerEquipmentItem.field1749 == 85) { // L: 958
 														if (Login.field911[Login.field910] == null && Login.field910 > 0) { // L: 959
 															--Login.field910; // L: 960
 														}
@@ -817,7 +817,7 @@ public class UserComparator7 extends AbstractUserComparator {
 														}
 													}
 
-													if (class160.field1749 == 84) { // L: 970
+													if (PlayerEquipmentItem.field1749 == 84) { // L: 970
 														label1290: {
 															try {
 																var31 = new SimpleDateFormat("ddMMyyyyHH", Locale.ENGLISH); // L: 977
@@ -918,13 +918,13 @@ public class UserComparator7 extends AbstractUserComparator {
 										} else if (Login.loginIndex == 9) { // L: 1080
 											var46 = Login.loginBoxX + 180; // L: 1081
 											var9 = 311; // L: 1082
-											if (class160.field1749 == 84 || class160.field1749 == 13 || var5 == 1 && var59 >= var46 - 75 && var59 <= var46 + 75 && var45 >= var9 - 20 && var45 <= var9 + 20) { // L: 1083
+											if (PlayerEquipmentItem.field1749 == 84 || PlayerEquipmentItem.field1749 == 13 || var5 == 1 && var59 >= var46 - 75 && var59 <= var46 + 75 && var45 >= var9 - 20 && var45 <= var9 + 20) { // L: 1083
 												Tiles.method2027(false); // L: 1084
 											}
 										} else if (Login.loginIndex == 10) { // L: 1087
 											var46 = Login.loginBoxX + 180; // L: 1088
 											var9 = 209; // L: 1089
-											if (class160.field1749 == 84 || var5 == 1 && var59 >= var46 - 109 && var59 <= var46 + 109 && var45 >= var9 && var45 <= var9 + 68) { // L: 1090
+											if (PlayerEquipmentItem.field1749 == 84 || var5 == 1 && var59 >= var46 - 109 && var59 <= var46 + 109 && var45 >= var9 && var45 <= var9 + 68) { // L: 1090
 												setLoginResponseString("", "Connecting to server...", ""); // L: 1091
 												Client.field534 = class424.field4561; // L: 1092
 												Friend.method6297(false); // L: 1093
@@ -1010,7 +1010,7 @@ public class UserComparator7 extends AbstractUserComparator {
 
 													return;
 												}
-											} while(class160.field1749 != 84 && class160.field1749 != 13); // L: 837
+											} while(PlayerEquipmentItem.field1749 != 84 && PlayerEquipmentItem.field1749 != 13); // L: 837
 
 											Archive.Login_promptCredentials(true); // L: 838
 										}
@@ -1064,7 +1064,7 @@ public class UserComparator7 extends AbstractUserComparator {
 			var9 = Client.field565[var7]; // L: 6999
 			if (var4 >= 0 && var5 >= 0 && var4 < 103 && var5 < 103) { // L: 7000
 				if (var9 == 0) { // L: 7001
-					BoundaryObject var36 = Decimator.scene.method4002(SoundSystem.Client_plane, var4, var5); // L: 7002
+					BoundaryObject var36 = Decimator.scene.getBoundaryObject(SoundSystem.Client_plane, var4, var5); // L: 7002
 					if (var36 != null) { // L: 7003
 						var11 = Skeleton.Entity_unpackID(var36.tag); // L: 7004
 						if (var7 == 2) { // L: 7005
@@ -1077,7 +1077,7 @@ public class UserComparator7 extends AbstractUserComparator {
 				}
 
 				if (var9 == 1) { // L: 7012
-					WallDecoration var42 = Decimator.scene.method3919(SoundSystem.Client_plane, var4, var5); // L: 7013
+					WallDecoration var42 = Decimator.scene.getWallObject(SoundSystem.Client_plane, var4, var5); // L: 7013
 					if (var42 != null) { // L: 7014
 						var11 = Skeleton.Entity_unpackID(var42.tag); // L: 7015
 						if (var7 != 4 && var7 != 5) { // L: 7016

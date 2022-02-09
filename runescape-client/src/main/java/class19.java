@@ -291,7 +291,7 @@ public class class19 {
 				}
 			}
 
-			if (var0.overheadText != null && (var1 >= var75 || !var0.field1125 && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 4880 4881
+			if (var0.overheadText != null && (var1 >= var75 || !var0.showPublicPlayerChat && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 4880 4881
 				LoginScreenAnimation.method2214(var0, var0.defaultHeight); // L: 4882
 				if (Client.viewportTempX > -1 && Client.overheadTextCount < Client.overheadTextLimit) { // L: 4883
 					Client.overheadTextXOffsets[Client.overheadTextCount] = class408.fontBold12.stringWidth(var0.overheadText) / 2; // L: 4884

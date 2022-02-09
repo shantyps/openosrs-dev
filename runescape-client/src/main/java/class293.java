@@ -112,7 +112,7 @@ public class class293 {
 			}
 		}
 
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1177) { // L: 4031
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) { // L: 4031
 			if (var0.spotAnimationFrame < 0) { // L: 4032
 				var0.spotAnimationFrame = 0;
 			}
@@ -149,7 +149,7 @@ public class class293 {
 
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) { // L: 4061
 			var1 = class78.SequenceDefinition_get(var0.sequence); // L: 4062
-			if (var1.field2107 == 1 && var0.field1176 > 0 && var0.field1157 <= Client.cycle && var0.field1158 < Client.cycle) { // L: 4063 4064
+			if (var1.field2107 == 1 && var0.field1176 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) { // L: 4063 4064
 				var0.sequenceDelay = 1; // L: 4065
 				return; // L: 4066
 			}
@@ -168,8 +168,8 @@ public class class293 {
 
 					if (var0.sequenceFrame >= var1.frameIds.length) { // L: 4080
 						var0.sequenceFrame -= var1.frameCount; // L: 4081
-						++var0.field1129; // L: 4082
-						if (var0.field1129 >= var1.field2108) { // L: 4083
+						++var0.currentSequenceFrameIndex; // L: 4082
+						if (var0.currentSequenceFrameIndex >= var1.field2108) { // L: 4083
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var1.frameIds.length) { // L: 4084
 							Projectile.method1958(var1, var0.sequenceFrame, var0.x, var0.y); // L: 4085
@@ -186,8 +186,8 @@ public class class293 {
 						class333.method6126(var1, var0.sequenceFrame, var0.x, var0.y); // L: 4093
 					} else {
 						var0.sequenceFrame -= var1.frameCount; // L: 4096
-						++var0.field1129; // L: 4097
-						if (var0.field1129 >= var1.field2108) { // L: 4098
+						++var0.currentSequenceFrameIndex; // L: 4097
+						if (var0.currentSequenceFrameIndex >= var1.field2108) { // L: 4098
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var2) { // L: 4099
 							class333.method6126(var1, var0.sequenceFrame, var0.x, var0.y); // L: 4100

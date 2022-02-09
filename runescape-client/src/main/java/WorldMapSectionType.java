@@ -36,7 +36,8 @@ public enum WorldMapSectionType implements MouseWheel {
 	@ObfuscatedGetter(
 		intValue = -493940413
 	)
-	static int field2723;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 	@ObfuscatedName("p")
 	@ObfuscatedGetter(
 		intValue = 608641575
