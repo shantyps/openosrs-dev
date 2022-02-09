@@ -27,12 +27,8 @@ package net.runelite.mixins;
 import net.runelite.api.SoundEffectVolume;
 import net.runelite.api.events.AreaSoundEffectPlayed;
 import net.runelite.api.events.SoundEffectPlayed;
-import net.runelite.api.mixins.Copy;
-import net.runelite.api.mixins.FieldHook;
-import net.runelite.api.mixins.Inject;
-import net.runelite.api.mixins.Mixin;
-import net.runelite.api.mixins.Replace;
-import net.runelite.api.mixins.Shadow;
+import net.runelite.api.events.SoundEffectReceived;
+import net.runelite.api.mixins.*;
 import net.runelite.rs.api.RSActor;
 import net.runelite.rs.api.RSClient;
 import net.runelite.rs.api.RSPcmStream;
@@ -113,6 +109,16 @@ public abstract class SoundEffectMixin implements RSClient
 
 
 		lastSoundEffectCount = soundCount;
+	}
+
+	@Inject
+	@MethodHook("queueSoundEffect")
+	public static void soundEffectReceived(int id, int numLoops, int delay) {
+		SoundEffectReceived event = new SoundEffectReceived();
+		event.setId(id);
+		event.setRepetitions(numLoops);
+		event.setDelay(delay);
+		client.getCallbacks().post(event);
 	}
 
 	@Inject

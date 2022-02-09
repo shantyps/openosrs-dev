@@ -11,6 +11,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
+import net.runelite.client.RuneLite;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.EventBus;
 import net.runelite.client.eventbus.Subscribe;
@@ -19,6 +20,7 @@ import net.runelite.client.ui.DynamicGridLayout;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.components.SliderUI;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.NotNull;
 
 import javax.inject.Inject;
@@ -44,7 +46,7 @@ import java.util.concurrent.ForkJoinPool;
 @Slf4j
 public class EventInspector extends DevToolsFrame {
 
-    private final static int MAX_LOG_ENTRIES = 2500;
+    private final static int MAX_LOG_ENTRIES = 1000;
     private static final int VARBITS_ARCHIVE_ID = 14;
     private final Client client;
     private final EventBus eventBus;
@@ -59,6 +61,7 @@ public class EventInspector extends DevToolsFrame {
     private boolean accessedObjectForAnimation = false;
     private Multimap<Integer, Integer> varbits;
     private final Set<Actor> facedActors = new HashSet<>();
+    private final List<ProjectileSpawned> projectileSpawnedList = new ArrayList<>();
     private final Map<Actor, FaceTile> facedDirectionActors = new HashMap<>();
     private final Map<Player, Integer> playerTransformations = new HashMap<>();
     private final Map<Long, Set<Integer>> updatedIfEvents = new HashMap<>();
@@ -68,8 +71,10 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Integer, Integer> inventoryDiffs = new HashMap<>();
     private final Map<Actor, CombatLevelChangeEvent> combatLevelChanges = new HashMap<>();
     private final Map<Actor, RecolourEvent> tintingChanges = new HashMap<>();
+    private final Map<Player, Pair<Integer, WorldPoint>> playerMovements = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
     private final Set<Player> movementTrackedPlayers = new HashSet<>();
+    private final Map<Integer, String> soundEffectNames = new HashMap<>(5000);
     private WidgetNode lastMoveSub;
     private long hashTableNodeGet1 = -1;
     private long hashTableNodeGet2 = -1;
@@ -98,6 +103,8 @@ public class EventInspector extends DevToolsFrame {
     private int widgetModelRotation = -1;
 
     private Boolean widgetHidden = null;
+
+    private boolean dirty = false;
 
     private int widgetNpcId = -1;
 
@@ -316,7 +323,7 @@ public class EventInspector extends DevToolsFrame {
 
     private void changeJCheckBoxStatus(JPanel parent, boolean value) {
         for (Component component : parent.getComponents()) {
-            if (component == pauseButton || component == localPlayerOnly || component == rsCoordFormat) continue;
+            if (component == pauseButton || component == localPlayerOnly || component == rsCoordFormat || component == translateCoordsInInstance) continue;
             if (component instanceof JCheckBox) {
                 ((JCheckBox) component).setSelected(value);
             } else if (component instanceof JPanel) {
@@ -342,9 +349,23 @@ public class EventInspector extends DevToolsFrame {
         panel.add(groundItemDel);
         panel.add(groundItemUpdate);
 
-        projectiles.setToolTipText("<html>The projectile inspector will require each unique projectile to be received from two" + "<br>different distances in" +
-                " order for it to be able to identify all of the projectile parameters." + "<br>This is due to one of the properties of projectile being the " +
-                "equivalent of" + "<br>lengthAdjustment + (chebyshevDistance * stepMultiplier).</html>");
+        projectiles.setToolTipText("<html>" +
+                "Projectile tracking works best from different distances with non-moving entities.<br>" +
+                "Due to projectiles being pid-dependent, it is impossible to accurately decode their original values.<br>" +
+                "There are simple heuristics used to determine the source of the projectile, which mostly comes down to<br>" +
+                "ensuring the projectile's starting position collides with the given creature and that the creature us playing<br>" +
+                "an animation at the time. There are other conditions at play.<br>" +
+                "When a projectile is shot from a npc towards a player, the player's previous position is used to determine the distance<br>." +
+                "For npc -> npc, or player -> player, it assumes the target has the higher pid(as in is processed first).<br>" +
+                "The inspector uses most recent projectile data when decoding projectile's original values, so even if it messes up,<br>" +
+                "it will simply need new data from different positions to give it another shot.<br>" +
+                "With NPCs, it is unclear where the projectile calculations are done server-side, as it is often times from the south-western<br>" +
+                "corner of the npc, but it can also be based on the actual difference between the two creatures, keeping their size in mind.<br>" +
+                "With all these criteria in mind, the data provided by the tool should be taken with a grain of salt, as there are several things<br>" +
+                "that can go wrong when decoding the original projectile values.<br>" +
+                "It should be kept in mind however, that only the 'lengthAdjustment' and 'stepMultiplier' values could be off. Everything<br>" +
+                "else provided by this tool will be accurate based on the packet's original values." +
+                "</html>");
         combinedObjects.setToolTipText("<html>Combined Objects refer to objects which have their models merged with the players' model" + " to fix model " +
                 "priority issues.<br>This is commonly used for agility shortcuts and obstacles, such as pipes.</html>");
     }
@@ -507,8 +528,8 @@ public class EventInspector extends DevToolsFrame {
             JTextField prefixLabel = new JTextField(prefix);
             prefixLabel.setEditable(false);
             prefixLabel.setBackground(null);
-            prefixLabel.setBorder(null);
             prefixLabel.setToolTipText(prefix);
+            prefixLabel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 5, new Color(52, 52, 52)));
             JTextField textLabel = new JTextField(text);
             textLabel.setEditable(false);
             textLabel.setBackground(null);
@@ -518,13 +539,7 @@ public class EventInspector extends DevToolsFrame {
             labelPanel.add(prefixLabel, BorderLayout.WEST);
             labelPanel.add(textLabel);
             tracker.add(labelPanel);
-
-            // Cull very old stuff
-            while (tracker.getComponentCount() > MAX_LOG_ENTRIES) {
-                tracker.remove(0);
-            }
-
-            tracker.revalidate();
+            dirty = true;
         });
     }
 
@@ -557,13 +572,8 @@ public class EventInspector extends DevToolsFrame {
     }
 
     @Subscribe
-    public void onProjectileMoved(ProjectileMoved event) {
-        projectileTracker.submitProjectileMoved(client, event, rsCoordFormat.isSelected(), (earlyProjectileInfo, dynamicProjectileInfo, prefix, text) -> {
-            final boolean inDistance =
-                    Math.max(getDistance(dynamicProjectileInfo.getStartPoint()), getDistance(dynamicProjectileInfo.getEndPoint())) <= maxEventDistance;
-            final boolean console = inDistance && prefix.contains("Player(" + Objects.requireNonNull(client.getLocalPlayer()).getName());
-            addLine(prefix, text, console, projectiles);
-        }, translateCoordsInInstance.isSelected());
+    public void onProjectileSpawned(ProjectileSpawned event) {
+        projectileSpawnedList.add(event);
     }
 
     @Subscribe
@@ -731,17 +741,25 @@ public class EventInspector extends DevToolsFrame {
     }
 
     @Subscribe
-    public void soundEffectPlayed(SoundEffectPlayed event) {
-        final int soundId = event.getSoundId();
+    public void soundEffectReceived(SoundEffectReceived event) {
+        final int soundId = event.getId();
         final int delay = event.getDelay();
-        final int loops = event.getLoops();
+        final int loops = event.getRepetitions();
         StringBuilder soundEffectBuilder = new StringBuilder();
         soundEffectBuilder.append("SoundEffect(");
-        soundEffectBuilder.append("id = ").append(soundId);
+        String name = soundEffectNames.get(soundId);
+        String prefix;
+        if (name == null) {
+            prefix = "Local sound";
+            soundEffectBuilder.append("id = ").append(soundId);
+        } else {
+            prefix = "Local sound(id = " + soundId + ")";
+            soundEffectBuilder.append("name = \"").append(name).append('"');
+        }
         if (delay != 0) soundEffectBuilder.append(", delay = ").append(delay);
         if (loops != 1) soundEffectBuilder.append(", repetitions = ").append(loops);
         soundEffectBuilder.append(")");
-        addLine("Local", soundEffectBuilder.toString(), true, soundEffects);
+        addLine(prefix, soundEffectBuilder.toString(), true, soundEffects);
     }
 
     @Subscribe
@@ -754,7 +772,15 @@ public class EventInspector extends DevToolsFrame {
         final int radius = event.getRange();
         StringBuilder soundEffectBuilder = new StringBuilder();
         soundEffectBuilder.append("SoundEffect(");
-        soundEffectBuilder.append("id = ").append(soundId);
+        String name = soundEffectNames.get(soundId);
+        String prefix;
+        if (name == null) {
+            prefix = "Area sound";
+            soundEffectBuilder.append("id = ").append(soundId);
+        } else {
+            prefix = "Area sound(id = " + soundId + ")";
+            soundEffectBuilder.append("name = \"").append(name).append('"');
+        }
         if (radius != 0) soundEffectBuilder.append(", radius = ").append(radius);
         if (delay != 0) soundEffectBuilder.append(", delay = ").append(delay);
         if (loops != 1) soundEffectBuilder.append(", repetitions = ").append(loops);
@@ -763,11 +789,11 @@ public class EventInspector extends DevToolsFrame {
         Optional<Player> sourcePlayer = client.getPlayers().stream().filter(player -> player.getWorldLocation().distanceTo(location) == 0).findAny();
         Optional<NPC> sourceNpc = client.getNpcs().stream().filter(npc -> npc.getWorldLocation().distanceTo(location) == 0).findAny();
         if (sourcePlayer.isPresent() && sourceNpc.isEmpty()) {
-            addLine(formatActor(sourcePlayer.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourcePlayer.get()), areaSoundEffects);
+            addLine(prefix + ", " + formatActor(sourcePlayer.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourcePlayer.get()), areaSoundEffects);
         } else if (sourceNpc.isPresent() && sourcePlayer.isEmpty()) {
-            addLine(formatActor(sourceNpc.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourceNpc.get()), areaSoundEffects);
+            addLine(prefix + ", " + formatActor(sourceNpc.get()), soundEffectBuilder.toString(), isActorConsoleLogged(sourceNpc.get()), areaSoundEffects);
         } else {
-            addLine("Unknown(" + formatLocation(location) + ")", soundEffectBuilder.toString(), inEventDistance(location), areaSoundEffects);
+            addLine(prefix + ", " + "Unknown(" + formatLocation(location) + ")", soundEffectBuilder.toString(), inEventDistance(location), areaSoundEffects);
         }
     }
 
@@ -815,6 +841,17 @@ public class EventInspector extends DevToolsFrame {
     @SuppressWarnings("StringBufferReplaceableByString")
     @Subscribe
     public void onClientTick(ClientTick event) {
+        if (dirty) {
+            dirty = false;
+            SwingUtilities.invokeLater(() -> {
+                // Cull very old stuff
+                while (tracker.getComponentCount() > MAX_LOG_ENTRIES) {
+                    tracker.remove(0);
+                }
+
+                tracker.revalidate();
+            });
+        }
         latestInventoryId = -1;
         /* Reset animation access as it may not have been reset manually due to a null check in the function. */
         accessedObjectForAnimation = false;
@@ -922,6 +959,7 @@ public class EventInspector extends DevToolsFrame {
                 final WorldPoint previousLocation = pair.getRight();
                 final LocalPoint localDestination = LocalPoint.fromScene(movementEvent.getX(), movementEvent.getY());
                 final WorldPoint destination = fromLocal(client, localDestination);
+                playerMovements.put(movementEvent.getPlayer(), Pair.of(client.getTickCount(), previousLocation));
                 final int distance = getDistance(localDestination);
                 final boolean isLocalPlayer = movementEvent.getPlayer() == client.getLocalPlayer();
                 if (!isLocalPlayer && (distance > 15 || movementEvent.getPlayer().getPlane() != client.getPlane())) continue;
@@ -938,6 +976,76 @@ public class EventInspector extends DevToolsFrame {
                 }
             }
             movementEvents.clear();
+        }
+        if (!projectileSpawnedList.isEmpty()) {
+            projectileSpawnedList.forEach(projectileSpawned -> {
+                Triple<ProjectileTracker.StaticProjectileInfo, ProjectileTracker.DynamicProjectileInfo, List<ProjectileTracker.DynamicProjectileInfo>> info  =
+                        projectileTracker.addEvent(projectileSpawned, playerMovements);
+                final List<ProjectileTracker.DynamicProjectileInfo> comparisonPoints = info.getRight();
+                final ProjectileTracker.DynamicProjectileInfo dynamicInfo = info.getMiddle();
+                final ProjectileTracker.StaticProjectileInfo staticInfo = info.getLeft();
+                final StringBuilder productBuilder = new StringBuilder();
+                if (!comparisonPoints.isEmpty()) {
+                    final ProjectileTracker.DynamicProjectileInfo comparisonPoint = comparisonPoints.get(0);
+                    final int durDiff = dynamicInfo.getFlightDuration() - comparisonPoint.getFlightDuration();
+                    int distDiff;
+                    if (comparisonPoints.size() == 1) {
+                        // If we only have one entry, we cannot really tell if this is a sw-based or real distance based projectile, so let's assume based on size.
+                        if (dynamicInfo.getStartActor() != null) {
+                            final int size = dynamicInfo.getStartActor() instanceof NPC ? ((NPC) dynamicInfo.getStartActor()).getComposition().getSize() : 1;
+                            final boolean southWestBased = size >= 3;
+                            if (southWestBased) {
+                                distDiff = dynamicInfo.getSwDistance() - comparisonPoint.getSwDistance();
+                            } else {
+                                distDiff = dynamicInfo.getDistance() - comparisonPoint.getDistance();
+                            }
+                        } else {
+                            distDiff = dynamicInfo.getDistance() - comparisonPoint.getDistance();
+                        }
+                    } else {
+                        final int distanceDiff = dynamicInfo.getSwDistance() - comparisonPoint.getSwDistance();
+                        final int durationDiff = dynamicInfo.getFlightDuration() - comparisonPoint.getFlightDuration();
+                        final int durationPerTileDistance = Math.abs(durationDiff / distanceDiff);
+                        final boolean swBased = comparisonPoints.stream().allMatch(entry -> {
+                            final int otherDisDiff = dynamicInfo.getSwDistance() - comparisonPoint.getSwDistance();
+                            final int otherDurDiff = dynamicInfo.getFlightDuration() - comparisonPoint.getFlightDuration();
+                            return Math.abs(otherDurDiff / otherDisDiff) == durationPerTileDistance;
+                        });
+                        if (swBased) {
+                            distDiff = distanceDiff;
+                        } else {
+                            distDiff = dynamicInfo.getDistance() - comparisonPoint.getDistance();
+                        }
+                    }
+                    final int durationPerTileDistance = Math.abs(durDiff / distDiff);
+                    final int duration = dynamicInfo.getFlightDuration();
+                    final int distance = dynamicInfo.getDistance();
+                    final int lengthAdjustment = duration - (distance * durationPerTileDistance);
+                    productBuilder.append("Projectile(id = ").append(staticInfo.getId()).append(", ");
+                    productBuilder.append("startHeight = ").append(staticInfo.getStartHeight()).append(", ");
+                    productBuilder.append("endHeight = ").append(staticInfo.getEndHeight()).append(", ");
+                    productBuilder.append("delay = ").append(staticInfo.getDelay()).append(", ");
+                    productBuilder.append("angle = ").append(staticInfo.getAngle()).append(", ");
+                    productBuilder.append("lengthAdjustment = ").append(lengthAdjustment).append(", ");
+                    productBuilder.append("distOffset = ").append(staticInfo.getDistanceOffset()).append(", ");
+                    productBuilder.append("stepMultiplier = ").append(durationPerTileDistance).append(")");
+                } else {
+                    productBuilder.append("IncompleteProjectile(id = ").append(staticInfo.getId()).append(", ");
+                    productBuilder.append("startHeight = ").append(staticInfo.getStartHeight()).append(", ");
+                    productBuilder.append("endHeight = ").append(staticInfo.getEndHeight()).append(", ");
+                    productBuilder.append("delay = ").append(staticInfo.getDelay()).append(", ");
+                    productBuilder.append("angle = ").append(staticInfo.getAngle()).append(", ");
+                    productBuilder.append("distOffset = ").append(staticInfo.getDistanceOffset()).append(")");
+                }
+                productBuilder.append("\t| ").append("distance = ").append(dynamicInfo.getDistance()).append(", ");
+                productBuilder.append("flightDuration = ").append(dynamicInfo.getFlightDuration());
+
+                final String from = formatActor(dynamicInfo.getStartActor(), dynamicInfo.getStartPoint().toWorldPoint());
+                final String to = formatActor(dynamicInfo.getEndActor(), dynamicInfo.getEndPoint().toWorldPoint());
+                final boolean console = isActorConsoleLogged(dynamicInfo.getStartActor()) || isActorConsoleLogged(dynamicInfo.getEndActor());
+                addLine(from + " -> " + to, productBuilder.toString(), console, projectiles);
+            });
+            projectileSpawnedList.clear();
         }
     }
 
@@ -1698,6 +1806,28 @@ public class EventInspector extends DevToolsFrame {
         if (settingsFile.exists()) {
             readSettingsFile();
         }
+        try {
+            InputStream soundsInput = RuneLite.class.getResourceAsStream("/sound_effects.txt");
+            if (soundsInput != null) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(soundsInput));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] split = line.split(":");
+                    if (split.length == 2) {
+                        try {
+                            String name = split[0];
+                            int id = Integer.parseInt(split[1]);
+                            soundEffectNames.put(id, name);
+                        } catch (Exception e) {
+                            log.error("Error reading sound name: " + Arrays.toString(split), e);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error loading sound names", e);
+        }
+
         eventBus.register(this);
         for (Skill skill : Skill.values()) {
             int xp = client.getSkillExperience(skill);
