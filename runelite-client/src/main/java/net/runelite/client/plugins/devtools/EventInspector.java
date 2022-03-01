@@ -1038,7 +1038,8 @@ public class EventInspector extends DevToolsFrame {
                     productBuilder.append("distOffset = ").append(staticInfo.getDistanceOffset()).append(")");
                 }
                 productBuilder.append("\t| ").append("distance = ").append(dynamicInfo.getDistance()).append(", ");
-                productBuilder.append("flightDuration = ").append(dynamicInfo.getFlightDuration());
+                productBuilder.append("flightDuration = ").append(dynamicInfo.getFlightDuration()).append(", ");
+                productBuilder.append("visualStart = ").append(formatLocation(dynamicInfo.getVisualStart()));
 
                 final String from = formatActor(dynamicInfo.getStartActor(), dynamicInfo.getStartPoint().toWorldPoint());
                 final String to = formatActor(dynamicInfo.getEndActor(), dynamicInfo.getEndPoint().toWorldPoint());
