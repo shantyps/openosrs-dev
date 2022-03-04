@@ -245,14 +245,14 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -543666705
 	)
-	@Export("exactMoveDeltaY1")
-	int exactMoveDeltaY1;
+	@Export("exactMoveDeltaX2")
+	int exactMoveDeltaX2;
 	@ObfuscatedName("bp")
 	@ObfuscatedGetter(
 		intValue = -205198277
 	)
-	@Export("exactMoveDeltaX2")
-	int exactMoveDeltaX2;
+	@Export("exactMoveDeltaY1")
+	int exactMoveDeltaY1;
 	@ObfuscatedName("ch")
 	@ObfuscatedGetter(
 		intValue = -201847185

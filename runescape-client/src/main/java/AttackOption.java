@@ -86,22 +86,22 @@ public enum AttackOption implements MouseWheel {
 			byte var5 = MoveSpeed.field2137.speed; // L: 451
 			if ((var4 & 2048) != 0) { // L: 452
 				var3.exactMoveDeltaX1 = var0.method7400(); // L: 453
-				var3.exactMoveDeltaX2 = var0.method7400(); // L: 454
-				var3.exactMoveDeltaY1 = var0.readByte(); // L: 455
+				var3.exactMoveDeltaY1 = var0.method7400(); // L: 454
+				var3.exactMoveDeltaX2 = var0.readByte(); // L: 455
 				var3.exactMoveDeltaY2 = var0.method7401(); // L: 456
 				var3.exactMoveArrive1Cycle = var0.method7408() + Client.cycle; // L: 457
 				var3.exactMoveArrive2Cycle = var0.readUnsignedShort() + Client.cycle; // L: 458
 				var3.exactMoveDirection = var0.readUnsignedShort(); // L: 459
 				if (var3.field1067) { // L: 460
 					var3.exactMoveDeltaX1 += var3.tileX; // L: 461
-					var3.exactMoveDeltaX2 += var3.tileY; // L: 462
-					var3.exactMoveDeltaY1 += var3.tileX; // L: 463
+					var3.exactMoveDeltaY1 += var3.tileY; // L: 462
+					var3.exactMoveDeltaX2 += var3.tileX; // L: 463
 					var3.exactMoveDeltaY2 += var3.tileY; // L: 464
 					var3.pathLength = 0; // L: 465
 				} else {
 					var3.exactMoveDeltaX1 += var3.pathX[0]; // L: 468
-					var3.exactMoveDeltaX2 += var3.pathY[0]; // L: 469
-					var3.exactMoveDeltaY1 += var3.pathX[0]; // L: 470
+					var3.exactMoveDeltaY1 += var3.pathY[0]; // L: 469
+					var3.exactMoveDeltaX2 += var3.pathX[0]; // L: 470
 					var3.exactMoveDeltaY2 += var3.pathY[0]; // L: 471
 					var3.pathLength = 1; // L: 472
 				}
