@@ -73,7 +73,10 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Actor, RecolourEvent> tintingChanges = new HashMap<>();
     private final Map<Player, Pair<Integer, WorldPoint>> playerMovements = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
+    private final Map<NPC, Pair<NPCMoved, WorldPoint>> npcMovementEvents = new HashMap<>();
+    private final Map<NPC, WorldPoint> previousNPCLocations = new HashMap<>();
     private final Set<Player> movementTrackedPlayers = new HashSet<>();
+    private final Set<NPC> movementTrackedNpcs = new HashSet<>();
     private final Map<Integer, String> soundEffectNames = new HashMap<>(5000);
     private WidgetNode lastMoveSub;
     private long hashTableNodeGet1 = -1;
@@ -154,6 +157,7 @@ public class EventInspector extends DevToolsFrame {
 
     private final JCheckBox movement = new JCheckBox("Player Walk, Run and Crawl", true);
     private final JCheckBox teleportation = new JCheckBox("Player Teleportation", true);
+    private final JCheckBox npcMovement = new JCheckBox("NPC Walk, Run, Crawl and Teleport", true);
     private final JCheckBox playerCount = new JCheckBox("Player Count", true);
     private final JCheckBox npcCount = new JCheckBox("NPC Count", true);
 
@@ -432,6 +436,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(playerMenuOptions);
         panel.add(movement);
         panel.add(teleportation);
+        panel.add(npcMovement);
         panel.add(playerCount);
         panel.add(npcCount);
         panel.add(new JSeparator());
@@ -977,6 +982,31 @@ public class EventInspector extends DevToolsFrame {
             }
             movementEvents.clear();
         }
+        if (!npcMovementEvents.isEmpty()) {
+            movementTrackedNpcs.removeIf(player -> getDistance(player.getWorldLocation()) > 15);
+            for (Pair<NPCMoved, WorldPoint> pair : npcMovementEvents.values()) {
+                final NPCMoved movementEvent = pair.getLeft();
+                final WorldPoint previousLocation = previousNPCLocations.get(movementEvent.getNpc());
+                final LocalPoint localDestination = LocalPoint.fromScene(movementEvent.getX(), movementEvent.getY());
+                final WorldPoint destination = fromLocal(client, localDestination);
+                previousNPCLocations.put(movementEvent.getNpc(), destination);
+                if (previousLocation == null) continue;
+                final int distance = getDistance(localDestination);
+                if ((distance > 15 || movementEvent.getNpc().getWorldLocation().getPlane() != client.getPlane())) continue;
+                /* Any players that were just added to the tracked players list can't be relied on for valid info. */
+                if (movementTrackedNpcs.add(movementEvent.getNpc())) continue;
+                if (movementEvent.getType() == 127) {
+                    addLine(formatActor(movementEvent.getNpc(), previousLocation), "Teleport(" + formatLocation(destination) + ")",
+                            isActorConsoleLogged(movementEvent.getNpc()), npcMovement);
+                } else {
+                    String type = movementEvent.getType() == 0 ? "Crawl" : movementEvent.getType() == 1 ? "Walk" : movementEvent.getType() == 2 ? "Run" :
+                            "Teleport";
+                    addLine(formatActor(movementEvent.getNpc(), previousLocation), "Movement(type = " + (type) +
+                            ", " + formatLocation(destination) + ")", isActorConsoleLogged(movementEvent.getNpc()), npcMovement);
+                }
+            }
+            npcMovementEvents.clear();
+        }
         if (!projectileSpawnedList.isEmpty()) {
             projectileSpawnedList.forEach(projectileSpawned -> {
                 Triple<ProjectileTracker.StaticProjectileInfo, ProjectileTracker.DynamicProjectileInfo, List<ProjectileTracker.DynamicProjectileInfo>> info  =
@@ -1357,6 +1387,11 @@ public class EventInspector extends DevToolsFrame {
     public void onPlayerMovement(PlayerMoved event) {
         movementEvents.put(event.getPlayer(), Pair.of(event, event.getPlayer().getWorldLocation()));
         this.latestServerTick = client.getTickCount();
+    }
+
+    @Subscribe
+    public void onNpcMovement(NPCMoved event) {
+        npcMovementEvents.put(event.getNpc(), Pair.of(event, event.getNpc().getWorldLocation()));
     }
 
     @Subscribe

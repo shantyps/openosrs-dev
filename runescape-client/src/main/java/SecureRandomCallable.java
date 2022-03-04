@@ -69,7 +69,7 @@ public class SecureRandomCallable implements Callable {
 							Client.npcIndices[++Client.npcCount - 1] = var3; // L: 7607
 							var4.npcCycle = Client.cycle; // L: 7608
 							var7 = var0.readBits(3); // L: 7609
-							var4.method2265(var7, MoveSpeed.field2135); // L: 7610
+							var4.move(var7, MoveSpeed.field2135); // L: 7610
 							var8 = var0.readBits(1); // L: 7611
 							if (var8 == 1) { // L: 7612
 								Client.field549[++Client.field548 - 1] = var3;
@@ -79,12 +79,12 @@ public class SecureRandomCallable implements Callable {
 							var4.npcCycle = Client.cycle; // L: 7617
 							if (var0.readBits(1) == 1) { // L: 7618
 								var7 = var0.readBits(3); // L: 7619
-								var4.method2265(var7, MoveSpeed.field2132); // L: 7620
+								var4.move(var7, MoveSpeed.field2132); // L: 7620
 								var8 = var0.readBits(3); // L: 7621
-								var4.method2265(var8, MoveSpeed.field2132); // L: 7622
+								var4.move(var8, MoveSpeed.field2132); // L: 7622
 							} else {
 								var7 = var0.readBits(3); // L: 7625
-								var4.method2265(var7, MoveSpeed.field2133); // L: 7626
+								var4.move(var7, MoveSpeed.field2133); // L: 7626
 							}
 
 							var7 = var0.readBits(1); // L: 7628
