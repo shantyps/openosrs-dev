@@ -3,6 +3,7 @@ package net.runelite.mixins;
 import net.runelite.api.Perspective;
 import net.runelite.api.Point;
 import net.runelite.api.TileObject;
+import net.runelite.api.coords.Angle;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import java.awt.Graphics2D;
@@ -120,5 +121,14 @@ public abstract class RSTileObjectMixin implements TileObject
 	public Point getMinimapLocation()
 	{
 		return Perspective.localToMinimap(client, getLocalLocation());
+	}
+
+	@Override
+	@Inject
+	public Angle getTileObjectAngle()
+	{
+		int orientation = getModelOrientation();
+		int rotation = (getConfig() >> 6) & 3;
+		return new Angle(rotation * 512 + orientation);
 	}
 }

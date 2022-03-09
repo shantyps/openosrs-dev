@@ -28,6 +28,8 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
 import javax.annotation.Nullable;
+
+import net.runelite.api.coords.Angle;
 import net.runelite.api.coords.LocalPoint;
 
 /**
@@ -116,4 +118,21 @@ public interface TileObject extends Locatable
 
 	int getFlags();
 	int getModelOrientation();
+
+	/**
+	 * Gets the orientation of the object.
+	 *
+	 * @return the orientation
+	 */
+	Angle getTileObjectAngle();
+
+	/**
+	 * A bitfield containing various flags:
+	 * <pre>{@code
+	 * object type id = bits & 0x20
+	 * orientation (0-3) = bits >>> 6 & 3
+	 * supports items = bits >>> 8 & 1
+	 * }</pre>
+	 */
+	int getConfig();
 }
