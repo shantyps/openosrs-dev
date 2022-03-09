@@ -1617,30 +1617,20 @@ public class EventInspector extends DevToolsFrame {
         Stream<TileObject> fullStream = Stream.concat(Arrays.stream(localTile.getGameObjects()), objects);
         Optional<TileObject> attachedObject = fullStream.filter(obj -> {
             if (obj == null) return false;
-            for (int type = 0; type <= 22; type++) {
-                for (int rot = 0; rot < 4; rot++) {
-                    final Model a = event.getAttachedModel();
-                    final Model b = getModel(obj, type, rot, latestPendingSpawn.getX(), latestPendingSpawn.getY());
-                    if (a.getFaceCount() == b.getFaceCount()
-                            && a.getVerticesCount() == b.getVerticesCount()
-                            && Arrays.equals(a.getFaceColors1(), b.getFaceColors1())
-                            && Arrays.equals(a.getFaceColors2(), b.getFaceColors2())
-                            && Arrays.equals(a.getFaceColors3(), b.getFaceColors3())
-                            && Arrays.equals(a.getFaceIndices1(), b.getFaceIndices1())
-                            && Arrays.equals(a.getFaceIndices2(), b.getFaceIndices2())
-                            && Arrays.equals(a.getFaceIndices3(), b.getFaceIndices3())
-                            && Arrays.equals(a.getVerticesX(), b.getVerticesX())
-                            && Arrays.equals(a.getVerticesY(), b.getVerticesY())
-                            && Arrays.equals(a.getVerticesZ(), b.getVerticesZ())
-                    ) {
-                        return true;
-                    }
-                }
-            }
-            return false;
+            final int rotation = obj.getTileObjectAngle().getAngle() >> 9;
+            final int type = obj.getFlags() & 0x1F;
+            final Model a = event.getAttachedModel();
+            final Model b = getModel(obj, type, rotation, latestPendingSpawn.getX(), latestPendingSpawn.getY());
+            if (b == null) return false;
+            return a == b || (a.getFaceCount() == b.getFaceCount() && a.getVerticesCount() == b.getVerticesCount() && Arrays.equals(a.getFaceColors1(),
+                    b.getFaceColors1()) && Arrays.equals(a.getFaceColors2(), b.getFaceColors2()) && Arrays.equals(a.getFaceColors3(), b.getFaceColors3())
+                    && Arrays.equals(a.getFaceIndices1(), b.getFaceIndices1()) && Arrays.equals(a.getFaceIndices2(), b.getFaceIndices2())
+                    && Arrays.equals(a.getFaceIndices3(), b.getFaceIndices3()) && Arrays.equals(a.getVerticesX(), b.getVerticesX())
+                    && Arrays.equals(a.getVerticesY(), b.getVerticesY()) && Arrays.equals(a.getVerticesZ(), b.getVerticesZ()));
         }).findAny();
 
         if (attachedObject.isEmpty()) {
+            addLine(formatActor(event.getPlayer()), "LocCombine(unable to locate object)", isActorConsoleLogged(event.getPlayer()), combinedObjects);
             log.info("Unable to find a matching game object for object combine on " + localTile.getWorldLocation());
             return;
         }
