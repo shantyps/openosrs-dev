@@ -89,8 +89,8 @@ public abstract class class142 extends Node {
 
 			if (HealthBarUpdate.field1178 && (var4 & 1024) != 0 || !HealthBarUpdate.field1178 && (var4 & 16) != 0) { // L: 7760
 				var3.exactMoveDeltaX1 = var0.readByte(); // L: 7761
-				var3.exactMoveDeltaX2 = var0.readByte(); // L: 7762
-				var3.exactMoveDeltaY1 = var0.method7365(); // L: 7763
+				var3.exactMoveDeltaY1 = var0.readByte(); // L: 7762
+				var3.exactMoveDeltaX2 = var0.method7365(); // L: 7763
 				var3.exactMoveDeltaY2 = var0.method7400(); // L: 7764
 				var3.exactMoveArrive1Cycle = var0.method7408() + Client.cycle; // L: 7765
 				var3.exactMoveArrive2Cycle = var0.method7562() + Client.cycle; // L: 7766
@@ -98,8 +98,8 @@ public abstract class class142 extends Node {
 				var3.pathLength = 1; // L: 7768
 				var3.field1176 = 0; // L: 7769
 				var3.exactMoveDeltaX1 += var3.pathX[0]; // L: 7770
-				var3.exactMoveDeltaX2 += var3.pathY[0]; // L: 7771
-				var3.exactMoveDeltaY1 += var3.pathX[0]; // L: 7772
+				var3.exactMoveDeltaY1 += var3.pathY[0]; // L: 7771
+				var3.exactMoveDeltaX2 += var3.pathX[0]; // L: 7772
 				var3.exactMoveDeltaY2 += var3.pathY[0]; // L: 7773
 			}
 

@@ -153,7 +153,7 @@ public class class334 {
 		if (var0.exactMoveArrive1Cycle >= Client.cycle) { // L: 3796
 			var2 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle); // L: 3797
 			var3 = var0.field1113 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3798
-			var4 = var0.field1113 * 64 + var0.exactMoveDeltaX2 * 128; // L: 3799
+			var4 = var0.field1113 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3799
 			var0.x += (var3 - var0.x) / var2; // L: 3800
 			var0.y += (var4 - var0.y) / var2; // L: 3801
 			var0.field1175 = 0; // L: 3802
@@ -163,8 +163,8 @@ public class class334 {
 				var2 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle; // L: 3807
 				var3 = Client.cycle - var0.exactMoveArrive1Cycle; // L: 3808
 				var4 = var0.field1113 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3809
-				int var5 = var0.field1113 * 64 + var0.exactMoveDeltaX2 * 128; // L: 3810
-				int var6 = var0.field1113 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3811
+				int var5 = var0.field1113 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3810
+				int var6 = var0.field1113 * 64 + var0.exactMoveDeltaX2 * 128; // L: 3811
 				int var7 = var0.field1113 * 64 + var0.exactMoveDeltaY2 * 128; // L: 3812
 				var0.x = (var3 * var6 + var4 * (var2 - var3)) / var2; // L: 3813
 				var0.y = (var7 * var3 + var5 * (var2 - var3)) / var2; // L: 3814

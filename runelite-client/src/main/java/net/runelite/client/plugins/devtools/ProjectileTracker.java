@@ -71,7 +71,7 @@ public class ProjectileTracker {
 
         final StaticProjectileInfo staticInfo = new StaticProjectileInfo(id, startHeight, endHeight, angle, distOffset, startCycle);
         final DynamicProjectileInfo dynamicInfo = new DynamicProjectileInfo(sourceActor, destinationActor, sourceWorldArea,
-                destinationWorldArea, endCycle - startCycle, distance2D, sourceWorldArea.distanceTo(destinationTile));
+                destinationWorldArea, WorldPoint.fromLocal(client, sourcePoint), endCycle - startCycle, distance2D, sourceWorldArea.distanceTo(destinationTile));
         final List<DynamicProjectileInfo> trackedInformation = trackedProjectiles.computeIfAbsent(staticInfo, s -> new ArrayList<>());
         final Set<Integer> distinctDistances = new HashSet<>();
         distinctDistances.add(dynamicInfo.swDistance);
@@ -154,10 +154,18 @@ public class ProjectileTracker {
         private final Actor endActor;
         private final WorldArea startPoint;
         private final WorldArea endPoint;
+        private final WorldPoint visualStart;
         private final int flightDuration;
         private final int distance;
         private final int swDistance;
-        DynamicProjectileInfo(Actor startActor, Actor endActor, WorldArea startPoint, WorldArea endPoint, int flightDuration, int distance, int swDistance) {
+        DynamicProjectileInfo(Actor startActor,
+                              Actor endActor,
+                              WorldArea startPoint,
+                              WorldArea endPoint,
+                              WorldPoint visualStart,
+                              int flightDuration,
+                              int distance,
+                              int swDistance) {
             this.startActor = startActor;
             this.endActor = endActor;
             this.startPoint = startPoint;
@@ -165,6 +173,7 @@ public class ProjectileTracker {
             this.flightDuration = flightDuration;
             this.distance = distance;
             this.swDistance = swDistance;
+            this.visualStart = visualStart;
         }
     }
 

@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.ForkJoinPool;
+import java.util.stream.Stream;
 
 /**
  * @author Kris | 22/10/2021
@@ -73,7 +74,10 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Actor, RecolourEvent> tintingChanges = new HashMap<>();
     private final Map<Player, Pair<Integer, WorldPoint>> playerMovements = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
+    private final Map<NPC, Pair<NPCMoved, WorldPoint>> npcMovementEvents = new HashMap<>();
+    private final Map<NPC, WorldPoint> previousNPCLocations = new HashMap<>();
     private final Set<Player> movementTrackedPlayers = new HashSet<>();
+    private final Set<NPC> movementTrackedNpcs = new HashSet<>();
     private final Map<Integer, String> soundEffectNames = new HashMap<>(5000);
     private WidgetNode lastMoveSub;
     private long hashTableNodeGet1 = -1;
@@ -154,6 +158,7 @@ public class EventInspector extends DevToolsFrame {
 
     private final JCheckBox movement = new JCheckBox("Player Walk, Run and Crawl", true);
     private final JCheckBox teleportation = new JCheckBox("Player Teleportation", true);
+    private final JCheckBox npcMovement = new JCheckBox("NPC Walk, Run, Crawl and Teleport", true);
     private final JCheckBox playerCount = new JCheckBox("Player Count", true);
     private final JCheckBox npcCount = new JCheckBox("NPC Count", true);
 
@@ -432,6 +437,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(playerMenuOptions);
         panel.add(movement);
         panel.add(teleportation);
+        panel.add(npcMovement);
         panel.add(playerCount);
         panel.add(npcCount);
         panel.add(new JSeparator());
@@ -977,6 +983,31 @@ public class EventInspector extends DevToolsFrame {
             }
             movementEvents.clear();
         }
+        if (!npcMovementEvents.isEmpty()) {
+            movementTrackedNpcs.removeIf(player -> getDistance(player.getWorldLocation()) > 15);
+            for (Pair<NPCMoved, WorldPoint> pair : npcMovementEvents.values()) {
+                final NPCMoved movementEvent = pair.getLeft();
+                final WorldPoint previousLocation = previousNPCLocations.get(movementEvent.getNpc());
+                final LocalPoint localDestination = LocalPoint.fromScene(movementEvent.getX(), movementEvent.getY());
+                final WorldPoint destination = fromLocal(client, localDestination);
+                previousNPCLocations.put(movementEvent.getNpc(), destination);
+                if (previousLocation == null) continue;
+                final int distance = getDistance(localDestination);
+                if ((distance > 15 || movementEvent.getNpc().getWorldLocation().getPlane() != client.getPlane())) continue;
+                /* Any players that were just added to the tracked players list can't be relied on for valid info. */
+                if (movementTrackedNpcs.add(movementEvent.getNpc())) continue;
+                if (movementEvent.getType() == 127) {
+                    addLine(formatActor(movementEvent.getNpc(), previousLocation), "Teleport(" + formatLocation(destination) + ")",
+                            isActorConsoleLogged(movementEvent.getNpc()), npcMovement);
+                } else {
+                    String type = movementEvent.getType() == 0 ? "Crawl" : movementEvent.getType() == 1 ? "Walk" : movementEvent.getType() == 2 ? "Run" :
+                            "Teleport";
+                    addLine(formatActor(movementEvent.getNpc(), previousLocation), "Movement(type = " + (type) +
+                            ", " + formatLocation(destination) + ")", isActorConsoleLogged(movementEvent.getNpc()), npcMovement);
+                }
+            }
+            npcMovementEvents.clear();
+        }
         if (!projectileSpawnedList.isEmpty()) {
             projectileSpawnedList.forEach(projectileSpawned -> {
                 Triple<ProjectileTracker.StaticProjectileInfo, ProjectileTracker.DynamicProjectileInfo, List<ProjectileTracker.DynamicProjectileInfo>> info  =
@@ -1038,7 +1069,8 @@ public class EventInspector extends DevToolsFrame {
                     productBuilder.append("distOffset = ").append(staticInfo.getDistanceOffset()).append(")");
                 }
                 productBuilder.append("\t| ").append("distance = ").append(dynamicInfo.getDistance()).append(", ");
-                productBuilder.append("flightDuration = ").append(dynamicInfo.getFlightDuration());
+                productBuilder.append("flightDuration = ").append(dynamicInfo.getFlightDuration()).append(", ");
+                productBuilder.append("visualStart = ").append(formatLocation(dynamicInfo.getVisualStart()));
 
                 final String from = formatActor(dynamicInfo.getStartActor(), dynamicInfo.getStartPoint().toWorldPoint());
                 final String to = formatActor(dynamicInfo.getEndActor(), dynamicInfo.getEndPoint().toWorldPoint());
@@ -1359,6 +1391,11 @@ public class EventInspector extends DevToolsFrame {
     }
 
     @Subscribe
+    public void onNpcMovement(NPCMoved event) {
+        npcMovementEvents.put(event.getNpc(), Pair.of(event, event.getNpc().getWorldLocation()));
+    }
+
+    @Subscribe
     public void onGroundItemSpawned(ItemSpawned event) {
         final Tile tile = event.getTile();
         final TileItem item = event.getItem();
@@ -1576,25 +1613,33 @@ public class EventInspector extends DevToolsFrame {
         Scene scene = client.getScene();
         Tile[][][] tiles = scene.getTiles();
         Tile localTile = tiles[client.getPlane()][latestPendingSpawn.getX()][latestPendingSpawn.getY()];
-        /* Let's assume that any object that uses this packet is a main game object. Decorations and other objects can rarely ever be clicked, let alone this
-        . */
-        Optional<GameObject> attachedObject = Arrays.stream(localTile.getGameObjects()).filter(obj -> {
+        Stream<TileObject> objects = Stream.of(localTile.getGroundObject(), localTile.getDecorativeObject(), localTile.getWallObject());
+        Stream<TileObject> fullStream = Stream.concat(Arrays.stream(localTile.getGameObjects()), objects);
+        Optional<TileObject> attachedObject = fullStream.filter(obj -> {
             if (obj == null) return false;
-            final int rotation = obj.getOrientation().getAngle() >> 9;
+            final int rotation = obj.getTileObjectAngle().getAngle() >> 9;
             final int type = obj.getFlags() & 0x1F;
-            return event.getAttachedModel() == getModel(obj, type, rotation, latestPendingSpawn.getX(), latestPendingSpawn.getY());
+            final Model a = event.getAttachedModel();
+            final Model b = getModel(obj, type, rotation, latestPendingSpawn.getX(), latestPendingSpawn.getY());
+            if (b == null) return false;
+            return a == b || (a.getFaceCount() == b.getFaceCount() && a.getVerticesCount() == b.getVerticesCount() && Arrays.equals(a.getFaceColors1(),
+                    b.getFaceColors1()) && Arrays.equals(a.getFaceColors2(), b.getFaceColors2()) && Arrays.equals(a.getFaceColors3(), b.getFaceColors3())
+                    && Arrays.equals(a.getFaceIndices1(), b.getFaceIndices1()) && Arrays.equals(a.getFaceIndices2(), b.getFaceIndices2())
+                    && Arrays.equals(a.getFaceIndices3(), b.getFaceIndices3()) && Arrays.equals(a.getVerticesX(), b.getVerticesX())
+                    && Arrays.equals(a.getVerticesY(), b.getVerticesY()) && Arrays.equals(a.getVerticesZ(), b.getVerticesZ()));
         }).findAny();
 
         if (attachedObject.isEmpty()) {
-            log.info("Unable to find a matching game object for object combine.");
+            addLine(formatActor(event.getPlayer()), "LocCombine(unable to locate object)", isActorConsoleLogged(event.getPlayer()), combinedObjects);
+            log.info("Unable to find a matching game object for object combine on " + localTile.getWorldLocation());
             return;
         }
 
 
-        GameObject obj = attachedObject.get();
+        TileObject obj = attachedObject.get();
         WorldPoint objectLocation = obj.getWorldLocation();
         final int clientTime = client.getGameCycle();
-        final int rotation = obj.getOrientation().getAngle() >> 9;
+        final int rotation = obj.getTileObjectAngle().getAngle() >> 9;
         final int type = obj.getFlags() & 0x1F;
         final int minX = event.getMinX() - latestPendingSpawn.getX();
         final int minY = event.getMinY() - latestPendingSpawn.getY();
@@ -1622,7 +1667,7 @@ public class EventInspector extends DevToolsFrame {
         addLine(formatActor(event.getPlayer()), locCombineBuilder.toString(), isActorConsoleLogged(event.getPlayer()), combinedObjects);
     }
 
-    private Model getModel(final GameObject obj, final int type, final int rotation, final int x, final int y) {
+    private Model getModel(final TileObject obj, final int type, final int rotation, final int x, final int y) {
         ObjectComposition def = client.getObjectDefinition(obj.getId());
         int width;
         int length;

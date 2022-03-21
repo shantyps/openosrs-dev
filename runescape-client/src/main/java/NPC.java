@@ -34,7 +34,8 @@ public final class NPC extends Actor {
 		descriptor = "(ILgl;I)V",
 		garbageValue = "-1216199003"
 	)
-	final void method2265(int var1, MoveSpeed var2) {
+	@Export("move")
+	final void move(int var1, MoveSpeed var2) {
 		int var3 = super.pathX[0]; // L: 15
 		int var4 = super.pathY[0]; // L: 16
 		if (var1 == 0) { // L: 17

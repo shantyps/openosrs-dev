@@ -30,18 +30,12 @@ import net.runelite.api.AnimationID;
 import net.runelite.api.NPCComposition;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
+import net.runelite.api.events.NPCMoved;
 import net.runelite.api.events.NpcChanged;
 import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.mixins.Copy;
-import net.runelite.api.mixins.FieldHook;
-import net.runelite.api.mixins.Inject;
-import net.runelite.api.mixins.Mixin;
-import net.runelite.api.mixins.Replace;
-import net.runelite.api.mixins.Shadow;
-import net.runelite.rs.api.RSClient;
-import net.runelite.rs.api.RSModel;
-import net.runelite.rs.api.RSNPC;
-import net.runelite.rs.api.RSNPCComposition;
+import net.runelite.api.events.PlayerMoved;
+import net.runelite.api.mixins.*;
+import net.runelite.rs.api.*;
 
 @Mixin(RSNPC.class)
 public abstract class RSNPCMixin implements RSNPC
@@ -204,5 +198,13 @@ public abstract class RSNPCMixin implements RSNPC
 		int tileHeight = Perspective.getTileHeight(client, tileHeightPoint, client.getPlane());
 
 		return model.getConvexHull(getX(), getY(), getOrientation(), tileHeight);
+	}
+
+	@Inject
+	@MethodHook(value = "move", end = true)
+	public void onNPCMovement(int direction, RSMoveSpeed type) {
+		int x = getPathX()[0];
+		int y = getPathY()[0];
+		client.getCallbacks().post(new NPCMoved(this, x, y, type.speed()));
 	}
 }
