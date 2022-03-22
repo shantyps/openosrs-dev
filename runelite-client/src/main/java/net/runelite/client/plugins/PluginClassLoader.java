@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Woox <https://github.com/wooxsolo>
+ * Copyright (c) 2016-2017, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,58 +22,36 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.api;
+package net.runelite.client.plugins;
 
-import net.runelite.api.coords.LocalPoint;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 
-/**
- * Represents a graphics object/spotanim.
- */
-public interface GraphicsObject extends Renderable
+class PluginClassLoader extends URLClassLoader
 {
-	/**
-	 * The graphics object ID.
-	 *
-	 * @return the ID
-	 */
-	int getId();
+	private final ClassLoader parent;
 
-	/**
-	 * The location of the object.
-	 *
-	 * @return the location
-	 */
-	LocalPoint getLocation();
+	PluginClassLoader(File plugin, ClassLoader parent) throws MalformedURLException
+	{
+		// null parent classloader, or else class path scanning includes everything from the main class loader
+		super(new URL[]{plugin.toURI().toURL()}, null);
 
-	/**
-	 * Get the time this spotanim starts
-	 *
-	 * @return
-	 */
-	int getStartCycle();
+		this.parent = parent;
+	}
 
-	/**
-	 * The plane the spotanim is on.
-	 *
-	 * @return
-	 */
-	int getLevel();
-
-	/**
-	 * Gets the z coordinate
-	 */
-	int getZ();
-
-	/**
-	 * Checks if this spotanim is done animating
-	 *
-	 * @return
-	 */
-	boolean finished();
-
-	/**
-	 * Set if this spotanim is done animating. If finished, the spotanim will despawn next frame.
-	 * @param finished
-	 */
-	void setFinished(boolean finished);
+	@Override
+	public Class<?> loadClass(String name) throws ClassNotFoundException
+	{
+		try
+		{
+			return super.loadClass(name);
+		}
+		catch (ClassNotFoundException ex)
+		{
+			// fall back to main class loader
+			return parent.loadClass(name);
+		}
+	}
 }

@@ -1227,6 +1227,10 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	void setSelectedItemSlot(int index);
 
+	@Import("selectedItemSlot")
+	@Override
+	int getSelectedItemIndex();
+
 	@Import("selectedItemWidget")
 	@Override
 	int getSelectedItemWidget();
@@ -1374,6 +1378,10 @@ public interface RSClient extends RSGameEngine, Client
 	@Override
 	@Import("isItemSelected")
 	int isItemSelected();
+
+	@Override
+	@Import("isItemSelected")
+	int getSelectedItem();
 
 	@Override
 	@Import("selectedItemName")
