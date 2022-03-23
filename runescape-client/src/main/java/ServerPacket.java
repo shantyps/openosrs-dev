@@ -723,7 +723,8 @@ public class ServerPacket {
 		descriptor = "(IIIB)Lcy;",
 		garbageValue = "-80"
 	)
-	static final InterfaceParent method5222(int var0, int var1, int var2) {
+	@Export("ifOpenSub")
+	static final InterfaceParent ifOpenSub(int var0, int var1, int var2) {
 		InterfaceParent var3 = new InterfaceParent(); // L: 11500
 		var3.group = var1; // L: 11501
 		var3.type = var2; // L: 11502

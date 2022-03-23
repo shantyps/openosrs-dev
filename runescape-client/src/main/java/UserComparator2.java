@@ -56,7 +56,7 @@ public class UserComparator2 implements Comparator {
 		} else if (var0 < 1400) { // L: 431
 			return ItemLayer.method3896(var0, var1, var2);
 		} else if (var0 < 1500) { // L: 432
-			return class193.method3879(var0, var1, var2);
+			return MoveSpeed.method3879(var0, var1, var2);
 		} else if (var0 < 1600) { // L: 433
 			return UserComparator10.method2614(var0, var1, var2);
 		} else if (var0 < 1700) { // L: 434
@@ -76,7 +76,7 @@ public class UserComparator2 implements Comparator {
 		} else if (var0 < 2400) { // L: 441
 			return ItemLayer.method3896(var0, var1, var2);
 		} else if (var0 < 2500) { // L: 442
-			return class193.method3879(var0, var1, var2);
+			return MoveSpeed.method3879(var0, var1, var2);
 		} else if (var0 < 2600) { // L: 443
 			return SoundCache.method803(var0, var1, var2);
 		} else if (var0 < 2700) { // L: 444

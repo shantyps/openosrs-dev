@@ -33,7 +33,7 @@ public final class class4 {
 		garbageValue = "178536163"
 	)
 	static long method16() {
-		return Client.field608; // L: 2578
+		return Client.userRegistrationId; // L: 2578
 	}
 
 	@ObfuscatedName("ld")

@@ -37,42 +37,42 @@ final class class428 implements class427 {
 	)
 	static final void method7654(int var0, int var1, int var2) {
 		if (EnumComposition.cameraX < var0) { // L: 3501
-			EnumComposition.cameraX = (var0 - EnumComposition.cameraX) * class33.field231 / 1000 + EnumComposition.cameraX + Tiles.field996; // L: 3502
+			EnumComposition.cameraX = (var0 - EnumComposition.cameraX) * class33.cameraMoveToAcceleration / 1000 + EnumComposition.cameraX + Tiles.cameraMoveToSpeed; // L: 3502
 			if (EnumComposition.cameraX > var0) { // L: 3503
 				EnumComposition.cameraX = var0;
 			}
 		}
 
 		if (EnumComposition.cameraX > var0) { // L: 3505
-			EnumComposition.cameraX -= (EnumComposition.cameraX - var0) * class33.field231 / 1000 + Tiles.field996; // L: 3506
+			EnumComposition.cameraX -= (EnumComposition.cameraX - var0) * class33.cameraMoveToAcceleration / 1000 + Tiles.cameraMoveToSpeed; // L: 3506
 			if (EnumComposition.cameraX < var0) { // L: 3507
 				EnumComposition.cameraX = var0;
 			}
 		}
 
 		if (FriendSystem.cameraY < var1) { // L: 3509
-			FriendSystem.cameraY = (var1 - FriendSystem.cameraY) * class33.field231 / 1000 + FriendSystem.cameraY + Tiles.field996; // L: 3510
+			FriendSystem.cameraY = (var1 - FriendSystem.cameraY) * class33.cameraMoveToAcceleration / 1000 + FriendSystem.cameraY + Tiles.cameraMoveToSpeed; // L: 3510
 			if (FriendSystem.cameraY > var1) { // L: 3511
 				FriendSystem.cameraY = var1;
 			}
 		}
 
 		if (FriendSystem.cameraY > var1) { // L: 3513
-			FriendSystem.cameraY -= (FriendSystem.cameraY - var1) * class33.field231 / 1000 + Tiles.field996; // L: 3514
+			FriendSystem.cameraY -= (FriendSystem.cameraY - var1) * class33.cameraMoveToAcceleration / 1000 + Tiles.cameraMoveToSpeed; // L: 3514
 			if (FriendSystem.cameraY < var1) { // L: 3515
 				FriendSystem.cameraY = var1;
 			}
 		}
 
 		if (CollisionMap.cameraZ < var2) { // L: 3517
-			CollisionMap.cameraZ = (var2 - CollisionMap.cameraZ) * class33.field231 / 1000 + CollisionMap.cameraZ + Tiles.field996; // L: 3518
+			CollisionMap.cameraZ = (var2 - CollisionMap.cameraZ) * class33.cameraMoveToAcceleration / 1000 + CollisionMap.cameraZ + Tiles.cameraMoveToSpeed; // L: 3518
 			if (CollisionMap.cameraZ > var2) { // L: 3519
 				CollisionMap.cameraZ = var2;
 			}
 		}
 
 		if (CollisionMap.cameraZ > var2) { // L: 3521
-			CollisionMap.cameraZ -= (CollisionMap.cameraZ - var2) * class33.field231 / 1000 + Tiles.field996; // L: 3522
+			CollisionMap.cameraZ -= (CollisionMap.cameraZ - var2) * class33.cameraMoveToAcceleration / 1000 + Tiles.cameraMoveToSpeed; // L: 3522
 			if (CollisionMap.cameraZ < var2) { // L: 3523
 				CollisionMap.cameraZ = var2;
 			}

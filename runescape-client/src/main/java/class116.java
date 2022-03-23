@@ -267,7 +267,7 @@ public enum class116 implements MouseWheel {
 				}
 			}
 
-			if (var0.overheadText != null && (var1 >= var75 || !var0.field1152 && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 4589 4590
+			if (var0.overheadText != null && (var1 >= var75 || !var0.showPublicPlayerChat && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 4589 4590
 				WorldMapLabelSize.method4533(var0, var0.defaultHeight); // L: 4591
 				if (Client.viewportTempX > -1 && Client.overheadTextCount < Client.overheadTextLimit) { // L: 4592
 					Client.overheadTextXOffsets[Client.overheadTextCount] = FloorOverlayDefinition.fontBold12.stringWidth(var0.overheadText) / 2; // L: 4593

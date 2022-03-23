@@ -29,7 +29,8 @@ public final class NPC extends Actor {
 		descriptor = "(ILgv;I)V",
 		garbageValue = "-1208741979"
 	)
-	final void method2357(int var1, class193 var2) {
+	@Export("move")
+	final void move(int var1, MoveSpeed var2) {
 		int var3 = super.pathX[0]; // L: 15
 		int var4 = super.pathY[0]; // L: 16
 		if (var1 == 0) { // L: 17
@@ -118,11 +119,11 @@ public final class NPC extends Actor {
 					var3.isSingleTile = true;
 				}
 
-				if (super.field1189 != 0 && Client.cycle >= super.field1133 && Client.cycle < super.field1185) { // L: 93
-					var3.overrideHue = super.field1146; // L: 94
-					var3.overrideSaturation = super.field1187; // L: 95
-					var3.overrideLuminance = super.field1188; // L: 96
-					var3.overrideAmount = super.field1189; // L: 97
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) { // L: 93
+					var3.overrideHue = super.recolourHue; // L: 94
+					var3.overrideSaturation = super.recolourSaturation; // L: 95
+					var3.overrideLuminance = super.recolourLuminance; // L: 96
+					var3.overrideAmount = super.recolourAmount; // L: 97
 				} else {
 					var3.overrideAmount = 0; // L: 100
 				}
@@ -158,7 +159,7 @@ public final class NPC extends Actor {
 
 				super.pathX[0] = var1; // L: 61
 				super.pathY[0] = var2; // L: 62
-				super.pathTraversed[0] = class193.field2193; // L: 63
+				super.pathTraversed[0] = MoveSpeed.field2193; // L: 63
 				return; // L: 64
 			}
 		}
@@ -282,8 +283,8 @@ public final class NPC extends Actor {
 			var17 = Client.field756 / 256;
 		}
 
-		if (Client.field740[4] && Client.field549[4] + 128 > var17) { // L: 4117
-			var17 = Client.field549[4] + 128;
+		if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var17) { // L: 4117
+			var17 = Client.cameraMoveIntensity[4] + 128;
 		}
 
 		int var5 = Client.camAngleY & 2047; // L: 4118
@@ -303,8 +304,8 @@ public final class NPC extends Actor {
 		int var12;
 		int var13;
 		for (var12 = 0; var12 < 5; ++var12) { // L: 4128
-			if (Client.field740[var12]) { // L: 4129
-				var13 = (int)(Math.random() * (double)(Client.field482[var12] * 2 + 1) - (double)Client.field482[var12] + Math.sin((double)Client.field766[var12] / 100.0D * (double)Client.field744[var12]) * (double)Client.field549[var12]); // L: 4130
+			if (Client.cameraShaking[var12]) { // L: 4129
+				var13 = (int)(Math.random() * (double)(Client.cameraShakeIntensity[var12] * 2 + 1) - (double)Client.cameraShakeIntensity[var12] + Math.sin((double)Client.cameraShakeSpeed[var12] / 100.0D * (double)Client.cameraShakeCycle[var12]) * (double)Client.cameraMoveIntensity[var12]); // L: 4130
 				if (var12 == 0) { // L: 4131
 					EnumComposition.cameraX += var13;
 				}

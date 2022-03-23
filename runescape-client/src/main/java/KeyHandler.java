@@ -262,18 +262,18 @@ public final class KeyHandler implements KeyListener, FocusListener {
 				var0.sequenceFrame = 0; // L: 3900
 				var0.sequenceFrameCycle = 0; // L: 3901
 				var0.sequenceDelay = var2; // L: 3902
-				var0.field1169 = 0; // L: 3903
+				var0.currentSequenceFrameIndex = 0; // L: 3903
 			}
 
 			if (var3 == 2) { // L: 3905
-				var0.field1169 = 0; // L: 3906
+				var0.currentSequenceFrameIndex = 0; // L: 3906
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || ItemContainer.SequenceDefinition_get(var1).field2166 >= ItemContainer.SequenceDefinition_get(var0.sequence).field2166) { // L: 3909
 			var0.sequence = var1; // L: 3910
 			var0.sequenceFrame = 0; // L: 3911
 			var0.sequenceFrameCycle = 0; // L: 3912
 			var0.sequenceDelay = var2; // L: 3913
-			var0.field1169 = 0; // L: 3914
+			var0.currentSequenceFrameIndex = 0; // L: 3914
 			var0.field1134 = var0.pathLength; // L: 3915
 		}
 

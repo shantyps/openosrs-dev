@@ -18,7 +18,8 @@ public class ClanChannel extends Node {
 	@ObfuscatedGetter(
 		intValue = 227189983
 	)
-	static int field1660;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 	@ObfuscatedName("um")
 	@ObfuscatedSignature(
 		descriptor = "Lon;"

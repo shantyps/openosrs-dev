@@ -88,6 +88,6 @@ class class13 extends DefaultTlsClient {
 			var8[var5] = class67.ItemDefinition_get(var2[var5]).name;
 		}
 
-		class193.method3880(var8, class14.foundItemIds); // L: 11866
+		MoveSpeed.method3880(var8, class14.foundItemIds); // L: 11866
 	} // L: 11867
 }

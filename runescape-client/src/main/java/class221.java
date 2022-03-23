@@ -100,7 +100,7 @@ public class class221 {
 			var9 = (var7 & 7) + class9.field34; // L: 7139
 			if (var8 >= 0 && var9 >= 0 && var8 < 103 && var9 < 103) { // L: 7140
 				if (var6 == 0) { // L: 7141
-					BoundaryObject var34 = FriendSystem.scene.method4150(class160.Client_plane, var8, var9); // L: 7142
+					BoundaryObject var34 = FriendSystem.scene.getBoundaryObject(class160.Client_plane, var8, var9); // L: 7142
 					if (var34 != null) { // L: 7143
 						var11 = class121.Entity_unpackID(var34.tag); // L: 7144
 						if (var4 == 2) { // L: 7145
@@ -113,7 +113,7 @@ public class class221 {
 				}
 
 				if (var6 == 1) { // L: 7152
-					WallDecoration var44 = FriendSystem.scene.method4224(class160.Client_plane, var8, var9); // L: 7153
+					WallDecoration var44 = FriendSystem.scene.getWallObject(class160.Client_plane, var8, var9); // L: 7153
 					if (var44 != null) { // L: 7154
 						var11 = class121.Entity_unpackID(var44.tag); // L: 7155
 						if (var4 != 4 && var4 != 5) { // L: 7156

@@ -9,7 +9,8 @@ public class class33 {
 	@ObfuscatedGetter(
 		intValue = -1543138447
 	)
-	static int field231;
+	@Export("cameraMoveToAcceleration")
+	static int cameraMoveToAcceleration;
 	@ObfuscatedName("v")
 	@ObfuscatedSignature(
 		descriptor = "Lld;"

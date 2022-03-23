@@ -369,7 +369,8 @@ public class Widget extends Node {
 	@ObfuscatedGetter(
 		intValue = 1683212549
 	)
-	public int field3398;
+	@Export("modelRotation")
+	public int modelRotation;
 	@ObfuscatedName("cc")
 	@ObfuscatedGetter(
 		intValue = -507742713
@@ -780,7 +781,7 @@ public class Widget extends Node {
 		this.modelAngleY = 0; // L: 113
 		this.modelAngleZ = 0; // L: 114
 		this.modelZoom = 100; // L: 115
-		this.field3398 = 0; // L: 116
+		this.modelRotation = 0; // L: 116
 		this.field3399 = 0; // L: 117
 		this.modelOrthog = false; // L: 118
 		this.modelTransparency = false; // L: 119
@@ -1151,7 +1152,7 @@ public class Widget extends Node {
 			this.modelOrthog = var1.readUnsignedByte() == 1; // L: 486
 			var1.readUnsignedShort(); // L: 487
 			if (this.widthAlignment != 0) { // L: 488
-				this.field3398 = var1.readUnsignedShort();
+				this.modelRotation = var1.readUnsignedShort();
 			}
 
 			if (this.heightAlignment != 0) { // L: 489

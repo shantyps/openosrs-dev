@@ -1659,4 +1659,8 @@ public interface RSClient extends RSGameEngine, Client
 
 	@Construct
 	RSEvictingDualNodeHashTable newEvictingDualNodeHashTable(int var1);
+
+	@Import("userRegistrationId")
+	@Override
+	long getUserRegistrationId();
 }

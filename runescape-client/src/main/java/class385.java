@@ -97,7 +97,7 @@ public class class385 {
 							Client.npcIndices[++Client.npcCount - 1] = var3; // L: 7875
 							var4.npcCycle = Client.cycle; // L: 7876
 							var7 = var0.readBits(3); // L: 7877
-							var4.method2357(var7, class193.field2193); // L: 7878
+							var4.move(var7, MoveSpeed.field2193); // L: 7878
 							var8 = var0.readBits(1); // L: 7879
 							if (var8 == 1) { // L: 7880
 								Client.field533[++Client.field609 - 1] = var3;
@@ -107,12 +107,12 @@ public class class385 {
 							var4.npcCycle = Client.cycle; // L: 7885
 							if (var0.readBits(1) == 1) { // L: 7886
 								var7 = var0.readBits(3); // L: 7887
-								var4.method2357(var7, class193.field2191); // L: 7888
+								var4.move(var7, MoveSpeed.field2191); // L: 7888
 								var8 = var0.readBits(3); // L: 7889
-								var4.method2357(var8, class193.field2191); // L: 7890
+								var4.move(var8, MoveSpeed.field2191); // L: 7890
 							} else {
 								var7 = var0.readBits(3); // L: 7893
-								var4.method2357(var7, class193.field2195); // L: 7894
+								var4.move(var7, MoveSpeed.field2195); // L: 7894
 							}
 
 							var7 = var0.readBits(1); // L: 7896

@@ -296,13 +296,13 @@ public final class Player extends Actor {
 			this.isHidden = false;
 		}
 
-		class168[] var25 = null; // L: 111
+		PlayerEquipmentItem[] var25 = null; // L: 111
 		boolean var26 = false; // L: 112
 		if (var1.offset < var1.array.length) { // L: 113
 			var8 = var1.readUnsignedShort(); // L: 114
 			var26 = (var8 >> 15 & 1) == 1; // L: 115
 			if (var8 > 0 && var8 != 32768) { // L: 116
-				var25 = new class168[12]; // L: 117
+				var25 = new PlayerEquipmentItem[12]; // L: 117
 
 				for (int var9 = 0; var9 < 12; ++var9) { // L: 118
 					int var10 = var8 >> 12 - var9 & 1; // L: 119
@@ -311,7 +311,7 @@ public final class Player extends Actor {
 						int var15 = var1.readUnsignedByte(); // L: 126
 						boolean var16 = (var15 & 1) != 0; // L: 127
 						boolean var17 = (var15 & 2) != 0; // L: 128
-						class168 var18 = new class168(var14); // L: 129
+						PlayerEquipmentItem var18 = new PlayerEquipmentItem(var14); // L: 129
 						int var19;
 						int[] var20;
 						boolean var21;
@@ -320,13 +320,13 @@ public final class Player extends Actor {
 						if (var16) { // L: 130
 							var19 = var1.readUnsignedByte(); // L: 131
 							var20 = new int[]{var19 & 15, var19 >> 4 & 15}; // L: 132 133 134
-							var21 = var18.field1804 != null && var20.length == var18.field1804.length; // L: 135
+							var21 = var18.recolorTo != null && var20.length == var18.recolorTo.length; // L: 135
 
 							for (var22 = 0; var22 < 2; ++var22) { // L: 136
 								if (var20[var22] != 15) { // L: 137
 									var23 = (short)var1.readUnsignedShort(); // L: 138
 									if (var21) { // L: 139
-										var18.field1804[var20[var22]] = var23; // L: 140
+										var18.recolorTo[var20[var22]] = var23; // L: 140
 									}
 								}
 							}
@@ -335,13 +335,13 @@ public final class Player extends Actor {
 						if (var17) { // L: 145
 							var19 = var1.readUnsignedByte(); // L: 146
 							var20 = new int[]{var19 & 15, var19 >> 4 & 15}; // L: 147 148 149
-							var21 = var18.field1805 != null && var20.length == var18.field1805.length; // L: 150
+							var21 = var18.retextureTo != null && var20.length == var18.retextureTo.length; // L: 150
 
 							for (var22 = 0; var22 < 2; ++var22) { // L: 151
 								if (var20[var22] != 15) { // L: 152
 									var23 = (short)var1.readUnsignedShort(); // L: 153
 									if (var21) { // L: 154
-										var18.field1805[var20[var22]] = var23; // L: 155
+										var18.retextureTo[var20[var22]] = var23; // L: 155
 									}
 								}
 							}
@@ -426,11 +426,11 @@ public final class Player extends Actor {
 				}
 
 				var3.isSingleTile = true; // L: 277
-				if (super.field1189 != 0 && Client.cycle >= super.field1133 && Client.cycle < super.field1185) { // L: 278
-					var3.overrideHue = super.field1146; // L: 279
-					var3.overrideSaturation = super.field1187; // L: 280
-					var3.overrideLuminance = super.field1188; // L: 281
-					var3.overrideAmount = super.field1189; // L: 282
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) { // L: 278
+					var3.overrideHue = super.recolourHue; // L: 279
+					var3.overrideSaturation = super.recolourSaturation; // L: 280
+					var3.overrideLuminance = super.recolourLuminance; // L: 281
+					var3.overrideAmount = super.recolourAmount; // L: 282
 				} else {
 					var3.overrideAmount = 0; // L: 285
 				}
@@ -563,16 +563,17 @@ public final class Player extends Actor {
 		descriptor = "(IILgv;I)V",
 		garbageValue = "-2026849446"
 	)
-	final void method2144(int var1, int var2, class193 var3) {
+	@Export("move")
+	final void move(int var1, int var2, MoveSpeed var3) {
 		if (super.sequence != -1 && ItemContainer.SequenceDefinition_get(super.sequence).field2171 == 1) { // L: 291
 			super.sequence = -1;
 		}
 
-		super.field1160 = -1; // L: 292
+		super.facedDirection = -1; // L: 292
 		if (var1 >= 0 && var1 < 104 && var2 >= 0 && var2 < 104) { // L: 293
 			if (super.pathX[0] >= 0 && super.pathX[0] < 104 && super.pathY[0] >= 0 && super.pathY[0] < 104) { // L: 294
-				if (var3 == class193.field2191) {
-					GraphicsObject.method1860(this, var1, var2, class193.field2191); // L: 296
+				if (var3 == MoveSpeed.field2191) {
+					GraphicsObject.method1860(this, var1, var2, MoveSpeed.field2191); // L: 296
 				}
 
 				this.method2149(var1, var2, var3); // L: 297
@@ -607,7 +608,7 @@ public final class Player extends Actor {
 		descriptor = "(IILgv;B)V",
 		garbageValue = "-40"
 	)
-	final void method2149(int var1, int var2, class193 var3) {
+	final void method2149(int var1, int var2, MoveSpeed var3) {
 		if (super.pathLength < 9) { // L: 313
 			++super.pathLength;
 		}

@@ -12,7 +12,8 @@ public class JagexCache {
 	@ObfuscatedGetter(
 		intValue = -1318999061
 	)
-	static int field1737;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 	@ObfuscatedName("v")
 	@ObfuscatedSignature(
 		descriptor = "Llq;"

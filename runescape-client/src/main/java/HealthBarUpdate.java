@@ -82,14 +82,14 @@ public class HealthBarUpdate extends Node {
 		garbageValue = "-1310765413"
 	)
 	static final void method2213(PacketBuffer var0, int var1, Player var2, int var3) {
-		byte var4 = class193.field2192.field2194; // L: 453
+		byte var4 = MoveSpeed.field2192.speed; // L: 453
 		if ((var3 & 8192) != 0) { // L: 454
-			var2.field1133 = Client.cycle + var0.method7935(); // L: 455
-			var2.field1185 = Client.cycle + var0.method7798(); // L: 456
-			var2.field1146 = var0.method7955(); // L: 457
-			var2.field1187 = var0.method7955(); // L: 458
-			var2.field1188 = var0.method7925(); // L: 459
-			var2.field1189 = (byte)var0.method7790(); // L: 460
+			var2.recolourStartCycle = Client.cycle + var0.method7935(); // L: 455
+			var2.recolourEndCycle = Client.cycle + var0.method7798(); // L: 456
+			var2.recolourHue = var0.method7955(); // L: 457
+			var2.recolourSaturation = var0.method7955(); // L: 458
+			var2.recolourLuminance = var0.method7925(); // L: 459
+			var2.recolourAmount = (byte)var0.method7790(); // L: 460
 		}
 
 		if ((var3 & 256) != 0) { // L: 462
@@ -122,7 +122,7 @@ public class HealthBarUpdate extends Node {
 					var2.overheadTextEffect = var5 & 255; // L: 483
 					var2.overheadTextCyclesRemaining = 150; // L: 484
 					var2.isAutoChatting = var7; // L: 485
-					var2.field1152 = var2 != class19.localPlayer && var6.isUser && "" != Client.field712 && var11.toLowerCase().indexOf(Client.field712) == -1; // L: 486
+					var2.showPublicPlayerChat = var2 != class19.localPlayer && var6.isUser && "" != Client.field712 && var11.toLowerCase().indexOf(Client.field712) == -1; // L: 486
 					if (var6.isPrivileged) { // L: 488
 						var12 = var7 ? 91 : 1;
 					} else {
@@ -150,10 +150,10 @@ public class HealthBarUpdate extends Node {
 			var2.spotAnimation = var0.method7798(); // L: 500
 			var5 = var0.method7889(); // L: 501
 			var2.spotAnimationHeight = var5 >> 16; // L: 502
-			var2.field1173 = (var5 & 65535) + Client.cycle; // L: 503
+			var2.spotAnimationStartCycle = (var5 & 65535) + Client.cycle; // L: 503
 			var2.spotAnimationFrame = 0; // L: 504
 			var2.spotAnimationFrameCycle = 0; // L: 505
-			if (var2.field1173 > Client.cycle) { // L: 506
+			if (var2.spotAnimationStartCycle > Client.cycle) { // L: 506
 				var2.spotAnimationFrame = -1;
 			}
 
@@ -172,24 +172,24 @@ public class HealthBarUpdate extends Node {
 		}
 
 		if ((var3 & 512) != 0) { // L: 517
-			var2.field1175 = var0.method7792(); // L: 518
-			var2.field1177 = var0.readByte(); // L: 519
-			var2.field1176 = var0.method7925(); // L: 520
-			var2.field1178 = var0.method7955(); // L: 521
-			var2.field1179 = var0.method7935() + Client.cycle; // L: 522
-			var2.field1180 = var0.method7971() + Client.cycle; // L: 523
-			var2.field1181 = var0.method7798(); // L: 524
+			var2.exactMoveDeltaX1 = var0.method7792(); // L: 518
+			var2.exactMoveDeltaY1 = var0.readByte(); // L: 519
+			var2.exactMoveDeltaX2 = var0.method7925(); // L: 520
+			var2.exactMoveDeltaY2 = var0.method7955(); // L: 521
+			var2.exactMoveArrive1Cycle = var0.method7935() + Client.cycle; // L: 522
+			var2.exactMoveArrive2Cycle = var0.method7971() + Client.cycle; // L: 523
+			var2.exactMoveDirection = var0.method7798(); // L: 524
 			if (var2.field1109) { // L: 525
-				var2.field1175 += var2.tileX; // L: 526
-				var2.field1177 += var2.tileY; // L: 527
-				var2.field1176 += var2.tileX; // L: 528
-				var2.field1178 += var2.tileY; // L: 529
+				var2.exactMoveDeltaX1 += var2.tileX; // L: 526
+				var2.exactMoveDeltaY1 += var2.tileY; // L: 527
+				var2.exactMoveDeltaX2 += var2.tileX; // L: 528
+				var2.exactMoveDeltaY2 += var2.tileY; // L: 529
 				var2.pathLength = 0; // L: 530
 			} else {
-				var2.field1175 += var2.pathX[0]; // L: 533
-				var2.field1177 += var2.pathY[0]; // L: 534
-				var2.field1176 += var2.pathX[0]; // L: 535
-				var2.field1178 += var2.pathY[0]; // L: 536
+				var2.exactMoveDeltaX1 += var2.pathX[0]; // L: 533
+				var2.exactMoveDeltaY1 += var2.pathY[0]; // L: 534
+				var2.exactMoveDeltaX2 += var2.pathX[0]; // L: 535
+				var2.exactMoveDeltaY2 += var2.pathY[0]; // L: 536
 				var2.pathLength = 1; // L: 537
 			}
 
@@ -197,10 +197,10 @@ public class HealthBarUpdate extends Node {
 		}
 
 		if ((var3 & 16) != 0) { // L: 541
-			var2.field1160 = var0.readUnsignedShort(); // L: 542
+			var2.facedDirection = var0.readUnsignedShort(); // L: 542
 			if (var2.pathLength == 0) { // L: 543
-				var2.orientation = var2.field1160; // L: 544
-				var2.field1160 = -1; // L: 545
+				var2.orientation = var2.facedDirection; // L: 544
+				var2.facedDirection = -1; // L: 545
 			}
 		}
 
@@ -231,7 +231,7 @@ public class HealthBarUpdate extends Node {
 		}
 
 		if ((var3 & 16384) != 0) { // L: 568
-			Players.field1285[var1] = (class193)ChatChannel.findEnumerated(class124.method2801(), var0.method7955()); // L: 569
+			Players.field1285[var1] = (MoveSpeed)ChatChannel.findEnumerated(class124.method2801(), var0.method7955()); // L: 569
 		}
 
 		if ((var3 & 32) != 0) { // L: 571
@@ -289,14 +289,14 @@ public class HealthBarUpdate extends Node {
 			if (var4 == 127) { // L: 614
 				var2.resetPath(var2.tileX, var2.tileY);
 			} else {
-				class193 var15;
-				if (var4 != class193.field2192.field2194) { // L: 617
-					var15 = (class193)ChatChannel.findEnumerated(class124.method2801(), var4);
+				MoveSpeed var15;
+				if (var4 != MoveSpeed.field2192.speed) { // L: 617
+					var15 = (MoveSpeed)ChatChannel.findEnumerated(class124.method2801(), var4);
 				} else {
 					var15 = Players.field1285[var1]; // L: 618
 				}
 
-				var2.method2144(var2.tileX, var2.tileY, var15); // L: 619
+				var2.move(var2.tileX, var2.tileY, var15); // L: 619
 			}
 		}
 

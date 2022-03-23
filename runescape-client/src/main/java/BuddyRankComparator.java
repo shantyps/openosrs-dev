@@ -66,9 +66,9 @@ public class BuddyRankComparator extends AbstractUserComparator {
 		int var3;
 		int var4;
 		int var11;
-		if (var0.field1179 >= Client.cycle) { // L: 3573
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) { // L: 3573
 			ModeWhere.method6145(var0);
-		} else if (var0.field1180 >= Client.cycle) { // L: 3574
+		} else if (var0.exactMoveArrive2Cycle >= Client.cycle) { // L: 3574
 			class16.method215(var0);
 		} else {
 			var0.movementSequence = var0.idleSequence; // L: 3576
@@ -115,7 +115,7 @@ public class BuddyRankComparator extends AbstractUserComparator {
 						var0.orientation = 0;
 					}
 
-					class193 var6 = var0.pathTraversed[var0.pathLength - 1]; // L: 3608
+					MoveSpeed var6 = var0.pathTraversed[var0.pathLength - 1]; // L: 3608
 					if (var4 - var11 <= 256 && var4 - var11 >= -256 && var5 - var3 <= 256 && var5 - var3 >= -256) { // L: 3609
 						int var7 = var0.orientation - var0.rotation & 2047; // L: 3616
 						if (var7 > 1024) { // L: 3617
@@ -174,9 +174,9 @@ public class BuddyRankComparator extends AbstractUserComparator {
 							}
 						}
 
-						if (var6 == class193.field2191) { // L: 3644
+						if (var6 == MoveSpeed.field2191) { // L: 3644
 							var9 <<= 1;
-						} else if (var6 == class193.field2195) { // L: 3645
+						} else if (var6 == MoveSpeed.field2195) { // L: 3645
 							var9 >>= 1;
 						}
 
@@ -231,8 +231,8 @@ public class BuddyRankComparator extends AbstractUserComparator {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) { // L: 3670
 			var0.sequence = -1; // L: 3671
 			var0.spotAnimation = -1; // L: 3672
-			var0.field1179 = 0; // L: 3673
-			var0.field1180 = 0; // L: 3674
+			var0.exactMoveArrive1Cycle = 0; // L: 3673
+			var0.exactMoveArrive2Cycle = 0; // L: 3674
 			var0.x = var0.pathX[0] * 128 + var0.field1145 * 64; // L: 3675
 			var0.y = var0.field1145 * 64 + var0.pathY[0] * 128; // L: 3676
 			var0.method2205(); // L: 3677
@@ -241,8 +241,8 @@ public class BuddyRankComparator extends AbstractUserComparator {
 		if (class19.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) { // L: 3679 3680
 			var0.sequence = -1; // L: 3681
 			var0.spotAnimation = -1; // L: 3682
-			var0.field1179 = 0; // L: 3683
-			var0.field1180 = 0; // L: 3684
+			var0.exactMoveArrive1Cycle = 0; // L: 3683
+			var0.exactMoveArrive2Cycle = 0; // L: 3684
 			var0.x = var0.pathX[0] * 128 + var0.field1145 * 64; // L: 3685
 			var0.y = var0.pathY[0] * 128 + var0.field1145 * 64; // L: 3686
 			var0.method2205(); // L: 3687
@@ -269,9 +269,9 @@ public class BuddyRankComparator extends AbstractUserComparator {
 				}
 			}
 
-			if (var0.field1160 != -1 && (var0.pathLength == 0 || var0.field1197 > 0)) { // L: 3706
-				var0.orientation = var0.field1160; // L: 3707
-				var0.field1160 = -1; // L: 3708
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1197 > 0)) { // L: 3706
+				var0.orientation = var0.facedDirection; // L: 3707
+				var0.facedDirection = -1; // L: 3708
 			}
 
 			var11 = var0.orientation - var0.rotation & 2047; // L: 3710
@@ -284,14 +284,14 @@ public class BuddyRankComparator extends AbstractUserComparator {
 				++var0.field1131; // L: 3716
 				boolean var14;
 				if (var11 > 1024) { // L: 3717
-					var0.rotation -= var0.field1183 ? var11 : var0.field1192 * 763690023 * -1413434473; // L: 3718
+					var0.rotation -= var0.instantTurn ? var11 : var0.field1192 * 763690023 * -1413434473; // L: 3718
 					var14 = true; // L: 3719
 					if (var11 < var0.field1192 || var11 > 2048 - var0.field1192) { // L: 3720
 						var0.rotation = var0.orientation; // L: 3721
 						var14 = false; // L: 3722
 					}
 
-					if (!var0.field1183 && var0.movementSequence == var0.idleSequence && (var0.field1131 > 25 || var14)) { // L: 3724
+					if (!var0.instantTurn && var0.movementSequence == var0.idleSequence && (var0.field1131 > 25 || var14)) { // L: 3724
 						if (var0.turnLeftSequence != -1) { // L: 3725
 							var0.movementSequence = var0.turnLeftSequence;
 						} else {
@@ -299,14 +299,14 @@ public class BuddyRankComparator extends AbstractUserComparator {
 						}
 					}
 				} else {
-					var0.rotation += var0.field1183 ? var11 : var0.field1192 * 763690023 * -1413434473; // L: 3730
+					var0.rotation += var0.instantTurn ? var11 : var0.field1192 * 763690023 * -1413434473; // L: 3730
 					var14 = true; // L: 3731
 					if (var11 < var0.field1192 || var11 > 2048 - var0.field1192) { // L: 3732
 						var0.rotation = var0.orientation; // L: 3733
 						var14 = false; // L: 3734
 					}
 
-					if (!var0.field1183 && var0.idleSequence == var0.movementSequence && (var0.field1131 > 25 || var14)) { // L: 3736
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1131 > 25 || var14)) { // L: 3736
 						if (var0.turnRightSequence != -1) { // L: 3737
 							var0.movementSequence = var0.turnRightSequence;
 						} else {
@@ -316,7 +316,7 @@ public class BuddyRankComparator extends AbstractUserComparator {
 				}
 
 				var0.rotation &= 2047; // L: 3742
-				var0.field1183 = false; // L: 3743
+				var0.instantTurn = false; // L: 3743
 			} else {
 				var0.field1131 = 0; // L: 3745
 			}

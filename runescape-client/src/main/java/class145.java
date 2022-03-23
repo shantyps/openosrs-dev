@@ -91,7 +91,8 @@ public class class145 {
 		descriptor = "(III)V",
 		garbageValue = "1527642591"
 	)
-	static void method3032(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (Interpreter.clientPreferences.method2288() != 0 && var0 != -1) { // L: 3365
 			WorldMapSection2.method4561(class268.archive11, var0, 0, Interpreter.clientPreferences.method2288(), false); // L: 3366
 			Client.field731 = true; // L: 3367

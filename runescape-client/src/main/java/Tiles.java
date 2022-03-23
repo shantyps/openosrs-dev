@@ -11,7 +11,8 @@ public final class Tiles {
 	@ObfuscatedGetter(
 		intValue = 1069541605
 	)
-	static int field996;
+	@Export("cameraMoveToSpeed")
+	static int cameraMoveToSpeed;
 	@ObfuscatedName("v")
 	@Export("Tiles_heights")
 	static int[][][] Tiles_heights;

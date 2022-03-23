@@ -176,12 +176,12 @@ public enum ModeWhere implements MouseWheel {
 		garbageValue = "1465598297"
 	)
 	static final void method6145(Actor var0) {
-		int var1 = Math.max(1, var0.field1179 - Client.cycle); // L: 3751
-		int var2 = var0.field1145 * 64 + var0.field1175 * 128; // L: 3752
-		int var3 = var0.field1145 * 64 + var0.field1177 * 128; // L: 3753
+		int var1 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle); // L: 3751
+		int var2 = var0.field1145 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3752
+		int var3 = var0.field1145 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3753
 		var0.x += (var2 - var0.x) / var1; // L: 3754
 		var0.y += (var3 - var0.y) / var1; // L: 3755
 		var0.field1197 = 0; // L: 3756
-		var0.orientation = var0.field1181; // L: 3757
+		var0.orientation = var0.exactMoveDirection; // L: 3757
 	} // L: 3758
 }

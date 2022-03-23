@@ -259,28 +259,28 @@ public class DynamicObject extends Renderable {
 				var6 = var1.readUnsignedShort(); // L: 7701
 				var7 = var1.method7971(); // L: 7702
 				if (class162.field1768) { // L: 7703
-					var4.field1183 = var1.method7789() == 1; // L: 7704
+					var4.instantTurn = var1.method7789() == 1; // L: 7704
 				}
 
 				var8 = var4.x - (var6 - ApproximateRouteStrategy.baseX - ApproximateRouteStrategy.baseX) * 64; // L: 7706
 				var9 = var4.y - (var7 - class250.baseY - class250.baseY) * 64; // L: 7707
 				if (var8 != 0 || var9 != 0) { // L: 7708
-					var4.field1160 = (int)(Math.atan2((double)var8, (double)var9) * 325.949D) & 2047;
+					var4.facedDirection = (int)(Math.atan2((double)var8, (double)var9) * 325.949D) & 2047;
 				}
 			}
 
 			if ((var5 & 1024) != 0) { // L: 7710
-				var4.field1161 = var1.readInt(); // L: 7711
+				var4.combatLevelChange = var1.readInt(); // L: 7711
 			}
 
 			if ((var5 & 16) != 0) { // L: 7713
 				var4.spotAnimation = var1.readUnsignedShort(); // L: 7714
 				var6 = var1.readInt(); // L: 7715
 				var4.spotAnimationHeight = var6 >> 16; // L: 7716
-				var4.field1173 = (var6 & 65535) + Client.cycle; // L: 7717
+				var4.spotAnimationStartCycle = (var6 & 65535) + Client.cycle; // L: 7717
 				var4.spotAnimationFrame = 0; // L: 7718
 				var4.spotAnimationFrameCycle = 0; // L: 7719
-				if (var4.field1173 > Client.cycle) { // L: 7720
+				if (var4.spotAnimationStartCycle > Client.cycle) { // L: 7720
 					var4.spotAnimationFrame = -1;
 				}
 
@@ -334,28 +334,28 @@ public class DynamicObject extends Renderable {
 			}
 
 			if (class162.field1768 && (var5 & 256) != 0 || !class162.field1768 && (var5 & 64) != 0) { // L: 7761
-				var4.field1175 = var1.method7925(); // L: 7762
-				var4.field1177 = var1.method7792(); // L: 7763
-				var4.field1176 = var1.readByte(); // L: 7764
-				var4.field1178 = var1.readByte(); // L: 7765
-				var4.field1179 = var1.method7971() + Client.cycle; // L: 7766
-				var4.field1180 = var1.readUnsignedShort() + Client.cycle; // L: 7767
-				var4.field1181 = var1.method7971(); // L: 7768
+				var4.exactMoveDeltaX1 = var1.method7925(); // L: 7762
+				var4.exactMoveDeltaY1 = var1.method7792(); // L: 7763
+				var4.exactMoveDeltaX2 = var1.readByte(); // L: 7764
+				var4.exactMoveDeltaY2 = var1.readByte(); // L: 7765
+				var4.exactMoveArrive1Cycle = var1.method7971() + Client.cycle; // L: 7766
+				var4.exactMoveArrive2Cycle = var1.readUnsignedShort() + Client.cycle; // L: 7767
+				var4.exactMoveDirection = var1.method7971(); // L: 7768
 				var4.pathLength = 1; // L: 7769
 				var4.field1134 = 0; // L: 7770
-				var4.field1175 += var4.pathX[0]; // L: 7771
-				var4.field1177 += var4.pathY[0]; // L: 7772
-				var4.field1176 += var4.pathX[0]; // L: 7773
-				var4.field1178 += var4.pathY[0]; // L: 7774
+				var4.exactMoveDeltaX1 += var4.pathX[0]; // L: 7771
+				var4.exactMoveDeltaY1 += var4.pathY[0]; // L: 7772
+				var4.exactMoveDeltaX2 += var4.pathX[0]; // L: 7773
+				var4.exactMoveDeltaY2 += var4.pathY[0]; // L: 7774
 			}
 
 			if ((var5 & 512) != 0) { // L: 7776
-				var4.field1133 = Client.cycle + var1.method7798(); // L: 7777
-				var4.field1185 = Client.cycle + var1.method7935(); // L: 7778
-				var4.field1146 = var1.readByte(); // L: 7779
-				var4.field1187 = var1.method7792(); // L: 7780
-				var4.field1188 = var1.method7792(); // L: 7781
-				var4.field1189 = (byte)var1.method7927(); // L: 7782
+				var4.recolourStartCycle = Client.cycle + var1.method7798(); // L: 7777
+				var4.recolourEndCycle = Client.cycle + var1.method7935(); // L: 7778
+				var4.recolourHue = var1.readByte(); // L: 7779
+				var4.recolourSaturation = var1.method7792(); // L: 7780
+				var4.recolourLuminance = var1.method7792(); // L: 7781
+				var4.recolourAmount = (byte)var1.method7927(); // L: 7782
 			}
 
 			if ((var5 & 2) != 0) { // L: 7784
@@ -396,18 +396,18 @@ public class DynamicObject extends Renderable {
 						var4.sequenceFrame = 0; // L: 7813
 						var4.sequenceFrameCycle = 0; // L: 7814
 						var4.sequenceDelay = var7; // L: 7815
-						var4.field1169 = 0; // L: 7816
+						var4.currentSequenceFrameIndex = 0; // L: 7816
 					}
 
 					if (var8 == 2) { // L: 7818
-						var4.field1169 = 0; // L: 7819
+						var4.currentSequenceFrameIndex = 0; // L: 7819
 					}
 				} else if (var6 == -1 || var4.sequence == -1 || ItemContainer.SequenceDefinition_get(var6).field2166 >= ItemContainer.SequenceDefinition_get(var4.sequence).field2166) { // L: 7822
 					var4.sequence = var6; // L: 7823
 					var4.sequenceFrame = 0; // L: 7824
 					var4.sequenceFrameCycle = 0; // L: 7825
 					var4.sequenceDelay = var7; // L: 7826
-					var4.field1169 = 0; // L: 7827
+					var4.currentSequenceFrameIndex = 0; // L: 7827
 					var4.field1134 = var4.pathLength; // L: 7828
 				}
 			}

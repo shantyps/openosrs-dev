@@ -36,7 +36,8 @@ public enum WorldMapSectionType implements MouseWheel {
 	@ObfuscatedGetter(
 		intValue = 703478945
 	)
-	static int field2778;
+	@Export("cameraLookAtY")
+	static int cameraLookAtY;
 	@ObfuscatedName("x")
 	@Export("Tiles_lightness")
 	static int[] Tiles_lightness;
@@ -168,7 +169,7 @@ public enum WorldMapSectionType implements MouseWheel {
 			}
 		}
 
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1173) { // L: 3810
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) { // L: 3810
 			if (var0.spotAnimationFrame < 0) { // L: 3811
 				var0.spotAnimationFrame = 0;
 			}
@@ -205,7 +206,7 @@ public enum WorldMapSectionType implements MouseWheel {
 
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) { // L: 3840
 			var1 = ItemContainer.SequenceDefinition_get(var0.sequence); // L: 3841
-			if (var1.field2162 == 1 && var0.field1134 > 0 && var0.field1179 <= Client.cycle && var0.field1180 < Client.cycle) { // L: 3842 3843
+			if (var1.field2162 == 1 && var0.field1134 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) { // L: 3842 3843
 				var0.sequenceDelay = 1; // L: 3844
 				return; // L: 3845
 			}
@@ -224,8 +225,8 @@ public enum WorldMapSectionType implements MouseWheel {
 
 					if (var0.sequenceFrame >= var1.frameIds.length) { // L: 3859
 						var0.sequenceFrame -= var1.frameCount; // L: 3860
-						++var0.field1169; // L: 3861
-						if (var0.field1169 >= var1.field2169) { // L: 3862
+						++var0.currentSequenceFrameIndex; // L: 3861
+						if (var0.currentSequenceFrameIndex >= var1.field2169) { // L: 3862
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var1.frameIds.length) { // L: 3863
 							class152.method3102(var1, var0.sequenceFrame, var0.x, var0.y); // L: 3864
@@ -242,8 +243,8 @@ public enum WorldMapSectionType implements MouseWheel {
 						class241.method5002(var1, var0.sequenceFrame, var0.x, var0.y); // L: 3872
 					} else {
 						var0.sequenceFrame -= var1.frameCount; // L: 3875
-						++var0.field1169; // L: 3876
-						if (var0.field1169 >= var1.field2169) { // L: 3877
+						++var0.currentSequenceFrameIndex; // L: 3876
+						if (var0.currentSequenceFrameIndex >= var1.field2169) { // L: 3877
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var2) { // L: 3878
 							class241.method5002(var1, var0.sequenceFrame, var0.x, var0.y); // L: 3879

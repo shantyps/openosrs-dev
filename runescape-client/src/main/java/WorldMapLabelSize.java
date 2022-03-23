@@ -102,8 +102,8 @@ public class WorldMapLabelSize {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (class250.baseY + var4.pathY[0] >> 13) + (ApproximateRouteStrategy.baseX + var4.pathX[0] >> 13 << 14); // L: 209
-				if (var4.field1160 != -1) { // L: 210
-					Players.Players_orientations[var1] = var4.field1160;
+				if (var4.facedDirection != -1) { // L: 210
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation; // L: 211
 				}
@@ -154,7 +154,7 @@ public class WorldMapLabelSize {
 					var4.tileY = var7; // L: 248
 				} else {
 					var4.field1109 = false; // L: 251
-					var4.method2144(var6, var7, Players.field1285[var1]); // L: 252
+					var4.move(var6, var7, Players.field1285[var1]); // L: 252
 				}
 
 			} else if (var3 == 2) { // L: 256
@@ -216,7 +216,7 @@ public class WorldMapLabelSize {
 					var4.tileY = var7; // L: 319
 				} else {
 					var4.field1109 = false; // L: 322
-					var4.method2144(var6, var7, Players.field1285[var1]); // L: 323
+					var4.move(var6, var7, Players.field1285[var1]); // L: 323
 				}
 
 			} else {
@@ -249,7 +249,7 @@ public class WorldMapLabelSize {
 						var4.tileY = var11; // L: 344
 					} else {
 						var4.field1109 = false; // L: 347
-						var4.method2144(var10, var11, Players.field1285[var1]); // L: 348
+						var4.move(var10, var11, Players.field1285[var1]); // L: 348
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 350
@@ -273,7 +273,7 @@ public class WorldMapLabelSize {
 						var4.tileY = var11; // L: 367
 					} else {
 						var4.field1109 = false; // L: 370
-						var4.method2144(var10, var11, Players.field1285[var1]); // L: 371
+						var4.move(var10, var11, Players.field1285[var1]); // L: 371
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 373

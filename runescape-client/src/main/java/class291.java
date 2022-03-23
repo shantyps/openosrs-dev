@@ -79,16 +79,16 @@ public class class291 {
 		if (EnumComposition.cameraX == class175.field1883 && ReflectionCheck.field250 == FriendSystem.cameraY && CollisionMap.cameraZ == ModeWhere.field4080 && Language.cameraPitch == WorldMapRegion.field2706 && MusicPatchNode2.cameraYaw == class457.field4747) { // L: 3483
 			Client.field739 = false; // L: 3484
 			Client.isCameraLocked = false; // L: 3485
-			class12.field62 = 0; // L: 3486
-			WorldMapSectionType.field2778 = 0; // L: 3487
-			class351.field4157 = 0; // L: 3488
-			ClanChannel.field1660 = 0; // L: 3489
-			JagexCache.field1737 = 0; // L: 3490
-			class33.field231 = 0; // L: 3491
-			Tiles.field996 = 0; // L: 3492
-			PcmPlayer.field302 = 0; // L: 3493
-			DevicePcmPlayerProvider.field146 = 0; // L: 3494
-			ClanSettings.field1608 = 0; // L: 3495
+			class12.cameraLookAtX = 0; // L: 3486
+			WorldMapSectionType.cameraLookAtY = 0; // L: 3487
+			class351.cameraLookAtHeight = 0; // L: 3488
+			ClanChannel.cameraLookAtSpeed = 0; // L: 3489
+			JagexCache.cameraLookAtAcceleration = 0; // L: 3490
+			class33.cameraMoveToAcceleration = 0; // L: 3491
+			Tiles.cameraMoveToSpeed = 0; // L: 3492
+			PcmPlayer.cameraMoveToX = 0; // L: 3493
+			DevicePcmPlayerProvider.cameraMoveToY = 0; // L: 3494
+			ClanSettings.cameraMoveToHeight = 0; // L: 3495
 		}
 
 	} // L: 3498

@@ -105,8 +105,8 @@ public class class321 {
 		garbageValue = "1974154557"
 	)
 	static final void method6030(int var0, int var1, boolean var2) {
-		if (!var2 || var0 != class193.field2197 || class221.field2647 != var1) { // L: 5167
-			class193.field2197 = var0; // L: 5170
+		if (!var2 || var0 != MoveSpeed.field2197 || class221.field2647 != var1) { // L: 5167
+			MoveSpeed.field2197 = var0; // L: 5170
 			class221.field2647 = var1; // L: 5171
 			InterfaceParent.updateGameState(25); // L: 5172
 			class119.drawLoadingMessage("Loading - please wait.", true); // L: 5173

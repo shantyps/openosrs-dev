@@ -482,7 +482,7 @@ public class InterfaceParent extends Node {
 
 						if (Client.isResizable || Client.field576[var11] || Client.gameDrawingMode > 1) { // L: 9755
 							if (var10.type == 0 && !var10.isIf3 && var10.scrollHeight > var10.height) { // L: 9756 9757
-								class193.drawScrollBar(var12 + var10.width, var13, var10.scrollY, var10.height, var10.scrollHeight);
+								MoveSpeed.drawScrollBar(var12 + var10.width, var13, var10.scrollY, var10.height, var10.scrollHeight);
 							}
 
 							if (var10.type != 1) { // L: 9759

@@ -565,14 +565,14 @@ public class class132 extends class128 {
 		}
 
 		if (Language.cameraPitch < var0) { // L: 3530
-			Language.cameraPitch = (var0 - Language.cameraPitch) * JagexCache.field1737 / 1000 + Language.cameraPitch + ClanChannel.field1660; // L: 3531
+			Language.cameraPitch = (var0 - Language.cameraPitch) * JagexCache.cameraLookAtAcceleration / 1000 + Language.cameraPitch + ClanChannel.cameraLookAtSpeed; // L: 3531
 			if (Language.cameraPitch > var0) { // L: 3532
 				Language.cameraPitch = var0;
 			}
 		}
 
 		if (Language.cameraPitch > var0) { // L: 3534
-			Language.cameraPitch -= (Language.cameraPitch - var0) * JagexCache.field1737 / 1000 + ClanChannel.field1660; // L: 3535
+			Language.cameraPitch -= (Language.cameraPitch - var0) * JagexCache.cameraLookAtAcceleration / 1000 + ClanChannel.cameraLookAtSpeed; // L: 3535
 			if (Language.cameraPitch < var0) { // L: 3536
 				Language.cameraPitch = var0;
 			}
@@ -588,12 +588,12 @@ public class class132 extends class128 {
 		}
 
 		if (var2 > 0) { // L: 3541
-			MusicPatchNode2.cameraYaw = MusicPatchNode2.cameraYaw + ClanChannel.field1660 + var2 * JagexCache.field1737 / 1000; // L: 3542
+			MusicPatchNode2.cameraYaw = MusicPatchNode2.cameraYaw + ClanChannel.cameraLookAtSpeed + var2 * JagexCache.cameraLookAtAcceleration / 1000; // L: 3542
 			MusicPatchNode2.cameraYaw &= 2047; // L: 3543
 		}
 
 		if (var2 < 0) { // L: 3545
-			MusicPatchNode2.cameraYaw -= -var2 * JagexCache.field1737 / 1000 + ClanChannel.field1660; // L: 3546
+			MusicPatchNode2.cameraYaw -= -var2 * JagexCache.cameraLookAtAcceleration / 1000 + ClanChannel.cameraLookAtSpeed; // L: 3546
 			MusicPatchNode2.cameraYaw &= 2047; // L: 3547
 		}
 

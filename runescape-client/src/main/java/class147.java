@@ -54,13 +54,13 @@ public class class147 extends class128 {
 		garbageValue = "57"
 	)
 	static final void method3052() {
-		int var0 = PcmPlayer.field302 * 128 + 64; // L: 3556
-		int var1 = DevicePcmPlayerProvider.field146 * 128 + 64; // L: 3557
-		int var2 = Archive.getTileHeight(var0, var1, class160.Client_plane) - ClanSettings.field1608; // L: 3558
+		int var0 = PcmPlayer.cameraMoveToX * 128 + 64; // L: 3556
+		int var1 = DevicePcmPlayerProvider.cameraMoveToY * 128 + 64; // L: 3557
+		int var2 = Archive.getTileHeight(var0, var1, class160.Client_plane) - ClanSettings.cameraMoveToHeight; // L: 3558
 		class428.method7654(var0, var2, var1); // L: 3559
-		var0 = class12.field62 * 128 + 64; // L: 3560
-		var1 = WorldMapSectionType.field2778 * 128 + 64; // L: 3561
-		var2 = Archive.getTileHeight(var0, var1, class160.Client_plane) - class351.field4157; // L: 3562
+		var0 = class12.cameraLookAtX * 128 + 64; // L: 3560
+		var1 = WorldMapSectionType.cameraLookAtY * 128 + 64; // L: 3561
+		var2 = Archive.getTileHeight(var0, var1, class160.Client_plane) - class351.cameraLookAtHeight; // L: 3562
 		int var3 = var0 - EnumComposition.cameraX; // L: 3563
 		int var4 = var2 - FriendSystem.cameraY; // L: 3564
 		int var5 = var1 - CollisionMap.cameraZ; // L: 3565

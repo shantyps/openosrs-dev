@@ -165,7 +165,7 @@ public class GraphicsObject extends Renderable {
 		descriptor = "(Lcw;IILgv;B)V",
 		garbageValue = "2"
 	)
-	static final void method1860(Player var0, int var1, int var2, class193 var3) {
+	static final void method1860(Player var0, int var1, int var2, MoveSpeed var3) {
 		int var4 = var0.pathX[0]; // L: 7995
 		int var5 = var0.pathY[0]; // L: 7996
 		int var6 = var0.transformedSize(); // L: 7997

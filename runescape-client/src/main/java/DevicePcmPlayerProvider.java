@@ -12,7 +12,8 @@ public class DevicePcmPlayerProvider implements class47 {
 	@ObfuscatedGetter(
 		intValue = -637981437
 	)
-	static int field146;
+	@Export("cameraMoveToY")
+	static int cameraMoveToY;
 	@ObfuscatedName("g")
 	@ObfuscatedSignature(
 		descriptor = "Llq;"

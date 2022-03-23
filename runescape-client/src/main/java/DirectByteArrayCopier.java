@@ -65,7 +65,7 @@ public class DirectByteArrayCopier extends AbstractByteArrayCopier {
 			return 1; // L: 1889
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) { // L: 1891
 			class295.Interpreter_intStackSize -= 2; // L: 1892
-			class145.method3032(Interpreter.Interpreter_intStack[class295.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class295.Interpreter_intStackSize + 1]); // L: 1893
+			class145.playJingle(Interpreter.Interpreter_intStack[class295.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class295.Interpreter_intStackSize + 1]); // L: 1893
 			return 1; // L: 1894
 		} else {
 			class83 var3;
@@ -345,7 +345,7 @@ public class DirectByteArrayCopier extends AbstractByteArrayCopier {
 						var14 = WorldMapSectionType.regionLandArchives[var2]; // L: 5338
 						if (var14 != null) { // L: 5339
 							MouseHandler.playPcmPlayers(); // L: 5340
-							ChatChannel.method1991(var14, var3, var4, class193.field2197 * 8 - 48, class221.field2647 * 8 - 48, Client.collisionMaps); // L: 5341
+							ChatChannel.method1991(var14, var3, var4, MoveSpeed.field2197 * 8 - 48, class221.field2647 * 8 - 48, Client.collisionMaps); // L: 5341
 						}
 					}
 
@@ -481,8 +481,8 @@ public class DirectByteArrayCopier extends AbstractByteArrayCopier {
 				}
 
 				if (!Client.isInInstance) { // L: 5445
-					var3 = (class193.field2197 - 6) / 8; // L: 5446
-					var4 = (class193.field2197 + 6) / 8; // L: 5447
+					var3 = (MoveSpeed.field2197 - 6) / 8; // L: 5446
+					var4 = (MoveSpeed.field2197 + 6) / 8; // L: 5447
 					var5 = (class221.field2647 - 6) / 8; // L: 5448
 					var6 = (class221.field2647 + 6) / 8; // L: 5449
 

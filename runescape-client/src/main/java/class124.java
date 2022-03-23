@@ -81,7 +81,7 @@ public enum class124 implements MouseWheel {
 		descriptor = "(I)[Lgv;",
 		garbageValue = "2062143502"
 	)
-	public static class193[] method2801() {
-		return new class193[]{class193.field2195, class193.field2193, class193.field2192, class193.field2191}; // L: 14
+	public static MoveSpeed[] method2801() {
+		return new MoveSpeed[]{MoveSpeed.field2195, MoveSpeed.field2193, MoveSpeed.field2192, MoveSpeed.field2191}; // L: 14
 	}
 }

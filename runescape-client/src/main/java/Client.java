@@ -93,7 +93,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("playerAppearance")
 	static PlayerComposition playerAppearance;
 	@ObfuscatedName("tt")
-	static boolean[] field740;
+	@Export("cameraShaking")
+	static boolean[] cameraShaking;
 	@ObfuscatedName("ua")
 	@ObfuscatedGetter(
 		intValue = -1186847035
@@ -106,12 +107,14 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("minimapState")
 	static int minimapState;
 	@ObfuscatedName("ts")
-	static int[] field482;
+	@Export("cameraShakeIntensity")
+	static int[] cameraShakeIntensity;
 	@ObfuscatedName("uy")
 	@Export("archiveLoaders")
 	static ArrayList archiveLoaders;
 	@ObfuscatedName("tq")
-	static int[] field549;
+	@Export("cameraMoveIntensity")
+	static int[] cameraMoveIntensity;
 	@ObfuscatedName("uo")
 	@ObfuscatedGetter(
 		intValue = -19127139
@@ -119,14 +122,16 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("archiveLoadersDone")
 	static int archiveLoadersDone;
 	@ObfuscatedName("tp")
-	static int[] field766;
+	@Export("cameraShakeSpeed")
+	static int[] cameraShakeSpeed;
 	@ObfuscatedName("re")
 	@ObfuscatedGetter(
 		intValue = -948451773
 	)
 	static int field721;
 	@ObfuscatedName("tr")
-	static int[] field744;
+	@Export("cameraShakeCycle")
+	static int[] cameraShakeCycle;
 	@ObfuscatedName("rz")
 	@ObfuscatedGetter(
 		longValue = 36479923069350349L
@@ -885,7 +890,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@ObfuscatedGetter(
 		longValue = 6514604348113006825L
 	)
-	static long field608;
+	@Export("userRegistrationId")
+	static long userRegistrationId;
 	@ObfuscatedName("lm")
 	@Export("renderSelf")
 	static boolean renderSelf;
@@ -1487,7 +1493,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		players = new Player[2048]; // L: 398
 		localPlayerIndex = -1; // L: 400
 		field607 = 0; // L: 401
-		field608 = -1L; // L: 402
+		userRegistrationId = -1L; // L: 402
 		renderSelf = true; // L: 404
 		drawPlayerNames = 0; // L: 409
 		field634 = 0; // L: 410
@@ -1618,11 +1624,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		soundEffects = new SoundEffect[50]; // L: 591
 		isCameraLocked = false; // L: 593
 		field739 = false; // L: 604
-		field740 = new boolean[5]; // L: 612
-		field482 = new int[5]; // L: 613
-		field549 = new int[5]; // L: 614
-		field766 = new int[5]; // L: 615
-		field744 = new int[5]; // L: 616
+		cameraShaking = new boolean[5]; // L: 612
+		cameraShakeIntensity = new int[5]; // L: 613
+		cameraMoveIntensity = new int[5]; // L: 614
+		cameraShakeSpeed = new int[5]; // L: 615
+		cameraShakeCycle = new int[5]; // L: 616
 		field745 = 256; // L: 617
 		field706 = 205; // L: 618
 		zoomHeight = 256; // L: 619
@@ -2682,7 +2688,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (class124.field1514 >= 29) { // L: 2219
 						((AbstractSocket)var1).read(var2.array, 0, 8); // L: 2220
 						var2.offset = 0; // L: 2221
-						field608 = var2.readLong(); // L: 2222
+						userRegistrationId = var2.readLong(); // L: 2222
 					}
 
 					((AbstractSocket)var1).read(var2.array, 0, 1); // L: 2224
@@ -2715,7 +2721,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						timer.method6597(); // L: 2249
 						PacketWriter.method2489(); // L: 2250
 						Strings.updatePlayer(var2); // L: 2251
-						class193.field2197 = -1; // L: 2252
+						MoveSpeed.field2197 = -1; // L: 2252
 						class146.loadRegions(false, var2); // L: 2253
 						packetWriter.serverPacket = null; // L: 2254
 					}
@@ -3571,7 +3577,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 															}
 
 															for (var4 = 0; var4 < 5; ++var4) { // L: 3267
-																var10002 = field744[var4]++;
+																var10002 = cameraShakeCycle[var4]++;
 															}
 
 															JagexCache.varcs.tryWrite(); // L: 3268
@@ -3725,7 +3731,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				var1 = viewportX; // L: 3997
 				var2 = viewportY; // L: 3998
 				if ((menuOptionsCount >= 2 || isItemSelected != 0 || isSpellSelected) && showMouseOverText) { // L: 4000 4001
-					var3 = class168.method3324(); // L: 4002
+					var3 = PlayerEquipmentItem.method3324(); // L: 4002
 					String var11;
 					if (isItemSelected == 1 && menuOptionsCount < 2) { // L: 4004
 						var11 = "Use" + " " + selectedItemName + " " + "->";
@@ -3987,15 +3993,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				if (ServerPacket.field3079 == var1.serverPacket) { // L: 5776
 					isCameraLocked = true; // L: 5777
 					field739 = false; // L: 5778
-					class12.field62 = var3.readUnsignedByte(); // L: 5779
-					WorldMapSectionType.field2778 = var3.readUnsignedByte(); // L: 5780
-					class351.field4157 = var3.readUnsignedShort(); // L: 5781
-					ClanChannel.field1660 = var3.readUnsignedByte(); // L: 5782
-					JagexCache.field1737 = var3.readUnsignedByte(); // L: 5783
-					if (JagexCache.field1737 >= 100) { // L: 5784
-						var20 = class12.field62 * 128 + 64; // L: 5785
-						var5 = WorldMapSectionType.field2778 * 128 + 64; // L: 5786
-						var22 = Archive.getTileHeight(var20, var5, class160.Client_plane) - class351.field4157; // L: 5787
+					class12.cameraLookAtX = var3.readUnsignedByte(); // L: 5779
+					WorldMapSectionType.cameraLookAtY = var3.readUnsignedByte(); // L: 5780
+					class351.cameraLookAtHeight = var3.readUnsignedShort(); // L: 5781
+					ClanChannel.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 5782
+					JagexCache.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 5783
+					if (JagexCache.cameraLookAtAcceleration >= 100) { // L: 5784
+						var20 = class12.cameraLookAtX * 128 + 64; // L: 5785
+						var5 = WorldMapSectionType.cameraLookAtY * 128 + 64; // L: 5786
+						var22 = Archive.getTileHeight(var20, var5, class160.Client_plane) - class351.cameraLookAtHeight; // L: 5787
 						var7 = var20 - EnumComposition.cameraX; // L: 5788
 						var23 = var22 - FriendSystem.cameraY; // L: 5789
 						var9 = var5 - CollisionMap.cameraZ; // L: 5790
@@ -4165,7 +4171,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					isCameraLocked = false; // L: 5927
 
 					for (var20 = 0; var20 < 5; ++var20) { // L: 5928
-						field740[var20] = false;
+						cameraShaking[var20] = false;
 					}
 
 					var1.serverPacket = null; // L: 5929
@@ -4218,13 +4224,13 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 
 				if (ServerPacket.field3100 == var1.serverPacket && isCameraLocked) { // L: 5961 5962
 					field739 = true; // L: 5963
-					Tiles.field996 = var3.readUnsignedByte(); // L: 5964
-					class33.field231 = var3.readUnsignedByte(); // L: 5965
-					ClanChannel.field1660 = var3.readUnsignedByte(); // L: 5966
-					JagexCache.field1737 = var3.readUnsignedByte(); // L: 5967
+					Tiles.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 5964
+					class33.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 5965
+					ClanChannel.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 5966
+					JagexCache.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 5967
 
 					for (var20 = 0; var20 < 5; ++var20) { // L: 5968
-						field740[var20] = false;
+						cameraShaking[var20] = false;
 					}
 
 					var1.serverPacket = null; // L: 5969
@@ -4260,14 +4266,14 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 
 				if (ServerPacket.field3116 == var1.serverPacket) { // L: 5994
 					var20 = var3.readUnsignedByte(); // L: 5995
-					var5 = var3.readUnsignedByte(); // L: 5996
-					var22 = var3.readUnsignedByte(); // L: 5997
-					var7 = var3.readUnsignedByte(); // L: 5998
-					field740[var20] = true; // L: 5999
-					field482[var20] = var5; // L: 6000
-					field549[var20] = var22; // L: 6001
-					field766[var20] = var7; // L: 6002
-					field744[var20] = 0; // L: 6003
+					var5 = var3.readUnsignedByte(); // L: 5996 shakeIntensity
+					var22 = var3.readUnsignedByte(); // L: 5997 movementIntensity
+					var7 = var3.readUnsignedByte(); // L: 5998 speed
+					cameraShaking[var20] = true; // L: 5999
+					cameraShakeIntensity[var20] = var5; // L: 6000
+					cameraMoveIntensity[var20] = var22; // L: 6001
+					cameraShakeSpeed[var20] = var7; // L: 6002
+					cameraShakeCycle[var20] = 0; // L: 6003
 					var1.serverPacket = null; // L: 6004
 					return true; // L: 6005
 				}
@@ -4351,7 +4357,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						class20.closeInterface(var82, var22 != var82.group);
 					}
 
-					ServerPacket.method5222(var5, var22, var20); // L: 6067
+					ServerPacket.ifOpenSub(var5, var22, var20); // L: 6067
 					var1.serverPacket = null; // L: 6068
 					return true; // L: 6069
 				}
@@ -4799,7 +4805,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						}
 
 						if (var85 == null) { // L: 6413
-							var85 = ServerPacket.method5222(var7, var23, var9);
+							var85 = ServerPacket.ifOpenSub(var7, var23, var9);
 						}
 					}
 
@@ -4952,7 +4958,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					var68 = var3.readUnsignedShort(); // L: 6542
 					if (var7 >= 0 && var23 >= 0 && var7 < 103 && var23 < 103) { // L: 6543
 						if (var12 == 0) { // L: 6544
-							BoundaryObject var93 = FriendSystem.scene.method4150(class160.Client_plane, var7, var23); // L: 6545
+							BoundaryObject var93 = FriendSystem.scene.getBoundaryObject(class160.Client_plane, var7, var23); // L: 6545
 							if (var93 != null) { // L: 6546
 								var15 = class121.Entity_unpackID(var93.tag); // L: 6547
 								if (var10 == 2) { // L: 6548
@@ -4963,7 +4969,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 								}
 							}
 						} else if (var12 == 1) { // L: 6555
-							WallDecoration var92 = FriendSystem.scene.method4224(class160.Client_plane, var7, var23); // L: 6556
+							WallDecoration var92 = FriendSystem.scene.getWallObject(class160.Client_plane, var7, var23); // L: 6556
 							if (var92 != null) { // L: 6557
 								var15 = class121.Entity_unpackID(var92.tag); // L: 6558
 								if (var10 != 4 && var10 != 5) { // L: 6559
@@ -5140,10 +5146,10 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (var24 != null) { // L: 6702
 						var24.spotAnimation = var22; // L: 6703
 						var24.spotAnimationHeight = var5 >> 16; // L: 6704
-						var24.field1173 = (var5 & 65535) + cycle; // L: 6705
+						var24.spotAnimationStartCycle = (var5 & 65535) + cycle; // L: 6705
 						var24.spotAnimationFrame = 0; // L: 6706
 						var24.spotAnimationFrameCycle = 0; // L: 6707
-						if (var24.field1173 > cycle) { // L: 6708
+						if (var24.spotAnimationStartCycle > cycle) { // L: 6708
 							var24.spotAnimationFrame = -1; // L: 6709
 						}
 
@@ -5223,8 +5229,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 							var80.itemQuantityMode = 2; // L: 6772
 						}
 
-						if (var80.field3398 > 0) { // L: 6773
-							var80.modelZoom = var80.modelZoom * 32 / var80.field3398;
+						if (var80.modelRotation > 0) { // L: 6773
+							var80.modelZoom = var80.modelZoom * 32 / var80.modelRotation;
 						} else if (var80.rawWidth > 0) { // L: 6774
 							var80.modelZoom = var80.modelZoom * 32 / var80.rawWidth;
 						}
@@ -5273,10 +5279,10 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (var77 != null) { // L: 6809
 						var77.spotAnimation = var5; // L: 6810
 						var77.spotAnimationHeight = var22 >> 16; // L: 6811
-						var77.field1173 = (var22 & 65535) + cycle; // L: 6812
+						var77.spotAnimationStartCycle = (var22 & 65535) + cycle; // L: 6812
 						var77.spotAnimationFrame = 0; // L: 6813
 						var77.spotAnimationFrameCycle = 0; // L: 6814
-						if (var77.field1173 > cycle) { // L: 6815
+						if (var77.spotAnimationStartCycle > cycle) { // L: 6815
 							var77.spotAnimationFrame = -1; // L: 6816
 						}
 
@@ -5319,15 +5325,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				if (ServerPacket.field3097 == var1.serverPacket) { // L: 6845
 					isCameraLocked = true; // L: 6846
 					field739 = false; // L: 6847
-					PcmPlayer.field302 = var3.readUnsignedByte(); // L: 6848
-					DevicePcmPlayerProvider.field146 = var3.readUnsignedByte(); // L: 6849
-					ClanSettings.field1608 = var3.readUnsignedShort(); // L: 6850
-					Tiles.field996 = var3.readUnsignedByte(); // L: 6851
-					class33.field231 = var3.readUnsignedByte(); // L: 6852
-					if (class33.field231 >= 100) { // L: 6853
-						EnumComposition.cameraX = PcmPlayer.field302 * 128 + 64; // L: 6854
-						CollisionMap.cameraZ = DevicePcmPlayerProvider.field146 * 128 + 64; // L: 6855
-						FriendSystem.cameraY = Archive.getTileHeight(EnumComposition.cameraX, CollisionMap.cameraZ, class160.Client_plane) - ClanSettings.field1608; // L: 6856
+					PcmPlayer.cameraMoveToX = var3.readUnsignedByte(); // L: 6848
+					DevicePcmPlayerProvider.cameraMoveToY = var3.readUnsignedByte(); // L: 6849
+					ClanSettings.cameraMoveToHeight = var3.readUnsignedShort(); // L: 6850
+					Tiles.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 6851
+					class33.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 6852
+					if (class33.cameraMoveToAcceleration >= 100) { // L: 6853
+						EnumComposition.cameraX = PcmPlayer.cameraMoveToX * 128 + 64; // L: 6854
+						CollisionMap.cameraZ = DevicePcmPlayerProvider.cameraMoveToY * 128 + 64; // L: 6855
+						FriendSystem.cameraY = Archive.getTileHeight(EnumComposition.cameraX, CollisionMap.cameraZ, class160.Client_plane) - ClanSettings.cameraMoveToHeight; // L: 6856
 					}
 
 					var1.serverPacket = null; // L: 6858
@@ -5356,16 +5362,16 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 								var24.sequenceFrame = 0; // L: 6881
 								var24.sequenceFrameCycle = 0; // L: 6882
 								var24.sequenceDelay = var22; // L: 6883
-								var24.field1169 = 0; // L: 6884
+								var24.currentSequenceFrameIndex = 0; // L: 6884
 							} else if (var23 == 2) { // L: 6886
-								var24.field1169 = 0; // L: 6887
+								var24.currentSequenceFrameIndex = 0; // L: 6887
 							}
 						} else if (var5 == -1 || var24.sequence == -1 || ItemContainer.SequenceDefinition_get(var5).field2166 >= ItemContainer.SequenceDefinition_get(var24.sequence).field2166) { // L: 6890
 							var24.sequence = var5; // L: 6891
 							var24.sequenceFrame = 0; // L: 6892
 							var24.sequenceFrameCycle = 0; // L: 6893
 							var24.sequenceDelay = var22; // L: 6894
-							var24.field1169 = 0; // L: 6895
+							var24.currentSequenceFrameIndex = 0; // L: 6895
 							var24.field1134 = var24.pathLength; // L: 6896
 						}
 					}
@@ -5438,7 +5444,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						var5 = -1;
 					}
 
-					class145.method3032(var5, var20); // L: 6948
+					class145.playJingle(var5, var20); // L: 6948
 					var1.serverPacket = null; // L: 6949
 					return true; // L: 6950
 				}
@@ -5660,7 +5666,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 							}
 						}
 					} else {
-						var2 = class168.method3324(); // L: 8093
+						var2 = PlayerEquipmentItem.method3324(); // L: 8093
 						if ((var1 == 1 || !UserComparator5.mouseCam && var1 == 4) && var2 >= 0) { // L: 8094
 							var3 = menuOpcodes[var2]; // L: 8095
 							if (var3 == 39 || var3 == 40 || var3 == 41 || var3 == 42 || var3 == 43 || var3 == 33 || var3 == 34 || var3 == 35 || var3 == 36 || var3 == 37 || var3 == 38 || var3 == 1005) { // L: 8096
@@ -5737,7 +5743,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	)
 	@Export("shouldLeftClickOpenMenu")
 	final boolean shouldLeftClickOpenMenu() {
-		int var1 = class168.method3324(); // L: 8153
+		int var1 = PlayerEquipmentItem.method3324(); // L: 8153
 		return (leftClickOpensMenu == 1 && menuOptionsCount > 2 || ArchiveLoader.method2071(var1)) && !menuShiftClick[var1]; // L: 8154
 	}
 

@@ -519,7 +519,7 @@ public class EventInspector extends DevToolsFrame {
                 }
             }
             /* Log it externally here anyways */
-            if (!addToConsole || !checkBox.isSelected() || pauseButton.isSelected()) return;
+            if (!addToConsole || (checkBox != null && !checkBox.isSelected()) || pauseButton.isSelected()) return;
             if (tick != lastTick) {
                 lastTick = tick;
                 JLabel header = new JLabel("Tick " + tick);
@@ -1759,6 +1759,8 @@ public class EventInspector extends DevToolsFrame {
     public void onGameStateChanged(GameStateChanged event) {
         if (event.getGameState() == GameState.LOGIN_SCREEN && !eventBuffer.isEmpty()) {
             writeToFile();
+        } else if (event.getGameState() == GameState.LOGGED_IN) {
+            addInitializationLine();
         }
     }
 
@@ -1894,7 +1896,19 @@ public class EventInspector extends DevToolsFrame {
                 }
             }
         });
+        addInitializationLine();
         super.open();
+    }
+
+    private void addInitializationLine() {
+        addLine(
+                "Initialization",
+                "Logged into account " + client.getUsername() + ", registration id: " + client.getUserRegistrationId() + ".",
+                client.getTickCount(),
+                true,
+                null,
+                true
+        );
     }
 
     @Override

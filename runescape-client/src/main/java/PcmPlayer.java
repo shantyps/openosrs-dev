@@ -17,7 +17,8 @@ public class PcmPlayer {
 	@ObfuscatedGetter(
 		intValue = -1524812773
 	)
-	static int field302;
+	@Export("cameraMoveToX")
+	static int cameraMoveToX;
 	@ObfuscatedName("n")
 	@Export("PcmPlayer_stereo")
 	protected static boolean PcmPlayer_stereo;
@@ -537,7 +538,7 @@ public class PcmPlayer {
 				Client.widgetClickY = var2; // L: 11154
 				class136.widgetDragDuration = 0; // L: 11155
 				Client.isDraggingWidget = false; // L: 11156
-				int var3 = class168.method3324(); // L: 11157
+				int var3 = PlayerEquipmentItem.method3324(); // L: 11157
 				if (var3 != -1) { // L: 11158
 					PacketWriter.tempMenuAction = new MenuAction(); // L: 11159
 					PacketWriter.tempMenuAction.param0 = Client.menuArguments1[var3]; // L: 11160

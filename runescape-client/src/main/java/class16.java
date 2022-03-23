@@ -76,19 +76,19 @@ public class class16 implements ThreadFactory {
 		garbageValue = "362811494"
 	)
 	static final void method215(Actor var0) {
-		if (var0.field1180 == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > ItemContainer.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 3761
-			int var1 = var0.field1180 - var0.field1179; // L: 3762
-			int var2 = Client.cycle - var0.field1179; // L: 3763
-			int var3 = var0.field1145 * 64 + var0.field1175 * 128; // L: 3764
-			int var4 = var0.field1145 * 64 + var0.field1177 * 128; // L: 3765
-			int var5 = var0.field1145 * 64 + var0.field1176 * 128; // L: 3766
-			int var6 = var0.field1145 * 64 + var0.field1178 * 128; // L: 3767
+		if (var0.exactMoveArrive2Cycle == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > ItemContainer.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 3761
+			int var1 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle; // L: 3762
+			int var2 = Client.cycle - var0.exactMoveArrive1Cycle; // L: 3763
+			int var3 = var0.field1145 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3764
+			int var4 = var0.field1145 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3765
+			int var5 = var0.field1145 * 64 + var0.exactMoveDeltaX2 * 128; // L: 3766
+			int var6 = var0.field1145 * 64 + var0.exactMoveDeltaY2 * 128; // L: 3767
 			var0.x = (var5 * var2 + var3 * (var1 - var2)) / var1; // L: 3768
 			var0.y = (var6 * var2 + var4 * (var1 - var2)) / var1; // L: 3769
 		}
 
 		var0.field1197 = 0; // L: 3771
-		var0.orientation = var0.field1181; // L: 3772
+		var0.orientation = var0.exactMoveDirection; // L: 3772
 		var0.rotation = var0.orientation; // L: 3773
 	} // L: 3774
 

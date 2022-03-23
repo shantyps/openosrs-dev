@@ -624,8 +624,8 @@ public class NPCComposition extends DualNode {
 						String var5 = var4.name; // L: 9397
 						int var6;
 						int var9;
-						if (var4.combatLevel != 0 && var0.field1161 != 0) { // L: 9398
-							var6 = var0.field1161 != -1 ? var0.field1161 * -1966879477 * -544172381 : var4.combatLevel * -2021557183 * -620194879; // L: 9399
+						if (var4.combatLevel != 0 && var0.combatLevelChange != 0) { // L: 9398
+							var6 = var0.combatLevelChange != -1 ? var0.combatLevelChange * -1966879477 * -544172381 : var4.combatLevel * -2021557183 * -620194879; // L: 9399
 							var9 = class19.localPlayer.combatLevel; // L: 9402
 							int var10 = var9 - var6; // L: 9404
 							String var8;

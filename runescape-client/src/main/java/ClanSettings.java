@@ -11,7 +11,8 @@ public class ClanSettings {
 	@ObfuscatedGetter(
 		intValue = 1198231863
 	)
-	static int field1608;
+	@Export("cameraMoveToHeight")
+	static int cameraMoveToHeight;
 	@ObfuscatedName("ov")
 	@ObfuscatedSignature(
 		descriptor = "[Lkn;"
