@@ -179,6 +179,7 @@ public interface InjectUtil
 	 */
 	static Method findMethodDeep(ClassFile clazz, String name, Predicate<Signature> type)
 	{
+		ClassFile origClass = clazz;
 		do
 		{
 			for (Method method : clazz.getMethods())
@@ -194,7 +195,7 @@ public interface InjectUtil
 		}
 		while ((clazz = clazz.getParent()) != null);
 
-		throw new InjectException(String.format("Method %s couldn't be found", name + type.toString()));
+		throw new InjectException(String.format("Method %s couldn't be found", name + " @ " + type.toString() + ", " + origClass));
 	}
 
 	/**

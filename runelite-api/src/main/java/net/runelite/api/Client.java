@@ -2478,4 +2478,6 @@ public interface Client extends GameEngine
 	 * @return
 	 */
 	Deque<AmbientSoundEffect> getAmbientSoundEffects();
+
+	long getUserRegistrationId();
 }
