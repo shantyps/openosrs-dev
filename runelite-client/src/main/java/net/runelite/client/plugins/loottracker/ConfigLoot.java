@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Woox <https://github.com/wooxsolo>
+ * Copyright (c) 2022, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,58 +22,52 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.api;
+package net.runelite.client.plugins.loottracker;
 
-import net.runelite.api.coords.LocalPoint;
+import java.time.Instant;
+import java.util.Arrays;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import net.runelite.http.api.loottracker.LootRecordType;
 
-/**
- * Represents a graphics object/spotanim.
- */
-public interface GraphicsObject extends Renderable
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(of = {"type", "name"})
+class ConfigLoot
 {
-	/**
-	 * The graphics object ID.
-	 *
-	 * @return the ID
-	 */
-	int getId();
+	LootRecordType type;
+	String name;
+	int kills;
+	Instant first = Instant.now();
+	Instant last;
+	int[] drops;
 
-	/**
-	 * The location of the object.
-	 *
-	 * @return the location
-	 */
-	LocalPoint getLocation();
+	ConfigLoot(LootRecordType type, String name)
+	{
+		this.type = type;
+		this.name = name;
+		this.drops = new int[0];
+	}
 
-	/**
-	 * Get the time this spotanim starts
-	 *
-	 * @return
-	 */
-	int getStartCycle();
+	void add(int id, int qty)
+	{
+		for (int i = 0; i < drops.length; i += 2)
+		{
+			if (drops[i] == id)
+			{
+				drops[i + 1] += qty;
+				return;
+			}
+		}
 
-	/**
-	 * The plane the spotanim is on.
-	 *
-	 * @return
-	 */
-	int getLevel();
+		drops = Arrays.copyOf(drops, drops.length + 2);
+		drops[drops.length - 2] = id;
+		drops[drops.length - 1] = qty;
+	}
 
-	/**
-	 * Gets the z coordinate
-	 */
-	int getZ();
-
-	/**
-	 * Checks if this spotanim is done animating
-	 *
-	 * @return
-	 */
-	boolean finished();
-
-	/**
-	 * Set if this spotanim is done animating. If finished, the spotanim will despawn next frame.
-	 * @param finished
-	 */
-	void setFinished(boolean finished);
+	int numDrops()
+	{
+		return drops.length / 2;
+	}
 }

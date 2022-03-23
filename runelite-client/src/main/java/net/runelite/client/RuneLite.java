@@ -49,6 +49,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.Optional;
 import java.util.stream.Stream;
@@ -169,11 +170,15 @@ public class RuneLite
 	@Nullable
 	private Client client;
 
+	@Inject
+	@Nullable
+	private RuntimeConfig runtimeConfig;
+
 	public static void main(String[] args) throws Exception
 	{
 		Locale.setDefault(Locale.ENGLISH);
 
-		final OptionParser parser = new OptionParser();
+		final OptionParser parser = new OptionParser(false);
 		parser.accepts("developer-mode", "Enable developer tools");
 		parser.accepts("debug", "Show extra debugging output");
 		parser.accepts("safe-mode", "Disables external plugins and the GPU plugin");
@@ -344,6 +349,8 @@ public class RuneLite
 			injector.injectMembers(client);
 		}
 
+		setupSystemProps();
+
 		// Start the applet
 		if (applet != null)
 		{
@@ -389,6 +396,7 @@ public class RuneLite
 		// Load the plugins, but does not start them yet.
 		// This will initialize configuration
 		pluginManager.loadCorePlugins();
+		pluginManager.loadSideLoadPlugins();
 
 		oprsExternalPluginManager.loadPlugins();
 
@@ -636,6 +644,21 @@ public class RuneLite
 		catch (Exception e)
 		{
 			log.warn("unable to copy jagexcache", e);
+		}
+	}
+
+	private void setupSystemProps()
+	{
+		if (runtimeConfig == null || runtimeConfig.getSysProps() == null)
+		{
+			return;
+		}
+
+		for (Map.Entry<String, String> entry : runtimeConfig.getSysProps().entrySet())
+		{
+			String key = entry.getKey(), value = entry.getValue();
+			log.debug("Setting property {}={}", key, value);
+			System.setProperty(key, value);
 		}
 	}
 }

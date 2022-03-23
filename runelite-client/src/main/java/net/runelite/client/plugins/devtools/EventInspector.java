@@ -1489,7 +1489,7 @@ public class EventInspector extends DevToolsFrame {
         final int delay = obj.getStartCycle() - client.getGameCycle();
         final int tileHeight = Perspective.getTileHeight(client, obj.getLocation(), client.getPlane());
         final StringBuilder builder = new StringBuilder();
-        final int height = -(obj.getHeight() - tileHeight);
+        final int height = -(obj.getZ() - tileHeight);
         builder.append("SpotanimSpecific(");
         builder.append("id = ").append(obj.getId()).append(", ");
         if (delay != 0) builder.append("delay = ").append(delay).append(", ");
