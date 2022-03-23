@@ -1907,7 +1907,7 @@ public class EventInspector extends DevToolsFrame {
                 client.getTickCount(),
                 true,
                 null,
-                true
+                false
         );
     }
 
