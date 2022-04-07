@@ -112,6 +112,7 @@ public class EventInspector extends DevToolsFrame {
     private boolean dirty = false;
 
     private int widgetNpcId = -1;
+    private int previousRunEnergy = -1;
 
     private int latestServerTick;
     /* A set for ignored scripts. There are some plugins which invoke procs through the client which we ignore. */
@@ -124,6 +125,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox areaSoundEffects = new JCheckBox("Area Sound Effects", true);
     private final JCheckBox say = new JCheckBox("Say", true);
     private final JCheckBox experience = new JCheckBox("Experience", true);
+    private final JCheckBox runEnergy = new JCheckBox("Run Energy", true);
     private final JCheckBox messages = new JCheckBox("Messages", true);
     private final JCheckBox varbitsCheckBox = new JCheckBox("Varbits", false);
     private final JCheckBox varpsCheckBox = new JCheckBox("Varps", false);
@@ -430,6 +432,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(soundEffects);
         panel.add(jingles);
         panel.add(experience);
+        panel.add(runEnergy);
         panel.add(varpsCheckBox);
         panel.add(varbitsCheckBox);
         panel.add(hintArrows);
@@ -810,6 +813,16 @@ public class EventInspector extends DevToolsFrame {
         if (actor == null) return;
         overheadChatList.add(event);
         latestServerTick = client.getTickCount();
+    }
+
+    @Subscribe
+    public void runEnergyChanged(RunEnergyChangedEvent event) {
+        if (this.previousRunEnergy == -1) {
+            this.previousRunEnergy = event.getNewEnergy();
+            return;
+        }
+        addLine("Local(previous = " + this.previousRunEnergy + ")", "RunEnergy(value = " + event.getNewEnergy() + ")", true, runEnergy);
+        this.previousRunEnergy = event.getNewEnergy();
     }
 
     /**

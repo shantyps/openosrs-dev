@@ -2592,6 +2592,12 @@ public abstract class RSClientMixin implements RSClient
 	}
 
 	@Inject
+	@FieldHook("runEnergy")
+	public static void onRunEnergyChanged(int idx) {
+		client.getCallbacks().post(new RunEnergyChangedEvent(client.getEnergy()));
+	}
+
+	@Inject
 	@MethodHook(value = "ifOpenSub", end = true)
 	public static void onSubInterfaceChange(int targetComponent, int interfaceId, int walkType) {
 		client.getCallbacks().post(new IfOpenSubEvent(targetComponent, interfaceId, walkType));
