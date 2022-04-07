@@ -129,6 +129,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox experience = new JCheckBox("Experience", true);
     private final JCheckBox stats = new JCheckBox("Stats", true);
     private final JCheckBox runEnergy = new JCheckBox("Run Energy", true);
+    private final JCheckBox instances = new JCheckBox("Instances", true);
     private final JCheckBox messages = new JCheckBox("Messages", true);
     private final JCheckBox varbitsCheckBox = new JCheckBox("Varbits", false);
     private final JCheckBox varpsCheckBox = new JCheckBox("Varps", false);
@@ -430,7 +431,7 @@ public class EventInspector extends DevToolsFrame {
         JLabel title = new JLabel("Misc Packets");
         title.setFont(new Font("Helvetica", Font.PLAIN, 14));
         panel.add(title);
-
+        panel.add(instances);
         panel.add(inventoryChanges);
         panel.add(soundEffects);
         panel.add(jingles);
@@ -449,6 +450,9 @@ public class EventInspector extends DevToolsFrame {
         panel.add(playerCount);
         panel.add(npcCount);
         panel.add(new JSeparator());
+        instances.setToolTipText("<html>Instances will show each individual copied zone as a separate line below the header.<br>" +
+                "It should be noted that the coordinates shown for instances are zone coordinates in X-Y-Z format,<br>" +
+                "to get the absolute coordinates one has to multiply the X and Y values by 8.</html>");
         camera.setToolTipText("<html>Camera packets include:<br>" + "CamReset<br>" + "CamShake<br>" + "CamLookAt<br>" + "CamMoveTo<br></html>");
         playerMenuOptions.setToolTipText("<html>Player menu option's index is 0-indexed, therefore the first option will have an index of 0.</html>");
         inventoryChanges.setToolTipText("<html>Inventories will only send differences compared to the cached version of the inventory<br>" + "due to how " +
@@ -817,6 +821,31 @@ public class EventInspector extends DevToolsFrame {
         if (actor == null) return;
         overheadChatList.add(event);
         latestServerTick = client.getTickCount();
+    }
+
+    @Subscribe
+    public void onRebuildRegion(RebuildRegionEvent event) {
+        final String formattedLocation = this.formatLocation(new WorldPoint(client.getBaseX(), client.getBaseY(), client.getPlane()));
+        addLine("Local", "RebuildRegion(base = " + formattedLocation + ")", true, instances);
+        final int[][][] templates = client.getInstanceTemplateChunks();
+        final int baseZoneX = client.getBaseX() >> 3;
+        final int baseZoneY = client.getBaseY() >> 3;
+        for (int z = 0; z < 4; ++z) {
+            for (int x = 0; x < 13; ++x) {
+                for (int y = 0; y < 13; ++y) {
+                    int toX = baseZoneX + x;
+                    int toY = baseZoneY + y;
+                    final int copiedZone = templates[z][x][y];
+                    if (copiedZone == -1) continue;
+                    final int rotation = copiedZone >> 1 & 0x3;
+                    final int copiedZ = copiedZone >> 24 & 0x3;
+                    final int copiedX = copiedZone >> 14 & 0x3FF;
+                    final int copiedY = copiedZone >> 3 & 0x7FF;
+                    addLine("Local", "Zone(toZone = Zone(zoneX = " + toX + ", zoneY = " + toY + ", z = " + z + "), " +
+                            "fromZone = Zone(zoneX = " + copiedX + ", zoneY = " + copiedY + ", z = " + copiedZ + "), rotation = " + rotation + ")", true, instances);
+                }
+            }
+        }
     }
 
     @Subscribe

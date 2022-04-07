@@ -2604,6 +2604,15 @@ public abstract class RSClientMixin implements RSClient
 	}
 
 	@Inject
+	@MethodHook(value = "loadRegions", end = true)
+	public static void onRegionLoad(boolean instanced, RSPacketBuffer buffer) {
+		if (!instanced) {
+			return;
+		}
+		client.getCallbacks().post(new RebuildRegionEvent());
+	}
+
+	@Inject
 	@FieldHook("playerOptionsPriorities")
 	public static void onPlayerMenuOptionChanged(int idx) {
 		client.getCallbacks().post(new PlayerMenuOptionChanged(idx, client.getPlayerOptions()[idx], !client.getPlayerOptionsPriorities()[idx]));
