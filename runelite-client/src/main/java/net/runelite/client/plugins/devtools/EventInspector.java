@@ -11,6 +11,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
+import net.runelite.api.widgets.WidgetModalMode;
 import net.runelite.client.RuneLite;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.EventBus;
@@ -952,7 +953,7 @@ public class EventInspector extends DevToolsFrame {
                 ifMoveSubs.forEach((node, value) -> {
                     final long fromTopInterfacePacked = value.getLeft();
                     final long packedInterface = value.getRight();
-                    addLine("Move interface (id = " + node.getId() + ", walkType = " + node.getModalMode() + ")",
+                    addLine("Move interface (id = " + node.getId() + ", modal = " + (node.getModalMode() == WidgetModalMode.MODAL_NOCLICKTHROUGH) + ")",
                             "IfMoveSub(" + "fromTopInterface = " + (fromTopInterfacePacked >> 16) + ", " + "fromTopComponent = " + (fromTopInterfacePacked & 0xFFFF) + ", " + "toTopInterface = " + (packedInterface >> 16) + ", " + "toTopComponent = " + (packedInterface & 0xFFFF) + ")", latestServerTick, true, ifMoveSub);
                 });
             }
@@ -1127,14 +1128,14 @@ public class EventInspector extends DevToolsFrame {
             lastMoveSub = null;
         }
         addLine("Sub interface",
-                "IfOpenSub(id = " + event.getInterfaceId() + ", topInterface = " + (event.getTargetComponent() >> 16) + ", topComponent = " + (event.getTargetComponent() & 0xFFFF) + ", walkType = " + event.getWalkType() + ")", true, ifOpenSub);
+                "IfOpenSub(id = " + event.getInterfaceId() + ", topInterface = " + (event.getTargetComponent() >> 16) + ", topComponent = " + (event.getTargetComponent() & 0xFFFF) + ", modal = " + (event.getWalkType() == WidgetModalMode.MODAL_NOCLICKTHROUGH) + ")", true, ifOpenSub);
     }
 
     @Subscribe
     public void onWidgetCloseReceived(WidgetClosed event) {
         resetTrackedVariables();
         if (!event.isUnload()) return;
-        addLine("Close Sub Interface(id = " + event.getGroupId() + ", walkType = " + event.getModalMode() + ")",
+        addLine("Close Sub Interface(id = " + event.getGroupId() + ", modal = " + (event.getModalMode() == WidgetModalMode.MODAL_NOCLICKTHROUGH) + ")",
                 "IfCloseSub(topInterface = " + (hashTableNodeGet2 >> 16) + ", topComponent = " + (hashTableNodeGet2 & 0xFFFF) + ")", true, ifCloseSub);
     }
 
