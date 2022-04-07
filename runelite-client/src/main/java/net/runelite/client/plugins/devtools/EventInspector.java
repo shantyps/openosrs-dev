@@ -56,6 +56,8 @@ public class EventInspector extends DevToolsFrame {
     private final JPanel tracker = new JPanel();
     private int lastTick = 0;
     private final Map<Skill, Integer> cachedExperienceMap = new HashMap<>();
+    private final Map<Skill, Integer> cachedBoostedLevelsMap = new HashMap<>();
+    private final Map<Skill, Integer> cachedBaseLevelsMap = new HashMap<>();
     private final List<OverheadTextChanged> overheadChatList = new ArrayList<>();
     private final ClientThread clientThread;
     private int[] oldVarps = null;
@@ -125,6 +127,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox areaSoundEffects = new JCheckBox("Area Sound Effects", true);
     private final JCheckBox say = new JCheckBox("Say", true);
     private final JCheckBox experience = new JCheckBox("Experience", true);
+    private final JCheckBox stats = new JCheckBox("Stats", true);
     private final JCheckBox runEnergy = new JCheckBox("Run Energy", true);
     private final JCheckBox messages = new JCheckBox("Messages", true);
     private final JCheckBox varbitsCheckBox = new JCheckBox("Varbits", false);
@@ -432,6 +435,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(soundEffects);
         panel.add(jingles);
         panel.add(experience);
+        panel.add(stats);
         panel.add(runEnergy);
         panel.add(varpsCheckBox);
         panel.add(varbitsCheckBox);
@@ -842,10 +846,19 @@ public class EventInspector extends DevToolsFrame {
     public void experienceChanged(StatChanged event) {
         final int previousExperience = cachedExperienceMap.getOrDefault(event.getSkill(), -1);
         cachedExperienceMap.put(event.getSkill(), event.getXp());
-        if (previousExperience == -1) return;
-        final int experienceDiff = event.getXp() - previousExperience;
-        if (experienceDiff == 0) return;
-        addLine("Local", "Experience(skill = " + event.getSkill().getName() + ", xp = " + experienceDiff + ")", true, experience);
+        final int previousBoostedLevel = cachedBoostedLevelsMap.getOrDefault(event.getSkill(), -1);
+        cachedBoostedLevelsMap.put(event.getSkill(), event.getBoostedLevel());
+        final int previousBaseLevel = cachedBaseLevelsMap.getOrDefault(event.getSkill(), -1);
+        cachedBaseLevelsMap.put(event.getSkill(), event.getLevel());
+        if (previousExperience != -1) {
+            final int experienceDiff = event.getXp() - previousExperience;
+            if (experienceDiff != 0) {
+                addLine("Local", "Experience(skill = " + event.getSkill().getName() + ", xp = " + experienceDiff + ")", true, experience);
+            }
+        }
+        if (previousBoostedLevel != event.getBoostedLevel() || previousBaseLevel != event.getLevel()) {
+            addLine("Stat(previous = " + previousBoostedLevel + "/" + previousBaseLevel + ")", "StatChange(skill = " + event.getSkill().getName() + ", level = " + event.getBoostedLevel() + "/" + event.getLevel() + ")", true, stats);
+        }
     }
 
     @Subscribe
@@ -1893,7 +1906,10 @@ public class EventInspector extends DevToolsFrame {
         for (Skill skill : Skill.values()) {
             int xp = client.getSkillExperience(skill);
             cachedExperienceMap.put(skill, xp);
+            cachedBaseLevelsMap.put(skill, client.getRealSkillLevel(skill));
+            cachedBoostedLevelsMap.put(skill, client.getBoostedSkillLevel(skill));
         }
+        previousRunEnergy = client.getEnergy();
         if (oldVarps == null) {
             oldVarps = new int[client.getVarps().length];
             oldVarps2 = new int[client.getVarps().length];
