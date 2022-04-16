@@ -11,6 +11,7 @@ import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldArea;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.events.*;
+import net.runelite.api.widgets.WidgetModalMode;
 import net.runelite.client.RuneLite;
 import net.runelite.client.callback.ClientThread;
 import net.runelite.client.eventbus.EventBus;
@@ -55,6 +56,8 @@ public class EventInspector extends DevToolsFrame {
     private final JPanel tracker = new JPanel();
     private int lastTick = 0;
     private final Map<Skill, Integer> cachedExperienceMap = new HashMap<>();
+    private final Map<Skill, Integer> cachedBoostedLevelsMap = new HashMap<>();
+    private final Map<Skill, Integer> cachedBaseLevelsMap = new HashMap<>();
     private final List<OverheadTextChanged> overheadChatList = new ArrayList<>();
     private final ClientThread clientThread;
     private int[] oldVarps = null;
@@ -111,6 +114,7 @@ public class EventInspector extends DevToolsFrame {
     private boolean dirty = false;
 
     private int widgetNpcId = -1;
+    private int previousRunEnergy = -1;
 
     private int latestServerTick;
     /* A set for ignored scripts. There are some plugins which invoke procs through the client which we ignore. */
@@ -123,6 +127,9 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox areaSoundEffects = new JCheckBox("Area Sound Effects", true);
     private final JCheckBox say = new JCheckBox("Say", true);
     private final JCheckBox experience = new JCheckBox("Experience", true);
+    private final JCheckBox stats = new JCheckBox("Stats", true);
+    private final JCheckBox runEnergy = new JCheckBox("Run Energy", true);
+    private final JCheckBox instances = new JCheckBox("Instances", true);
     private final JCheckBox messages = new JCheckBox("Messages", true);
     private final JCheckBox varbitsCheckBox = new JCheckBox("Varbits", false);
     private final JCheckBox varpsCheckBox = new JCheckBox("Varps", false);
@@ -424,11 +431,13 @@ public class EventInspector extends DevToolsFrame {
         JLabel title = new JLabel("Misc Packets");
         title.setFont(new Font("Helvetica", Font.PLAIN, 14));
         panel.add(title);
-
+        panel.add(instances);
         panel.add(inventoryChanges);
         panel.add(soundEffects);
         panel.add(jingles);
         panel.add(experience);
+        panel.add(stats);
+        panel.add(runEnergy);
         panel.add(varpsCheckBox);
         panel.add(varbitsCheckBox);
         panel.add(hintArrows);
@@ -441,6 +450,9 @@ public class EventInspector extends DevToolsFrame {
         panel.add(playerCount);
         panel.add(npcCount);
         panel.add(new JSeparator());
+        instances.setToolTipText("<html>Instances will show each individual copied zone as a separate line below the header.<br>" +
+                "It should be noted that the coordinates shown for instances are zone coordinates in X-Y-Z format,<br>" +
+                "to get the absolute coordinates one has to multiply the X and Y values by 8.</html>");
         camera.setToolTipText("<html>Camera packets include:<br>" + "CamReset<br>" + "CamShake<br>" + "CamLookAt<br>" + "CamMoveTo<br></html>");
         playerMenuOptions.setToolTipText("<html>Player menu option's index is 0-indexed, therefore the first option will have an index of 0.</html>");
         inventoryChanges.setToolTipText("<html>Inventories will only send differences compared to the cached version of the inventory<br>" + "due to how " +
@@ -811,6 +823,41 @@ public class EventInspector extends DevToolsFrame {
         latestServerTick = client.getTickCount();
     }
 
+    @Subscribe
+    public void onRebuildRegion(RebuildRegionEvent event) {
+        final String formattedLocation = this.formatLocation(new WorldPoint(client.getBaseX(), client.getBaseY(), client.getPlane()));
+        addLine("Local", "RebuildRegion(base = " + formattedLocation + ")", true, instances);
+        final int[][][] templates = client.getInstanceTemplateChunks();
+        final int baseZoneX = client.getBaseX() >> 3;
+        final int baseZoneY = client.getBaseY() >> 3;
+        for (int z = 0; z < 4; ++z) {
+            for (int x = 0; x < 13; ++x) {
+                for (int y = 0; y < 13; ++y) {
+                    int toX = baseZoneX + x;
+                    int toY = baseZoneY + y;
+                    final int copiedZone = templates[z][x][y];
+                    if (copiedZone == -1) continue;
+                    final int rotation = copiedZone >> 1 & 0x3;
+                    final int copiedZ = copiedZone >> 24 & 0x3;
+                    final int copiedX = copiedZone >> 14 & 0x3FF;
+                    final int copiedY = copiedZone >> 3 & 0x7FF;
+                    addLine("Local", "Zone(toZone = Zone(zoneX = " + toX + ", zoneY = " + toY + ", z = " + z + "), " +
+                            "fromZone = Zone(zoneX = " + copiedX + ", zoneY = " + copiedY + ", z = " + copiedZ + "), rotation = " + rotation + ")", true, instances);
+                }
+            }
+        }
+    }
+
+    @Subscribe
+    public void runEnergyChanged(RunEnergyChangedEvent event) {
+        if (this.previousRunEnergy == -1) {
+            this.previousRunEnergy = event.getNewEnergy();
+            return;
+        }
+        addLine("Local(previous = " + this.previousRunEnergy + ")", "RunEnergy(value = " + event.getNewEnergy() + ")", true, runEnergy);
+        this.previousRunEnergy = event.getNewEnergy();
+    }
+
     /**
      * Due to the annoying nature of how overhead chat is handled by the client, the only way we can detect if a message was actually server-driven
      * or player-driven is to see if another field was changed shortly after. This strictly applies for player public chat, therefore it
@@ -828,10 +875,19 @@ public class EventInspector extends DevToolsFrame {
     public void experienceChanged(StatChanged event) {
         final int previousExperience = cachedExperienceMap.getOrDefault(event.getSkill(), -1);
         cachedExperienceMap.put(event.getSkill(), event.getXp());
-        if (previousExperience == -1) return;
-        final int experienceDiff = event.getXp() - previousExperience;
-        if (experienceDiff == 0) return;
-        addLine("Local", "Experience(skill = " + event.getSkill().getName() + ", xp = " + experienceDiff + ")", true, experience);
+        final int previousBoostedLevel = cachedBoostedLevelsMap.getOrDefault(event.getSkill(), -1);
+        cachedBoostedLevelsMap.put(event.getSkill(), event.getBoostedLevel());
+        final int previousBaseLevel = cachedBaseLevelsMap.getOrDefault(event.getSkill(), -1);
+        cachedBaseLevelsMap.put(event.getSkill(), event.getLevel());
+        if (previousExperience != -1) {
+            final int experienceDiff = event.getXp() - previousExperience;
+            if (experienceDiff != 0) {
+                addLine("Local", "Experience(skill = " + event.getSkill().getName() + ", xp = " + experienceDiff + ")", true, experience);
+            }
+        }
+        if (previousBoostedLevel != event.getBoostedLevel() || previousBaseLevel != event.getLevel()) {
+            addLine("Stat(previous = " + previousBoostedLevel + "/" + previousBaseLevel + ")", "StatChange(skill = " + event.getSkill().getName() + ", level = " + event.getBoostedLevel() + "/" + event.getLevel() + ")", true, stats);
+        }
     }
 
     @Subscribe
@@ -952,7 +1008,7 @@ public class EventInspector extends DevToolsFrame {
                 ifMoveSubs.forEach((node, value) -> {
                     final long fromTopInterfacePacked = value.getLeft();
                     final long packedInterface = value.getRight();
-                    addLine("Move interface (id = " + node.getId() + ", walkType = " + node.getModalMode() + ")",
+                    addLine("Move interface (id = " + node.getId() + ", modal = " + (node.getModalMode() == WidgetModalMode.MODAL_NOCLICKTHROUGH) + ")",
                             "IfMoveSub(" + "fromTopInterface = " + (fromTopInterfacePacked >> 16) + ", " + "fromTopComponent = " + (fromTopInterfacePacked & 0xFFFF) + ", " + "toTopInterface = " + (packedInterface >> 16) + ", " + "toTopComponent = " + (packedInterface & 0xFFFF) + ")", latestServerTick, true, ifMoveSub);
                 });
             }
@@ -1127,14 +1183,14 @@ public class EventInspector extends DevToolsFrame {
             lastMoveSub = null;
         }
         addLine("Sub interface",
-                "IfOpenSub(id = " + event.getInterfaceId() + ", topInterface = " + (event.getTargetComponent() >> 16) + ", topComponent = " + (event.getTargetComponent() & 0xFFFF) + ", walkType = " + event.getWalkType() + ")", true, ifOpenSub);
+                "IfOpenSub(id = " + event.getInterfaceId() + ", topInterface = " + (event.getTargetComponent() >> 16) + ", topComponent = " + (event.getTargetComponent() & 0xFFFF) + ", modal = " + (event.getWalkType() == WidgetModalMode.MODAL_NOCLICKTHROUGH) + ")", true, ifOpenSub);
     }
 
     @Subscribe
     public void onWidgetCloseReceived(WidgetClosed event) {
         resetTrackedVariables();
         if (!event.isUnload()) return;
-        addLine("Close Sub Interface(id = " + event.getGroupId() + ", walkType = " + event.getModalMode() + ")",
+        addLine("Close Sub Interface(id = " + event.getGroupId() + ", modal = " + (event.getModalMode() == WidgetModalMode.MODAL_NOCLICKTHROUGH) + ")",
                 "IfCloseSub(topInterface = " + (hashTableNodeGet2 >> 16) + ", topComponent = " + (hashTableNodeGet2 & 0xFFFF) + ")", true, ifCloseSub);
     }
 
@@ -1879,7 +1935,10 @@ public class EventInspector extends DevToolsFrame {
         for (Skill skill : Skill.values()) {
             int xp = client.getSkillExperience(skill);
             cachedExperienceMap.put(skill, xp);
+            cachedBaseLevelsMap.put(skill, client.getRealSkillLevel(skill));
+            cachedBoostedLevelsMap.put(skill, client.getBoostedSkillLevel(skill));
         }
+        previousRunEnergy = client.getEnergy();
         if (oldVarps == null) {
             oldVarps = new int[client.getVarps().length];
             oldVarps2 = new int[client.getVarps().length];
