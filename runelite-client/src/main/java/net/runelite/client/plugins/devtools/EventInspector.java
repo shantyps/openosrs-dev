@@ -1,6 +1,7 @@
 package net.runelite.client.plugins.devtools;
 
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Multimap;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -1340,6 +1342,27 @@ public class EventInspector extends DevToolsFrame {
         widgetNpcId = event.getNpcId();
     }
 
+    private static final Map<Integer, String> VARBIT_NAMES;
+
+    static
+    {
+        ImmutableMap.Builder<Integer, String> builder = new ImmutableMap.Builder<>();
+
+        try
+        {
+            for (Field f : Varbits.class.getDeclaredFields())
+            {
+                builder.put(f.getInt(null), f.getName());
+            }
+        }
+        catch (IllegalAccessException ex)
+        {
+            log.error("error setting up varbit names", ex);
+        }
+
+        VARBIT_NAMES = builder.build();
+    }
+
     @Subscribe
     public void onVarbitChanged(VarbitChanged varbitChanged) {
         int index = varbitChanged.getIndex();
@@ -1349,13 +1372,7 @@ public class EventInspector extends DevToolsFrame {
             int newValue = client.getVarbitValue(varps, i);
             if (old != newValue) {
                 client.setVarbitValue(oldVarps2, i, newValue);
-                String name = null;
-                for (Varbits varbit : Varbits.values()) {
-                    if (varbit.getId() == i) {
-                        name = varbit.name();
-                        break;
-                    }
-                }
+                String name = VARBIT_NAMES.get(i);
                 String prefix = name == null ? "Varbit" : ("Varbit \"" + name + "\"");
                 addLine(prefix + " (varpId: " + index + ", oldValue: " + old + ")", "Varbit(id = " + i + ", value = " + newValue + ")", true, varbitsCheckBox);
             }
