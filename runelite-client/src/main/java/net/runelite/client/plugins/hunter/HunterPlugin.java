@@ -197,8 +197,6 @@ public class HunterPlugin extends Plugin
 			case ObjectID.NET_TRAP_8996: // Black sally caught
 			case ObjectID.LARGE_BOULDER_28830: // Maniacal monkey tail obtained
 			case ObjectID.LARGE_BOULDER_28831: // Maniacal monkey tail obtained
-			case 60147: // Giant silkworm caught
-			case 60151: // Sacred silkworm caught
 				if (myTrap != null)
 				{
 					myTrap.setState(HunterTrap.State.FULL);
