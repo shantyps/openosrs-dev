@@ -10,7 +10,8 @@ public class class67 {
 	@ObfuscatedGetter(
 		intValue = -19074661
 	)
-	static int field881;
+	@Export("cameraLookAtY")
+	static int cameraLookAtY;
 	@ObfuscatedName("v")
 	static final BigInteger field882;
 	@ObfuscatedName("c")

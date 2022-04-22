@@ -53,7 +53,8 @@ public class PlayerComposition {
 	@ObfuscatedSignature(
 		descriptor = "[Lfj;"
 	)
-	class168[] field3302;
+	@Export("playerEquipmentItems")
+	PlayerEquipmentItem[] playerEquipmentItems;
 	@ObfuscatedName("l")
 	boolean field3306;
 
@@ -71,8 +72,8 @@ public class PlayerComposition {
 		descriptor = "([I[Lfj;Z[IZII)V",
 		garbageValue = "-299741271"
 	)
-	public void method5570(int[] var1, class168[] var2, boolean var3, int[] var4, boolean var5, int var6) {
-		this.field3302 = var2; // L: 30
+	public void method5570(int[] var1, PlayerEquipmentItem[] var2, boolean var3, int[] var4, boolean var5, int var6) {
+		this.playerEquipmentItems = var2; // L: 30
 		this.field3306 = var3; // L: 31
 		this.update(var1, var4, var5, var6); // L: 32
 	} // L: 33
@@ -336,19 +337,19 @@ public class PlayerComposition {
 							ItemComposition var22 = class19.ItemDefinition_get(var13 - 512);
 							ModelData var15 = var22.method3719(this.isFemale);
 							if (var15 != null) {
-								if (this.field3302 != null) {
-									class168 var16 = this.field3302[var12];
+								if (this.playerEquipmentItems != null) {
+									PlayerEquipmentItem var16 = this.playerEquipmentItems[var12];
 									if (var16 != null) {
 										int var17;
-										if (var16.field1791 != null && var22.recolorFrom != null && var16.field1791.length == var22.recolorTo.length) {
+										if (var16.recolorTo != null && var22.recolorFrom != null && var16.recolorTo.length == var22.recolorTo.length) {
 											for (var17 = 0; var17 < var22.recolorFrom.length; ++var17) {
-												var15.recolor(var22.recolorTo[var17], var16.field1791[var17]); // L: 205
+												var15.recolor(var22.recolorTo[var17], var16.recolorTo[var17]); // L: 205
 											}
 										}
 
-										if (var16.field1790 != null && var22.retextureFrom != null && var22.retextureTo.length == var16.field1790.length) {
+										if (var16.retextureTo != null && var22.retextureFrom != null && var22.retextureTo.length == var16.retextureTo.length) {
 											for (var17 = 0; var17 < var22.retextureFrom.length; ++var17) {
-												var15.retexture(var22.retextureTo[var17], var16.field1790[var17]);
+												var15.retexture(var22.retextureTo[var17], var16.retextureTo[var17]);
 											}
 										}
 									}
@@ -491,8 +492,8 @@ public class PlayerComposition {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (GrandExchangeOfferOwnWorldComparator.baseX + var4.pathX[0] >> 13 << 14) + (VarcInt.baseY + var4.pathY[0] >> 13); // L: 207
-				if (var4.field1121 != -1) { // L: 208
-					Players.Players_orientations[var1] = var4.field1121;
+				if (var4.facedDirection != -1) { // L: 208
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation; // L: 209
 				}

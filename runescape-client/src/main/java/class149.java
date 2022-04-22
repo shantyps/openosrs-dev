@@ -20,7 +20,7 @@ public class class149 {
 	)
 	@Export("updateActorSequence")
 	static final void updateActorSequence(Actor var0, int var1) {
-		if (var0.field1143 >= Client.cycle) { // L: 3919
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) { // L: 3919
 			UserComparator8.method2578(var0);
 		} else {
 			int var3;
@@ -28,20 +28,20 @@ public class class149 {
 			int var5;
 			int var7;
 			int var11;
-			if (var0.field1163 >= Client.cycle) { // L: 3920
-				if (var0.field1163 == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > class163.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 3921
-					var11 = var0.field1163 - var0.field1143; // L: 3922
-					var3 = Client.cycle - var0.field1143; // L: 3923
-					var4 = var0.field1150 * 64 + var0.field1129 * 128; // L: 3924
-					var5 = var0.field1150 * 64 + var0.field1160 * 128; // L: 3925
-					int var12 = var0.field1150 * 64 + var0.field1132 * 128; // L: 3926
-					var7 = var0.field1150 * 64 + var0.field1161 * 128; // L: 3927
+			if (var0.exactMoveArrive2Cycle >= Client.cycle) { // L: 3920
+				if (var0.exactMoveArrive2Cycle == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > class163.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 3921
+					var11 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle; // L: 3922
+					var3 = Client.cycle - var0.exactMoveArrive1Cycle; // L: 3923
+					var4 = var0.field1150 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3924
+					var5 = var0.field1150 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3925
+					int var12 = var0.field1150 * 64 + var0.exactMoveDeltaX2 * 128; // L: 3926
+					var7 = var0.field1150 * 64 + var0.exactMoveDeltaY2 * 128; // L: 3927
 					var0.x = (var12 * var3 + var4 * (var11 - var3)) / var11; // L: 3928
 					var0.y = (var3 * var7 + var5 * (var11 - var3)) / var11; // L: 3929
 				}
 
 				var0.field1179 = 0; // L: 3931
-				var0.orientation = var0.field1135; // L: 3932
+				var0.orientation = var0.exactMoveDirection; // L: 3932
 				var0.rotation = var0.orientation; // L: 3933
 			} else {
 				var0.movementSequence = var0.idleSequence; // L: 3936
@@ -88,7 +88,7 @@ public class class149 {
 							var0.orientation = 0;
 						}
 
-						class193 var6 = var0.pathTraversed[var0.pathLength - 1]; // L: 3968
+						MoveSpeed var6 = var0.pathTraversed[var0.pathLength - 1]; // L: 3968
 						if (var4 - var11 <= 256 && var4 - var11 >= -256 && var5 - var3 <= 256 && var5 - var3 >= -256) { // L: 3969
 							var7 = var0.orientation - var0.rotation & 2047; // L: 3976
 							if (var7 > 1024) { // L: 3977
@@ -147,9 +147,9 @@ public class class149 {
 								}
 							}
 
-							if (var6 == class193.field2187) { // L: 4004
+							if (var6 == MoveSpeed.field2187) { // L: 4004
 								var9 <<= 1;
-							} else if (var6 == class193.field2184) { // L: 4005
+							} else if (var6 == MoveSpeed.field2184) { // L: 4005
 								var9 >>= 1;
 							}
 
@@ -205,8 +205,8 @@ public class class149 {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) { // L: 4030
 			var0.sequence = -1; // L: 4031
 			var0.spotAnimation = -1; // L: 4032
-			var0.field1143 = 0; // L: 4033
-			var0.field1163 = 0; // L: 4034
+			var0.exactMoveArrive1Cycle = 0; // L: 4033
+			var0.exactMoveArrive2Cycle = 0; // L: 4034
 			var0.x = var0.pathX[0] * 128 + var0.field1150 * 64; // L: 4035
 			var0.y = var0.field1150 * 64 + var0.pathY[0] * 128; // L: 4036
 			var0.method2179(); // L: 4037
@@ -215,8 +215,8 @@ public class class149 {
 		if (GrandExchangeEvents.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) { // L: 4039 4040
 			var0.sequence = -1; // L: 4041
 			var0.spotAnimation = -1; // L: 4042
-			var0.field1143 = 0; // L: 4043
-			var0.field1163 = 0; // L: 4044
+			var0.exactMoveArrive1Cycle = 0; // L: 4043
+			var0.exactMoveArrive2Cycle = 0; // L: 4044
 			var0.x = var0.field1150 * 64 + var0.pathX[0] * 128; // L: 4045
 			var0.y = var0.pathY[0] * 128 + var0.field1150 * 64; // L: 4046
 			var0.method2179(); // L: 4047

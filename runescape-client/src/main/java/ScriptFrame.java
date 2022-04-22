@@ -542,7 +542,7 @@ public class ScriptFrame {
 				}
 			}
 
-			if (var0.overheadText != null && (var1 >= var75 || !var0.field1130 && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5002 5003
+			if (var0.overheadText != null && (var1 >= var75 || !var0.showPublicPlayerChat && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5002 5003
 				class93.method2376(var0, var0.defaultHeight); // L: 5004
 				if (Client.viewportTempX > -1 && Client.overheadTextCount < Client.overheadTextLimit) { // L: 5005
 					Client.overheadTextXOffsets[Client.overheadTextCount] = RouteStrategy.fontBold12.stringWidth(var0.overheadText) / 2; // L: 5006

@@ -242,7 +242,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener, FocusLi
 	)
 	static int method613(int var0, Script var1, boolean var2) {
 		if (var0 < 1000) { // L: 427
-			return class168.method3353(var0, var1, var2);
+			return PlayerEquipmentItem.method3353(var0, var1, var2);
 		} else if (var0 < 1100) { // L: 428
 			return class7.method54(var0, var1, var2);
 		} else if (var0 < 1200) { // L: 429
@@ -399,28 +399,28 @@ public class MouseHandler implements MouseListener, MouseMotionListener, FocusLi
 				var5 = var0.readUnsignedShort(); // L: 8216
 				var6 = var0.method7715(); // L: 8217
 				if (class431.field4602) { // L: 8218
-					var3.field1144 = var0.method7875() == 1; // L: 8219
+					var3.instantTurn = var0.method7875() == 1; // L: 8219
 				}
 
 				var7 = var3.x - (var5 - GrandExchangeOfferOwnWorldComparator.baseX - GrandExchangeOfferOwnWorldComparator.baseX) * 64; // L: 8221
 				var8 = var3.y - (var6 - VarcInt.baseY - VarcInt.baseY) * 64; // L: 8222
 				if (var7 != 0 || var8 != 0) { // L: 8223
-					var3.field1121 = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
+					var3.facedDirection = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
 				}
 			}
 
 			if ((var4 & 1024) != 0) { // L: 8225
-				var3.field1182 = var0.readInt(); // L: 8226
+				var3.combatLevelChange = var0.readInt(); // L: 8226
 			}
 
 			if ((var4 & 16) != 0) { // L: 8228
 				var3.spotAnimation = var0.readUnsignedShort(); // L: 8229
 				var5 = var0.readInt(); // L: 8230
 				var3.spotAnimationHeight = var5 >> 16; // L: 8231
-				var3.field1134 = (var5 & 65535) + Client.cycle; // L: 8232
+				var3.spotAnimationStartCycle = (var5 & 65535) + Client.cycle; // L: 8232
 				var3.spotAnimationFrame = 0; // L: 8233
 				var3.spotAnimationFrameCycle = 0; // L: 8234
-				if (var3.field1134 > Client.cycle) { // L: 8235
+				if (var3.spotAnimationStartCycle > Client.cycle) { // L: 8235
 					var3.spotAnimationFrame = -1;
 				}
 
@@ -474,28 +474,28 @@ public class MouseHandler implements MouseListener, MouseMotionListener, FocusLi
 			}
 
 			if (class431.field4602 && (var4 & 256) != 0 || !class431.field4602 && (var4 & 64) != 0) { // L: 8276
-				var3.field1129 = var0.method7885(); // L: 8277
-				var3.field1160 = var0.method7707(); // L: 8278
-				var3.field1132 = var0.readByte(); // L: 8279
-				var3.field1161 = var0.readByte(); // L: 8280
-				var3.field1143 = var0.method7715() + Client.cycle; // L: 8281
-				var3.field1163 = var0.readUnsignedShort() + Client.cycle; // L: 8282
-				var3.field1135 = var0.method7715(); // L: 8283
+				var3.exactMoveDeltaX1 = var0.method7885(); // L: 8277
+				var3.exactMoveDeltaY1 = var0.method7707(); // L: 8278
+				var3.exactMoveDeltaX2 = var0.readByte(); // L: 8279
+				var3.exactMoveDeltaY2 = var0.readByte(); // L: 8280
+				var3.exactMoveArrive1Cycle = var0.method7715() + Client.cycle; // L: 8281
+				var3.exactMoveArrive2Cycle = var0.readUnsignedShort() + Client.cycle; // L: 8282
+				var3.exactMoveDirection = var0.method7715(); // L: 8283
 				var3.pathLength = 1; // L: 8284
 				var3.field1170 = 0; // L: 8285
-				var3.field1129 += var3.pathX[0]; // L: 8286
-				var3.field1160 += var3.pathY[0]; // L: 8287
-				var3.field1132 += var3.pathX[0]; // L: 8288
-				var3.field1161 += var3.pathY[0]; // L: 8289
+				var3.exactMoveDeltaX1 += var3.pathX[0]; // L: 8286
+				var3.exactMoveDeltaY1 += var3.pathY[0]; // L: 8287
+				var3.exactMoveDeltaX2 += var3.pathX[0]; // L: 8288
+				var3.exactMoveDeltaY2 += var3.pathY[0]; // L: 8289
 			}
 
 			if ((var4 & 512) != 0) { // L: 8291
-				var3.field1167 = Client.cycle + var0.method7713(); // L: 8292
-				var3.field1168 = Client.cycle + var0.method7714(); // L: 8293
-				var3.field1169 = var0.readByte(); // L: 8294
-				var3.field1114 = var0.method7707(); // L: 8295
-				var3.field1171 = var0.method7707(); // L: 8296
-				var3.field1122 = (byte)var0.method7742(); // L: 8297
+				var3.recolourStartCycle = Client.cycle + var0.method7713(); // L: 8292
+				var3.recolourEndCycle = Client.cycle + var0.method7714(); // L: 8293
+				var3.recolourHue = var0.readByte(); // L: 8294
+				var3.recolourSaturation = var0.method7707(); // L: 8295
+				var3.recolourLuminance = var0.method7707(); // L: 8296
+				var3.recolourAmount = (byte)var0.method7742(); // L: 8297
 			}
 
 			if ((var4 & 2) != 0) { // L: 8299
@@ -536,18 +536,18 @@ public class MouseHandler implements MouseListener, MouseMotionListener, FocusLi
 						var3.sequenceFrame = 0; // L: 8328
 						var3.sequenceFrameCycle = 0; // L: 8329
 						var3.sequenceDelay = var6; // L: 8330
-						var3.field1152 = 0; // L: 8331
+						var3.currentSequenceFrameIndex = 0; // L: 8331
 					}
 
 					if (var7 == 2) { // L: 8333
-						var3.field1152 = 0; // L: 8334
+						var3.currentSequenceFrameIndex = 0; // L: 8334
 					}
 				} else if (var5 == -1 || var3.sequence == -1 || class163.SequenceDefinition_get(var5).field2155 >= class163.SequenceDefinition_get(var3.sequence).field2155) { // L: 8337
 					var3.sequence = var5; // L: 8338
 					var3.sequenceFrame = 0; // L: 8339
 					var3.sequenceFrameCycle = 0; // L: 8340
 					var3.sequenceDelay = var6; // L: 8341
-					var3.field1152 = 0; // L: 8342
+					var3.currentSequenceFrameIndex = 0; // L: 8342
 					var3.field1170 = var3.pathLength; // L: 8343
 				}
 			}

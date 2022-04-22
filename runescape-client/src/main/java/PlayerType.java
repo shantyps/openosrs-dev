@@ -233,7 +233,7 @@ public enum PlayerType implements MouseWheel {
 			return 1; // L: 1889
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) { // L: 1891
 			Interpreter.Interpreter_intStackSize -= 2; // L: 1892
-			Players.method2419(Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize], Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize + 1]); // L: 1893
+			Players.playJingle(Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize], Interpreter.Interpreter_intStack[Interpreter.Interpreter_intStackSize + 1]); // L: 1893
 			return 1; // L: 1894
 		} else {
 			class83 var3;

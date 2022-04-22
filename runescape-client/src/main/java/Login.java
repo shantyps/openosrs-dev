@@ -190,14 +190,14 @@ public class Login {
 		garbageValue = "540363482"
 	)
 	static final void method1932(PacketBuffer var0, int var1, Player var2, int var3) {
-		byte var4 = class193.field2186.field2183; // L: 451
+		byte var4 = MoveSpeed.field2186.speed; // L: 451
 		if ((var3 & 8192) != 0) { // L: 452
-			var2.field1167 = Client.cycle + var0.method7714(); // L: 453
-			var2.field1168 = Client.cycle + var0.method7713(); // L: 454
-			var2.field1169 = var0.method7708(); // L: 455
-			var2.field1114 = var0.method7708(); // L: 456
-			var2.field1171 = var0.method7885(); // L: 457
-			var2.field1122 = (byte)var0.method7773(); // L: 458
+			var2.recolourStartCycle = Client.cycle + var0.method7714(); // L: 453
+			var2.recolourEndCycle = Client.cycle + var0.method7713(); // L: 454
+			var2.recolourHue = var0.method7708(); // L: 455
+			var2.recolourSaturation = var0.method7708(); // L: 456
+			var2.recolourLuminance = var0.method7885(); // L: 457
+			var2.recolourAmount = (byte)var0.method7773(); // L: 458
 		}
 
 		if ((var3 & 256) != 0) { // L: 460
@@ -224,13 +224,13 @@ public class Login {
 					Players.field1273.offset = 0; // L: 475
 					var0.method7814(Players.field1273.array, 0, var8); // L: 476
 					Players.field1273.offset = 0; // L: 477
-					String var11 = AbstractFont.escapeBrackets(MouseHandler.method584(class193.method3883(Players.field1273))); // L: 478
+					String var11 = AbstractFont.escapeBrackets(MouseHandler.method584(MoveSpeed.method3883(Players.field1273))); // L: 478
 					var2.overheadText = var11.trim(); // L: 479
 					var2.overheadTextColor = var5 >> 8; // L: 480
 					var2.overheadTextEffect = var5 & 255; // L: 481
 					var2.overheadTextCyclesRemaining = 150; // L: 482
 					var2.isAutoChatting = var7; // L: 483
-					var2.field1130 = var2 != GrandExchangeEvents.localPlayer && var6.isUser && "" != Client.field728 && var11.toLowerCase().indexOf(Client.field728) == -1; // L: 484
+					var2.showPublicPlayerChat = var2 != GrandExchangeEvents.localPlayer && var6.isUser && "" != Client.field728 && var11.toLowerCase().indexOf(Client.field728) == -1; // L: 484
 					if (var6.isPrivileged) { // L: 486
 						var12 = var7 ? 91 : 1;
 					} else {
@@ -258,10 +258,10 @@ public class Login {
 			var2.spotAnimation = var0.method7713(); // L: 498
 			var5 = var0.method7705(); // L: 499
 			var2.spotAnimationHeight = var5 >> 16; // L: 500
-			var2.field1134 = (var5 & 65535) + Client.cycle; // L: 501
+			var2.spotAnimationStartCycle = (var5 & 65535) + Client.cycle; // L: 501
 			var2.spotAnimationFrame = 0; // L: 502
 			var2.spotAnimationFrameCycle = 0; // L: 503
-			if (var2.field1134 > Client.cycle) { // L: 504
+			if (var2.spotAnimationStartCycle > Client.cycle) { // L: 504
 				var2.spotAnimationFrame = -1;
 			}
 
@@ -280,24 +280,24 @@ public class Login {
 		}
 
 		if ((var3 & 512) != 0) { // L: 515
-			var2.field1129 = var0.method7707(); // L: 516
-			var2.field1160 = var0.readByte(); // L: 517
-			var2.field1132 = var0.method7885(); // L: 518
-			var2.field1161 = var0.method7708(); // L: 519
-			var2.field1143 = var0.method7714() + Client.cycle; // L: 520
-			var2.field1163 = var0.method7715() + Client.cycle; // L: 521
-			var2.field1135 = var0.method7713(); // L: 522
+			var2.exactMoveDeltaX1 = var0.method7707(); // L: 516
+			var2.exactMoveDeltaY1 = var0.readByte(); // L: 517
+			var2.exactMoveDeltaX2 = var0.method7885(); // L: 518
+			var2.exactMoveDeltaY2 = var0.method7708(); // L: 519
+			var2.exactMoveArrive1Cycle = var0.method7714() + Client.cycle; // L: 520
+			var2.exactMoveArrive2Cycle = var0.method7715() + Client.cycle; // L: 521
+			var2.exactMoveDirection = var0.method7713(); // L: 522
 			if (var2.field1070) { // L: 523
-				var2.field1129 += var2.tileX; // L: 524
-				var2.field1160 += var2.tileY; // L: 525
-				var2.field1132 += var2.tileX; // L: 526
-				var2.field1161 += var2.tileY; // L: 527
+				var2.exactMoveDeltaX1 += var2.tileX; // L: 524
+				var2.exactMoveDeltaY1 += var2.tileY; // L: 525
+				var2.exactMoveDeltaX2 += var2.tileX; // L: 526
+				var2.exactMoveDeltaY2 += var2.tileY; // L: 527
 				var2.pathLength = 0; // L: 528
 			} else {
-				var2.field1129 += var2.pathX[0]; // L: 531
-				var2.field1160 += var2.pathY[0]; // L: 532
-				var2.field1132 += var2.pathX[0]; // L: 533
-				var2.field1161 += var2.pathY[0]; // L: 534
+				var2.exactMoveDeltaX1 += var2.pathX[0]; // L: 531
+				var2.exactMoveDeltaY1 += var2.pathY[0]; // L: 532
+				var2.exactMoveDeltaX2 += var2.pathX[0]; // L: 533
+				var2.exactMoveDeltaY2 += var2.pathY[0]; // L: 534
 				var2.pathLength = 1; // L: 535
 			}
 
@@ -305,10 +305,10 @@ public class Login {
 		}
 
 		if ((var3 & 16) != 0) { // L: 539
-			var2.field1121 = var0.readUnsignedShort(); // L: 540
+			var2.facedDirection = var0.readUnsignedShort(); // L: 540
 			if (var2.pathLength == 0) { // L: 541
-				var2.orientation = var2.field1121; // L: 542
-				var2.field1121 = -1; // L: 543
+				var2.orientation = var2.facedDirection; // L: 542
+				var2.facedDirection = -1; // L: 543
 			}
 		}
 
@@ -339,9 +339,9 @@ public class Login {
 		}
 
 		if ((var3 & 16384) != 0) { // L: 566
-			class193[] var15 = Players.field1286; // L: 567
-			class193[] var21 = new class193[]{class193.field2185, class193.field2187, class193.field2186, class193.field2184}; // L: 571
-			var15[var1] = (class193)MusicPatchPcmStream.findEnumerated(var21, var0.method7708()); // L: 573
+			MoveSpeed[] var15 = Players.field1286; // L: 567
+			MoveSpeed[] var21 = new MoveSpeed[]{MoveSpeed.field2185, MoveSpeed.field2187, MoveSpeed.field2186, MoveSpeed.field2184}; // L: 571
+			var15[var1] = (MoveSpeed)MusicPatchPcmStream.findEnumerated(var21, var0.method7708()); // L: 573
 		}
 
 		if ((var3 & 32) != 0) { // L: 575
@@ -399,10 +399,10 @@ public class Login {
 			if (var4 == 127) { // L: 618
 				var2.resetPath(var2.tileX, var2.tileY);
 			} else {
-				class193 var22;
-				if (var4 != class193.field2186.field2183) { // L: 621
-					class193[] var18 = new class193[]{class193.field2185, class193.field2187, class193.field2186, class193.field2184}; // L: 624
-					var22 = (class193)MusicPatchPcmStream.findEnumerated(var18, var4); // L: 626
+				MoveSpeed var22;
+				if (var4 != MoveSpeed.field2186.speed) { // L: 621
+					MoveSpeed[] var18 = new MoveSpeed[]{MoveSpeed.field2185, MoveSpeed.field2187, MoveSpeed.field2186, MoveSpeed.field2184}; // L: 624
+					var22 = (MoveSpeed)MusicPatchPcmStream.findEnumerated(var18, var4); // L: 626
 				} else {
 					var22 = Players.field1286[var1]; // L: 628
 				}

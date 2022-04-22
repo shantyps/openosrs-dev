@@ -438,14 +438,14 @@ public enum WorldMapSectionType implements MouseWheel {
 		}
 
 		if (class147.cameraPitch < var0) { // L: 3758
-			class147.cameraPitch = (var0 - class147.cameraPitch) * class386.field4337 / 1000 + class147.cameraPitch + NetFileRequest.field3960; // L: 3759
+			class147.cameraPitch = (var0 - class147.cameraPitch) * class386.cameraLookAtAcceleration / 1000 + class147.cameraPitch + NetFileRequest.cameraLookAtSpeed; // L: 3759
 			if (class147.cameraPitch > var0) { // L: 3760
 				class147.cameraPitch = var0;
 			}
 		}
 
 		if (class147.cameraPitch > var0) { // L: 3762
-			class147.cameraPitch -= (class147.cameraPitch - var0) * class386.field4337 / 1000 + NetFileRequest.field3960; // L: 3763
+			class147.cameraPitch -= (class147.cameraPitch - var0) * class386.cameraLookAtAcceleration / 1000 + NetFileRequest.cameraLookAtSpeed; // L: 3763
 			if (class147.cameraPitch < var0) { // L: 3764
 				class147.cameraPitch = var0;
 			}
@@ -461,12 +461,12 @@ public enum WorldMapSectionType implements MouseWheel {
 		}
 
 		if (var2 > 0) { // L: 3769
-			class21.cameraYaw = class21.cameraYaw + NetFileRequest.field3960 + var2 * class386.field4337 / 1000; // L: 3770
+			class21.cameraYaw = class21.cameraYaw + NetFileRequest.cameraLookAtSpeed + var2 * class386.cameraLookAtAcceleration / 1000; // L: 3770
 			class21.cameraYaw &= 2047; // L: 3771
 		}
 
 		if (var2 < 0) { // L: 3773
-			class21.cameraYaw -= NetFileRequest.field3960 + -var2 * class386.field4337 / 1000; // L: 3774
+			class21.cameraYaw -= NetFileRequest.cameraLookAtSpeed + -var2 * class386.cameraLookAtAcceleration / 1000; // L: 3774
 			class21.cameraYaw &= 2047; // L: 3775
 		}
 

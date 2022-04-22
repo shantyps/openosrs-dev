@@ -169,8 +169,8 @@ class class12 extends SSLSocket {
 						String var5 = var4.name; // L: 10021
 						int var6;
 						int var9;
-						if (var4.combatLevel != 0 && var0.field1182 != 0) { // L: 10022
-							var6 = var0.field1182 != -1 ? var0.field1182 * -979480491 * -1781781251 : var4.combatLevel * -867920465 * 2112479567; // L: 10023
+						if (var4.combatLevel != 0 && var0.combatLevelChange != 0) { // L: 10022
+							var6 = var0.combatLevelChange != -1 ? var0.combatLevelChange * -979480491 * -1781781251 : var4.combatLevel * -867920465 * 2112479567; // L: 10023
 							var9 = GrandExchangeEvents.localPlayer.combatLevel; // L: 10026
 							int var10 = var9 - var6; // L: 10028
 							String var8;

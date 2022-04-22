@@ -147,7 +147,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("archiveLoaders")
 	static ArrayList archiveLoaders;
 	@ObfuscatedName("tx")
-	static boolean[] field546;
+	@Export("cameraShaking")
+	static boolean[] cameraShaking;
 	@ObfuscatedName("uo")
 	@ObfuscatedGetter(
 		intValue = 810173849
@@ -197,7 +198,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("mapIconYs")
 	static int[] mapIconYs;
 	@ObfuscatedName("th")
-	static int[] field756;
+	@Export("cameraShakeIntensity")
+	static int[] cameraShakeIntensity;
 	@ObfuscatedName("rc")
 	@ObfuscatedSignature(
 		descriptor = "[Lqi;"
@@ -205,9 +207,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("mapIcons")
 	static SpritePixels[] mapIcons;
 	@ObfuscatedName("tl")
-	static int[] field636;
+	@Export("cameraMoveIntensity")
+	static int[] cameraMoveIntensity;
 	@ObfuscatedName("tb")
-	static int[] field674;
+	@Export("cameraShakeSpeed")
+	static int[] cameraShakeSpeed;
 	@ObfuscatedName("ru")
 	@ObfuscatedSignature(
 		descriptor = "[Lea;"
@@ -215,7 +219,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("currentClanChannels")
 	static ClanChannel[] currentClanChannels;
 	@ObfuscatedName("tm")
-	static int[] field600;
+	@Export("cameraShakeCycle")
+	static int[] cameraShakeCycle;
 	@ObfuscatedName("ty")
 	@ObfuscatedGetter(
 		intValue = -2113477791
@@ -858,7 +863,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@ObfuscatedGetter(
 		longValue = 4157369345681014175L
 	)
-	static long field623;
+	@Export("userRegistrationId")
+	static long userRegistrationId;
 	@ObfuscatedName("lc")
 	@Export("renderSelf")
 	static boolean renderSelf;
@@ -1461,7 +1467,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		players = new Player[2048]; // L: 398
 		localPlayerIndex = -1; // L: 400
 		field544 = 0; // L: 401
-		field623 = -1L; // L: 402
+		userRegistrationId = -1L; // L: 402
 		renderSelf = true; // L: 404
 		drawPlayerNames = 0; // L: 409
 		field626 = 0; // L: 410
@@ -1592,11 +1598,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		soundEffects = new SoundEffect[50]; // L: 591
 		isCameraLocked = false; // L: 593
 		field754 = false; // L: 604
-		field546 = new boolean[5]; // L: 612
-		field756 = new int[5]; // L: 613
-		field636 = new int[5]; // L: 614
-		field674 = new int[5]; // L: 615
-		field600 = new int[5]; // L: 616
+		cameraShaking = new boolean[5]; // L: 612
+		cameraShakeIntensity = new int[5]; // L: 613
+		cameraMoveIntensity = new int[5]; // L: 614
+		cameraShakeSpeed = new int[5]; // L: 615
+		cameraShakeCycle = new int[5]; // L: 616
 		field760 = 256; // L: 617
 		field761 = 205; // L: 618
 		zoomHeight = 256; // L: 619
@@ -1666,7 +1672,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		class182.masterDisk = new ArchiveDisk(255, JagexCache.JagexCache_dat2File, JagexCache.JagexCache_idx255File, 500000); // L: 843
 		class131.clientPreferences = AbstractWorldMapData.method4344(); // L: 844
 		this.setUpClipboard(); // L: 845
-		ModelData0.method5093(this, class193.field2189); // L: 846
+		ModelData0.method5093(this, MoveSpeed.field2189); // L: 846
 		class131.setWindowedMode(class131.clientPreferences.method2251()); // L: 847
 		Decimator.friendSystem = new FriendSystem(class122.loginType); // L: 848
 		this.field622 = new class14("tokenRequest", 1, 1); // L: 849
@@ -2979,7 +2985,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (class391.field4372 >= 29) { // L: 2510
 						((AbstractSocket)var1).read(var2.array, 0, 8); // L: 2511
 						var2.offset = 0; // L: 2512
-						field623 = var2.readLong(); // L: 2513
+						userRegistrationId = var2.readLong(); // L: 2513
 					}
 
 					((AbstractSocket)var1).read(var2.array, 0, 1); // L: 2515
@@ -3652,7 +3658,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 															}
 
 															for (var3 = 0; var3 < 5; ++var3) { // L: 3457
-																int var10002 = field600[var3]++;
+																int var10002 = cameraShakeCycle[var3]++;
 															}
 
 															class160.varcs.tryWrite(); // L: 3458
@@ -4066,15 +4072,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				if (ServerPacket.field3104 == var1.serverPacket) { // L: 6120
 					isCameraLocked = true; // L: 6121
 					field754 = false; // L: 6122
-					class286.field3274 = var3.readUnsignedByte(); // L: 6123
-					class54.field447 = var3.readUnsignedByte(); // L: 6124
-					BZip2State.field4662 = var3.readUnsignedShort(); // L: 6125
-					Script.field955 = var3.readUnsignedByte(); // L: 6126
-					ArchiveDisk.field4309 = var3.readUnsignedByte(); // L: 6127
-					if (ArchiveDisk.field4309 >= 100) { // L: 6128
-						WorldMapLabelSize.cameraX = class286.field3274 * 128 + 64; // L: 6129
-						class154.cameraZ = class54.field447 * 128 + 64; // L: 6130
-						ItemContainer.cameraY = WorldMapLabel.getTileHeight(WorldMapLabelSize.cameraX, class154.cameraZ, class18.Client_plane) - BZip2State.field4662; // L: 6131
+					class286.cameraMoveToX = var3.readUnsignedByte(); // L: 6123
+					class54.cameraMoveToY = var3.readUnsignedByte(); // L: 6124
+					BZip2State.cameraMoveToHeight = var3.readUnsignedShort(); // L: 6125
+					Script.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 6126
+					ArchiveDisk.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 6127
+					if (ArchiveDisk.cameraMoveToAcceleration >= 100) { // L: 6128
+						WorldMapLabelSize.cameraX = class286.cameraMoveToX * 128 + 64; // L: 6129
+						class154.cameraZ = class54.cameraMoveToY * 128 + 64; // L: 6130
+						ItemContainer.cameraY = WorldMapLabel.getTileHeight(WorldMapLabelSize.cameraX, class154.cameraZ, class18.Client_plane) - BZip2State.cameraMoveToHeight; // L: 6131
 					}
 
 					var1.serverPacket = null; // L: 6133
@@ -4090,7 +4096,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				String var52;
 				if (ServerPacket.field3030 == var1.serverPacket) { // L: 6141
 					var52 = var3.readStringCp1252NullTerminated(); // L: 6142
-					var21 = AbstractFont.escapeBrackets(MouseHandler.method584(class193.method3883(var3))); // L: 6143
+					var21 = AbstractFont.escapeBrackets(MouseHandler.method584(MoveSpeed.method3883(var3))); // L: 6143
 					Actor.addGameMessage(6, var52, var21); // L: 6144
 					var1.serverPacket = null; // L: 6145
 					return true; // L: 6146
@@ -4176,7 +4182,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					var13 = var3.readUnsignedShort(); // L: 6226
 					if (var22 >= 0 && var8 >= 0 && var22 < 103 && var8 < 103) { // L: 6227
 						if (var24 == 0) { // L: 6228
-							BoundaryObject var69 = ArchiveLoader.scene.method4754(class18.Client_plane, var22, var8); // L: 6229
+							BoundaryObject var69 = ArchiveLoader.scene.getBoundaryObject(class18.Client_plane, var22, var8); // L: 6229
 							if (var69 != null) { // L: 6230
 								var15 = FileSystem.Entity_unpackID(var69.tag); // L: 6231
 								if (var62 == 2) { // L: 6232
@@ -4187,7 +4193,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 								}
 							}
 						} else if (var24 == 1) { // L: 6239
-							WallDecoration var68 = ArchiveLoader.scene.method4860(class18.Client_plane, var22, var8); // L: 6240
+							WallDecoration var68 = ArchiveLoader.scene.getWallObject(class18.Client_plane, var22, var8); // L: 6240
 							if (var68 != null) { // L: 6241
 								var15 = FileSystem.Entity_unpackID(var68.tag); // L: 6242
 								if (var62 != 4 && var62 != 5) { // L: 6243
@@ -4269,7 +4275,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						var5 = -1;
 					}
 
-					Players.method2419(var5, var20); // L: 6311
+					Players.playJingle(var5, var20); // L: 6311
 					var1.serverPacket = null; // L: 6312
 					return true; // L: 6313
 				}
@@ -4417,7 +4423,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					isCameraLocked = false; // L: 6416
 
 					for (var20 = 0; var20 < 5; ++var20) { // L: 6417
-						field546[var20] = false;
+						cameraShaking[var20] = false;
 					}
 
 					var1.serverPacket = null; // L: 6418
@@ -4561,15 +4567,19 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				}
 
 				if (ServerPacket.field3077 == var1.serverPacket) { // L: 6526
+					//         .writeByte(type.type)
+					//        .writeByte(shakeIntensity)
+					//        .writeByte(movementIntensity)
+					//        .writeByte(speed)
 					var20 = var3.readUnsignedByte(); // L: 6527
 					var5 = var3.readUnsignedByte(); // L: 6528
 					var6 = var3.readUnsignedByte(); // L: 6529
 					var22 = var3.readUnsignedByte(); // L: 6530
-					field546[var20] = true; // L: 6531
-					field756[var20] = var5; // L: 6532
-					field636[var20] = var6; // L: 6533
-					field674[var20] = var22; // L: 6534
-					field600[var20] = 0; // L: 6535
+					cameraShaking[var20] = true; // L: 6531
+					cameraShakeIntensity[var20] = var5; // L: 6532
+					cameraMoveIntensity[var20] = var6; // L: 6533
+					cameraShakeSpeed[var20] = var22; // L: 6534
+					cameraShakeCycle[var20] = 0; // L: 6535
 					var1.serverPacket = null; // L: 6536
 					return true; // L: 6537
 				}
@@ -4616,16 +4626,16 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 								var57.sequenceFrame = 0; // L: 6572
 								var57.sequenceFrameCycle = 0; // L: 6573
 								var57.sequenceDelay = var6; // L: 6574
-								var57.field1152 = 0; // L: 6575
+								var57.currentSequenceFrameIndex = 0; // L: 6575
 							} else if (var8 == 2) { // L: 6577
-								var57.field1152 = 0; // L: 6578
+								var57.currentSequenceFrameIndex = 0; // L: 6578
 							}
 						} else if (var5 == -1 || var57.sequence == -1 || class163.SequenceDefinition_get(var5).field2155 >= class163.SequenceDefinition_get(var57.sequence).field2155) { // L: 6581
 							var57.sequence = var5; // L: 6582
 							var57.sequenceFrame = 0; // L: 6583
 							var57.sequenceFrameCycle = 0; // L: 6584
 							var57.sequenceDelay = var6; // L: 6585
-							var57.field1152 = 0; // L: 6586
+							var57.currentSequenceFrameIndex = 0; // L: 6586
 							var57.field1170 = var57.pathLength; // L: 6587
 						}
 					}
@@ -4699,7 +4709,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (!var63) { // L: 6638
 						crossWorldMessageIds[crossWorldMessageIdsIndex] = var30; // L: 6639
 						crossWorldMessageIdsIndex = (crossWorldMessageIdsIndex + 1) % 100; // L: 6640
-						var32 = class193.method3883(var3); // L: 6641
+						var32 = MoveSpeed.method3883(var3); // L: 6641
 						var33 = var72 >= 0 ? 43 : 46; // L: 6642
 						class301.addChatMessage(var33, "", var32, var12.name); // L: 6643
 					}
@@ -4737,7 +4747,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						}
 
 						if (var91 == null) { // L: 6668
-							var91 = class4.method16(var22, var8, var61);
+							var91 = class4.ifOpenSub(var22, var8, var61);
 						}
 					}
 
@@ -4891,8 +4901,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 							var60.itemQuantityMode = 2; // L: 6781
 						}
 
-						if (var60.field3467 > 0) { // L: 6782
-							var60.modelZoom = var60.modelZoom * 32 / var60.field3467;
+						if (var60.modelRotation > 0) { // L: 6782
+							var60.modelZoom = var60.modelZoom * 32 / var60.modelRotation;
 						} else if (var60.rawWidth > 0) { // L: 6783
 							var60.modelZoom = var60.modelZoom * 32 / var60.rawWidth;
 						}
@@ -5005,7 +5015,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (!var76 && field618 == 0) { // L: 6866
 						crossWorldMessageIds[crossWorldMessageIdsIndex] = var38; // L: 6867
 						crossWorldMessageIdsIndex = (crossWorldMessageIdsIndex + 1) % 100; // L: 6868
-						var32 = AbstractFont.escapeBrackets(MouseHandler.method584(class193.method3883(var3))); // L: 6869
+						var32 = AbstractFont.escapeBrackets(MouseHandler.method584(MoveSpeed.method3883(var3))); // L: 6869
 						byte var92;
 						if (var37.isPrivileged) { // L: 6871
 							var92 = 7;
@@ -5187,7 +5197,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (!var89 && field618 == 0) { // L: 7000
 						crossWorldMessageIds[crossWorldMessageIdsIndex] = var35; // L: 7001
 						crossWorldMessageIdsIndex = (crossWorldMessageIdsIndex + 1) % 100; // L: 7002
-						var41 = AbstractFont.escapeBrackets(MouseHandler.method584(class193.method3883(var3))); // L: 7003
+						var41 = AbstractFont.escapeBrackets(MouseHandler.method584(MoveSpeed.method3883(var3))); // L: 7003
 						if (var40.modIcon != -1) { // L: 7004
 							class301.addChatMessage(9, Script.method1990(var40.modIcon) + var52, var41, class82.base37DecodeLong(var26));
 						} else {
@@ -5259,15 +5269,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				if (ServerPacket.field3078 == var1.serverPacket) { // L: 7055
 					isCameraLocked = true; // L: 7056
 					field754 = false; // L: 7057
-					class154.field1691 = var3.readUnsignedByte(); // L: 7058
-					class67.field881 = var3.readUnsignedByte(); // L: 7059
-					DevicePcmPlayerProvider.field154 = var3.readUnsignedShort(); // L: 7060
-					NetFileRequest.field3960 = var3.readUnsignedByte(); // L: 7061
-					class386.field4337 = var3.readUnsignedByte(); // L: 7062
-					if (class386.field4337 >= 100) { // L: 7063
-						var20 = class154.field1691 * 128 + 64; // L: 7064
-						var5 = class67.field881 * 128 + 64; // L: 7065
-						var6 = WorldMapLabel.getTileHeight(var20, var5, class18.Client_plane) - DevicePcmPlayerProvider.field154; // L: 7066
+					class154.cameraLookAtX = var3.readUnsignedByte(); // L: 7058
+					class67.cameraLookAtY = var3.readUnsignedByte(); // L: 7059
+					DevicePcmPlayerProvider.cameraLookAtHeight = var3.readUnsignedShort(); // L: 7060
+					NetFileRequest.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 7061
+					class386.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 7062
+					if (class386.cameraLookAtAcceleration >= 100) { // L: 7063
+						var20 = class154.cameraLookAtX * 128 + 64; // L: 7064
+						var5 = class67.cameraLookAtY * 128 + 64; // L: 7065
+						var6 = WorldMapLabel.getTileHeight(var20, var5, class18.Client_plane) - DevicePcmPlayerProvider.cameraLookAtHeight; // L: 7066
 						var22 = var20 - WorldMapLabelSize.cameraX; // L: 7067
 						var8 = var6 - ItemContainer.cameraY; // L: 7068
 						var61 = var5 - class154.cameraZ; // L: 7069
@@ -5412,10 +5422,10 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (var58 != null) { // L: 7189
 						var58.spotAnimation = var5; // L: 7190
 						var58.spotAnimationHeight = var6 >> 16; // L: 7191
-						var58.field1134 = (var6 & 65535) + cycle; // L: 7192
+						var58.spotAnimationStartCycle = (var6 & 65535) + cycle; // L: 7192
 						var58.spotAnimationFrame = 0; // L: 7193
 						var58.spotAnimationFrameCycle = 0; // L: 7194
-						if (var58.field1134 > cycle) { // L: 7195
+						if (var58.spotAnimationStartCycle > cycle) { // L: 7195
 							var58.spotAnimationFrame = -1; // L: 7196
 						}
 
@@ -5464,7 +5474,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (!var65) { // L: 7230
 						crossWorldMessageIds[crossWorldMessageIdsIndex] = var46; // L: 7231
 						crossWorldMessageIdsIndex = (crossWorldMessageIdsIndex + 1) % 100; // L: 7232
-						var41 = AbstractFont.escapeBrackets(class193.method3883(var3)); // L: 7233
+						var41 = AbstractFont.escapeBrackets(MoveSpeed.method3883(var3)); // L: 7233
 						var16 = var72 >= 0 ? 41 : 44; // L: 7234
 						if (var34.modIcon != -1) { // L: 7235
 							class301.addChatMessage(var16, Script.method1990(var34.modIcon) + var21, var41, var14.name);
@@ -5541,10 +5551,10 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (var57 != null) { // L: 7293
 						var57.spotAnimation = var6; // L: 7294
 						var57.spotAnimationHeight = var5 >> 16; // L: 7295
-						var57.field1134 = (var5 & 65535) + cycle; // L: 7296
+						var57.spotAnimationStartCycle = (var5 & 65535) + cycle; // L: 7296
 						var57.spotAnimationFrame = 0; // L: 7297
 						var57.spotAnimationFrameCycle = 0; // L: 7298
-						if (var57.field1134 > cycle) { // L: 7299
+						if (var57.spotAnimationStartCycle > cycle) { // L: 7299
 							var57.spotAnimationFrame = -1; // L: 7300
 						}
 
@@ -5627,13 +5637,13 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 
 				if (ServerPacket.field3059 == var1.serverPacket && isCameraLocked) { // L: 7378 7379
 					field754 = true; // L: 7380
-					Script.field955 = var3.readUnsignedByte(); // L: 7381
-					ArchiveDisk.field4309 = var3.readUnsignedByte(); // L: 7382
-					NetFileRequest.field3960 = var3.readUnsignedByte(); // L: 7383
-					class386.field4337 = var3.readUnsignedByte(); // L: 7384
+					Script.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 7381
+					ArchiveDisk.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 7382
+					NetFileRequest.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 7383
+					class386.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 7384
 
 					for (var20 = 0; var20 < 5; ++var20) { // L: 7385
-						field546[var20] = false;
+						cameraShaking[var20] = false;
 					}
 
 					var1.serverPacket = null; // L: 7386
@@ -5649,7 +5659,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						Script.closeInterface(var7, var6 != var7.group);
 					}
 
-					class4.method16(var5, var6, var20); // L: 7396
+					class4.ifOpenSub(var5, var6, var20); // L: 7396
 					var1.serverPacket = null; // L: 7397
 					return true; // L: 7398
 				}

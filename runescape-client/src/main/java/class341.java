@@ -73,7 +73,7 @@ public class class341 implements Iterator {
 		descriptor = "(Lcz;IILgm;I)V",
 		garbageValue = "214021877"
 	)
-	static final void method6279(Player var0, int var1, int var2, class193 var3) {
+	static final void method6279(Player var0, int var1, int var2, MoveSpeed var3) {
 		int var4 = var0.pathX[0]; // L: 8351
 		int var5 = var0.pathY[0]; // L: 8352
 		int var6 = var0.transformedSize(); // L: 8353
@@ -419,7 +419,7 @@ public class class341 implements Iterator {
 				var13 = var7; // L: 8592
 				if (var7 >= 1) { // L: 8593
 					for (var14 = 0; var14 < var13 - 1; ++var14) { // L: 8594
-						var0.method2127(Client.field784[var14], Client.field785[var14], var3);
+						var0.move(Client.field784[var14], Client.field785[var14], var3);
 					}
 
 				}

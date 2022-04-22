@@ -122,7 +122,7 @@ public class class138 extends class128 {
 							} else {
 								String[] var9 = var8.inventoryActions; // L: 11082
 								int var10 = -1; // L: 11083
-								if (Client.shiftClickDrop && class168.method3351()) { // L: 11084
+								if (Client.shiftClickDrop && PlayerEquipmentItem.method3351()) { // L: 11084
 									var10 = var8.getShiftClickIndex(); // L: 11085
 								}
 

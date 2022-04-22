@@ -130,7 +130,7 @@ public abstract class Renderable extends DualNode {
 		int var0;
 		for (var0 = 0; var0 < 2048; ++var0) { // L: 2651
 			Players.field1276[var0] = null; // L: 2652
-			Players.field1286[var0] = class193.field2185; // L: 2653
+			Players.field1286[var0] = MoveSpeed.field2185; // L: 2653
 		}
 
 		for (var0 = 0; var0 < 2048; ++var0) { // L: 2656

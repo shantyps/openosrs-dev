@@ -165,9 +165,9 @@ public class Skeleton extends Node {
 				}
 			}
 
-			if (var0.field1121 != -1 && (var0.pathLength == 0 || var0.field1179 > 0)) { // L: 4080
-				var0.orientation = var0.field1121; // L: 4081
-				var0.field1121 = -1; // L: 4082
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1179 > 0)) { // L: 4080
+				var0.orientation = var0.facedDirection; // L: 4081
+				var0.facedDirection = -1; // L: 4082
 			}
 
 			int var4 = var0.orientation - var0.rotation & 2047; // L: 4084
@@ -180,14 +180,14 @@ public class Skeleton extends Node {
 				++var0.field1174; // L: 4090
 				boolean var6;
 				if (var4 > 1024) { // L: 4091
-					var0.rotation -= var0.field1144 ? var4 : var0.field1175 * -730517519 * -1419386607; // L: 4092
+					var0.rotation -= var0.instantTurn ? var4 : var0.field1175 * -730517519 * -1419386607; // L: 4092
 					var6 = true; // L: 4093
 					if (var4 < var0.field1175 || var4 > 2048 - var0.field1175) { // L: 4094
 						var0.rotation = var0.orientation; // L: 4095
 						var6 = false; // L: 4096
 					}
 
-					if (!var0.field1144 && var0.idleSequence == var0.movementSequence && (var0.field1174 > 25 || var6)) { // L: 4098
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1174 > 25 || var6)) { // L: 4098
 						if (var0.turnLeftSequence != -1) { // L: 4099
 							var0.movementSequence = var0.turnLeftSequence;
 						} else {
@@ -195,14 +195,14 @@ public class Skeleton extends Node {
 						}
 					}
 				} else {
-					var0.rotation += var0.field1144 ? var4 : -1419386607 * var0.field1175 * -730517519; // L: 4104
+					var0.rotation += var0.instantTurn ? var4 : -1419386607 * var0.field1175 * -730517519; // L: 4104
 					var6 = true; // L: 4105
 					if (var4 < var0.field1175 || var4 > 2048 - var0.field1175) { // L: 4106
 						var0.rotation = var0.orientation; // L: 4107
 						var6 = false; // L: 4108
 					}
 
-					if (!var0.field1144 && var0.movementSequence == var0.idleSequence && (var0.field1174 > 25 || var6)) { // L: 4110
+					if (!var0.instantTurn && var0.movementSequence == var0.idleSequence && (var0.field1174 > 25 || var6)) { // L: 4110
 						if (var0.turnRightSequence != -1) { // L: 4111
 							var0.movementSequence = var0.turnRightSequence;
 						} else {
@@ -212,7 +212,7 @@ public class Skeleton extends Node {
 				}
 
 				var0.rotation &= 2047; // L: 4116
-				var0.field1144 = false; // L: 4117
+				var0.instantTurn = false; // L: 4117
 			} else {
 				var0.field1174 = 0; // L: 4119
 			}

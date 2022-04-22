@@ -10,7 +10,8 @@ public final class BZip2State {
 	@ObfuscatedGetter(
 		intValue = -1129469843
 	)
-	static int field4662;
+	@Export("cameraMoveToHeight")
+	static int cameraMoveToHeight;
 	@ObfuscatedName("v")
 	final int field4655;
 	@ObfuscatedName("c")

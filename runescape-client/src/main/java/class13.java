@@ -58,42 +58,42 @@ class class13 extends DefaultTlsClient {
 	)
 	static final void method163(int var0, int var1, int var2) {
 		if (WorldMapLabelSize.cameraX < var0) { // L: 3729
-			WorldMapLabelSize.cameraX = (var0 - WorldMapLabelSize.cameraX) * ArchiveDisk.field4309 / 1000 + WorldMapLabelSize.cameraX + Script.field955; // L: 3730
+			WorldMapLabelSize.cameraX = (var0 - WorldMapLabelSize.cameraX) * ArchiveDisk.cameraMoveToAcceleration / 1000 + WorldMapLabelSize.cameraX + Script.cameraMoveToSpeed; // L: 3730
 			if (WorldMapLabelSize.cameraX > var0) { // L: 3731
 				WorldMapLabelSize.cameraX = var0;
 			}
 		}
 
 		if (WorldMapLabelSize.cameraX > var0) { // L: 3733
-			WorldMapLabelSize.cameraX -= (WorldMapLabelSize.cameraX - var0) * ArchiveDisk.field4309 / 1000 + Script.field955; // L: 3734
+			WorldMapLabelSize.cameraX -= (WorldMapLabelSize.cameraX - var0) * ArchiveDisk.cameraMoveToAcceleration / 1000 + Script.cameraMoveToSpeed; // L: 3734
 			if (WorldMapLabelSize.cameraX < var0) { // L: 3735
 				WorldMapLabelSize.cameraX = var0;
 			}
 		}
 
 		if (ItemContainer.cameraY < var1) { // L: 3737
-			ItemContainer.cameraY = (var1 - ItemContainer.cameraY) * ArchiveDisk.field4309 / 1000 + ItemContainer.cameraY + Script.field955; // L: 3738
+			ItemContainer.cameraY = (var1 - ItemContainer.cameraY) * ArchiveDisk.cameraMoveToAcceleration / 1000 + ItemContainer.cameraY + Script.cameraMoveToSpeed; // L: 3738
 			if (ItemContainer.cameraY > var1) { // L: 3739
 				ItemContainer.cameraY = var1;
 			}
 		}
 
 		if (ItemContainer.cameraY > var1) { // L: 3741
-			ItemContainer.cameraY -= (ItemContainer.cameraY - var1) * ArchiveDisk.field4309 / 1000 + Script.field955; // L: 3742
+			ItemContainer.cameraY -= (ItemContainer.cameraY - var1) * ArchiveDisk.cameraMoveToAcceleration / 1000 + Script.cameraMoveToSpeed; // L: 3742
 			if (ItemContainer.cameraY < var1) { // L: 3743
 				ItemContainer.cameraY = var1;
 			}
 		}
 
 		if (class154.cameraZ < var2) { // L: 3745
-			class154.cameraZ = (var2 - class154.cameraZ) * ArchiveDisk.field4309 / 1000 + class154.cameraZ + Script.field955; // L: 3746
+			class154.cameraZ = (var2 - class154.cameraZ) * ArchiveDisk.cameraMoveToAcceleration / 1000 + class154.cameraZ + Script.cameraMoveToSpeed; // L: 3746
 			if (class154.cameraZ > var2) { // L: 3747
 				class154.cameraZ = var2;
 			}
 		}
 
 		if (class154.cameraZ > var2) { // L: 3749
-			class154.cameraZ -= (class154.cameraZ - var2) * ArchiveDisk.field4309 / 1000 + Script.field955; // L: 3750
+			class154.cameraZ -= (class154.cameraZ - var2) * ArchiveDisk.cameraMoveToAcceleration / 1000 + Script.cameraMoveToSpeed; // L: 3750
 			if (class154.cameraZ < var2) { // L: 3751
 				class154.cameraZ = var2;
 			}

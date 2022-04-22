@@ -13,7 +13,7 @@ public class Players {
 	@ObfuscatedSignature(
 		descriptor = "[Lgm;"
 	)
-	static class193[] field1286;
+	static MoveSpeed[] field1286;
 	@ObfuscatedName("b")
 	@ObfuscatedSignature(
 		descriptor = "[Lpi;"
@@ -69,7 +69,7 @@ public class Players {
 
 	static {
 		field1283 = new byte[2048]; // L: 18
-		field1286 = new class193[2048]; // L: 19
+		field1286 = new MoveSpeed[2048]; // L: 19
 		field1276 = new Buffer[2048]; // L: 20
 		Players_count = 0; // L: 21
 		Players_indices = new int[2048]; // L: 22
@@ -140,7 +140,8 @@ public class Players {
 		descriptor = "(III)V",
 		garbageValue = "2053593928"
 	)
-	static void method2419(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (class131.clientPreferences.method2321() != 0 && var0 != -1) { // L: 3622
 			class18.method266(Message.archive11, var0, 0, class131.clientPreferences.method2321(), false); // L: 3623
 			Client.field746 = true; // L: 3624

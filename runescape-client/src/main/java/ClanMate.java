@@ -350,7 +350,7 @@ public class ClanMate extends Buddy {
 					var9 = (var7 & 7) + class29.field181; // L: 7636
 					if (var8 >= 0 && var9 >= 0 && var8 < 103 && var9 < 103) { // L: 7637
 						if (var6 == 0) { // L: 7638
-							BoundaryObject var32 = ArchiveLoader.scene.method4754(class18.Client_plane, var8, var9); // L: 7639
+							BoundaryObject var32 = ArchiveLoader.scene.getBoundaryObject(class18.Client_plane, var8, var9); // L: 7639
 							if (var32 != null) { // L: 7640
 								var11 = FileSystem.Entity_unpackID(var32.tag); // L: 7641
 								if (var4 == 2) { // L: 7642
@@ -363,7 +363,7 @@ public class ClanMate extends Buddy {
 						}
 
 						if (var6 == 1) { // L: 7649
-							WallDecoration var43 = ArchiveLoader.scene.method4860(class18.Client_plane, var8, var9); // L: 7650
+							WallDecoration var43 = ArchiveLoader.scene.getWallObject(class18.Client_plane, var8, var9); // L: 7650
 							if (var43 != null) { // L: 7651
 								var11 = FileSystem.Entity_unpackID(var43.tag); // L: 7652
 								if (var4 != 4 && var4 != 5) { // L: 7653

@@ -87,13 +87,13 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 		garbageValue = "1843908381"
 	)
 	static final void method1128() {
-		int var0 = class286.field3274 * 128 + 64; // L: 3784
-		int var1 = class54.field447 * 128 + 64; // L: 3785
-		int var2 = WorldMapLabel.getTileHeight(var0, var1, class18.Client_plane) - BZip2State.field4662; // L: 3786
+		int var0 = class286.cameraMoveToX * 128 + 64; // L: 3784
+		int var1 = class54.cameraMoveToY * 128 + 64; // L: 3785
+		int var2 = WorldMapLabel.getTileHeight(var0, var1, class18.Client_plane) - BZip2State.cameraMoveToHeight; // L: 3786
 		class13.method163(var0, var2, var1); // L: 3787
-		var0 = class154.field1691 * 128 + 64; // L: 3788
-		var1 = class67.field881 * 128 + 64; // L: 3789
-		var2 = WorldMapLabel.getTileHeight(var0, var1, class18.Client_plane) - DevicePcmPlayerProvider.field154; // L: 3790
+		var0 = class154.cameraLookAtX * 128 + 64; // L: 3788
+		var1 = class67.cameraLookAtY * 128 + 64; // L: 3789
+		var2 = WorldMapLabel.getTileHeight(var0, var1, class18.Client_plane) - DevicePcmPlayerProvider.cameraLookAtHeight; // L: 3790
 		int var3 = var0 - WorldMapLabelSize.cameraX; // L: 3791
 		int var4 = var2 - ItemContainer.cameraY; // L: 3792
 		int var5 = var1 - class154.cameraZ; // L: 3793
@@ -116,18 +116,18 @@ public class GrandExchangeOfferOwnWorldComparator implements Comparator {
 				var0.sequenceFrame = 0; // L: 4239
 				var0.sequenceFrameCycle = 0; // L: 4240
 				var0.sequenceDelay = var2; // L: 4241
-				var0.field1152 = 0; // L: 4242
+				var0.currentSequenceFrameIndex = 0; // L: 4242
 			}
 
 			if (var3 == 2) { // L: 4244
-				var0.field1152 = 0; // L: 4245
+				var0.currentSequenceFrameIndex = 0; // L: 4245
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || class163.SequenceDefinition_get(var1).field2155 >= class163.SequenceDefinition_get(var0.sequence).field2155) { // L: 4248
 			var0.sequence = var1; // L: 4249
 			var0.sequenceFrame = 0; // L: 4250
 			var0.sequenceFrameCycle = 0; // L: 4251
 			var0.sequenceDelay = var2; // L: 4252
-			var0.field1152 = 0; // L: 4253
+			var0.currentSequenceFrameIndex = 0; // L: 4253
 			var0.field1170 = var0.pathLength; // L: 4254
 		}
 

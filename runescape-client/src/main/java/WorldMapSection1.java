@@ -230,7 +230,7 @@ public class WorldMapSection1 implements WorldMapSection {
 							Client.npcIndices[++Client.npcCount - 1] = var5; // L: 8073
 							var13.npcCycle = Client.cycle; // L: 8074
 							var9 = var2.readBits(3); // L: 8075
-							var13.method2347(var9, class193.field2185); // L: 8076
+							var13.move(var9, MoveSpeed.field2185); // L: 8076
 							var10 = var2.readBits(1); // L: 8077
 							if (var10 == 1) { // L: 8078
 								Client.field548[++Client.field547 - 1] = var5;
@@ -240,12 +240,12 @@ public class WorldMapSection1 implements WorldMapSection {
 							var13.npcCycle = Client.cycle; // L: 8083
 							if (var2.readBits(1) == 1) { // L: 8084
 								var9 = var2.readBits(3); // L: 8085
-								var13.method2347(var9, class193.field2187); // L: 8086
+								var13.move(var9, MoveSpeed.field2187); // L: 8086
 								var10 = var2.readBits(3); // L: 8087
-								var13.method2347(var10, class193.field2187); // L: 8088
+								var13.move(var10, MoveSpeed.field2187); // L: 8088
 							} else {
 								var9 = var2.readBits(3); // L: 8091
-								var13.method2347(var9, class193.field2184); // L: 8092
+								var13.move(var9, MoveSpeed.field2184); // L: 8092
 							}
 
 							var9 = var2.readBits(1); // L: 8094

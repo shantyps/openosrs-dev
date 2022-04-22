@@ -224,6 +224,6 @@ public class MusicPatchPcmStream extends PcmStream {
 		garbageValue = "-100"
 	)
 	static long method5456() {
-		return Client.field623; // L: 2963
+		return Client.userRegistrationId; // L: 2963
 	}
 }

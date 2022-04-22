@@ -80,12 +80,12 @@ public class UserComparator8 extends AbstractUserComparator {
 		garbageValue = "1404835546"
 	)
 	static final void method2578(Actor var0) {
-		int var1 = Math.max(1, var0.field1143 - Client.cycle); // L: 4055
-		int var2 = var0.field1150 * 64 + var0.field1129 * 128; // L: 4056
-		int var3 = var0.field1150 * 64 + var0.field1160 * 128; // L: 4057
+		int var1 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle); // L: 4055
+		int var2 = var0.field1150 * 64 + var0.exactMoveDeltaX1 * 128; // L: 4056
+		int var3 = var0.field1150 * 64 + var0.exactMoveDeltaY1 * 128; // L: 4057
 		var0.x += (var2 - var0.x) / var1; // L: 4058
 		var0.y += (var3 - var0.y) / var1; // L: 4059
 		var0.field1179 = 0; // L: 4060
-		var0.orientation = var0.field1135; // L: 4061
+		var0.orientation = var0.exactMoveDirection; // L: 4061
 	} // L: 4062
 }

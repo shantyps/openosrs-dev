@@ -11,7 +11,8 @@ public class Script extends DualNode {
 	@ObfuscatedGetter(
 		intValue = 1540125023
 	)
-	static int field955;
+	@Export("cameraMoveToSpeed")
+	static int cameraMoveToSpeed;
 	@ObfuscatedName("ud")
 	@ObfuscatedGetter(
 		intValue = 1431517737

@@ -13,7 +13,8 @@ public final class ArchiveDisk {
 	@ObfuscatedGetter(
 		intValue = 696721361
 	)
-	static int field4309;
+	@Export("cameraMoveToAcceleration")
+	static int cameraMoveToAcceleration;
 	@ObfuscatedName("v")
 	@Export("ArchiveDisk_buffer")
 	static byte[] ArchiveDisk_buffer;

@@ -1,3 +1,4 @@
+import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
@@ -8,7 +9,8 @@ public final class class386 {
 	@ObfuscatedGetter(
 		intValue = 513737707
 	)
-	static int field4337;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 	@ObfuscatedName("v")
 	@ObfuscatedSignature(
 		descriptor = "[Lnq;"

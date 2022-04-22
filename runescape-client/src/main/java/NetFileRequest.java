@@ -11,7 +11,8 @@ public class NetFileRequest extends DualNode {
 	@ObfuscatedGetter(
 		intValue = -1408840155
 	)
-	static int field3960;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 	@ObfuscatedName("l")
 	@Export("SpriteBuffer_spritePalette")
 	public static int[] SpriteBuffer_spritePalette;

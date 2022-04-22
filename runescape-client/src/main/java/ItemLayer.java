@@ -79,7 +79,7 @@ public final class ItemLayer {
 		Client.packetWriter.close(); // L: 2854
 		FloorOverlayDefinition.FloorOverlayDefinition_cached.clear(); // L: 2857
 		MouseRecorder.method2098(); // L: 2859
-		class193.method3884(); // L: 2860
+		MoveSpeed.method3884(); // L: 2860
 		HealthBarDefinition.method3466(); // L: 2861
 		NPCComposition.NpcDefinition_cached.clear(); // L: 2863
 		NPCComposition.NpcDefinition_cachedModels.clear(); // L: 2864

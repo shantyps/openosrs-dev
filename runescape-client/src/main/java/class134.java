@@ -153,8 +153,8 @@ public class class134 extends class144 {
 				var3.itemQuantityMode = 2; // L: 839
 			}
 
-			if (var3.field3467 > 0) { // L: 840
-				var3.modelZoom = var3.modelZoom * 32 / var3.field3467;
+			if (var3.modelRotation > 0) { // L: 840
+				var3.modelZoom = var3.modelZoom * 32 / var3.modelRotation;
 			} else if (var3.rawWidth > 0) { // L: 841
 				var3.modelZoom = var3.modelZoom * 32 / var3.rawWidth;
 			}

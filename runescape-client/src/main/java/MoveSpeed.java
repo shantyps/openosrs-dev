@@ -1,9 +1,11 @@
 import net.runelite.mapping.Export;
+import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
 @ObfuscatedName("gm")
-public enum class193 implements MouseWheel {
+@Implements("MoveSpeed")
+public enum MoveSpeed implements MouseWheel {
 	@ObfuscatedName("v")
 	@ObfuscatedSignature(
 		descriptor = "Lgm;"
@@ -28,10 +30,11 @@ public enum class193 implements MouseWheel {
 	@ObfuscatedName("ah")
 	protected static String field2189;
 	@ObfuscatedName("b")
-	public byte field2183;
+	@Export("speed")
+	public byte speed;
 
-	class193(byte var3) {
-		this.field2183 = var3; // L: 14
+	MoveSpeed(byte var3) {
+		this.speed = var3; // L: 14
 	} // L: 15
 
 	@ObfuscatedName("v")
@@ -41,7 +44,7 @@ public enum class193 implements MouseWheel {
 	)
 	@Export("rsOrdinal")
 	public int rsOrdinal() {
-		return this.field2183; // L: 18
+		return this.speed; // L: 18
 	}
 
 	@ObfuscatedName("c")

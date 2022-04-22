@@ -15,7 +15,8 @@ public class class154 extends class166 {
 	@ObfuscatedGetter(
 		intValue = 1598240235
 	)
-	static int field1691;
+	@Export("cameraLookAtX")
+	static int cameraLookAtX;
 	@ObfuscatedName("id")
 	@ObfuscatedGetter(
 		intValue = 71444527

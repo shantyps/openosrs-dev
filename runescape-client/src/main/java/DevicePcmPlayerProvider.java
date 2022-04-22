@@ -11,7 +11,8 @@ public class DevicePcmPlayerProvider implements class45 {
 	@ObfuscatedGetter(
 		intValue = 1132145401
 	)
-	static int field154;
+	@Export("cameraLookAtHeight")
+	static int cameraLookAtHeight;
 	@ObfuscatedName("b")
 	@ObfuscatedSignature(
 		descriptor = "[Lbb;"

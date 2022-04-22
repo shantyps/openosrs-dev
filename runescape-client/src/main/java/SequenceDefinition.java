@@ -644,8 +644,8 @@ public class SequenceDefinition extends DualNode {
 			var22 = Client.field718 / 256;
 		}
 
-		if (Client.field546[4] && Client.field636[4] + 128 > var22) { // L: 4477
-			var22 = Client.field636[4] + 128;
+		if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var22) { // L: 4477
+			var22 = Client.cameraMoveIntensity[4] + 128;
 		}
 
 		int var5 = Client.camAngleY & 2047; // L: 4478
@@ -850,8 +850,8 @@ public class SequenceDefinition extends DualNode {
 		var16 = class21.cameraYaw; // L: 4630
 
 		for (var17 = 0; var17 < 5; ++var17) { // L: 4631
-			if (Client.field546[var17]) { // L: 4632
-				var18 = (int)(Math.random() * (double)(Client.field756[var17] * 2 + 1) - (double)Client.field756[var17] + Math.sin((double)Client.field674[var17] / 100.0D * (double)Client.field600[var17]) * (double)Client.field636[var17]); // L: 4633
+			if (Client.cameraShaking[var17]) { // L: 4632
+				var18 = (int)(Math.random() * (double)(Client.cameraShakeIntensity[var17] * 2 + 1) - (double)Client.cameraShakeIntensity[var17] + Math.sin((double)Client.cameraShakeSpeed[var17] / 100.0D * (double)Client.cameraShakeCycle[var17]) * (double)Client.cameraMoveIntensity[var17]); // L: 4633
 				if (var17 == 0) { // L: 4634
 					WorldMapLabelSize.cameraX += var18;
 				}

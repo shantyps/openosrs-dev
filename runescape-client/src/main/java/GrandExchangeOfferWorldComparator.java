@@ -68,7 +68,7 @@ final class GrandExchangeOfferWorldComparator implements Comparator {
 			}
 		}
 
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1134) { // L: 4156
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) { // L: 4156
 			if (var0.spotAnimationFrame < 0) { // L: 4157
 				var0.spotAnimationFrame = 0;
 			}
@@ -105,7 +105,7 @@ final class GrandExchangeOfferWorldComparator implements Comparator {
 
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) { // L: 4186
 			var1 = class163.SequenceDefinition_get(var0.sequence); // L: 4187
-			if (var1.field2159 == 1 && var0.field1170 > 0 && var0.field1143 <= Client.cycle && var0.field1163 < Client.cycle) { // L: 4188 4189
+			if (var1.field2159 == 1 && var0.field1170 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) { // L: 4188 4189
 				var0.sequenceDelay = 1; // L: 4190
 				return; // L: 4191
 			}
@@ -124,8 +124,8 @@ final class GrandExchangeOfferWorldComparator implements Comparator {
 
 					if (var0.sequenceFrame >= var1.frameIds.length) { // L: 4205
 						var0.sequenceFrame -= var1.frameCount; // L: 4206
-						++var0.field1152; // L: 4207
-						if (var0.field1152 >= var1.field2138) { // L: 4208
+						++var0.currentSequenceFrameIndex; // L: 4207
+						if (var0.currentSequenceFrameIndex >= var1.field2138) { // L: 4208
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var1.frameIds.length) { // L: 4209
 							Language.method6087(var1, var0.sequenceFrame, var0.x, var0.y); // L: 4210
@@ -142,8 +142,8 @@ final class GrandExchangeOfferWorldComparator implements Comparator {
 						KeyHandler.method336(var1, var0.sequenceFrame, var0.x, var0.y); // L: 4218
 					} else {
 						var0.sequenceFrame -= var1.frameCount; // L: 4221
-						++var0.field1152; // L: 4222
-						if (var0.field1152 >= var1.field2138) { // L: 4223
+						++var0.currentSequenceFrameIndex; // L: 4222
+						if (var0.currentSequenceFrameIndex >= var1.field2138) { // L: 4223
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var2) { // L: 4224
 							KeyHandler.method336(var1, var0.sequenceFrame, var0.x, var0.y); // L: 4225

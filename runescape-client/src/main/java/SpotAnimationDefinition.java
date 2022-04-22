@@ -258,16 +258,16 @@ public class SpotAnimationDefinition extends DualNode {
 		if (WorldMapLabelSize.cameraX == class93.field1253 && ItemContainer.cameraY == PcmPlayer.field294 && class154.cameraZ == WorldMapElement.field1837 && ObjectComposition.field2065 == class147.cameraPitch && class21.field116 == class21.cameraYaw) { // L: 3711
 			Client.field754 = false; // L: 3712
 			Client.isCameraLocked = false; // L: 3713
-			class154.field1691 = 0; // L: 3714
-			class67.field881 = 0; // L: 3715
-			DevicePcmPlayerProvider.field154 = 0; // L: 3716
-			NetFileRequest.field3960 = 0; // L: 3717
-			class386.field4337 = 0; // L: 3718
-			ArchiveDisk.field4309 = 0; // L: 3719
-			Script.field955 = 0; // L: 3720
-			class286.field3274 = 0; // L: 3721
-			class54.field447 = 0; // L: 3722
-			BZip2State.field4662 = 0; // L: 3723
+			class154.cameraLookAtX = 0; // L: 3714
+			class67.cameraLookAtY = 0; // L: 3715
+			DevicePcmPlayerProvider.cameraLookAtHeight = 0; // L: 3716
+			NetFileRequest.cameraLookAtSpeed = 0; // L: 3717
+			class386.cameraLookAtAcceleration = 0; // L: 3718
+			ArchiveDisk.cameraMoveToAcceleration = 0; // L: 3719
+			Script.cameraMoveToSpeed = 0; // L: 3720
+			class286.cameraMoveToX = 0; // L: 3721
+			class54.cameraMoveToY = 0; // L: 3722
+			BZip2State.cameraMoveToHeight = 0; // L: 3723
 		}
 
 	} // L: 3726
