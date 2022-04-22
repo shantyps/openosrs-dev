@@ -34,6 +34,7 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import net.runelite.api.annotations.Varbit;
 import net.runelite.api.annotations.VisibleForExternalPlugins;
 import net.runelite.api.clan.ClanChannel;
 import net.runelite.api.clan.ClanID;
@@ -578,6 +579,14 @@ public interface Client extends OAuthApi, GameEngine
 	void setDraggedOnWidget(Widget widget);
 
 	/**
+	 * Get the number of client cycles the current dragged widget
+	 * has been dragged for.
+	 *
+	 * @return
+	 */
+	int getDragTime();
+
+	/**
 	 * Gets Interface ID of the root widget
 	 */
 	int getTopLevelInterfaceId();
@@ -859,12 +868,22 @@ public interface Client extends OAuthApi, GameEngine
 	int getVar(VarPlayer varPlayer);
 
 	/**
-	 * Gets a value corresponding to the passed variable.
+	 * Gets a value corresponding to the passed varbit.
 	 *
-	 * @param varbit the variable
+	 * @param varbit the varbit id
+	 * @return the value
+	 * @see Client#getVarbitValue(int)
+	 */
+	@Deprecated
+	int getVar(@Varbit int varbit);
+
+	/**
+	 * Gets a value corresponding to the passed varbit.
+	 *
+	 * @param varbit the varbit id
 	 * @return the value
 	 */
-	int getVar(Varbits varbit);
+	int getVarbitValue(@Varbit int varbit);
 
 	/**
 	 * Gets an int value corresponding to the passed variable.
@@ -881,15 +900,6 @@ public interface Client extends OAuthApi, GameEngine
 	 * @return the value
 	 */
 	String getVar(VarClientStr varClientStr);
-
-	/**
-	 * Gets the value of a given Varbit.
-	 *
-	 * @param varbitId the varbit id
-	 * @return the value
-	 */
-	@VisibleForExternalPlugins
-	int getVarbitValue(int varbitId);
 
 	/**
 	 * Gets the value of a given VarClientInt
@@ -920,12 +930,12 @@ public interface Client extends OAuthApi, GameEngine
 	void setVar(VarClientInt varClientStr, int value);
 
 	/**
-	 * Sets the value of a given variable.
+	 * Sets the value of a varbit
 	 *
-	 * @param varbit the variable
+	 * @param varbit the varbit id
 	 * @param value  the new value
 	 */
-	void setVarbit(Varbits varbit, int value);
+	void setVarbit(@Varbit int varbit, int value);
 
 	/**
 	 * Gets the varbit composition for a given varbit id
@@ -944,7 +954,7 @@ public interface Client extends OAuthApi, GameEngine
 	 * @return the value
 	 * @see Varbits
 	 */
-	int getVarbitValue(int[] varps, int varbitId);
+	int getVarbitValue(int[] varps, @Varbit int varbitId);
 
 	/**
 	 * Gets the value of a given VarPlayer.
@@ -966,7 +976,7 @@ public interface Client extends OAuthApi, GameEngine
 	 * @param value  the value
 	 * @see Varbits
 	 */
-	void setVarbitValue(int[] varps, int varbit, int value);
+	void setVarbitValue(int[] varps, @Varbit int varbit, int value);
 
 	/**
 	 * Mark the given varp as changed, causing var listeners to be
@@ -2106,16 +2116,23 @@ public interface Client extends OAuthApi, GameEngine
 	void setSpellSelected(boolean selected);
 
 	/**
-	 * Get if an item is selected with "Use"
-	 * @return 1 if selected, else 0
+	 * @deprecated use {@link #getSelectedWidget()} instead.
 	 */
+	@Deprecated
 	int getSelectedItem();
 
 	/**
-	 * If an item is selected, this is the item index in the inventory.
-	 * @return
+	 * @deprecated use {@link #getSelectedSpellChildIndex()} instead.
 	 */
+	@Deprecated
 	int getSelectedItemIndex();
+
+	/**
+	 * Get the selected widget, such as a selected spell or selected item (eg. "Use")
+	 * @return the selected widget
+	 */
+	@Nullable
+	Widget getSelectedWidget();
 
 	/**
 	 * Returns client item composition cache
@@ -2169,6 +2186,12 @@ public interface Client extends OAuthApi, GameEngine
 	String getSelectedSpellActionName();
 
 	int getSelectedSpellFlags();
+
+	void setSelectedSpellFlags(int var0);
+
+	int getSelectedSpellItemId();
+
+	void setSelectedSpellItemId(int itemId);
 
 	/**
 	 * Set whether or not player attack options will be hidden for friends
@@ -2234,14 +2257,34 @@ public interface Client extends OAuthApi, GameEngine
 	 */
 	void insertMenuItem(String action, String target, int opcode, int identifier, int argument1, int argument2, boolean forceLeftClick);
 
+	/**
+	 * @deprecated use {@link #setSelectedSpellItemId(int)} instead.
+	 */
+	@Deprecated
 	void setSelectedItemID(int id);
 
+	/**
+	 * @deprecated use {@link #getSelectedSpellWidget()} instead.
+	 */
+	@Deprecated
 	int getSelectedItemWidget();
 
+	/**
+	 * @deprecated use {@link #setSelectedSpellWidget(int)} instead.
+	 */
+	@Deprecated
 	void setSelectedItemWidget(int widgetID);
 
+	/**
+	 * @deprecated use {@link #getSelectedSpellChildIndex()} instead.
+	 */
+	@Deprecated
 	int getSelectedItemSlot();
 
+	/**
+	 * @deprecated use {@link #setSelectedSpellChildIndex(int)} instead.
+	 */
+	@Deprecated
 	void setSelectedItemSlot(int idx);
 
 	int getSelectedSpellWidget();

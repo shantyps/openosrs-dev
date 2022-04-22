@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Jasper Ketelaar <Jasper0781@gmail.com>
+ * Copyright (c) 2018, OpenOSRS
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,40 +22,69 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.client.plugins.mta;
+package net.runelite.mixins;
 
-import java.awt.Dimension;
-import java.awt.Graphics2D;
-import javax.inject.Inject;
-import net.runelite.client.ui.FontManager;
-import net.runelite.client.ui.overlay.Overlay;
-import net.runelite.client.ui.overlay.OverlayLayer;
-import net.runelite.client.ui.overlay.OverlayPosition;
+import net.runelite.api.MenuAction;
+import net.runelite.api.mixins.Inject;
+import net.runelite.api.mixins.Mixin;
+import net.runelite.api.mixins.Shadow;
+import net.runelite.api.widgets.Widget;
+import net.runelite.rs.api.RSClient;
+import net.runelite.rs.api.RSRuneLiteMenuEntry;
 
-public class MTAInventoryOverlay extends Overlay
+@Mixin(RSRuneLiteMenuEntry.class)
+public abstract class RuneLiteMenuEntryMixin implements RSRuneLiteMenuEntry
 {
-	private final MTAPlugin plugin;
+	@Shadow("client")
+	private static RSClient client;
 
 	@Inject
-	public MTAInventoryOverlay(MTAPlugin plugin)
-	{
-		this.plugin = plugin;
-		setPosition(OverlayPosition.DYNAMIC);
-		setLayer(OverlayLayer.ABOVE_WIDGETS);
-	}
-
 	@Override
-	public Dimension render(Graphics2D graphics)
+	public int getItemId()
 	{
-		for (MTARoom room : plugin.getRooms())
+		MenuAction menuAction = this.getType();
+		if (menuAction == MenuAction.CC_OP || menuAction == MenuAction.CC_OP_LOW_PRIORITY)
 		{
-			if (room.inside())
+			int param1 = this.getParam1();
+			int param0 = this.getParam0();
+			if (param1 == 9764864)
 			{
-				graphics.setFont(FontManager.getRunescapeBoldFont());
-				room.over(graphics);
+				Widget widget = client.getWidget(param1);
+				if (param0 != -1)
+				{
+					widget = widget.getChild(param0);
+					return widget.getItemId();
+				}
 			}
 		}
 
-		return null;
+		return -1;
+	}
+
+	@Inject
+	@Override
+	public Widget getWidget()
+	{
+		int param1 = this.getParam1();
+		int param0 = this.getParam0();
+
+		Widget widget = client.getWidget(param1);
+
+		if (widget == null)
+		{
+			return null;
+		}
+
+		if (param0 != -1)
+		{
+			Widget child = widget.getChild(param0);
+
+			if (child != null)
+			{
+				return child;
+			}
+		}
+
+		return widget;
 	}
 }
