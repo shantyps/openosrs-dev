@@ -1,6 +1,8 @@
 import net.runelite.mapping.Export;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ObfuscatedName("nb")
 public class class385 {
@@ -55,6 +57,8 @@ public class class385 {
 			throw new IllegalArgumentException(); // L: 12
 		}
 	}
+
+	private static Logger logger = LoggerFactory.getLogger("Main");
 
 	@ObfuscatedName("he")
 	@ObfuscatedSignature(
@@ -121,6 +125,9 @@ public class class385 {
 							}
 						} else if (var6 == 3) { // L: 7900
 							Client.field612[++Client.field634 - 1] = var3; // L: 7901
+							if (var4.definition.id == 5532) {
+								logger.info("Removed Kebbit(id = " + var3 + ")");
+							}
 						}
 					}
 				}

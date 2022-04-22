@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.concurrent.Future;
+
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
@@ -20,6 +21,8 @@ import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 import net.runelite.rs.ScriptOpcodes;
 import netscape.javascript.JSObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Implements("Client")
 @ObfuscatedName("client")
@@ -3903,6 +3906,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				}
 
 				if (ServerPacket.field3061 == var1.serverPacket) { // L: 5710
+					logger.info("UpdatePlayers()");
 					class83.updatePlayers(var3, var1.serverPacketLength); // L: 5711
 					class4.method19(); // L: 5712
 					var1.serverPacket = null; // L: 5713
@@ -4238,6 +4242,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				}
 
 				if (ServerPacket.field3030 == var1.serverPacket) { // L: 5973
+					logger.info("UpdateNpcs()");
 					DynamicObject.updateNpcs(false, var3); // L: 5974
 					var1.serverPacket = null; // L: 5975
 					return true; // L: 5976
@@ -5433,6 +5438,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					}
 
 					class401.playSong(var20); // L: 6940
+					System.out.println("Requested to play song: " + var20);
 					var1.serverPacket = null; // L: 6941
 					return true; // L: 6942
 				}
@@ -6245,4 +6251,6 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 			return 1; // L: 1404
 		}
 	}
+
+	private static Logger logger = LoggerFactory.getLogger("Main");
 }

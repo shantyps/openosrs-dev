@@ -1,6 +1,8 @@
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ObfuscatedName("hi")
 public class class221 {
@@ -9,6 +11,8 @@ public class class221 {
 		intValue = -1143760795
 	)
 	static int field2647;
+
+	private static Logger logger = LoggerFactory.getLogger("Main");
 
 	@ObfuscatedName("hz")
 	@ObfuscatedSignature(
@@ -46,6 +50,7 @@ public class class221 {
 			var14 = var1.method7935(); // L: 7081
 			var9 = var41 + var6; // L: 7082
 			var11 = var42 + var7; // L: 7083
+			logger.info("Projectile()");
 			if (var6 >= 0 && var7 >= 0 && var6 < 104 && var7 < 104 && var9 >= 0 && var11 >= 0 && var9 < 104 && var11 < 104 && var14 != 65535) { // L: 7084
 				var6 = var6 * 128 + 64; // L: 7085
 				var7 = var7 * 128 + 64; // L: 7086

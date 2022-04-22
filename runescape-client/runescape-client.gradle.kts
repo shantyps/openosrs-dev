@@ -33,6 +33,9 @@ dependencies {
     implementation(group = "org.bouncycastle", name = "bcprov-jdk15on", version = "1.52")
     implementation(group = "org.json", name = "json", version = "20220320")
 
+    implementation("ch.qos.logback:logback-classic:1.2.11")
+    implementation("ch.qos.logback:logback-core:1.2.11")
+
     testImplementation(group = "junit", name = "junit", version = "4.12")
     testImplementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.32")
     testImplementation(group = "org.slf4j", name = "slf4j-simple", version = "1.7.32")

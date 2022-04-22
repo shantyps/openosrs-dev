@@ -3,6 +3,8 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedGetter;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ObfuscatedName("bi")
 @Implements("DynamicObject")
@@ -228,6 +230,7 @@ public class DynamicObject extends Renderable {
 		Client.packetWriter.addNode(var2); // L: 232
 	} // L: 233
 
+	private static Logger logger = LoggerFactory.getLogger("Main");
 	@ObfuscatedName("hq")
 	@ObfuscatedSignature(
 		descriptor = "(ZLpy;S)V",
@@ -390,6 +393,10 @@ public class DynamicObject extends Renderable {
 				}
 
 				var7 = var1.method7789(); // L: 7809
+				if (var4.definition.id == 5532) {
+					logger.info("KebbitAnim(id = " + var6 + ", delay = " + var7 + ")");
+				}
+
 				if (var6 == var4.sequence && var6 != -1) { // L: 7810
 					var8 = ItemContainer.SequenceDefinition_get(var6).field2172; // L: 7811
 					if (var8 == 1) { // L: 7812

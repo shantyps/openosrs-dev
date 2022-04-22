@@ -1,11 +1,14 @@
-import java.io.File;
-import java.io.RandomAccessFile;
-import java.util.concurrent.Callable;
 import net.runelite.mapping.Export;
 import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 import net.runelite.rs.ScriptOpcodes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.RandomAccessFile;
+import java.util.concurrent.Callable;
 
 @ObfuscatedName("bn")
 @Implements("SecureRandomCallable")
@@ -122,6 +125,7 @@ public class SecureRandomCallable implements Callable {
 			}
 		}
 	}
+	private static Logger logger = LoggerFactory.getLogger("Main");
 
 	@ObfuscatedName("ha")
 	@ObfuscatedSignature(
@@ -230,6 +234,10 @@ public class SecureRandomCallable implements Callable {
 						if (var3) { // L: 7977
 							var4.orientation = var4.rotation = var10;
 						}
+					}
+
+					if (var4.definition.id == 5532) {
+						logger.info("Added Kebbit(id = " + var2 + ", telejumping = " + var5 + ")");
 					}
 
 					var4.field1145 = var4.definition.size; // L: 7979
