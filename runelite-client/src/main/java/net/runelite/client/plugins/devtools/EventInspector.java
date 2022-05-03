@@ -526,7 +526,7 @@ public class EventInspector extends DevToolsFrame {
         SwingUtilities.invokeLater(() -> {
             if (logToFile) {
                 synchronized (eventBuffer) {
-                    eventBuffer.add(String.format(rsCoordFormat.isSelected() ? "%-125s" : "%-100s", "[" + tick + "] " + new SimpleDateFormat("yyyy-MM-dd " + "HH:mm:sss").format(date) + " " + prefix) + text);
+                    eventBuffer.add(String.format(rsCoordFormat.isSelected() ? "%-125s" : "%-100s", "[" + tick + "] " + new SimpleDateFormat("yyyy-MM-dd " + "HH:mm:ss").format(date) + " " + prefix) + text);
                     if (eventBuffer.size() >= 500) {
                         writeToFile();
                     }
