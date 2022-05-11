@@ -425,7 +425,6 @@ public interface Client extends OAuthApi, GameEngine
 	 * <p>
 	 * (getLocalPlayerIndex returns the local index, useful for menus/interacting)
 	 */
-	@Nullable
 	Player getLocalPlayer();
 
 	int getLocalPlayerIndex();
@@ -1253,6 +1252,17 @@ public interface Client extends OAuthApi, GameEngine
 	void setMusicVolume(int volume);
 
 	/**
+	 * @return true if the current {@link #getMusicCurrentTrackId()} is a Jingle, otherwise its a Track
+	 */
+	boolean isPlayingJingle();
+
+	/**
+	 * @return Currently playing music/jingle id, or -1 if not playing
+	 * @see #isPlayingJingle()
+	 */
+	int getMusicCurrentTrackId();
+
+	/**
 	 * Play a sound effect at the player's current location. This is how UI,
 	 * and player-generated (e.g. mining, woodcutting) sound effects are
 	 * normally played.
@@ -1930,6 +1940,14 @@ public interface Client extends OAuthApi, GameEngine
 	void setBlacklistDeadNpcs(Set<Integer> blacklist);
 
 	/**
+	 * Adds a custom clientscript to the list of available clientscripts.
+	 *
+	 * @param script compiled clientscript code
+	 * @return the id of the newly-added script
+	 */
+	int addClientScript(byte[] script);
+
+	/**
 	 * Gets an array of tile collision data.
 	 * <p>
 	 * The index into the array is the plane/z-axis coordinate.
@@ -2138,6 +2156,12 @@ public interface Client extends OAuthApi, GameEngine
 	 * Returns client item composition cache
 	 */
 	NodeCache getItemCompositionCache();
+
+	/**
+	 * Returns client object composition cache
+	 * @return
+	 */
+	NodeCache getObjectCompositionCache();
 
 	/**
 	 * Returns the array of cross sprites that appear and animate when left-clicking
