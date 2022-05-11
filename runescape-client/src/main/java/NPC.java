@@ -73,11 +73,11 @@ public final class NPC extends Actor {
 					var3.isSingleTile = true;
 				}
 
-				if (super.field1140 != 0 && Client.cycle >= super.field1196 && Client.cycle < super.field1197) { // L: 112
-					var3.overrideHue = super.field1143; // L: 113
-					var3.overrideSaturation = super.field1199; // L: 114
-					var3.overrideLuminance = super.field1153; // L: 115
-					var3.overrideAmount = super.field1140; // L: 116
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) { // L: 112
+					var3.overrideHue = super.recolourHue; // L: 113
+					var3.overrideSaturation = super.recolourSaturation; // L: 114
+					var3.overrideLuminance = super.recolourLuminance; // L: 115
+					var3.overrideAmount = super.recolourAmount; // L: 116
 				} else {
 					var3.overrideAmount = 0; // L: 119
 				}

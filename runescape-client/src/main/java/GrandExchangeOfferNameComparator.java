@@ -255,7 +255,7 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 					var2.overheadTextEffect = var5 & 255; // L: 470
 					var2.overheadTextCyclesRemaining = 150; // L: 471
 					var2.isAutoChatting = var7; // L: 472
-					var2.field1198 = var2 != ModelData0.localPlayer && var6.isUser && "" != Client.field549 && var11.toLowerCase().indexOf(Client.field549) == -1; // L: 473
+					var2.showPublicPlayerChat = var2 != ModelData0.localPlayer && var6.isUser && "" != Client.field549 && var11.toLowerCase().indexOf(Client.field549) == -1; // L: 473
 					if (var6.isPrivileged) { // L: 475
 						var12 = var7 ? 91 : 1;
 					} else {
@@ -274,10 +274,10 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 		}
 
 		if ((var3 & 4) != 0) { // L: 483
-			var2.field1172 = var0.method7576(); // L: 484
+			var2.facedDirection = var0.method7576(); // L: 484
 			if (var2.pathLength == 0) { // L: 485
-				var2.orientation = var2.field1172; // L: 486
-				var2.field1172 = -1; // L: 487
+				var2.orientation = var2.facedDirection; // L: 486
+				var2.facedDirection = -1; // L: 487
 			}
 		}
 
@@ -294,10 +294,10 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 			var2.spotAnimation = var0.method7576(); // L: 499
 			var5 = var0.method7567(); // L: 500
 			var2.spotAnimationHeight = var5 >> 16; // L: 501
-			var2.field1185 = (var5 & 65535) + Client.cycle; // L: 502
+			var2.spotAnimationStartCycle = (var5 & 65535) + Client.cycle; // L: 502
 			var2.spotAnimationFrame = 0; // L: 503
 			var2.spotAnimationFrameCycle = 0; // L: 504
-			if (var2.field1185 > Client.cycle) { // L: 505
+			if (var2.spotAnimationStartCycle > Client.cycle) { // L: 505
 				var2.spotAnimationFrame = -1;
 			}
 
@@ -313,24 +313,24 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 		}
 
 		if ((var3 & 16384) != 0) { // L: 517
-			var2.field1187 = var0.method7547(); // L: 518
-			var2.field1189 = var0.method7548(); // L: 519
-			var2.field1188 = var0.method7548(); // L: 520
-			var2.field1190 = var0.method7549(); // L: 521
-			var2.field1191 = var0.readUnsignedShort() + Client.cycle; // L: 522
-			var2.field1192 = var0.method7554() + Client.cycle; // L: 523
-			var2.field1139 = var0.readUnsignedShort(); // L: 524
+			var2.exactMoveDeltaX1 = var0.method7547(); // L: 518
+			var2.exactMoveDeltaY1 = var0.method7548(); // L: 519
+			var2.exactMoveDeltaX2 = var0.method7548(); // L: 520
+			var2.exactMoveDeltaY2 = var0.method7549(); // L: 521
+			var2.exactMoveArrive1Cycle = var0.readUnsignedShort() + Client.cycle; // L: 522
+			var2.exactMoveArrive2Cycle = var0.method7554() + Client.cycle; // L: 523
+			var2.exactMoveDirection = var0.readUnsignedShort(); // L: 524
 			if (var2.field1095) { // L: 525
-				var2.field1187 += var2.tileX; // L: 526
-				var2.field1189 += var2.tileY; // L: 527
-				var2.field1188 += var2.tileX; // L: 528
-				var2.field1190 += var2.tileY; // L: 529
+				var2.exactMoveDeltaX1 += var2.tileX; // L: 526
+				var2.exactMoveDeltaY1 += var2.tileY; // L: 527
+				var2.exactMoveDeltaX2 += var2.tileX; // L: 528
+				var2.exactMoveDeltaY2 += var2.tileY; // L: 529
 				var2.pathLength = 0; // L: 530
 			} else {
-				var2.field1187 += var2.pathX[0]; // L: 533
-				var2.field1189 += var2.pathY[0]; // L: 534
-				var2.field1188 += var2.pathX[0]; // L: 535
-				var2.field1190 += var2.pathY[0]; // L: 536
+				var2.exactMoveDeltaX1 += var2.pathX[0]; // L: 533
+				var2.exactMoveDeltaY1 += var2.pathY[0]; // L: 534
+				var2.exactMoveDeltaX2 += var2.pathX[0]; // L: 535
+				var2.exactMoveDeltaY2 += var2.pathY[0]; // L: 536
 				var2.pathLength = 1; // L: 537
 			}
 
@@ -338,12 +338,12 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 		}
 
 		if ((var3 & 1024) != 0) { // L: 541
-			var2.field1196 = Client.cycle + var0.method7576(); // L: 542
-			var2.field1197 = Client.cycle + var0.readUnsignedShort(); // L: 543
-			var2.field1143 = var0.method7547(); // L: 544
-			var2.field1199 = var0.method7549(); // L: 545
-			var2.field1153 = var0.method7548(); // L: 546
-			var2.field1140 = (byte)var0.readUnsignedByte(); // L: 547
+			var2.recolourStartCycle = Client.cycle + var0.method7576(); // L: 542
+			var2.recolourEndCycle = Client.cycle + var0.readUnsignedShort(); // L: 543
+			var2.recolourHue = var0.method7547(); // L: 544
+			var2.recolourSaturation = var0.method7549(); // L: 545
+			var2.recolourLuminance = var0.method7548(); // L: 546
+			var2.recolourAmount = (byte)var0.readUnsignedByte(); // L: 547
 		}
 
 		int var15;

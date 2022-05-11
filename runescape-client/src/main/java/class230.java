@@ -32,8 +32,8 @@ public class class230 {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (SecureRandomCallable.baseX + var4.pathX[0] >> 13 << 14) + (GrandExchangeOfferOwnWorldComparator.baseY + var4.pathY[0] >> 13); // L: 207
-				if (var4.field1172 != -1) { // L: 208
-					Players.Players_orientations[var1] = var4.field1172;
+				if (var4.facedDirection != -1) { // L: 208
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation; // L: 209
 				}

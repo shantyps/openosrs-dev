@@ -882,7 +882,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@ObfuscatedGetter(
 		longValue = 3707872763962830187L
 	)
-	static long field611;
+	@Export("userRegistrationId")
+	static long userRegistrationId;
 	@ObfuscatedName("lq")
 	@Export("renderSelf")
 	static boolean renderSelf;
@@ -1490,7 +1491,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		players = new Player[2048]; // L: 413
 		localPlayerIndex = -1; // L: 415
 		field610 = 0; // L: 416
-		field611 = -1L; // L: 417
+		userRegistrationId = -1L; // L: 417
 		renderSelf = true; // L: 419
 		drawPlayerNames = 0; // L: 424
 		field621 = 0; // L: 425
@@ -2969,7 +2970,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (Varcs.field1329 >= 29) { // L: 2582
 						((AbstractSocket)var1).read(var2.array, 0, 8); // L: 2583
 						var2.offset = 0; // L: 2584
-						field611 = var2.readLong(); // L: 2585
+						userRegistrationId = var2.readLong(); // L: 2585
 					}
 
 					((AbstractSocket)var1).read(var2.array, 0, 1); // L: 2587
@@ -4729,7 +4730,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					}
 
 					var5 = var3.method7503(); // L: 6376
-					class306.method5593(var67, var5); // L: 6377
+					class306.playJingle(var67, var5); // L: 6377
 					var1.serverPacket = null; // L: 6378
 					return true; // L: 6379
 				}
@@ -5161,10 +5162,10 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (var54 != null) { // L: 6703
 						var54.spotAnimation = var6; // L: 6704
 						var54.spotAnimationHeight = var5 >> 16; // L: 6705
-						var54.field1185 = (var5 & 65535) + cycle; // L: 6706
+						var54.spotAnimationStartCycle = (var5 & 65535) + cycle; // L: 6706
 						var54.spotAnimationFrame = 0; // L: 6707
 						var54.spotAnimationFrameCycle = 0; // L: 6708
-						if (var54.field1185 > cycle) { // L: 6709
+						if (var54.spotAnimationStartCycle > cycle) { // L: 6709
 							var54.spotAnimationFrame = -1; // L: 6710
 						}
 
@@ -5216,10 +5217,10 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					if (var56 != null) { // L: 6754
 						var56.spotAnimation = var5; // L: 6755
 						var56.spotAnimationHeight = var6 >> 16; // L: 6756
-						var56.field1185 = (var6 & 65535) + cycle; // L: 6757
+						var56.spotAnimationStartCycle = (var6 & 65535) + cycle; // L: 6757
 						var56.spotAnimationFrame = 0; // L: 6758
 						var56.spotAnimationFrameCycle = 0; // L: 6759
-						if (var56.field1185 > cycle) { // L: 6760
+						if (var56.spotAnimationStartCycle > cycle) { // L: 6760
 							var56.spotAnimationFrame = -1; // L: 6761
 						}
 
@@ -5384,16 +5385,16 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 								var54.sequenceFrame = 0; // L: 6907
 								var54.sequenceFrameCycle = 0; // L: 6908
 								var54.sequenceDelay = var6; // L: 6909
-								var54.field1186 = 0; // L: 6910
+								var54.currentSequenceFrameIndex = 0; // L: 6910
 							} else if (var28 == 2) { // L: 6912
-								var54.field1186 = 0; // L: 6913
+								var54.currentSequenceFrameIndex = 0; // L: 6913
 							}
 						} else if (var5 == -1 || var54.sequence == -1 || class114.SequenceDefinition_get(var5).field2220 >= class114.SequenceDefinition_get(var54.sequence).field2220) { // L: 6916
 							var54.sequence = var5; // L: 6917
 							var54.sequenceFrame = 0; // L: 6918
 							var54.sequenceFrameCycle = 0; // L: 6919
 							var54.sequenceDelay = var6; // L: 6920
-							var54.field1186 = 0; // L: 6921
+							var54.currentSequenceFrameIndex = 0; // L: 6921
 							var54.field1200 = var54.pathLength; // L: 6922
 						}
 					}
@@ -5461,7 +5462,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						}
 
 						if (var57 == null) { // L: 6974
-							var57 = class241.method4812(var27, var28, var9);
+							var57 = class241.ifOpenSub(var27, var28, var9);
 						}
 					}
 
@@ -5845,7 +5846,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 						NetSocket.closeInterface(var7, var67 != var7.group);
 					}
 
-					class241.method4812(var6, var67, var5); // L: 7289
+					class241.ifOpenSub(var6, var67, var5); // L: 7289
 					var1.serverPacket = null; // L: 7290
 					return true; // L: 7291
 				}
@@ -6937,7 +6938,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				}
 			}
 
-			if (var0.overheadText != null && (var1 >= var75 || !var0.field1198 && (publicChatMode == 4 || !var0.isAutoChatting && (publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5160 5161
+			if (var0.overheadText != null && (var1 >= var75 || !var0.showPublicPlayerChat && (publicChatMode == 4 || !var0.isAutoChatting && (publicChatMode == 0 || publicChatMode == 3 || publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5160 5161
 				ByteArrayPool.method6357(var0, var0.defaultHeight); // L: 5162
 				if (viewportTempX > -1 && overheadTextCount < overheadTextLimit) { // L: 5163
 					overheadTextXOffsets[overheadTextCount] = ChatChannel.fontBold12.stringWidth(var0.overheadText) / 2; // L: 5164

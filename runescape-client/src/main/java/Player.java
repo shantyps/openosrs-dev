@@ -386,11 +386,11 @@ public final class Player extends Actor {
 				}
 
 				var3.isSingleTile = true; // L: 239
-				if (super.field1140 != 0 && Client.cycle >= super.field1196 && Client.cycle < super.field1197) { // L: 240
-					var3.overrideHue = super.field1143; // L: 241
-					var3.overrideSaturation = super.field1199; // L: 242
-					var3.overrideLuminance = super.field1153; // L: 243
-					var3.overrideAmount = super.field1140; // L: 244
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) { // L: 240
+					var3.overrideHue = super.recolourHue; // L: 241
+					var3.overrideSaturation = super.recolourSaturation; // L: 242
+					var3.overrideLuminance = super.recolourLuminance; // L: 243
+					var3.overrideAmount = super.recolourAmount; // L: 244
 				} else {
 					var3.overrideAmount = 0; // L: 247
 				}
@@ -528,7 +528,7 @@ public final class Player extends Actor {
 			super.sequence = -1;
 		}
 
-		super.field1172 = -1; // L: 254
+		super.facedDirection = -1; // L: 254
 		if (var1 >= 0 && var1 < 104 && var2 >= 0 && var2 < 104) { // L: 255
 			if (super.pathX[0] >= 0 && super.pathX[0] < 104 && super.pathY[0] >= 0 && super.pathY[0] < 104) { // L: 256
 				if (var3 == class193.field2248) {

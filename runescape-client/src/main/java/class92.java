@@ -105,7 +105,7 @@ public class class92 {
 		garbageValue = "-1003322759"
 	)
 	static long method2374() {
-		return Client.field611; // L: 3049
+		return Client.userRegistrationId; // L: 3049
 	}
 
 	@ObfuscatedName("lg")

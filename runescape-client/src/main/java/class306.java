@@ -72,7 +72,8 @@ public class class306 {
 		descriptor = "(III)V",
 		garbageValue = "-341201892"
 	)
-	static void method5593(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (class12.clientPreferences.method2248() != 0 && var0 != -1) { // L: 3820
 			UserComparator8.method2574(UrlRequest.archive11, var0, 0, class12.clientPreferences.method2248(), false); // L: 3821
 			Client.playingJingle = true; // L: 3822

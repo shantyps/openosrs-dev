@@ -214,18 +214,18 @@ public class JagexCache {
 				var0.sequenceFrame = 0; // L: 4321
 				var0.sequenceFrameCycle = 0; // L: 4322
 				var0.sequenceDelay = var2; // L: 4323
-				var0.field1186 = 0; // L: 4324
+				var0.currentSequenceFrameIndex = 0; // L: 4324
 			}
 
 			if (var3 == 2) { // L: 4326
-				var0.field1186 = 0; // L: 4327
+				var0.currentSequenceFrameIndex = 0; // L: 4327
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || class114.SequenceDefinition_get(var1).field2220 >= class114.SequenceDefinition_get(var0.sequence).field2220) { // L: 4330
 			var0.sequence = var1; // L: 4331
 			var0.sequenceFrame = 0; // L: 4332
 			var0.sequenceFrameCycle = 0; // L: 4333
 			var0.sequenceDelay = var2; // L: 4334
-			var0.field1186 = 0; // L: 4335
+			var0.currentSequenceFrameIndex = 0; // L: 4335
 			var0.field1200 = var0.pathLength; // L: 4336
 		}
 
@@ -254,18 +254,18 @@ public class JagexCache {
 				var5 = var0.readUnsignedShort(); // L: 8183
 				var6 = var0.method7716(); // L: 8184
 				if (class393.field4428) { // L: 8185
-					var3.field1173 = var0.method7546() == 1; // L: 8186
+					var3.instantTurn = var0.method7546() == 1; // L: 8186
 				}
 
 				var7 = var3.x - (var5 - SecureRandomCallable.baseX - SecureRandomCallable.baseX) * 64; // L: 8188
 				var8 = var3.y - (var6 - GrandExchangeOfferOwnWorldComparator.baseY - GrandExchangeOfferOwnWorldComparator.baseY) * 64; // L: 8189
 				if (var7 != 0 || var8 != 0) { // L: 8190
-					var3.field1172 = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
+					var3.facedDirection = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
 				}
 			}
 
 			if ((var4 & 1024) != 0) { // L: 8192
-				var3.field1210 = var0.method7568(); // L: 8193
+				var3.combatLevelChange = var0.method7568(); // L: 8193
 			}
 
 			if ((var4 & 2) != 0) { // L: 8195
@@ -288,45 +288,45 @@ public class JagexCache {
 						var3.sequenceFrame = 0; // L: 8208
 						var3.sequenceFrameCycle = 0; // L: 8209
 						var3.sequenceDelay = var6; // L: 8210
-						var3.field1186 = 0; // L: 8211
+						var3.currentSequenceFrameIndex = 0; // L: 8211
 					}
 
 					if (var7 == 2) { // L: 8213
-						var3.field1186 = 0; // L: 8214
+						var3.currentSequenceFrameIndex = 0; // L: 8214
 					}
 				} else if (var5 == -1 || var3.sequence == -1 || class114.SequenceDefinition_get(var5).field2220 >= class114.SequenceDefinition_get(var3.sequence).field2220) { // L: 8217
 					var3.sequence = var5; // L: 8218
 					var3.sequenceFrame = 0; // L: 8219
 					var3.sequenceFrameCycle = 0; // L: 8220
 					var3.sequenceDelay = var6; // L: 8221
-					var3.field1186 = 0; // L: 8222
+					var3.currentSequenceFrameIndex = 0; // L: 8222
 					var3.field1200 = var3.pathLength; // L: 8223
 				}
 			}
 
 			if ((var4 & 512) != 0) { // L: 8227
-				var3.field1196 = Client.cycle + var0.method7576(); // L: 8228
-				var3.field1197 = Client.cycle + var0.method7576(); // L: 8229
-				var3.field1143 = var0.readByte(); // L: 8230
-				var3.field1199 = var0.method7548(); // L: 8231
-				var3.field1153 = var0.method7548(); // L: 8232
-				var3.field1140 = (byte)var0.readUnsignedByte(); // L: 8233
+				var3.recolourStartCycle = Client.cycle + var0.method7576(); // L: 8228
+				var3.recolourEndCycle = Client.cycle + var0.method7576(); // L: 8229
+				var3.recolourHue = var0.readByte(); // L: 8230
+				var3.recolourSaturation = var0.method7548(); // L: 8231
+				var3.recolourLuminance = var0.method7548(); // L: 8232
+				var3.recolourAmount = (byte)var0.readUnsignedByte(); // L: 8233
 			}
 
 			if (class393.field4428 && (var4 & 256) != 0 || !class393.field4428 && (var4 & 8) != 0) { // L: 8235
-				var3.field1187 = var0.method7548(); // L: 8236
-				var3.field1189 = var0.method7549(); // L: 8237
-				var3.field1188 = var0.method7548(); // L: 8238
-				var3.field1190 = var0.method7547(); // L: 8239
-				var3.field1191 = var0.method7716() + Client.cycle; // L: 8240
-				var3.field1192 = var0.method7716() + Client.cycle; // L: 8241
-				var3.field1139 = var0.readUnsignedShort(); // L: 8242
+				var3.exactMoveDeltaX1 = var0.method7548(); // L: 8236
+				var3.exactMoveDeltaY1 = var0.method7549(); // L: 8237
+				var3.exactMoveDeltaX2 = var0.method7548(); // L: 8238
+				var3.exactMoveDeltaY2 = var0.method7547(); // L: 8239
+				var3.exactMoveArrive1Cycle = var0.method7716() + Client.cycle; // L: 8240
+				var3.exactMoveArrive2Cycle = var0.method7716() + Client.cycle; // L: 8241
+				var3.exactMoveDirection = var0.readUnsignedShort(); // L: 8242
 				var3.pathLength = 1; // L: 8243
 				var3.field1200 = 0; // L: 8244
-				var3.field1187 += var3.pathX[0]; // L: 8245
-				var3.field1189 += var3.pathY[0]; // L: 8246
-				var3.field1188 += var3.pathX[0]; // L: 8247
-				var3.field1190 += var3.pathY[0]; // L: 8248
+				var3.exactMoveDeltaX1 += var3.pathX[0]; // L: 8245
+				var3.exactMoveDeltaY1 += var3.pathY[0]; // L: 8246
+				var3.exactMoveDeltaX2 += var3.pathX[0]; // L: 8247
+				var3.exactMoveDeltaY2 += var3.pathY[0]; // L: 8248
 			}
 
 			if ((var4 & 64) != 0) { // L: 8250
@@ -338,10 +338,10 @@ public class JagexCache {
 				var3.spotAnimation = var0.method7576(); // L: 8255
 				var5 = var0.method7701(); // L: 8256
 				var3.spotAnimationHeight = var5 >> 16; // L: 8257
-				var3.field1185 = (var5 & 65535) + Client.cycle; // L: 8258
+				var3.spotAnimationStartCycle = (var5 & 65535) + Client.cycle; // L: 8258
 				var3.spotAnimationFrame = 0; // L: 8259
 				var3.spotAnimationFrameCycle = 0; // L: 8260
-				if (var3.field1185 > Client.cycle) { // L: 8261
+				if (var3.spotAnimationStartCycle > Client.cycle) { // L: 8261
 					var3.spotAnimationFrame = -1;
 				}
 

@@ -126,8 +126,8 @@ public class WorldMapLabelSize {
 					if (!var4.isFollower || Client.followerIndex == var1) { // L: 10074
 						String var5 = var0.method2342(); // L: 10075
 						int var6;
-						if (var4.combatLevel != 0 && var0.field1210 != 0) { // L: 10076
-							var6 = var0.field1210 != -1 ? var0.field1210 * 731891927 * -1765430553 : var4.combatLevel * 580256741 * -200769043; // L: 10077
+						if (var4.combatLevel != 0 && var0.combatLevelChange != 0) { // L: 10076
+							var6 = var0.combatLevelChange != -1 ? var0.combatLevelChange * 731891927 * -1765430553 : var4.combatLevel * 580256741 * -200769043; // L: 10077
 							var5 = var5 + IgnoreList.method6430(var6, ModelData0.localPlayer.combatLevel) + " " + " (" + "level-" + var6 + ")"; // L: 10078
 						}
 

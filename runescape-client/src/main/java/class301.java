@@ -53,28 +53,28 @@ public class class301 {
 		int var2;
 		int var3;
 		int var4;
-		if (var0.field1191 >= Client.cycle) { // L: 3994
-			var2 = Math.max(1, var0.field1191 - Client.cycle); // L: 3995
-			var3 = var0.field1167 * 64 + var0.field1187 * 128; // L: 3996
-			var4 = var0.field1167 * 64 + var0.field1189 * 128; // L: 3997
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) { // L: 3994
+			var2 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle); // L: 3995
+			var3 = var0.field1167 * 64 + var0.exactMoveDeltaX1 * 128; // L: 3996
+			var4 = var0.field1167 * 64 + var0.exactMoveDeltaY1 * 128; // L: 3997
 			var0.x += (var3 - var0.x) / var2; // L: 3998
 			var0.y += (var4 - var0.y) / var2; // L: 3999
 			var0.field1194 = 0; // L: 4000
-			var0.orientation = var0.field1139; // L: 4001
-		} else if (var0.field1192 >= Client.cycle) { // L: 4003
-			if (var0.field1192 == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > class114.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 4004
-				var2 = var0.field1192 - var0.field1191; // L: 4005
-				var3 = Client.cycle - var0.field1191; // L: 4006
-				var4 = var0.field1167 * 64 + var0.field1187 * 128; // L: 4007
-				int var5 = var0.field1167 * 64 + var0.field1189 * 128; // L: 4008
-				int var6 = var0.field1167 * 64 + var0.field1188 * 128; // L: 4009
-				int var7 = var0.field1167 * 64 + var0.field1190 * 128; // L: 4010
+			var0.orientation = var0.exactMoveDirection; // L: 4001
+		} else if (var0.exactMoveArrive2Cycle >= Client.cycle) { // L: 4003
+			if (var0.exactMoveArrive2Cycle == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > class114.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 4004
+				var2 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle; // L: 4005
+				var3 = Client.cycle - var0.exactMoveArrive1Cycle; // L: 4006
+				var4 = var0.field1167 * 64 + var0.exactMoveDeltaX1 * 128; // L: 4007
+				int var5 = var0.field1167 * 64 + var0.exactMoveDeltaY1 * 128; // L: 4008
+				int var6 = var0.field1167 * 64 + var0.exactMoveDeltaX2 * 128; // L: 4009
+				int var7 = var0.field1167 * 64 + var0.exactMoveDeltaY2 * 128; // L: 4010
 				var0.x = (var6 * var3 + var4 * (var2 - var3)) / var2; // L: 4011
 				var0.y = (var7 * var3 + var5 * (var2 - var3)) / var2; // L: 4012
 			}
 
 			var0.field1194 = 0; // L: 4014
-			var0.orientation = var0.field1139; // L: 4015
+			var0.orientation = var0.exactMoveDirection; // L: 4015
 			var0.rotation = var0.orientation; // L: 4016
 		} else {
 			class115.method2680(var0); // L: 4018
@@ -83,8 +83,8 @@ public class class301 {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) { // L: 4019
 			var0.sequence = -1; // L: 4020
 			var0.spotAnimation = -1; // L: 4021
-			var0.field1191 = 0; // L: 4022
-			var0.field1192 = 0; // L: 4023
+			var0.exactMoveArrive1Cycle = 0; // L: 4022
+			var0.exactMoveArrive2Cycle = 0; // L: 4023
 			var0.x = var0.field1167 * 64 + var0.pathX[0] * 128; // L: 4024
 			var0.y = var0.pathY[0] * 128 + var0.field1167 * 64; // L: 4025
 			var0.method2180(); // L: 4026
@@ -93,8 +93,8 @@ public class class301 {
 		if (ModelData0.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) { // L: 4028 4029
 			var0.sequence = -1; // L: 4030
 			var0.spotAnimation = -1; // L: 4031
-			var0.field1191 = 0; // L: 4032
-			var0.field1192 = 0; // L: 4033
+			var0.exactMoveArrive1Cycle = 0; // L: 4032
+			var0.exactMoveArrive2Cycle = 0; // L: 4033
 			var0.x = var0.field1167 * 64 + var0.pathX[0] * 128; // L: 4034
 			var0.y = var0.pathY[0] * 128 + var0.field1167 * 64; // L: 4035
 			var0.method2180(); // L: 4036
@@ -121,9 +121,9 @@ public class class301 {
 				}
 			}
 
-			if (var0.field1172 != -1 && (var0.pathLength == 0 || var0.field1194 > 0)) { // L: 4055
-				var0.orientation = var0.field1172; // L: 4056
-				var0.field1172 = -1; // L: 4057
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1194 > 0)) { // L: 4055
+				var0.orientation = var0.facedDirection; // L: 4056
+				var0.facedDirection = -1; // L: 4057
 			}
 
 			var2 = var0.orientation - var0.rotation & 2047; // L: 4059
@@ -136,14 +136,14 @@ public class class301 {
 				++var0.field1203; // L: 4065
 				boolean var10;
 				if (var2 > 1024) { // L: 4066
-					var0.rotation -= var0.field1173 ? var2 : var0.field1204 * 1818380337 * -1019211567; // L: 4067
+					var0.rotation -= var0.instantTurn ? var2 : var0.field1204 * 1818380337 * -1019211567; // L: 4067
 					var10 = true; // L: 4068
 					if (var2 < var0.field1204 || var2 > 2048 - var0.field1204) { // L: 4069
 						var0.rotation = var0.orientation; // L: 4070
 						var10 = false; // L: 4071
 					}
 
-					if (!var0.field1173 && var0.movementSequence == var0.idleSequence && (var0.field1203 > 25 || var10)) { // L: 4073
+					if (!var0.instantTurn && var0.movementSequence == var0.idleSequence && (var0.field1203 > 25 || var10)) { // L: 4073
 						if (var0.turnLeftSequence != -1) { // L: 4074
 							var0.movementSequence = var0.turnLeftSequence;
 						} else {
@@ -151,14 +151,14 @@ public class class301 {
 						}
 					}
 				} else {
-					var0.rotation += var0.field1173 ? var2 : 1818380337 * var0.field1204 * -1019211567; // L: 4079
+					var0.rotation += var0.instantTurn ? var2 : 1818380337 * var0.field1204 * -1019211567; // L: 4079
 					var10 = true; // L: 4080
 					if (var2 < var0.field1204 || var2 > 2048 - var0.field1204) { // L: 4081
 						var0.rotation = var0.orientation; // L: 4082
 						var10 = false; // L: 4083
 					}
 
-					if (!var0.field1173 && var0.idleSequence == var0.movementSequence && (var0.field1203 > 25 || var10)) { // L: 4085
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1203 > 25 || var10)) { // L: 4085
 						if (var0.turnRightSequence != -1) { // L: 4086
 							var0.movementSequence = var0.turnRightSequence;
 						} else {
@@ -168,7 +168,7 @@ public class class301 {
 				}
 
 				var0.rotation &= 2047; // L: 4091
-				var0.field1173 = false; // L: 4092
+				var0.instantTurn = false; // L: 4092
 			} else {
 				var0.field1203 = 0; // L: 4094
 			}
@@ -210,7 +210,7 @@ public class class301 {
 			}
 		}
 
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1185) { // L: 4130
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) { // L: 4130
 			if (var0.spotAnimationFrame < 0) { // L: 4131
 				var0.spotAnimationFrame = 0;
 			}
@@ -247,7 +247,7 @@ public class class301 {
 
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) { // L: 4160
 			var11 = class114.SequenceDefinition_get(var0.sequence); // L: 4161
-			if (var11.field2224 == 1 && var0.field1200 > 0 && var0.field1191 <= Client.cycle && var0.field1192 < Client.cycle) { // L: 4162 4163
+			if (var11.field2224 == 1 && var0.field1200 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) { // L: 4162 4163
 				var0.sequenceDelay = 1; // L: 4164
 				return; // L: 4208
 			}
@@ -267,8 +267,8 @@ public class class301 {
 
 				if (var0.sequenceFrame >= var11.frameIds.length) { // L: 4179
 					var0.sequenceFrame -= var11.frameCount; // L: 4180
-					++var0.field1186; // L: 4181
-					if (var0.field1186 >= var11.field2223) { // L: 4182
+					++var0.currentSequenceFrameIndex; // L: 4181
+					if (var0.currentSequenceFrameIndex >= var11.field2223) { // L: 4182
 						var0.sequence = -1;
 					} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var11.frameIds.length) { // L: 4183
 						class16.method182(var11, var0.sequenceFrame, var0.x, var0.y); // L: 4184
@@ -285,8 +285,8 @@ public class class301 {
 					TileItem.method2407(var11, var0.sequenceFrame, var0.x, var0.y); // L: 4192
 				} else {
 					var0.sequenceFrame -= var11.frameCount; // L: 4195
-					++var0.field1186; // L: 4196
-					if (var0.field1186 >= var11.field2223) { // L: 4197
+					++var0.currentSequenceFrameIndex; // L: 4196
+					if (var0.currentSequenceFrameIndex >= var11.field2223) { // L: 4197
 						var0.sequence = -1;
 					} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var3) { // L: 4198
 						TileItem.method2407(var11, var0.sequenceFrame, var0.x, var0.y); // L: 4199

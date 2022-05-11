@@ -64,7 +64,7 @@ public class class137 extends class128 {
 			return 1; // L: 1889
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) { // L: 1891
 			class12.Interpreter_intStackSize -= 2; // L: 1892
-			class306.method5593(Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize + 1]); // L: 1893
+			class306.playJingle(Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize + 1]); // L: 1893
 			return 1; // L: 1894
 		} else {
 			class83 var3;

@@ -100,7 +100,8 @@ public class class241 {
 		descriptor = "(IIIB)Lck;",
 		garbageValue = "52"
 	)
-	static final InterfaceParent method4812(int var0, int var1, int var2) {
+	@Export("ifOpenSub")
+	static final InterfaceParent ifOpenSub(int var0, int var1, int var2) {
 		InterfaceParent var3 = new InterfaceParent(); // L: 12211
 		var3.group = var1; // L: 12212
 		var3.type = var2; // L: 12213
