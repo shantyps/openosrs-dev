@@ -76,6 +76,7 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Player, PlayerAppearance> appearances = new HashMap<>();
     private final Map<Integer, Integer> inventoryDiffs = new HashMap<>();
     private final Map<Actor, CombatLevelChangeEvent> combatLevelChanges = new HashMap<>();
+    private final Map<NPC, NameChangeEvent> nameChanges = new HashMap<>();
     private final Map<Actor, RecolourEvent> tintingChanges = new HashMap<>();
     private final Map<Player, Pair<Integer, WorldPoint>> playerMovements = new HashMap<>();
     private final Map<Player, Pair<PlayerMoved, WorldPoint>> movementEvents = new HashMap<>();
@@ -142,6 +143,7 @@ public class EventInspector extends DevToolsFrame {
     private final JCheckBox exactMove = new JCheckBox("Exact Move", true);
     private final JCheckBox tinting = new JCheckBox("Tinting", true);
     private final JCheckBox combatChange = new JCheckBox("Combat Level Change", true);
+    private final JCheckBox nameChange = new JCheckBox("Name", true);
     private final JCheckBox combinedObjects = new JCheckBox("Combined Objects", true);
     private final JCheckBox transformations = new JCheckBox("Transformations", true);
     private final JCheckBox appearancesCheckbox = new JCheckBox("Appearances", true);
@@ -390,6 +392,7 @@ public class EventInspector extends DevToolsFrame {
         panel.add(title);
 
         panel.add(appearancesCheckbox);
+        panel.add(nameChange);
         panel.add(spotanims);
         panel.add(sequences);
         panel.add(say);
@@ -942,6 +945,15 @@ public class EventInspector extends DevToolsFrame {
                 addLine(formatActor(actor), combatChange, isActorConsoleLogged(actor), this.combatChange);
             });
             combatLevelChanges.clear();
+        }
+
+        if (!nameChanges.isEmpty()) {
+            nameChanges.forEach((actor, change) -> {
+                if (actor == null || isActorPositionUninitialized(actor)) return;
+                String nameChange = "Name(previousName = " + change.getOldName() + ", newName = " + change.getNewName() + ")";
+                addLine(formatActor(actor), nameChange, isActorConsoleLogged(actor), this.nameChange);
+            });
+            nameChanges.clear();
         }
 
         if (!tintingChanges.isEmpty()) {
