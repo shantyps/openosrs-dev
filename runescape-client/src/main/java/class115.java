@@ -314,7 +314,7 @@ public class class115 {
 				var0.orientation = 0;
 			}
 
-			class193 var5 = var0.pathTraversed[var0.pathLength - 1]; // L: 4243
+			MoveSpeed var5 = var0.pathTraversed[var0.pathLength - 1]; // L: 4243
 			if (var3 - var10 <= 256 && var3 - var10 >= -256 && var4 - var2 <= 256 && var4 - var2 >= -256) { // L: 4244
 				int var6 = var0.orientation - var0.rotation & 2047; // L: 4251
 				if (var6 > 1024) { // L: 4252
@@ -373,9 +373,9 @@ public class class115 {
 					}
 				}
 
-				if (var5 == class193.field2248) { // L: 4279
+				if (var5 == MoveSpeed.field2248) { // L: 4279
 					var8 <<= 1;
-				} else if (var5 == class193.field2249) { // L: 4280
+				} else if (var5 == MoveSpeed.field2249) { // L: 4280
 					var8 >>= 1;
 				}
 

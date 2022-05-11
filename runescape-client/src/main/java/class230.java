@@ -84,7 +84,7 @@ public class class230 {
 					var4.tileY = var7; // L: 246
 				} else {
 					var4.field1095 = false; // L: 249
-					var4.method2117(var6, var7, Players.field1302[var1]); // L: 250
+					var4.move(var6, var7, Players.field1302[var1]); // L: 250
 				}
 
 			} else if (var3 == 2) { // L: 254
@@ -146,7 +146,7 @@ public class class230 {
 					var4.tileY = var7; // L: 317
 				} else {
 					var4.field1095 = false; // L: 320
-					var4.method2117(var6, var7, Players.field1302[var1]); // L: 321
+					var4.move(var6, var7, Players.field1302[var1]); // L: 321
 				}
 
 			} else {
@@ -177,7 +177,7 @@ public class class230 {
 							var4.tileY = var11; // L: 342
 						} else {
 							var4.field1095 = false; // L: 345
-							var4.method2117(var10, var11, Players.field1302[var1]); // L: 346
+							var4.move(var10, var11, Players.field1302[var1]); // L: 346
 						}
 					} else {
 						var4.resetPath(var10, var11); // L: 336
@@ -205,7 +205,7 @@ public class class230 {
 						var4.tileY = var11; // L: 365
 					} else {
 						var4.field1095 = false; // L: 368
-						var4.method2117(var10, var11, Players.field1302[var1]); // L: 369
+						var4.move(var10, var11, Players.field1302[var1]); // L: 369
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 371

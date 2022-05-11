@@ -435,7 +435,7 @@ public final class Occluder {
 					var9 = var1.method7554(); // L: 7774
 					if (var7 >= 0 && var8 >= 0 && var7 < 103 && var8 < 103) { // L: 7775
 						if (var5 == 0) { // L: 7776
-							BoundaryObject var31 = class175.scene.method4147(class128.Client_plane, var7, var8); // L: 7777
+							BoundaryObject var31 = class175.scene.getBoundaryObject(class128.Client_plane, var7, var8); // L: 7777
 							if (var31 != null) { // L: 7778
 								var11 = NetSocket.Entity_unpackID(var31.tag); // L: 7779
 								if (var3 == 2) { // L: 7780
@@ -448,7 +448,7 @@ public final class Occluder {
 						}
 
 						if (var5 == 1) { // L: 7787
-							WallDecoration var40 = class175.scene.method4049(class128.Client_plane, var7, var8); // L: 7788
+							WallDecoration var40 = class175.scene.getWallObject(class128.Client_plane, var7, var8); // L: 7788
 							if (var40 != null) { // L: 7789
 								var11 = NetSocket.Entity_unpackID(var40.tag); // L: 7790
 								if (var3 != 4 && var3 != 5) { // L: 7791

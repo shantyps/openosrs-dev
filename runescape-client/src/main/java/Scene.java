@@ -721,7 +721,8 @@ public class Scene {
 	@ObfuscatedSignature(
 		descriptor = "(III)Lhc;"
 	)
-	public BoundaryObject method4147(int var1, int var2, int var3) {
+	@Export("getBoundaryObject")
+	public BoundaryObject getBoundaryObject(int var1, int var2, int var3) {
 		Tile var4 = this.tiles[var1][var2][var3]; // L: 413
 		return var4 == null ? null : var4.boundaryObject; // L: 414 415
 	}
@@ -730,7 +731,8 @@ public class Scene {
 	@ObfuscatedSignature(
 		descriptor = "(III)Lhf;"
 	)
-	public WallDecoration method4049(int var1, int var2, int var3) {
+	@Export("getWallObject")
+	public WallDecoration getWallObject(int var1, int var2, int var3) {
 		Tile var4 = this.tiles[var1][var2][var3]; // L: 419
 		return var4 == null ? null : var4.wallDecoration; // L: 420 421
 	}

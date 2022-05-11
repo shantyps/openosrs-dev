@@ -102,7 +102,7 @@ public enum HorizontalAlignment implements MouseWheel {
 							Client.npcIndices[++Client.npcCount - 1] = var5; // L: 8030
 							var6.npcCycle = Client.cycle; // L: 8031
 							var9 = var2.readBits(3); // L: 8032
-							var6.method2340(var9, class193.field2251); // L: 8033
+							var6.move(var9, MoveSpeed.field2251); // L: 8033
 							var10 = var2.readBits(1); // L: 8034
 							if (var10 == 1) { // L: 8035
 								Client.field601[++Client.field565 - 1] = var5;
@@ -112,12 +112,12 @@ public enum HorizontalAlignment implements MouseWheel {
 							var6.npcCycle = Client.cycle; // L: 8040
 							if (var2.readBits(1) == 1) { // L: 8041
 								var9 = var2.readBits(3); // L: 8042
-								var6.method2340(var9, class193.field2248); // L: 8043
+								var6.move(var9, MoveSpeed.field2248); // L: 8043
 								var10 = var2.readBits(3); // L: 8044
-								var6.method2340(var10, class193.field2248); // L: 8045
+								var6.move(var10, MoveSpeed.field2248); // L: 8045
 							} else {
 								var9 = var2.readBits(3); // L: 8048
-								var6.method2340(var9, class193.field2249); // L: 8049
+								var6.move(var9, MoveSpeed.field2249); // L: 8049
 							}
 
 							var9 = var2.readBits(1); // L: 8051

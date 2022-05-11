@@ -79,7 +79,7 @@ public abstract class UrlRequester implements Runnable {
 					System.arraycopy(var6, 0, var8, var4.length, var7); // L: 73
 				}
 
-				class168.ByteArrayPool_release(var6); // L: 76
+				PlayerEquipmentItem.ByteArrayPool_release(var6); // L: 76
 			}
 
 			var2.response0 = var4; // L: 78
@@ -283,7 +283,7 @@ public abstract class UrlRequester implements Runnable {
 		descriptor = "(Lca;IILgd;I)V",
 		garbageValue = "-1504276994"
 	)
-	static final void method2540(Player var0, int var1, int var2, class193 var3) {
+	static final void method2540(Player var0, int var1, int var2, MoveSpeed var3) {
 		int var4 = var0.pathX[0]; // L: 8321
 		int var5 = var0.pathY[0]; // L: 8322
 		int var6 = var0.transformedSize(); // L: 8323

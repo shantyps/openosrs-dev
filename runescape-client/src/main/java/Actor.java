@@ -380,7 +380,7 @@ public abstract class Actor extends Renderable {
 		descriptor = "[Lgd;"
 	)
 	@Export("pathTraversed")
-	class193[] pathTraversed;
+	MoveSpeed[] pathTraversed;
 	@ObfuscatedName("dc")
 	@ObfuscatedGetter(
 		intValue = 753559813
@@ -451,7 +451,7 @@ public abstract class Actor extends Renderable {
 		this.pathLength = 0; // L: 80
 		this.pathX = new int[10]; // L: 81
 		this.pathY = new int[10]; // L: 82
-		this.pathTraversed = new class193[10]; // L: 83
+		this.pathTraversed = new MoveSpeed[10]; // L: 83
 		this.field1194 = 0; // L: 84
 		this.field1200 = 0; // L: 85
 		this.combatLevelChange = -1; // L: 86

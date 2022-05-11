@@ -192,7 +192,7 @@ public class SoundCache {
 					var0.draw("Login: ", Login.loginBoxX + 180 - 110, var26, 16777215, 0); // L: 1202
 					var27 = 200; // L: 1203
 
-					for (var5 = class168.method3253(); var0.stringWidth(var5) > var27; var5 = var5.substring(0, var5.length() - 1)) { // L: 1204 1205 1206
+					for (var5 = PlayerEquipmentItem.method3253(); var0.stringWidth(var5) > var27; var5 = var5.substring(0, var5.length() - 1)) { // L: 1204 1205 1206
 					}
 
 					var0.draw(AbstractFont.escapeBrackets(var5), Login.loginBoxX + 180 - 70, var26, 16777215, 0); // L: 1208
@@ -259,7 +259,7 @@ public class SoundCache {
 						var0.draw("Login: ", Decimator.loginBoxCenter - 110, var26, 16777215, 0); // L: 1270
 						var27 = 200; // L: 1271
 
-						for (var5 = class168.method3253(); var0.stringWidth(var5) > var27; var5 = var5.substring(1)) { // L: 1272 1273 1274
+						for (var5 = PlayerEquipmentItem.method3253(); var0.stringWidth(var5) > var27; var5 = var5.substring(1)) { // L: 1272 1273 1274
 						}
 
 						var0.draw(AbstractFont.escapeBrackets(var5) + (Login.currentLoginField == 0 & Client.cycle % 40 < 20 ? class166.colorStartTag(16776960) + "|" : ""), Decimator.loginBoxCenter - 70, var26, 16777215, 0); // L: 1276
@@ -385,7 +385,7 @@ public class SoundCache {
 						var0.draw("Username/email: ", Login.loginBoxX + 180 - 145, var26, 16777215, 0); // L: 1415
 						var27 = 174; // L: 1416
 
-						for (var5 = class168.method3253(); var0.stringWidth(var5) > var27; var5 = var5.substring(1)) { // L: 1417 1418 1419
+						for (var5 = PlayerEquipmentItem.method3253(); var0.stringWidth(var5) > var27; var5 = var5.substring(1)) { // L: 1417 1418 1419
 						}
 
 						var0.draw(AbstractFont.escapeBrackets(var5) + (Client.cycle % 40 < 20 ? class166.colorStartTag(16776960) + "|" : ""), Login.loginBoxX + 180 - 34, var26, 16777215, 0); // L: 1421
@@ -586,8 +586,8 @@ public class SoundCache {
 				int[] var24 = new int[4]; // L: 1629
 				Rasterizer2D.Rasterizer2D_getClipArray(var24); // L: 1630
 				Rasterizer2D.Rasterizer2D_setClip(Login.xPadding, 0, Login.xPadding + 765, class433.canvasHeight); // L: 1631
-				class193.loginScreenRunesAnimation.draw(Login.xPadding - 22, Client.cycle); // L: 1632
-				class193.loginScreenRunesAnimation.draw(Login.xPadding + 22 + 765 - 128, Client.cycle); // L: 1633
+				MoveSpeed.loginScreenRunesAnimation.draw(Login.xPadding - 22, Client.cycle); // L: 1632
+				MoveSpeed.loginScreenRunesAnimation.draw(Login.xPadding + 22 + 765 - 128, Client.cycle); // L: 1633
 				Rasterizer2D.Rasterizer2D_setClipArray(var24); // L: 1634
 			}
 

@@ -242,7 +242,7 @@ public class ViewportMouse {
 							}
 
 							if (var10.contentType == 1402) { // L: 10340
-								class193.loginScreenRunesAnimation.draw(var12, Client.cycle); // L: 10341
+								MoveSpeed.loginScreenRunesAnimation.draw(var12, Client.cycle); // L: 10341
 							}
 						}
 

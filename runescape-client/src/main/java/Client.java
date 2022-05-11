@@ -3038,7 +3038,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 
 						for (var40 = 0; var40 < 2048; ++var40) { // L: 2653
 							Players.field1307[var40] = null; // L: 2654
-							Players.field1302[var40] = class193.field2251; // L: 2655
+							Players.field1302[var40] = MoveSpeed.field2251; // L: 2655
 						}
 
 						for (var40 = 0; var40 < 2048; ++var40) { // L: 2658
@@ -4572,7 +4572,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 
 				if (ServerPacket.field3155 == var1.serverPacket) { // L: 6251
 					var67 = var3.readUnsignedByte(); // L: 6252
-					class193.method3800(var67); // L: 6253
+					MoveSpeed.method3800(var67); // L: 6253
 					var1.serverPacket = null; // L: 6254
 					return true; // L: 6255
 				}
@@ -4624,8 +4624,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 							var55.itemQuantityMode = 2; // L: 6293
 						}
 
-						if (var55.field3406 > 0) { // L: 6294
-							var55.modelZoom = var55.modelZoom * 32 / var55.field3406;
+						if (var55.modelRotation > 0) { // L: 6294
+							var55.modelZoom = var55.modelZoom * 32 / var55.modelRotation;
 						} else if (var55.rawWidth > 0) { // L: 6295
 							var55.modelZoom = var55.modelZoom * 32 / var55.rawWidth;
 						}
@@ -5736,7 +5736,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					var28 = var5 + (var6 & 7); // L: 7190
 					if (var27 >= 0 && var28 >= 0 && var27 < 103 && var28 < 103) { // L: 7191
 						if (var38 == 0) { // L: 7192
-							BoundaryObject var65 = class175.scene.method4147(class128.Client_plane, var27, var28); // L: 7193
+							BoundaryObject var65 = class175.scene.getBoundaryObject(class128.Client_plane, var27, var28); // L: 7193
 							if (var65 != null) { // L: 7194
 								var15 = NetSocket.Entity_unpackID(var65.tag); // L: 7195
 								if (var29 == 2) { // L: 7196
@@ -5747,7 +5747,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 								}
 							}
 						} else if (var38 == 1) { // L: 7203
-							WallDecoration var63 = class175.scene.method4049(class128.Client_plane, var27, var28); // L: 7204
+							WallDecoration var63 = class175.scene.getWallObject(class128.Client_plane, var27, var28); // L: 7204
 							if (var63 != null) { // L: 7205
 								var15 = NetSocket.Entity_unpackID(var63.tag); // L: 7206
 								if (var29 != 4 && var29 != 5) { // L: 7207

@@ -78,7 +78,7 @@ public class Buffer extends Node {
 	@Export("releaseArray")
 	public void releaseArray() {
 		if (this.array != null) { // L: 70
-			class168.ByteArrayPool_release(this.array);
+			PlayerEquipmentItem.ByteArrayPool_release(this.array);
 		}
 
 		this.array = null; // L: 71

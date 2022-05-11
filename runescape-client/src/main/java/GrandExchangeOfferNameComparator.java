@@ -228,7 +228,7 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 		garbageValue = "98"
 	)
 	static final void method5786(PacketBuffer var0, int var1, Player var2, int var3) {
-		byte var4 = class193.field2250.field2252; // L: 451
+		byte var4 = MoveSpeed.field2250.speed; // L: 451
 		int var5;
 		int var8;
 		int var9;
@@ -307,9 +307,9 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 		}
 
 		if ((var3 & 2048) != 0) { // L: 508
-			class193[] var14 = Players.field1302; // L: 509
-			class193[] var21 = new class193[]{class193.field2248, class193.field2250, class193.field2249, class193.field2251}; // L: 513
-			var14[var1] = (class193)class291.findEnumerated(var21, var0.method7549()); // L: 515
+			MoveSpeed[] var14 = Players.field1302; // L: 509
+			MoveSpeed[] var21 = new MoveSpeed[]{MoveSpeed.field2248, MoveSpeed.field2250, MoveSpeed.field2249, MoveSpeed.field2251}; // L: 513
+			var14[var1] = (MoveSpeed)class291.findEnumerated(var21, var0.method7549()); // L: 515
 		}
 
 		if ((var3 & 16384) != 0) { // L: 517
@@ -437,15 +437,15 @@ final class GrandExchangeOfferNameComparator implements Comparator {
 			if (var4 == 127) { // L: 618
 				var2.resetPath(var2.tileX, var2.tileY);
 			} else {
-				class193 var22;
-				if (var4 != class193.field2250.field2252) { // L: 621
-					class193[] var18 = new class193[]{class193.field2248, class193.field2250, class193.field2249, class193.field2251}; // L: 624
-					var22 = (class193)class291.findEnumerated(var18, var4); // L: 626
+				MoveSpeed var22;
+				if (var4 != MoveSpeed.field2250.speed) { // L: 621
+					MoveSpeed[] var18 = new MoveSpeed[]{MoveSpeed.field2248, MoveSpeed.field2250, MoveSpeed.field2249, MoveSpeed.field2251}; // L: 624
+					var22 = (MoveSpeed)class291.findEnumerated(var18, var4); // L: 626
 				} else {
 					var22 = Players.field1302[var1]; // L: 628
 				}
 
-				var2.method2117(var2.tileX, var2.tileY, var22); // L: 629
+				var2.move(var2.tileX, var2.tileY, var22); // L: 629
 			}
 		}
 

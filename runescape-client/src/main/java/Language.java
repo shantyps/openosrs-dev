@@ -569,7 +569,7 @@ public class Language implements MouseWheel {
 						var3 = Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize]; // L: 2812
 						boolean var4 = Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize + 1] == 1; // L: 2813
 						var5 = Interpreter.Interpreter_intStack[class12.Interpreter_intStackSize + 2]; // L: 2814
-						class168.method3251(var5, var3, var4); // L: 2815
+						PlayerEquipmentItem.method3251(var5, var3, var4); // L: 2815
 					}
 
 					if (var0 == ScriptOpcodes.ACTIVECLANSETTINGS_GETAFFINEDMUTED) { // L: 2817

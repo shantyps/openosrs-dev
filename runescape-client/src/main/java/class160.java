@@ -231,7 +231,7 @@ public class class160 {
 				}
 			} else {
 				for (var19 = 9; var19 >= 5; --var19) { // L: 11163
-					String var21 = class193.method3801(var0, var19); // L: 11164
+					String var21 = MoveSpeed.method3801(var0, var19); // L: 11164
 					if (var21 != null) { // L: 11165
 						Projectile.insertMenuItemNoShift(var21, var0.dataText, 1007, var19 + 1, var0.childIndex, var0.id); // L: 11166
 					}
@@ -243,7 +243,7 @@ public class class160 {
 				}
 
 				for (var4 = 4; var4 >= 0; --var4) { // L: 11175
-					String var20 = class193.method3801(var0, var4); // L: 11176
+					String var20 = MoveSpeed.method3801(var0, var4); // L: 11176
 					if (var20 != null) { // L: 11177
 						class175.insertMenuItem(var20, var0.dataText, 57, var4 + 1, var0.childIndex, var0.id, var0.prioritizeMenuEntry); // L: 11178
 					}

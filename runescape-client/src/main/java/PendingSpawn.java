@@ -463,7 +463,7 @@ public final class PendingSpawn extends Node {
 					class114.worldSelectArrows = null; // L: 1194
 					class267.worldSelectStars = null; // L: 1195
 					ArchiveDiskAction.field3997 = null; // L: 1196
-					class193.loginScreenRunesAnimation.method2214(); // L: 1197
+					MoveSpeed.loginScreenRunesAnimation.method2214(); // L: 1197
 					UrlRequester.method2538(2); // L: 1198
 					MouseRecorder.method2088(true); // L: 1199
 					Login.clearLoginScreen = false; // L: 1200

@@ -291,13 +291,13 @@ public final class Player extends Actor {
 			this.isHidden = false;
 		}
 
-		class168[] var12 = null; // L: 111
+		PlayerEquipmentItem[] var12 = null; // L: 111
 		boolean var13 = false; // L: 112
 		var8 = var1.readUnsignedShort(); // L: 113
 		var13 = (var8 >> 15 & 1) == 1; // L: 114
 		int var9;
 		if (var8 > 0 && var8 != 32768) { // L: 115
-			var12 = new class168[12]; // L: 116
+			var12 = new PlayerEquipmentItem[12]; // L: 116
 
 			for (var9 = 0; var9 < 12; ++var9) { // L: 117
 				int var10 = var8 >> 12 - var9 & 1; // L: 118
@@ -523,7 +523,8 @@ public final class Player extends Actor {
 		descriptor = "(IILgd;I)V",
 		garbageValue = "1708455011"
 	)
-	final void method2117(int var1, int var2, class193 var3) {
+	@Export("move")
+	final void move(int var1, int var2, MoveSpeed var3) {
 		if (super.sequence != -1 && class114.SequenceDefinition_get(super.sequence).field2206 == 1) { // L: 253
 			super.sequence = -1;
 		}
@@ -531,8 +532,8 @@ public final class Player extends Actor {
 		super.facedDirection = -1; // L: 254
 		if (var1 >= 0 && var1 < 104 && var2 >= 0 && var2 < 104) { // L: 255
 			if (super.pathX[0] >= 0 && super.pathX[0] < 104 && super.pathY[0] >= 0 && super.pathY[0] < 104) { // L: 256
-				if (var3 == class193.field2248) {
-					UrlRequester.method2540(this, var1, var2, class193.field2248); // L: 258
+				if (var3 == MoveSpeed.field2248) {
+					UrlRequester.method2540(this, var1, var2, MoveSpeed.field2248); // L: 258
 				}
 
 				this.method2119(var1, var2, var3); // L: 259
@@ -567,7 +568,7 @@ public final class Player extends Actor {
 		descriptor = "(IILgd;I)V",
 		garbageValue = "4079166"
 	)
-	final void method2119(int var1, int var2, class193 var3) {
+	final void method2119(int var1, int var2, MoveSpeed var3) {
 		if (super.pathLength < 9) { // L: 275
 			++super.pathLength;
 		}

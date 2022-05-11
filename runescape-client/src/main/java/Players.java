@@ -19,7 +19,7 @@ public class Players {
 	@ObfuscatedSignature(
 		descriptor = "[Lgd;"
 	)
-	static class193[] field1302;
+	static MoveSpeed[] field1302;
 	@ObfuscatedName("a")
 	@ObfuscatedSignature(
 		descriptor = "[Lpx;"
@@ -69,7 +69,7 @@ public class Players {
 
 	static {
 		field1301 = new byte[2048]; // L: 18
-		field1302 = new class193[2048]; // L: 19
+		field1302 = new MoveSpeed[2048]; // L: 19
 		field1307 = new Buffer[2048]; // L: 20
 		Players_count = 0; // L: 21
 		Players_indices = new int[2048]; // L: 22

@@ -308,7 +308,7 @@ public abstract class AbstractWorldMapData {
 			UrlRequester.field1354 = JagexCache.SpriteBuffer_getIndexedSpriteByName(var1, "options_radio_buttons,6", ""); // L: 233
 			class16.field81 = class67.options_buttons_0Sprite.subWidth; // L: 234
 			class268.field3212 = class67.options_buttons_0Sprite.subHeight; // L: 235
-			class193.loginScreenRunesAnimation = new LoginScreenAnimation(Login.runesSprite); // L: 236
+			MoveSpeed.loginScreenRunesAnimation = new LoginScreenAnimation(Login.runesSprite); // L: 236
 			if (var2) { // L: 237
 				Login.Login_username = ""; // L: 238
 				Login.Login_password = ""; // L: 239
