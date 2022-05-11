@@ -246,8 +246,8 @@ public class ArchiveLoader {
 			var4 = Client.field578 / 256;
 		}
 
-		if (Client.field743[4] && Client.field745[4] + 128 > var4) { // L: 4649
-			var4 = Client.field745[4] + 128;
+		if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var4) { // L: 4649
+			var4 = Client.cameraMoveIntensity[4] + 128;
 		}
 
 		int var31 = Client.camAngleY & 2047; // L: 4650
@@ -399,8 +399,8 @@ public class ArchiveLoader {
 		var11 = StudioGame.cameraYaw; // L: 4736
 
 		for (var12 = 0; var12 < 5; ++var12) { // L: 4737
-			if (Client.field743[var12]) { // L: 4738
-				var13 = (int)(Math.random() * (double)(Client.field744[var12] * 2 + 1) - (double)Client.field744[var12] + Math.sin((double)Client.field714[var12] / 100.0D * (double)Client.field677[var12]) * (double)Client.field745[var12]); // L: 4739
+			if (Client.cameraShaking[var12]) { // L: 4738
+				var13 = (int)(Math.random() * (double)(Client.cameraShakeIntensity[var12] * 2 + 1) - (double)Client.cameraShakeIntensity[var12] + Math.sin((double)Client.cameraShakeSpeed[var12] / 100.0D * (double)Client.cameraShakeCycle[var12]) * (double)Client.cameraMoveIntensity[var12]); // L: 4739
 				if (var12 == 0) { // L: 4740
 					class343.cameraX += var13;
 				}

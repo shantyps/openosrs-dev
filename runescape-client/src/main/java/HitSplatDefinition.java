@@ -11,7 +11,8 @@ public class HitSplatDefinition extends DualNode {
 	@ObfuscatedGetter(
 		intValue = 2130203017
 	)
-	static int field2077;
+	@Export("cameraMoveToAcceleration")
+	static int cameraMoveToAcceleration;
 	@ObfuscatedName("o")
 	@ObfuscatedSignature(
 		descriptor = "Llp;"

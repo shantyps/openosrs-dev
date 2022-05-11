@@ -9,7 +9,8 @@ public class class229 implements WorldMapSection {
 	@ObfuscatedGetter(
 		intValue = -833135371
 	)
-	static int field2805;
+	@Export("cameraMoveToSpeed")
+	static int cameraMoveToSpeed;
 	@ObfuscatedName("o")
 	@ObfuscatedGetter(
 		intValue = 158678861

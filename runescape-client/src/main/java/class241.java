@@ -48,14 +48,14 @@ public class class241 {
 		}
 
 		if (GameEngine.cameraPitch < var0) { // L: 3951
-			GameEngine.cameraPitch = (var0 - GameEngine.cameraPitch) * PacketBufferNode.field3083 / 1000 + GameEngine.cameraPitch + class17.field88; // L: 3952
+			GameEngine.cameraPitch = (var0 - GameEngine.cameraPitch) * PacketBufferNode.cameraLookAtAcceleration / 1000 + GameEngine.cameraPitch + class17.cameraLookAtSpeed; // L: 3952
 			if (GameEngine.cameraPitch > var0) { // L: 3953
 				GameEngine.cameraPitch = var0;
 			}
 		}
 
 		if (GameEngine.cameraPitch > var0) { // L: 3955
-			GameEngine.cameraPitch -= (GameEngine.cameraPitch - var0) * PacketBufferNode.field3083 / 1000 + class17.field88; // L: 3956
+			GameEngine.cameraPitch -= (GameEngine.cameraPitch - var0) * PacketBufferNode.cameraLookAtAcceleration / 1000 + class17.cameraLookAtSpeed; // L: 3956
 			if (GameEngine.cameraPitch < var0) { // L: 3957
 				GameEngine.cameraPitch = var0;
 			}
@@ -71,12 +71,12 @@ public class class241 {
 		}
 
 		if (var2 > 0) { // L: 3962
-			StudioGame.cameraYaw = StudioGame.cameraYaw + class17.field88 + var2 * PacketBufferNode.field3083 / 1000; // L: 3963
+			StudioGame.cameraYaw = StudioGame.cameraYaw + class17.cameraLookAtSpeed + var2 * PacketBufferNode.cameraLookAtAcceleration / 1000; // L: 3963
 			StudioGame.cameraYaw &= 2047; // L: 3964
 		}
 
 		if (var2 < 0) { // L: 3966
-			StudioGame.cameraYaw -= class17.field88 + -var2 * PacketBufferNode.field3083 / 1000; // L: 3967
+			StudioGame.cameraYaw -= class17.cameraLookAtSpeed + -var2 * PacketBufferNode.cameraLookAtAcceleration / 1000; // L: 3967
 			StudioGame.cameraYaw &= 2047; // L: 3968
 		}
 

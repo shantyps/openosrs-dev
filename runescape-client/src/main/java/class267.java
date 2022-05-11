@@ -11,7 +11,8 @@ public class class267 {
 	@ObfuscatedGetter(
 		intValue = -1597128389
 	)
-	static int field3206;
+	@Export("cameraLookAtX")
+	static int cameraLookAtX;
 	@ObfuscatedName("cm")
 	@ObfuscatedSignature(
 		descriptor = "[Lqd;"

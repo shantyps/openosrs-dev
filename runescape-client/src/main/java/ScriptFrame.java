@@ -11,7 +11,8 @@ public class ScriptFrame {
 	@ObfuscatedGetter(
 		intValue = -1251502185
 	)
-	static int field457;
+	@Export("cameraLookAtHeight")
+	static int cameraLookAtHeight;
 	@ObfuscatedName("m")
 	@Export("SpriteBuffer_spriteWidths")
 	public static int[] SpriteBuffer_spriteWidths;

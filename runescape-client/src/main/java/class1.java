@@ -236,13 +236,13 @@ public class class1 implements Callable {
 		garbageValue = "1026103514"
 	)
 	static final void method11() {
-		int var0 = Players.field1317 * 128 + 64; // L: 3977
-		int var1 = TileItem.field1292 * 128 + 64; // L: 3978
-		int var2 = class202.getTileHeight(var0, var1, class128.Client_plane) - WorldMapSection1.field2898; // L: 3979
+		int var0 = Players.cameraMoveToX * 128 + 64; // L: 3977
+		int var1 = TileItem.cameraMoveToY * 128 + 64; // L: 3978
+		int var2 = class202.getTileHeight(var0, var1, class128.Client_plane) - WorldMapSection1.cameraMoveToHeight; // L: 3979
 		class422.method7303(var0, var2, var1); // L: 3980
-		var0 = class267.field3206 * 128 + 64; // L: 3981
-		var1 = AbstractWorldMapData.field2851 * 128 + 64; // L: 3982
-		var2 = class202.getTileHeight(var0, var1, class128.Client_plane) - ScriptFrame.field457; // L: 3983
+		var0 = class267.cameraLookAtX * 128 + 64; // L: 3981
+		var1 = AbstractWorldMapData.cameraLookAtY * 128 + 64; // L: 3982
+		var2 = class202.getTileHeight(var0, var1, class128.Client_plane) - ScriptFrame.cameraLookAtHeight; // L: 3983
 		int var3 = var0 - class343.cameraX; // L: 3984
 		int var4 = var2 - class295.cameraY; // L: 3985
 		int var5 = var1 - FaceNormal.cameraZ; // L: 3986

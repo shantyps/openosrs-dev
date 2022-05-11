@@ -18,7 +18,8 @@ class class17 implements SSLSession {
 	@ObfuscatedGetter(
 		intValue = 1306614653
 	)
-	static int field88;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 	@ObfuscatedName("q")
 	@ObfuscatedSignature(
 		descriptor = "Llp;"

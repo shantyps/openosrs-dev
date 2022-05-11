@@ -12,7 +12,8 @@ public abstract class AbstractWorldMapData {
 	@ObfuscatedGetter(
 		intValue = -508466371
 	)
-	static int field2851;
+	@Export("cameraLookAtY")
+	static int cameraLookAtY;
 	@ObfuscatedName("a")
 	@ObfuscatedGetter(
 		intValue = 1205484999

@@ -12,7 +12,8 @@ public class WorldMapSection1 implements WorldMapSection {
 	@ObfuscatedGetter(
 		intValue = 1030373785
 	)
-	static int field2898;
+	@Export("cameraMoveToHeight")
+	static int cameraMoveToHeight;
 	@ObfuscatedName("o")
 	@ObfuscatedGetter(
 		intValue = -1054024445

@@ -11,7 +11,8 @@ public class Players {
 	@ObfuscatedGetter(
 		intValue = -419051257
 	)
-	static int field1317;
+	@Export("cameraMoveToX")
+	static int cameraMoveToX;
 	@ObfuscatedName("l")
 	static byte[] field1301;
 	@ObfuscatedName("k")

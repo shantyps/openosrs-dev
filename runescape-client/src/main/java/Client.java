@@ -102,7 +102,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@Export("minimapState")
 	static int minimapState;
 	@ObfuscatedName("th")
-	static boolean[] field743;
+	@Export("cameraShaking")
+	static boolean[] cameraShaking;
 	@ObfuscatedName("rw")
 	@ObfuscatedGetter(
 		intValue = 1443023427
@@ -229,7 +230,8 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	)
 	static int field719;
 	@ObfuscatedName("tx")
-	static int[] field745;
+	@Export("cameraMoveIntensity")
+	static int[] cameraMoveIntensity;
 	@ObfuscatedName("rp")
 	static int[] field721;
 	@ObfuscatedName("vc")
@@ -240,11 +242,14 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 	@ObfuscatedName("rn")
 	static int[] field720;
 	@ObfuscatedName("tg")
-	static int[] field744;
+	@Export("cameraShakeIntensity")
+	static int[] cameraShakeIntensity;
 	@ObfuscatedName("tp")
-	static int[] field714;
+	@Export("cameraShakeSpeed")
+	static int[] cameraShakeSpeed;
 	@ObfuscatedName("tv")
-	static int[] field677;
+	@Export("cameraShakeCycle")
+	static int[] cameraShakeCycle;
 	@ObfuscatedName("ux")
 	@ObfuscatedSignature(
 		descriptor = "[Lly;"
@@ -1616,11 +1621,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 		soundEffects = new SoundEffect[50]; // L: 606
 		isCameraLocked = false; // L: 608
 		field742 = false; // L: 619
-		field743 = new boolean[5]; // L: 627
-		field744 = new int[5]; // L: 628
-		field745 = new int[5]; // L: 629
-		field714 = new int[5]; // L: 630
-		field677 = new int[5]; // L: 631
+		cameraShaking = new boolean[5]; // L: 627
+		cameraShakeIntensity = new int[5]; // L: 628
+		cameraMoveIntensity = new int[5]; // L: 629
+		cameraShakeSpeed = new int[5]; // L: 630
+		cameraShakeCycle = new int[5]; // L: 631
 		field748 = 256; // L: 632
 		field749 = 205; // L: 633
 		zoomHeight = 256; // L: 634
@@ -4041,23 +4046,23 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 																if (class271.field3221 == class343.cameraX && class295.cameraY == Message.field469 && FaceNormal.cameraZ == NPC.field1262 && Interpreter.field838 == GameEngine.cameraPitch && StudioGame.cameraYaw == Timer.field4239) { // L: 3711
 																	field742 = false; // L: 3712
 																	isCameraLocked = false; // L: 3713
-																	class267.field3206 = 0; // L: 3714
-																	AbstractWorldMapData.field2851 = 0; // L: 3715
-																	ScriptFrame.field457 = 0; // L: 3716
-																	class17.field88 = 0; // L: 3717
-																	PacketBufferNode.field3083 = 0; // L: 3718
-																	HitSplatDefinition.field2077 = 0; // L: 3719
-																	class229.field2805 = 0; // L: 3720
-																	Players.field1317 = 0; // L: 3721
-																	TileItem.field1292 = 0; // L: 3722
-																	WorldMapSection1.field2898 = 0; // L: 3723
+																	class267.cameraLookAtX = 0; // L: 3714
+																	AbstractWorldMapData.cameraLookAtY = 0; // L: 3715
+																	ScriptFrame.cameraLookAtHeight = 0; // L: 3716
+																	class17.cameraLookAtSpeed = 0; // L: 3717
+																	PacketBufferNode.cameraLookAtAcceleration = 0; // L: 3718
+																	HitSplatDefinition.cameraMoveToAcceleration = 0; // L: 3719
+																	class229.cameraMoveToSpeed = 0; // L: 3720
+																	Players.cameraMoveToX = 0; // L: 3721
+																	TileItem.cameraMoveToY = 0; // L: 3722
+																	WorldMapSection1.cameraMoveToHeight = 0; // L: 3723
 																}
 															} else if (isCameraLocked) { // L: 3727
 																class1.method11();
 															}
 
 															for (var4 = 0; var4 < 5; ++var4) { // L: 3728
-																var10002 = field677[var4]++;
+																var10002 = cameraShakeCycle[var4]++;
 															}
 
 															class125.varcs.tryWrite(); // L: 3729
@@ -4789,7 +4794,7 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					isCameraLocked = false; // L: 6421
 
 					for (var67 = 0; var67 < 5; ++var67) { // L: 6422
-						field743[var67] = false;
+						cameraShaking[var67] = false;
 					}
 
 					var1.serverPacket = null; // L: 6423
@@ -4837,13 +4842,13 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 
 				if (ServerPacket.field3132 == var1.serverPacket && isCameraLocked) { // L: 6461 6462
 					field742 = true; // L: 6463
-					class229.field2805 = var3.readUnsignedByte(); // L: 6464
-					HitSplatDefinition.field2077 = var3.readUnsignedByte(); // L: 6465
-					class17.field88 = var3.readUnsignedByte(); // L: 6466
-					PacketBufferNode.field3083 = var3.readUnsignedByte(); // L: 6467
+					class229.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 6464
+					HitSplatDefinition.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 6465
+					class17.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 6466
+					PacketBufferNode.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 6467
 
 					for (var67 = 0; var67 < 5; ++var67) { // L: 6468
-						field743[var67] = false;
+						cameraShaking[var67] = false;
 					}
 
 					var1.serverPacket = null; // L: 6469
@@ -5097,15 +5102,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				if (ServerPacket.field3119 == var1.serverPacket) { // L: 6650
 					isCameraLocked = true; // L: 6651
 					field742 = false; // L: 6652
-					class267.field3206 = var3.readUnsignedByte(); // L: 6653
-					AbstractWorldMapData.field2851 = var3.readUnsignedByte(); // L: 6654
-					ScriptFrame.field457 = var3.readUnsignedShort(); // L: 6655
-					class17.field88 = var3.readUnsignedByte(); // L: 6656
-					PacketBufferNode.field3083 = var3.readUnsignedByte(); // L: 6657
-					if (PacketBufferNode.field3083 >= 100) { // L: 6658
-						var67 = class267.field3206 * 128 + 64; // L: 6659
-						var5 = AbstractWorldMapData.field2851 * 128 + 64; // L: 6660
-						var6 = class202.getTileHeight(var67, var5, class128.Client_plane) - ScriptFrame.field457; // L: 6661
+					class267.cameraLookAtX = var3.readUnsignedByte(); // L: 6653
+					AbstractWorldMapData.cameraLookAtY = var3.readUnsignedByte(); // L: 6654
+					ScriptFrame.cameraLookAtHeight = var3.readUnsignedShort(); // L: 6655
+					class17.cameraLookAtSpeed = var3.readUnsignedByte(); // L: 6656
+					PacketBufferNode.cameraLookAtAcceleration = var3.readUnsignedByte(); // L: 6657
+					if (PacketBufferNode.cameraLookAtAcceleration >= 100) { // L: 6658
+						var67 = class267.cameraLookAtX * 128 + 64; // L: 6659
+						var5 = AbstractWorldMapData.cameraLookAtY * 128 + 64; // L: 6660
+						var6 = class202.getTileHeight(var67, var5, class128.Client_plane) - ScriptFrame.cameraLookAtHeight; // L: 6661
 						var27 = var67 - class343.cameraX; // L: 6662
 						var28 = var6 - class295.cameraY; // L: 6663
 						var9 = var5 - FaceNormal.cameraZ; // L: 6664
@@ -5991,11 +5996,11 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 					var5 = var3.readUnsignedByte(); // L: 7405
 					var6 = var3.readUnsignedByte(); // L: 7406
 					var27 = var3.readUnsignedByte(); // L: 7407
-					field743[var67] = true; // L: 7408
-					field744[var67] = var5; // L: 7409
-					field745[var67] = var6; // L: 7410
-					field714[var67] = var27; // L: 7411
-					field677[var67] = 0; // L: 7412
+					cameraShaking[var67] = true; // L: 7408
+					cameraShakeIntensity[var67] = var5; // L: 7409
+					cameraMoveIntensity[var67] = var6; // L: 7410
+					cameraShakeSpeed[var67] = var27; // L: 7411
+					cameraShakeCycle[var67] = 0; // L: 7412
 					var1.serverPacket = null; // L: 7413
 					return true; // L: 7414
 				}
@@ -6042,15 +6047,15 @@ public final class Client extends GameEngine implements Usernamed, OAuthApi {
 				if (ServerPacket.field3129 == var1.serverPacket) { // L: 7445
 					isCameraLocked = true; // L: 7446
 					field742 = false; // L: 7447
-					Players.field1317 = var3.readUnsignedByte(); // L: 7448
-					TileItem.field1292 = var3.readUnsignedByte(); // L: 7449
-					WorldMapSection1.field2898 = var3.readUnsignedShort(); // L: 7450
-					class229.field2805 = var3.readUnsignedByte(); // L: 7451
-					HitSplatDefinition.field2077 = var3.readUnsignedByte(); // L: 7452
-					if (HitSplatDefinition.field2077 >= 100) { // L: 7453
-						class343.cameraX = Players.field1317 * 128 + 64; // L: 7454
-						FaceNormal.cameraZ = TileItem.field1292 * 128 + 64; // L: 7455
-						class295.cameraY = class202.getTileHeight(class343.cameraX, FaceNormal.cameraZ, class128.Client_plane) - WorldMapSection1.field2898; // L: 7456
+					Players.cameraMoveToX = var3.readUnsignedByte(); // L: 7448
+					TileItem.cameraMoveToY = var3.readUnsignedByte(); // L: 7449
+					WorldMapSection1.cameraMoveToHeight = var3.readUnsignedShort(); // L: 7450
+					class229.cameraMoveToSpeed = var3.readUnsignedByte(); // L: 7451
+					HitSplatDefinition.cameraMoveToAcceleration = var3.readUnsignedByte(); // L: 7452
+					if (HitSplatDefinition.cameraMoveToAcceleration >= 100) { // L: 7453
+						class343.cameraX = Players.cameraMoveToX * 128 + 64; // L: 7454
+						FaceNormal.cameraZ = TileItem.cameraMoveToY * 128 + 64; // L: 7455
+						class295.cameraY = class202.getTileHeight(class343.cameraX, FaceNormal.cameraZ, class128.Client_plane) - WorldMapSection1.cameraMoveToHeight; // L: 7456
 					}
 
 					var1.serverPacket = null; // L: 7458

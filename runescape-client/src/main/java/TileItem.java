@@ -11,7 +11,8 @@ public final class TileItem extends Renderable {
 	@ObfuscatedGetter(
 		intValue = -1684889403
 	)
-	static int field1292;
+	@Export("cameraMoveToY")
+	static int cameraMoveToY;
 	@ObfuscatedName("ev")
 	@ObfuscatedSignature(
 		descriptor = "Lle;"

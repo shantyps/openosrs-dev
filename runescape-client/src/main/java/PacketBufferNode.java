@@ -11,7 +11,8 @@ public class PacketBufferNode extends Node {
 	@ObfuscatedGetter(
 		intValue = -1437445359
 	)
-	static int field3083;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 	@ObfuscatedName("a")
 	@ObfuscatedSignature(
 		descriptor = "[Ljm;"

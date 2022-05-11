@@ -69,42 +69,42 @@ public class class422 implements class421 {
 	)
 	static final void method7303(int var0, int var1, int var2) {
 		if (class343.cameraX < var0) { // L: 3922
-			class343.cameraX = (var0 - class343.cameraX) * HitSplatDefinition.field2077 / 1000 + class343.cameraX + class229.field2805; // L: 3923
+			class343.cameraX = (var0 - class343.cameraX) * HitSplatDefinition.cameraMoveToAcceleration / 1000 + class343.cameraX + class229.cameraMoveToSpeed; // L: 3923
 			if (class343.cameraX > var0) { // L: 3924
 				class343.cameraX = var0;
 			}
 		}
 
 		if (class343.cameraX > var0) { // L: 3926
-			class343.cameraX -= (class343.cameraX - var0) * HitSplatDefinition.field2077 / 1000 + class229.field2805; // L: 3927
+			class343.cameraX -= (class343.cameraX - var0) * HitSplatDefinition.cameraMoveToAcceleration / 1000 + class229.cameraMoveToSpeed; // L: 3927
 			if (class343.cameraX < var0) { // L: 3928
 				class343.cameraX = var0;
 			}
 		}
 
 		if (class295.cameraY < var1) { // L: 3930
-			class295.cameraY = (var1 - class295.cameraY) * HitSplatDefinition.field2077 / 1000 + class295.cameraY + class229.field2805; // L: 3931
+			class295.cameraY = (var1 - class295.cameraY) * HitSplatDefinition.cameraMoveToAcceleration / 1000 + class295.cameraY + class229.cameraMoveToSpeed; // L: 3931
 			if (class295.cameraY > var1) { // L: 3932
 				class295.cameraY = var1;
 			}
 		}
 
 		if (class295.cameraY > var1) { // L: 3934
-			class295.cameraY -= (class295.cameraY - var1) * HitSplatDefinition.field2077 / 1000 + class229.field2805; // L: 3935
+			class295.cameraY -= (class295.cameraY - var1) * HitSplatDefinition.cameraMoveToAcceleration / 1000 + class229.cameraMoveToSpeed; // L: 3935
 			if (class295.cameraY < var1) { // L: 3936
 				class295.cameraY = var1;
 			}
 		}
 
 		if (FaceNormal.cameraZ < var2) { // L: 3938
-			FaceNormal.cameraZ = (var2 - FaceNormal.cameraZ) * HitSplatDefinition.field2077 / 1000 + FaceNormal.cameraZ + class229.field2805; // L: 3939
+			FaceNormal.cameraZ = (var2 - FaceNormal.cameraZ) * HitSplatDefinition.cameraMoveToAcceleration / 1000 + FaceNormal.cameraZ + class229.cameraMoveToSpeed; // L: 3939
 			if (FaceNormal.cameraZ > var2) { // L: 3940
 				FaceNormal.cameraZ = var2;
 			}
 		}
 
 		if (FaceNormal.cameraZ > var2) { // L: 3942
-			FaceNormal.cameraZ -= (FaceNormal.cameraZ - var2) * HitSplatDefinition.field2077 / 1000 + class229.field2805; // L: 3943
+			FaceNormal.cameraZ -= (FaceNormal.cameraZ - var2) * HitSplatDefinition.cameraMoveToAcceleration / 1000 + class229.cameraMoveToSpeed; // L: 3943
 			if (FaceNormal.cameraZ < var2) { // L: 3944
 				FaceNormal.cameraZ = var2;
 			}
