@@ -27,10 +27,11 @@ public final class NPC extends Actor {
 	@Export("definition")
 	NPCComposition definition;
 	@ObfuscatedName("q")
-	String field1258;
+	@Export("nameChange")
+	String nameChange;
 
 	NPC() {
-		this.field1258 = ""; // L: 11
+		this.nameChange = ""; // L: 11
 	} // L: 13
 
 	@ObfuscatedName("o")
@@ -39,7 +40,7 @@ public final class NPC extends Actor {
 		garbageValue = "0"
 	)
 	void method2338(String var1) {
-		this.field1258 = var1 == null ? "" : var1; // L: 16
+		this.nameChange = var1 == null ? "" : var1; // L: 16
 	} // L: 17
 
 	@ObfuscatedName("q")
@@ -93,8 +94,8 @@ public final class NPC extends Actor {
 		garbageValue = "922322997"
 	)
 	final String method2342() {
-		if (!this.field1258.isEmpty()) { // L: 20
-			return this.field1258; // L: 21
+		if (!this.nameChange.isEmpty()) { // L: 20
+			return this.nameChange; // L: 21
 		} else {
 			NPCComposition var1 = this.definition; // L: 23
 			if (var1.transforms != null) { // L: 24

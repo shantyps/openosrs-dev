@@ -42,6 +42,8 @@ public interface NPC extends Actor
 	@Override
 	String getName();
 
+	String getNameOverride();
+
 	@Override
 	int getCombatLevel();
 

@@ -31,10 +31,7 @@ import net.runelite.api.NPCComposition;
 import net.runelite.api.NpcID;
 import net.runelite.api.Perspective;
 import net.runelite.api.coords.LocalPoint;
-import net.runelite.api.events.NPCMoved;
-import net.runelite.api.events.NpcChanged;
-import net.runelite.api.events.NpcDespawned;
-import net.runelite.api.events.PlayerMoved;
+import net.runelite.api.events.*;
 import net.runelite.api.mixins.*;
 import net.runelite.rs.api.*;
 
@@ -214,6 +211,14 @@ public abstract class RSNPCMixin implements RSNPC
 		int tileHeight = Perspective.getTileHeight(client, tileHeightPoint, client.getPlane());
 
 		return model.getConvexHull(getX(), getY(), getOrientation(), tileHeight);
+	}
+
+	@FieldHook("nameChange")
+	@Inject
+	public void nameChange(int idx) {
+		if (getNameOverride() == null) return;
+		NameChangeEvent event = new NameChangeEvent(this, getName(), getNameOverride());
+		client.getCallbacks().post(event);
 	}
 
 	@Inject
