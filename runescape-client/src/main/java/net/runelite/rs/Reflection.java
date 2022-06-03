@@ -45,7 +45,7 @@ import net.runelite.mapping.ObfuscatedSignature;
 
 public class Reflection
 {
-	private static final boolean PRINT_DEBUG_MESSAGES = true;
+	private static final boolean PRINT_DEBUG_MESSAGES = false;
 
 	private static Map<String, Class<?>> classes = new HashMap<>();
 
@@ -58,7 +58,10 @@ public class Reflection
 			while (systemResources.hasMoreElements())
 			{
 				URL url = systemResources.nextElement();
-
+				if (url.toString().startsWith("jar:"))
+				{
+					continue;
+				}
 				Path path;
 				try
 				{
