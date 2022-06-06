@@ -76,6 +76,7 @@ public abstract class RSWidgetMixin implements RSWidget
 		rl$y = -1;
 		forcedX = -1;
 		forcedY = -1;
+		client.getCallbacks().post(PostWidgetConstructed.INSTANCE);
 	}
 
 	@Inject
