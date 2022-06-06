@@ -1072,8 +1072,14 @@ public class EventInspector extends DevToolsFrame {
                 } else {
                     String type = movementEvent.getType() == 0 ? "Crawl" : movementEvent.getType() == 1 ? "Walk" : movementEvent.getType() == 2 ? "Run" :
                             "Teleport";
-                    addLine(formatActor(movementEvent.getNpc(), previousLocation), "Movement(type = " + (type) +
-                            ", " + formatLocation(destination) + ")", isActorConsoleLogged(movementEvent.getNpc()), npcMovement);
+                    addLine(
+                            formatActor(movementEvent.getNpc(), previousLocation),
+                            "Movement(type = " + (type) + ", " + formatLocation(destination) + ")",
+                            client.getTickCount(),
+                            isActorConsoleLogged(movementEvent.getNpc()),
+                            npcMovement,
+                            npcMovement.isSelected()
+                    );
                 }
             }
             npcMovementEvents.clear();
