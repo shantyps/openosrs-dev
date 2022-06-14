@@ -40,4 +40,8 @@ tasks {
         targetCompatibility = JavaVersion.VERSION_1_8
         disableAutoTargetJvm()
     }
+
+    withType<JavaCompile> {
+        options.compilerArgs.addAll(arrayOf("-Xlint:-unchecked"))
+    }
 }

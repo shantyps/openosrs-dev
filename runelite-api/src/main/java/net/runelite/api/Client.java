@@ -2014,6 +2014,7 @@ public interface Client extends OAuthApi, GameEngine
 	 *
 	 * @param delay the number of game cycles to delay dragging
 	 */
+	@Deprecated
 	void setInventoryDragDelay(int delay);
 
 	boolean isHdMinimapEnabled();
@@ -2121,11 +2122,13 @@ public interface Client extends OAuthApi, GameEngine
 	/**
 	 * Get the if1 widget whose item is being dragged
 	 */
+	@Deprecated
 	Widget getIf1DraggedWidget();
 
 	/**
 	 * Get the item index of the item being dragged on an if1 widget
 	 */
+	@Deprecated
 	int getIf1DraggedItemIndex();
 
 	/**
