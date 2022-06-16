@@ -14,7 +14,7 @@ public class class306 {
 		descriptor = "(Lci;IILgn;I)V",
 		garbageValue = "-1866135565"
 	)
-	static final void method5765(Player var0, int var1, int var2, class192 var3) {
+	static final void method5765(Player var0, int var1, int var2, MoveSpeed var3) {
 		int var4 = var0.pathX[0]; // L: 8214
 		int var5 = var0.pathY[0]; // L: 8215
 		int var6 = var0.transformedSize(); // L: 8216

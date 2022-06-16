@@ -257,7 +257,7 @@ public final class WorldMapSprite {
 								var9 = (var7 & 7) + class298.field3558; // L: 7680
 								if (var8 >= 0 && var9 >= 0 && var8 < 103 && var9 < 103) { // L: 7681
 									if (var5 == 0) { // L: 7682
-										BoundaryObject var33 = class356.scene.method4333(PacketWriter.Client_plane, var8, var9); // L: 7683
+										BoundaryObject var33 = class356.scene.getBoundaryObject(PacketWriter.Client_plane, var8, var9); // L: 7683
 										if (var33 != null) { // L: 7684
 											var11 = Decimator.Entity_unpackID(var33.tag); // L: 7685
 											if (var3 == 2) { // L: 7686
@@ -270,7 +270,7 @@ public final class WorldMapSprite {
 									}
 
 									if (var5 == 1) { // L: 7693
-										WallDecoration var42 = class356.scene.method4178(PacketWriter.Client_plane, var8, var9); // L: 7694
+										WallDecoration var42 = class356.scene.getWallObject(PacketWriter.Client_plane, var8, var9); // L: 7694
 										if (var42 != null) { // L: 7695
 											var11 = Decimator.Entity_unpackID(var42.tag); // L: 7696
 											if (var3 != 4 && var3 != 5) { // L: 7697

@@ -17,7 +17,8 @@ class class12 extends SSLSocket {
 	@ObfuscatedGetter(
 		intValue = 731084091
 	)
-	static int field65;
+	@Export("cameraMoveToX")
+	static int cameraMoveToX;
 	@ObfuscatedName("lm")
 	@ObfuscatedSignature(
 		descriptor = "Lhk;"

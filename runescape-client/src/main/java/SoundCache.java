@@ -223,12 +223,12 @@ public class SoundCache {
 			}
 
 			if ((var4 & 1024) != 0) { // L: 8075
-				var3.field1189 = Client.cycle + var0.method7775(); // L: 8076
-				var3.field1135 = Client.cycle + var0.method7774(); // L: 8077
-				var3.field1191 = var0.readByte(); // L: 8078
-				var3.field1192 = var0.method7769(); // L: 8079
-				var3.field1193 = var0.method7952(); // L: 8080
-				var3.field1133 = (byte)var0.method7767(); // L: 8081
+				var3.recolourStartCycle = Client.cycle + var0.method7775(); // L: 8076
+				var3.recolourEndCycle = Client.cycle + var0.method7774(); // L: 8077
+				var3.recolourHue = var0.readByte(); // L: 8078
+				var3.recolourSaturation = var0.method7769(); // L: 8079
+				var3.recolourLuminance = var0.method7952(); // L: 8080
+				var3.recolourAmount = (byte)var0.method7767(); // L: 8081
 			}
 
 			int var6;
@@ -246,18 +246,18 @@ public class SoundCache {
 						var3.sequenceFrame = 0; // L: 8092
 						var3.sequenceFrameCycle = 0; // L: 8093
 						var3.sequenceDelay = var6; // L: 8094
-						var3.field1190 = 0; // L: 8095
+						var3.currentSequenceFrameIndex = 0; // L: 8095
 					}
 
 					if (var7 == 2) { // L: 8097
-						var3.field1190 = 0; // L: 8098
+						var3.currentSequenceFrameIndex = 0; // L: 8098
 					}
 				} else if (var5 == -1 || var3.sequence == -1 || ScriptFrame.SequenceDefinition_get(var5).field2183 >= ScriptFrame.SequenceDefinition_get(var3.sequence).field2183) { // L: 8101
 					var3.sequence = var5; // L: 8102
 					var3.sequenceFrame = 0; // L: 8103
 					var3.sequenceFrameCycle = 0; // L: 8104
 					var3.sequenceDelay = var6; // L: 8105
-					var3.field1190 = 0; // L: 8106
+					var3.currentSequenceFrameIndex = 0; // L: 8106
 					var3.field1203 = var3.pathLength; // L: 8107
 				}
 			}
@@ -266,10 +266,10 @@ public class SoundCache {
 				var3.spotAnimation = var0.method7775(); // L: 8112
 				var5 = var0.method7785(); // L: 8113
 				var3.spotAnimationHeight = var5 >> 16; // L: 8114
-				var3.field1178 = (var5 & 65535) + Client.cycle; // L: 8115
+				var3.spotAnimationStartCycle = (var5 & 65535) + Client.cycle; // L: 8115
 				var3.spotAnimationFrame = 0; // L: 8116
 				var3.spotAnimationFrameCycle = 0; // L: 8117
-				if (var3.field1178 > Client.cycle) { // L: 8118
+				if (var3.spotAnimationStartCycle > Client.cycle) { // L: 8118
 					var3.spotAnimationFrame = -1;
 				}
 
@@ -328,7 +328,7 @@ public class SoundCache {
 			}
 
 			if ((var4 & 2048) != 0) { // L: 8162
-				var3.field1204 = var0.method7787(); // L: 8163
+				var3.combatLevelChange = var0.method7787(); // L: 8163
 			}
 
 			if ((var4 & 8) != 0) { // L: 8165
@@ -352,32 +352,32 @@ public class SoundCache {
 			}
 
 			if (class101.field1366 && (var4 & 256) != 0 || !class101.field1366 && (var4 & 64) != 0) { // L: 8181
-				var3.field1140 = var0.method7952(); // L: 8182
-				var3.field1182 = var0.method7769(); // L: 8183
-				var3.field1181 = var0.method7768(); // L: 8184
-				var3.field1183 = var0.method7768(); // L: 8185
-				var3.field1184 = var0.method7776() + Client.cycle; // L: 8186
-				var3.field1194 = var0.method7775() + Client.cycle; // L: 8187
-				var3.field1186 = var0.method7776(); // L: 8188
+				var3.exactMoveDeltaX1 = var0.method7952(); // L: 8182
+				var3.exactMoveDeltaY1 = var0.method7769(); // L: 8183
+				var3.exactMoveDeltaX2 = var0.method7768(); // L: 8184
+				var3.exactMoveDeltaY2 = var0.method7768(); // L: 8185
+				var3.exactMoveArrive1Cycle = var0.method7776() + Client.cycle; // L: 8186
+				var3.exactMoveArrive2Cycle = var0.method7775() + Client.cycle; // L: 8187
+				var3.exactMoveDirection = var0.method7776(); // L: 8188
 				var3.pathLength = 1; // L: 8189
 				var3.field1203 = 0; // L: 8190
-				var3.field1140 += var3.pathX[0]; // L: 8191
-				var3.field1182 += var3.pathY[0]; // L: 8192
-				var3.field1181 += var3.pathX[0]; // L: 8193
-				var3.field1183 += var3.pathY[0]; // L: 8194
+				var3.exactMoveDeltaX1 += var3.pathX[0]; // L: 8191
+				var3.exactMoveDeltaY1 += var3.pathY[0]; // L: 8192
+				var3.exactMoveDeltaX2 += var3.pathX[0]; // L: 8193
+				var3.exactMoveDeltaY2 += var3.pathY[0]; // L: 8194
 			}
 
 			if ((var4 & 1) != 0) { // L: 8196
 				var5 = var0.method7776(); // L: 8197
 				var6 = var0.method7775(); // L: 8198
 				if (class101.field1366) { // L: 8199
-					var3.field1161 = var0.method7766() == 1; // L: 8200
+					var3.instantTurn = var0.method7766() == 1; // L: 8200
 				}
 
 				var7 = var3.x - (var5 - class28.baseX - class28.baseX) * 64; // L: 8202
 				var8 = var3.y - (var6 - WorldMapLabelSize.baseY - WorldMapLabelSize.baseY) * 64; // L: 8203
 				if (var7 != 0 || var8 != 0) { // L: 8204
-					var3.field1165 = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
+					var3.facedDirection = (int)(Math.atan2((double)var7, (double)var8) * 325.949D) & 2047;
 				}
 			}
 

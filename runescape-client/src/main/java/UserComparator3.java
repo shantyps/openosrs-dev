@@ -16,7 +16,8 @@ public class UserComparator3 extends AbstractUserComparator {
 	@ObfuscatedGetter(
 		intValue = -120700993
 	)
-	static int field1391;
+	@Export("cameraMoveToAcceleration")
+	static int cameraMoveToAcceleration;
 	@ObfuscatedName("mc")
 	@ObfuscatedGetter(
 		intValue = 761312471

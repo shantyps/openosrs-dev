@@ -224,8 +224,8 @@ public class StructComposition extends DualNode {
 				var3.itemQuantityMode = 2; // L: 849
 			}
 
-			if (var3.field3424 > 0) { // L: 850
-				var3.modelZoom = var3.modelZoom * 32 / var3.field3424;
+			if (var3.modelRotation > 0) { // L: 850
+				var3.modelZoom = var3.modelZoom * 32 / var3.modelRotation;
 			} else if (var3.rawWidth > 0) { // L: 851
 				var3.modelZoom = var3.modelZoom * 32 / var3.rawWidth;
 			}

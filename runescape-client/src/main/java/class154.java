@@ -304,7 +304,7 @@ public class class154 extends class165 {
 				}
 			}
 
-			if (var0.overheadText != null && (var1 >= var76 || !var0.field1152 && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5126 5127
+			if (var0.overheadText != null && (var1 >= var76 || !var0.showPublicPlayerChat && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player)var0).isFriend())))) { // L: 5126 5127
 				var79 = var0.defaultHeight; // L: 5128
 				class220.worldToScreen(var0.x, var0.y, var79); // L: 5130
 				if (Client.viewportTempX > -1 && Client.overheadTextCount < Client.overheadTextLimit) { // L: 5132

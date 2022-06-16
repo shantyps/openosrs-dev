@@ -29,22 +29,22 @@ public class class285 {
 		int var2;
 		int var3;
 		int var4;
-		if (var0.field1184 >= Client.cycle) { // L: 4009
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) { // L: 4009
 			GrandExchangeOfferTotalQuantityComparator.method5970(var0);
-		} else if (var0.field1194 >= Client.cycle) { // L: 4010
-			if (var0.field1194 == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > ScriptFrame.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 4011
-				var2 = var0.field1194 - var0.field1184; // L: 4012
-				var3 = Client.cycle - var0.field1184; // L: 4013
-				var4 = var0.field1205 * 64 + var0.field1140 * 128; // L: 4014
-				int var5 = var0.field1205 * 64 + var0.field1182 * 128; // L: 4015
-				int var6 = var0.field1205 * 64 + var0.field1181 * 128; // L: 4016
-				int var7 = var0.field1205 * 64 + var0.field1183 * 128; // L: 4017
+		} else if (var0.exactMoveArrive2Cycle >= Client.cycle) { // L: 4010
+			if (var0.exactMoveArrive2Cycle == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0 || var0.sequenceFrameCycle + 1 > ScriptFrame.SequenceDefinition_get(var0.sequence).frameLengths[var0.sequenceFrame]) { // L: 4011
+				var2 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle; // L: 4012
+				var3 = Client.cycle - var0.exactMoveArrive1Cycle; // L: 4013
+				var4 = var0.field1205 * 64 + var0.exactMoveDeltaX1 * 128; // L: 4014
+				int var5 = var0.field1205 * 64 + var0.exactMoveDeltaY1 * 128; // L: 4015
+				int var6 = var0.field1205 * 64 + var0.exactMoveDeltaX2 * 128; // L: 4016
+				int var7 = var0.field1205 * 64 + var0.exactMoveDeltaY2 * 128; // L: 4017
 				var0.x = (var6 * var3 + var4 * (var2 - var3)) / var2; // L: 4018
 				var0.y = (var7 * var3 + var5 * (var2 - var3)) / var2; // L: 4019
 			}
 
 			var0.field1202 = 0; // L: 4021
-			var0.orientation = var0.field1186; // L: 4022
+			var0.orientation = var0.exactMoveDirection; // L: 4022
 			var0.rotation = var0.orientation; // L: 4023
 		} else {
 			KitDefinition.method3439(var0); // L: 4025
@@ -53,8 +53,8 @@ public class class285 {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) { // L: 4026
 			var0.sequence = -1; // L: 4027
 			var0.spotAnimation = -1; // L: 4028
-			var0.field1184 = 0; // L: 4029
-			var0.field1194 = 0; // L: 4030
+			var0.exactMoveArrive1Cycle = 0; // L: 4029
+			var0.exactMoveArrive2Cycle = 0; // L: 4030
 			var0.x = var0.pathX[0] * 128 + var0.field1205 * 64; // L: 4031
 			var0.y = var0.pathY[0] * 128 + var0.field1205 * 64; // L: 4032
 			var0.method2182(); // L: 4033
@@ -63,8 +63,8 @@ public class class285 {
 		if (class101.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) { // L: 4035 4036
 			var0.sequence = -1; // L: 4037
 			var0.spotAnimation = -1; // L: 4038
-			var0.field1184 = 0; // L: 4039
-			var0.field1194 = 0; // L: 4040
+			var0.exactMoveArrive1Cycle = 0; // L: 4039
+			var0.exactMoveArrive2Cycle = 0; // L: 4040
 			var0.x = var0.field1205 * 64 + var0.pathX[0] * 128; // L: 4041
 			var0.y = var0.field1205 * 64 + var0.pathY[0] * 128; // L: 4042
 			var0.method2182(); // L: 4043
@@ -107,7 +107,7 @@ public class class285 {
 			}
 		}
 
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1178) { // L: 4081
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) { // L: 4081
 			if (var0.spotAnimationFrame < 0) { // L: 4082
 				var0.spotAnimationFrame = 0;
 			}
@@ -144,7 +144,7 @@ public class class285 {
 
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) { // L: 4111
 			var8 = ScriptFrame.SequenceDefinition_get(var0.sequence); // L: 4112
-			if (var8.field2187 == 1 && var0.field1203 > 0 && var0.field1184 <= Client.cycle && var0.field1194 < Client.cycle) { // L: 4113 4114
+			if (var8.field2187 == 1 && var0.field1203 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) { // L: 4113 4114
 				var0.sequenceDelay = 1; // L: 4115
 				return; // L: 4159
 			}
@@ -164,8 +164,8 @@ public class class285 {
 
 				if (var0.sequenceFrame >= var8.frameIds.length) { // L: 4130
 					var0.sequenceFrame -= var8.frameCount; // L: 4131
-					++var0.field1190; // L: 4132
-					if (var0.field1190 >= var8.field2186) { // L: 4133
+					++var0.currentSequenceFrameIndex; // L: 4132
+					if (var0.currentSequenceFrameIndex >= var8.field2186) { // L: 4133
 						var0.sequence = -1;
 					} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var8.frameIds.length) { // L: 4134
 						class120.method2761(var8, var0.sequenceFrame, var0.x, var0.y); // L: 4135
@@ -182,8 +182,8 @@ public class class285 {
 					GrandExchangeOfferWorldComparator.method5997(var8, var0.sequenceFrame, var0.x, var0.y); // L: 4143
 				} else {
 					var0.sequenceFrame -= var8.frameCount; // L: 4146
-					++var0.field1190; // L: 4147
-					if (var0.field1190 >= var8.field2186) { // L: 4148
+					++var0.currentSequenceFrameIndex; // L: 4147
+					if (var0.currentSequenceFrameIndex >= var8.field2186) { // L: 4148
 						var0.sequence = -1;
 					} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var3) { // L: 4149
 						GrandExchangeOfferWorldComparator.method5997(var8, var0.sequenceFrame, var0.x, var0.y); // L: 4150

@@ -568,7 +568,8 @@ public class PcmPlayer {
 		descriptor = "(IIB)V",
 		garbageValue = "-101"
 	)
-	static void method719(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (class19.clientPreferences.method2258() != 0 && var0 != -1) { // L: 3778
 			AttackOption.method2410(UserComparator7.field1383, var0, 0, class19.clientPreferences.method2258(), false); // L: 3779
 			Client.playingJingle = true; // L: 3780

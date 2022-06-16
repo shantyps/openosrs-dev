@@ -9,7 +9,8 @@ public abstract class class165 {
 	@ObfuscatedGetter(
 		intValue = 602051603
 	)
-	static int field1809;
+	@Export("cameraLookAtX")
+	static int cameraLookAtX;
 	@ObfuscatedName("f")
 	String field1805;
 	// $FF: synthetic field

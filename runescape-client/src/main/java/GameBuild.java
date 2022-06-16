@@ -11,7 +11,8 @@ public class GameBuild {
 	@ObfuscatedGetter(
 		intValue = 688457543
 	)
-	static int field3588;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 	@ObfuscatedName("c")
 	@ObfuscatedSignature(
 		descriptor = "Lka;"

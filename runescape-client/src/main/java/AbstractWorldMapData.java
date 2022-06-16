@@ -284,7 +284,7 @@ public abstract class AbstractWorldMapData {
 
 		for (int var0 = 0; var0 < 2048; ++var0) { // L: 665
 			Players.field1307[var0] = null; // L: 666
-			Players.field1304[var0] = class192.field2212; // L: 667
+			Players.field1304[var0] = MoveSpeed.field2212; // L: 667
 		}
 
 	} // L: 669

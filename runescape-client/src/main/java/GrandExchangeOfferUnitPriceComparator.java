@@ -111,7 +111,7 @@ final class GrandExchangeOfferUnitPriceComparator implements Comparator {
 							Client.npcIndices[++Client.npcCount - 1] = var3; // L: 8034
 							var4.npcCycle = Client.cycle; // L: 8035
 							var7 = var0.readBits(3); // L: 8036
-							var4.method2361(var7, class192.field2212); // L: 8037
+							var4.move(var7, MoveSpeed.field2212); // L: 8037
 							var8 = var0.readBits(1); // L: 8038
 							if (var8 == 1) { // L: 8039
 								Client.field539[++Client.field538 - 1] = var3;
@@ -121,12 +121,12 @@ final class GrandExchangeOfferUnitPriceComparator implements Comparator {
 							var4.npcCycle = Client.cycle; // L: 8044
 							if (var0.readBits(1) == 1) { // L: 8045
 								var7 = var0.readBits(3); // L: 8046
-								var4.method2361(var7, class192.field2211); // L: 8047
+								var4.move(var7, MoveSpeed.field2211); // L: 8047
 								var8 = var0.readBits(3); // L: 8048
-								var4.method2361(var8, class192.field2211); // L: 8049
+								var4.move(var8, MoveSpeed.field2211); // L: 8049
 							} else {
 								var7 = var0.readBits(3); // L: 8052
-								var4.method2361(var7, class192.field2209); // L: 8053
+								var4.move(var7, MoveSpeed.field2209); // L: 8053
 							}
 
 							var7 = var0.readBits(1); // L: 8055

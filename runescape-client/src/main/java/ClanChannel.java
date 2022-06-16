@@ -14,7 +14,8 @@ public class ClanChannel extends Node {
 	@ObfuscatedGetter(
 		intValue = 91794545
 	)
-	static int field1690;
+	@Export("cameraLookAtHeight")
+	static int cameraLookAtHeight;
 	@ObfuscatedName("c")
 	boolean field1689;
 	@ObfuscatedName("v")

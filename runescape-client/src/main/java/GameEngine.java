@@ -719,9 +719,9 @@ public abstract class GameEngine extends Applet implements Runnable, FocusListen
 	protected final void drawInitial(int var1, String var2, boolean var3) {
 		try {
 			Graphics var4 = this.canvas.getGraphics(); // L: 491
-			if (class192.fontHelvetica13 == null) { // L: 492
-				class192.fontHelvetica13 = new java.awt.Font("Helvetica", 1, 13); // L: 493
-				class11.loginScreenFontMetrics = this.canvas.getFontMetrics(class192.fontHelvetica13); // L: 494
+			if (MoveSpeed.fontHelvetica13 == null) { // L: 492
+				MoveSpeed.fontHelvetica13 = new java.awt.Font("Helvetica", 1, 13); // L: 493
+				class11.loginScreenFontMetrics = this.canvas.getFontMetrics(MoveSpeed.fontHelvetica13); // L: 494
 			}
 
 			if (var3) { // L: 496
@@ -743,7 +743,7 @@ public abstract class GameEngine extends Applet implements Runnable, FocusListen
 				var6.setColor(Color.black); // L: 507
 				var6.drawRect(1, 1, 301, 31); // L: 508
 				var6.fillRect(var1 * 3 + 2, 2, 300 - var1 * 3, 30); // L: 509
-				var6.setFont(class192.fontHelvetica13); // L: 510
+				var6.setFont(MoveSpeed.fontHelvetica13); // L: 510
 				var6.setColor(Color.white); // L: 511
 				var6.drawString(var2, (304 - class11.loginScreenFontMetrics.stringWidth(var2)) / 2, 22); // L: 512
 				var4.drawImage(class162.field1781, Script.canvasWidth / 2 - 152, class78.canvasHeight / 2 - 18, (ImageObserver)null); // L: 513
@@ -756,7 +756,7 @@ public abstract class GameEngine extends Applet implements Runnable, FocusListen
 				var4.setColor(Color.black); // L: 521
 				var4.drawRect(var7 + 1, var8 + 1, 301, 31); // L: 522
 				var4.fillRect(var1 * 3 + var7 + 2, var8 + 2, 300 - var1 * 3, 30); // L: 523
-				var4.setFont(class192.fontHelvetica13); // L: 524
+				var4.setFont(MoveSpeed.fontHelvetica13); // L: 524
 				var4.setColor(Color.white); // L: 525
 				var4.drawString(var2, var7 + (304 - class11.loginScreenFontMetrics.stringWidth(var2)) / 2, var8 + 22); // L: 526
 			}
@@ -773,7 +773,7 @@ public abstract class GameEngine extends Applet implements Runnable, FocusListen
 	)
 	protected final void method410() {
 		class162.field1781 = null; // L: 535
-		class192.fontHelvetica13 = null; // L: 536
+		MoveSpeed.fontHelvetica13 = null; // L: 536
 		class11.loginScreenFontMetrics = null; // L: 537
 	} // L: 538
 

@@ -87,8 +87,8 @@ public class class14 {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (class28.baseX + var4.pathX[0] >> 13 << 14) + (WorldMapLabelSize.baseY + var4.pathY[0] >> 13); // L: 420
-				if (var4.field1165 != -1) { // L: 421
-					Players.Players_orientations[var1] = var4.field1165;
+				if (var4.facedDirection != -1) { // L: 421
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation; // L: 422
 				}
@@ -139,7 +139,7 @@ public class class14 {
 					var4.tileY = var7; // L: 459
 				} else {
 					var4.field1088 = false; // L: 462
-					var4.method2139(var6, var7, Players.field1304[var1]); // L: 463
+					var4.move(var6, var7, Players.field1304[var1]); // L: 463
 				}
 
 			} else if (var3 == 2) { // L: 467
@@ -201,7 +201,7 @@ public class class14 {
 					var4.tileY = var7; // L: 530
 				} else {
 					var4.field1088 = false; // L: 533
-					var4.method2139(var6, var7, Players.field1304[var1]); // L: 534
+					var4.move(var6, var7, Players.field1304[var1]); // L: 534
 				}
 
 			} else {
@@ -234,7 +234,7 @@ public class class14 {
 						var4.tileY = var11; // L: 555
 					} else {
 						var4.field1088 = false; // L: 558
-						var4.method2139(var10, var11, Players.field1304[var1]); // L: 559
+						var4.move(var10, var11, Players.field1304[var1]); // L: 559
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 561
@@ -258,7 +258,7 @@ public class class14 {
 						var4.tileY = var11; // L: 578
 					} else {
 						var4.field1088 = false; // L: 581
-						var4.method2139(var10, var11, Players.field1304[var1]); // L: 582
+						var4.move(var10, var11, Players.field1304[var1]); // L: 582
 					}
 
 					var4.plane = (byte)(var7 + var4.plane & 3); // L: 584

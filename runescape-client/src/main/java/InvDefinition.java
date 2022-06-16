@@ -182,42 +182,42 @@ public class InvDefinition extends DualNode {
 	)
 	static final void method3358(int var0, int var1, int var2) {
 		if (class18.cameraX < var0) { // L: 3943
-			class18.cameraX = (var0 - class18.cameraX) * UserComparator3.field1391 / 1000 + class18.cameraX + PlayerComposition.field3346; // L: 3944
+			class18.cameraX = (var0 - class18.cameraX) * UserComparator3.cameraMoveToAcceleration / 1000 + class18.cameraX + PlayerComposition.cameraMoveToSpeed; // L: 3944
 			if (class18.cameraX > var0) { // L: 3945
 				class18.cameraX = var0;
 			}
 		}
 
 		if (class18.cameraX > var0) { // L: 3947
-			class18.cameraX -= (class18.cameraX - var0) * UserComparator3.field1391 / 1000 + PlayerComposition.field3346; // L: 3948
+			class18.cameraX -= (class18.cameraX - var0) * UserComparator3.cameraMoveToAcceleration / 1000 + PlayerComposition.cameraMoveToSpeed; // L: 3948
 			if (class18.cameraX < var0) { // L: 3949
 				class18.cameraX = var0;
 			}
 		}
 
 		if (class16.cameraY < var1) { // L: 3951
-			class16.cameraY = (var1 - class16.cameraY) * UserComparator3.field1391 / 1000 + class16.cameraY + PlayerComposition.field3346; // L: 3952
+			class16.cameraY = (var1 - class16.cameraY) * UserComparator3.cameraMoveToAcceleration / 1000 + class16.cameraY + PlayerComposition.cameraMoveToSpeed; // L: 3952
 			if (class16.cameraY > var1) { // L: 3953
 				class16.cameraY = var1;
 			}
 		}
 
 		if (class16.cameraY > var1) { // L: 3955
-			class16.cameraY -= (class16.cameraY - var1) * UserComparator3.field1391 / 1000 + PlayerComposition.field3346; // L: 3956
+			class16.cameraY -= (class16.cameraY - var1) * UserComparator3.cameraMoveToAcceleration / 1000 + PlayerComposition.cameraMoveToSpeed; // L: 3956
 			if (class16.cameraY < var1) { // L: 3957
 				class16.cameraY = var1;
 			}
 		}
 
 		if (class228.cameraZ < var2) { // L: 3959
-			class228.cameraZ = (var2 - class228.cameraZ) * UserComparator3.field1391 / 1000 + class228.cameraZ + PlayerComposition.field3346; // L: 3960
+			class228.cameraZ = (var2 - class228.cameraZ) * UserComparator3.cameraMoveToAcceleration / 1000 + class228.cameraZ + PlayerComposition.cameraMoveToSpeed; // L: 3960
 			if (class228.cameraZ > var2) { // L: 3961
 				class228.cameraZ = var2;
 			}
 		}
 
 		if (class228.cameraZ > var2) { // L: 3963
-			class228.cameraZ -= (class228.cameraZ - var2) * UserComparator3.field1391 / 1000 + PlayerComposition.field3346; // L: 3964
+			class228.cameraZ -= (class228.cameraZ - var2) * UserComparator3.cameraMoveToAcceleration / 1000 + PlayerComposition.cameraMoveToSpeed; // L: 3964
 			if (class228.cameraZ < var2) { // L: 3965
 				class228.cameraZ = var2;
 			}

@@ -208,7 +208,7 @@ public class Decimator {
 			return 1; // L: 1899
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) { // L: 1901
 			class446.Interpreter_intStackSize -= 2; // L: 1902
-			PcmPlayer.method719(Interpreter.Interpreter_intStack[class446.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class446.Interpreter_intStackSize + 1]); // L: 1903
+			PcmPlayer.playJingle(Interpreter.Interpreter_intStack[class446.Interpreter_intStackSize], Interpreter.Interpreter_intStack[class446.Interpreter_intStackSize + 1]); // L: 1903
 			return 1; // L: 1904
 		} else {
 			class83 var3;

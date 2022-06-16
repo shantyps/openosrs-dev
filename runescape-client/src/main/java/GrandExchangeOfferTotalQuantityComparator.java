@@ -46,12 +46,12 @@ final class GrandExchangeOfferTotalQuantityComparator implements Comparator {
 		garbageValue = "-1624008508"
 	)
 	static final void method5970(Actor var0) {
-		int var1 = Math.max(1, var0.field1184 - Client.cycle); // L: 4162
-		int var2 = var0.field1205 * 64 + var0.field1140 * 128; // L: 4163
-		int var3 = var0.field1205 * 64 + var0.field1182 * 128; // L: 4164
+		int var1 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle); // L: 4162
+		int var2 = var0.field1205 * 64 + var0.exactMoveDeltaX1 * 128; // L: 4163
+		int var3 = var0.field1205 * 64 + var0.exactMoveDeltaY1 * 128; // L: 4164
 		var0.x += (var2 - var0.x) / var1; // L: 4165
 		var0.y += (var3 - var0.y) / var1; // L: 4166
 		var0.field1202 = 0; // L: 4167
-		var0.orientation = var0.field1186; // L: 4168
+		var0.orientation = var0.exactMoveDirection; // L: 4168
 	} // L: 4169
 }

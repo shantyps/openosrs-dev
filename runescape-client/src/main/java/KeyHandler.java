@@ -235,14 +235,14 @@ public final class KeyHandler implements KeyListener, FocusListener {
 		}
 
 		if (ViewportMouse.cameraPitch < var0) { // L: 3972
-			ViewportMouse.cameraPitch = (var0 - ViewportMouse.cameraPitch) * MidiPcmStream.field3231 / 1000 + ViewportMouse.cameraPitch + GameBuild.field3588; // L: 3973
+			ViewportMouse.cameraPitch = (var0 - ViewportMouse.cameraPitch) * MidiPcmStream.cameraLookAtAcceleration / 1000 + ViewportMouse.cameraPitch + GameBuild.cameraLookAtSpeed; // L: 3973
 			if (ViewportMouse.cameraPitch > var0) { // L: 3974
 				ViewportMouse.cameraPitch = var0;
 			}
 		}
 
 		if (ViewportMouse.cameraPitch > var0) { // L: 3976
-			ViewportMouse.cameraPitch -= (ViewportMouse.cameraPitch - var0) * MidiPcmStream.field3231 / 1000 + GameBuild.field3588; // L: 3977
+			ViewportMouse.cameraPitch -= (ViewportMouse.cameraPitch - var0) * MidiPcmStream.cameraLookAtAcceleration / 1000 + GameBuild.cameraLookAtSpeed; // L: 3977
 			if (ViewportMouse.cameraPitch < var0) { // L: 3978
 				ViewportMouse.cameraPitch = var0;
 			}
@@ -258,12 +258,12 @@ public final class KeyHandler implements KeyListener, FocusListener {
 		}
 
 		if (var2 > 0) { // L: 3983
-			SoundCache.cameraYaw = var2 * MidiPcmStream.field3231 / 1000 + SoundCache.cameraYaw + GameBuild.field3588; // L: 3984
+			SoundCache.cameraYaw = var2 * MidiPcmStream.cameraLookAtAcceleration / 1000 + SoundCache.cameraYaw + GameBuild.cameraLookAtSpeed; // L: 3984
 			SoundCache.cameraYaw &= 2047; // L: 3985
 		}
 
 		if (var2 < 0) { // L: 3987
-			SoundCache.cameraYaw -= -var2 * MidiPcmStream.field3231 / 1000 + GameBuild.field3588; // L: 3988
+			SoundCache.cameraYaw -= -var2 * MidiPcmStream.cameraLookAtAcceleration / 1000 + GameBuild.cameraLookAtSpeed; // L: 3988
 			SoundCache.cameraYaw &= 2047; // L: 3989
 		}
 

@@ -1043,7 +1043,7 @@ public class ClanSettings {
 								var6 += var0.readUnsignedByte() << 8;
 							}
 
-							byte var7 = class192.field2208.field2210; // L: 219
+							byte var7 = MoveSpeed.field2208.speed; // L: 219
 							if ((var6 & 2048) != 0) { // L: 220
 								for (var8 = 0; var8 < 3; ++var8) { // L: 221
 									var5.actions[var8] = var0.readStringCp1252NullTerminated();
@@ -1075,7 +1075,7 @@ public class ClanSettings {
 										var5.overheadTextEffect = var8 & 255; // L: 241
 										var5.overheadTextCyclesRemaining = 150; // L: 242
 										var5.isAutoChatting = var10; // L: 243
-										var5.field1152 = var5 != class101.localPlayer && var9.isUser && "" != Client.field716 && var14.toLowerCase().indexOf(Client.field716) == -1; // L: 244
+										var5.showPublicPlayerChat = var5 != class101.localPlayer && var9.isUser && "" != Client.field716 && var14.toLowerCase().indexOf(Client.field716) == -1; // L: 244
 										if (var9.isPrivileged) { // L: 246
 											var15 = var10 ? 91 : 1;
 										} else {
@@ -1097,10 +1097,10 @@ public class ClanSettings {
 								var5.spotAnimation = var0.method7776(); // L: 255
 								var8 = var0.readInt(); // L: 256
 								var5.spotAnimationHeight = var8 >> 16; // L: 257
-								var5.field1178 = (var8 & 65535) + Client.cycle; // L: 258
+								var5.spotAnimationStartCycle = (var8 & 65535) + Client.cycle; // L: 258
 								var5.spotAnimationFrame = 0; // L: 259
 								var5.spotAnimationFrameCycle = 0; // L: 260
-								if (var5.field1178 > Client.cycle) { // L: 261
+								if (var5.spotAnimationStartCycle > Client.cycle) { // L: 261
 									var5.spotAnimationFrame = -1;
 								}
 
@@ -1110,24 +1110,24 @@ public class ClanSettings {
 							}
 
 							if ((var6 & 1024) != 0) { // L: 264
-								var5.field1140 = var0.method7952(); // L: 265
-								var5.field1182 = var0.readByte(); // L: 266
-								var5.field1181 = var0.method7952(); // L: 267
-								var5.field1183 = var0.method7768(); // L: 268
-								var5.field1184 = var0.method7774() + Client.cycle; // L: 269
-								var5.field1194 = var0.method7776() + Client.cycle; // L: 270
-								var5.field1186 = var0.readUnsignedShort(); // L: 271
+								var5.exactMoveDeltaX1 = var0.method7952(); // L: 265
+								var5.exactMoveDeltaY1 = var0.readByte(); // L: 266
+								var5.exactMoveDeltaX2 = var0.method7952(); // L: 267
+								var5.exactMoveDeltaY2 = var0.method7768(); // L: 268
+								var5.exactMoveArrive1Cycle = var0.method7774() + Client.cycle; // L: 269
+								var5.exactMoveArrive2Cycle = var0.method7776() + Client.cycle; // L: 270
+								var5.exactMoveDirection = var0.readUnsignedShort(); // L: 271
 								if (var5.field1088) { // L: 272
-									var5.field1140 += var5.tileX; // L: 273
-									var5.field1182 += var5.tileY; // L: 274
-									var5.field1181 += var5.tileX; // L: 275
-									var5.field1183 += var5.tileY; // L: 276
+									var5.exactMoveDeltaX1 += var5.tileX; // L: 273
+									var5.exactMoveDeltaY1 += var5.tileY; // L: 274
+									var5.exactMoveDeltaX2 += var5.tileX; // L: 275
+									var5.exactMoveDeltaY2 += var5.tileY; // L: 276
 									var5.pathLength = 0; // L: 277
 								} else {
-									var5.field1140 += var5.pathX[0]; // L: 280
-									var5.field1182 += var5.pathY[0]; // L: 281
-									var5.field1181 += var5.pathX[0]; // L: 282
-									var5.field1183 += var5.pathY[0]; // L: 283
+									var5.exactMoveDeltaX1 += var5.pathX[0]; // L: 280
+									var5.exactMoveDeltaY1 += var5.pathY[0]; // L: 281
+									var5.exactMoveDeltaX2 += var5.pathX[0]; // L: 282
+									var5.exactMoveDeltaY2 += var5.pathY[0]; // L: 283
 									var5.pathLength = 1; // L: 284
 								}
 
@@ -1135,17 +1135,17 @@ public class ClanSettings {
 							}
 
 							if ((var6 & 8) != 0) { // L: 288
-								var5.field1165 = var0.method7775(); // L: 289
+								var5.facedDirection = var0.method7775(); // L: 289
 								if (var5.pathLength == 0) { // L: 290
-									var5.orientation = var5.field1165; // L: 291
-									var5.field1165 = -1; // L: 292
+									var5.orientation = var5.facedDirection; // L: 291
+									var5.facedDirection = -1; // L: 292
 								}
 							}
 
 							if ((var6 & 256) != 0) { // L: 295
-								class192[] var16 = Players.field1304; // L: 296
-								class192[] var18 = new class192[]{class192.field2212, class192.field2208, class192.field2209, class192.field2211}; // L: 300
-								var16[var4] = (class192)Actor.findEnumerated(var18, var0.method7952()); // L: 302
+								MoveSpeed[] var16 = Players.field1304; // L: 296
+								MoveSpeed[] var18 = new MoveSpeed[]{MoveSpeed.field2212, MoveSpeed.field2208, MoveSpeed.field2209, MoveSpeed.field2211}; // L: 300
+								var16[var4] = (MoveSpeed)Actor.findEnumerated(var18, var0.method7952()); // L: 302
 							}
 
 							if ((var6 & 1) != 0) { // L: 304
@@ -1225,12 +1225,12 @@ public class ClanSettings {
 							}
 
 							if ((var6 & 512) != 0) { // L: 366
-								var5.field1189 = Client.cycle + var0.method7774(); // L: 367
-								var5.field1135 = Client.cycle + var0.method7776(); // L: 368
-								var5.field1191 = var0.method7769(); // L: 369
-								var5.field1192 = var0.method7952(); // L: 370
-								var5.field1193 = var0.method7769(); // L: 371
-								var5.field1133 = (byte)var0.readUnsignedByte(); // L: 372
+								var5.recolourStartCycle = Client.cycle + var0.method7774(); // L: 367
+								var5.recolourEndCycle = Client.cycle + var0.method7776(); // L: 368
+								var5.recolourHue = var0.method7769(); // L: 369
+								var5.recolourSaturation = var0.method7952(); // L: 370
+								var5.recolourLuminance = var0.method7769(); // L: 371
+								var5.recolourAmount = (byte)var0.readUnsignedByte(); // L: 372
 							}
 
 							if ((var6 & 16384) != 0) { // L: 374
@@ -1250,15 +1250,15 @@ public class ClanSettings {
 								if (var7 == 127) { // L: 386
 									var5.resetPath(var5.tileX, var5.tileY);
 								} else {
-									class192 var25;
-									if (var7 != class192.field2208.field2210) { // L: 389
-										class192[] var22 = new class192[]{class192.field2212, class192.field2208, class192.field2209, class192.field2211}; // L: 392
-										var25 = (class192)Actor.findEnumerated(var22, var7); // L: 394
+									MoveSpeed var25;
+									if (var7 != MoveSpeed.field2208.speed) { // L: 389
+										MoveSpeed[] var22 = new MoveSpeed[]{MoveSpeed.field2212, MoveSpeed.field2208, MoveSpeed.field2209, MoveSpeed.field2211}; // L: 392
+										var25 = (MoveSpeed)Actor.findEnumerated(var22, var7); // L: 394
 									} else {
 										var25 = Players.field1304[var4]; // L: 396
 									}
 
-									var5.method2139(var5.tileX, var5.tileY, var25); // L: 397
+									var5.move(var5.tileX, var5.tileY, var25); // L: 397
 								}
 							}
 						}

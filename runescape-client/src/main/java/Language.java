@@ -422,7 +422,8 @@ public class Language implements MouseWheel {
 		descriptor = "(IIII)Lcq;",
 		garbageValue = "-781279476"
 	)
-	static final InterfaceParent method6063(int var0, int var1, int var2) {
+	@Export("ifOpenSub")
+	static final InterfaceParent ifOpenSub(int var0, int var1, int var2) {
 		InterfaceParent var3 = new InterfaceParent(); // L: 11994
 		var3.group = var1; // L: 11995
 		var3.type = var2; // L: 11996

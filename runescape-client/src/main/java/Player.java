@@ -302,13 +302,13 @@ public final class Player extends Actor {
 			this.isHidden = false;
 		}
 
-		class167[] var12 = null; // L: 111
+		PlayerEquipmentItem[] var12 = null; // L: 111
 		boolean var13 = false; // L: 112
 		var8 = var1.readUnsignedShort(); // L: 113
 		var13 = (var8 >> 15 & 1) == 1; // L: 114
 		int var9;
 		if (var8 > 0 && var8 != 32768) { // L: 115
-			var12 = new class167[12]; // L: 116
+			var12 = new PlayerEquipmentItem[12]; // L: 116
 
 			for (var9 = 0; var9 < 12; ++var9) { // L: 117
 				int var10 = var8 >> 12 - var9 & 1; // L: 118
@@ -397,11 +397,11 @@ public final class Player extends Actor {
 				}
 
 				var3.isSingleTile = true; // L: 239
-				if (super.field1133 != 0 && Client.cycle >= super.field1189 && Client.cycle < super.field1135) { // L: 240
-					var3.overrideHue = super.field1191; // L: 241
-					var3.overrideSaturation = super.field1192; // L: 242
-					var3.overrideLuminance = super.field1193; // L: 243
-					var3.overrideAmount = super.field1133; // L: 244
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) { // L: 240
+					var3.overrideHue = super.recolourHue; // L: 241
+					var3.overrideSaturation = super.recolourSaturation; // L: 242
+					var3.overrideLuminance = super.recolourLuminance; // L: 243
+					var3.overrideAmount = super.recolourAmount; // L: 244
 				} else {
 					var3.overrideAmount = 0; // L: 247
 				}
@@ -534,16 +534,17 @@ public final class Player extends Actor {
 		descriptor = "(IILgn;S)V",
 		garbageValue = "26658"
 	)
-	final void method2139(int var1, int var2, class192 var3) {
+	@Export("move")
+	final void move(int var1, int var2, MoveSpeed var3) {
 		if (super.sequence != -1 && ScriptFrame.SequenceDefinition_get(super.sequence).field2188 == 1) { // L: 253
 			super.sequence = -1;
 		}
 
-		super.field1165 = -1; // L: 254
+		super.facedDirection = -1; // L: 254
 		if (var1 >= 0 && var1 < 104 && var2 >= 0 && var2 < 104) { // L: 255
 			if (super.pathX[0] >= 0 && super.pathX[0] < 104 && super.pathY[0] >= 0 && super.pathY[0] < 104) { // L: 256
-				if (var3 == class192.field2211) {
-					class306.method5765(this, var1, var2, class192.field2211); // L: 258
+				if (var3 == MoveSpeed.field2211) {
+					class306.method5765(this, var1, var2, MoveSpeed.field2211); // L: 258
 				}
 
 				this.method2141(var1, var2, var3); // L: 259
@@ -578,7 +579,7 @@ public final class Player extends Actor {
 		descriptor = "(IILgn;I)V",
 		garbageValue = "829621719"
 	)
-	final void method2141(int var1, int var2, class192 var3) {
+	final void method2141(int var1, int var2, MoveSpeed var3) {
 		if (super.pathLength < 9) { // L: 275
 			++super.pathLength;
 		}

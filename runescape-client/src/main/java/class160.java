@@ -59,8 +59,8 @@ public class class160 {
 						String var5 = var0.method2360(); // L: 9885
 						int var6;
 						int var9;
-						if (var4.combatLevel != 0 && var0.field1204 != 0) { // L: 9886
-							var6 = var0.field1204 != -1 ? var0.field1204 * -1036005949 * 71404267 : var4.combatLevel * -1544891593 * 471159431; // L: 9887
+						if (var4.combatLevel != 0 && var0.combatLevelChange != 0) { // L: 9886
+							var6 = var0.combatLevelChange != -1 ? var0.combatLevelChange * -1036005949 * 71404267 : var4.combatLevel * -1544891593 * 471159431; // L: 9887
 							var9 = class101.localPlayer.combatLevel; // L: 9890
 							int var10 = var9 - var6; // L: 9892
 							String var8;

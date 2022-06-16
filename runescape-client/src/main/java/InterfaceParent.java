@@ -11,7 +11,8 @@ public class InterfaceParent extends Node {
 	@ObfuscatedGetter(
 		intValue = -1985635931
 	)
-	static int field1043;
+	@Export("cameraMoveToHeight")
+	static int cameraMoveToHeight;
 	@ObfuscatedName("jy")
 	@ObfuscatedGetter(
 		intValue = -1949636447

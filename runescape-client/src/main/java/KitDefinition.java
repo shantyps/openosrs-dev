@@ -313,7 +313,7 @@ public class KitDefinition extends DualNode {
 				var0.orientation = 0;
 			}
 
-			class192 var5 = var0.pathTraversed[var0.pathLength - 1]; // L: 4204
+			MoveSpeed var5 = var0.pathTraversed[var0.pathLength - 1]; // L: 4204
 			if (var3 - var10 <= 256 && var3 - var10 >= -256 && var4 - var2 <= 256 && var4 - var2 >= -256) { // L: 4205
 				int var6 = var0.orientation - var0.rotation & 2047; // L: 4212
 				if (var6 > 1024) { // L: 4213
@@ -372,9 +372,9 @@ public class KitDefinition extends DualNode {
 					}
 				}
 
-				if (var5 == class192.field2211) { // L: 4240
+				if (var5 == MoveSpeed.field2211) { // L: 4240
 					var8 <<= 1;
-				} else if (var5 == class192.field2209) { // L: 4241
+				} else if (var5 == MoveSpeed.field2209) { // L: 4241
 					var8 >>= 1;
 				}
 

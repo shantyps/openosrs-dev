@@ -106,9 +106,9 @@ public class Script extends DualNode {
 				}
 			}
 
-			if (var0.field1165 != -1 && (var0.pathLength == 0 || var0.field1202 > 0)) { // L: 4294
-				var0.orientation = var0.field1165; // L: 4295
-				var0.field1165 = -1; // L: 4296
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1202 > 0)) { // L: 4294
+				var0.orientation = var0.facedDirection; // L: 4295
+				var0.facedDirection = -1; // L: 4296
 			}
 
 			int var4 = var0.orientation - var0.rotation & 2047; // L: 4298
@@ -121,14 +121,14 @@ public class Script extends DualNode {
 				++var0.field1196; // L: 4304
 				boolean var6;
 				if (var4 > 1024) { // L: 4305
-					var0.rotation -= var0.field1161 ? var4 : var0.field1129 * 124924459 * 881523843; // L: 4306
+					var0.rotation -= var0.instantTurn ? var4 : var0.field1129 * 124924459 * 881523843; // L: 4306
 					var6 = true; // L: 4307
 					if (var4 < var0.field1129 || var4 > 2048 - var0.field1129) { // L: 4308
 						var0.rotation = var0.orientation; // L: 4309
 						var6 = false; // L: 4310
 					}
 
-					if (!var0.field1161 && var0.idleSequence == var0.movementSequence && (var0.field1196 > 25 || var6)) { // L: 4312
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1196 > 25 || var6)) { // L: 4312
 						if (var0.turnLeftSequence != -1) { // L: 4313
 							var0.movementSequence = var0.turnLeftSequence;
 						} else {
@@ -136,14 +136,14 @@ public class Script extends DualNode {
 						}
 					}
 				} else {
-					var0.rotation += var0.field1161 ? var4 : 124924459 * var0.field1129 * 881523843; // L: 4318
+					var0.rotation += var0.instantTurn ? var4 : 124924459 * var0.field1129 * 881523843; // L: 4318
 					var6 = true; // L: 4319
 					if (var4 < var0.field1129 || var4 > 2048 - var0.field1129) { // L: 4320
 						var0.rotation = var0.orientation; // L: 4321
 						var6 = false; // L: 4322
 					}
 
-					if (!var0.field1161 && var0.movementSequence == var0.idleSequence && (var0.field1196 > 25 || var6)) { // L: 4324
+					if (!var0.instantTurn && var0.movementSequence == var0.idleSequence && (var0.field1196 > 25 || var6)) { // L: 4324
 						if (var0.turnRightSequence != -1) { // L: 4325
 							var0.movementSequence = var0.turnRightSequence;
 						} else {
@@ -153,7 +153,7 @@ public class Script extends DualNode {
 				}
 
 				var0.rotation &= 2047; // L: 4330
-				var0.field1161 = false; // L: 4331
+				var0.instantTurn = false; // L: 4331
 			} else {
 				var0.field1196 = 0; // L: 4333
 			}

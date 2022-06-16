@@ -739,8 +739,8 @@ public class ServerPacket {
 			var4 = Client.field681 / 256;
 		}
 
-		if (Client.field743[4] && Client.field745[4] + 128 > var4) { // L: 4527
-			var4 = Client.field745[4] + 128;
+		if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var4) { // L: 4527
+			var4 = Client.cameraMoveIntensity[4] + 128;
 		}
 
 		int var5 = Client.camAngleY & 2047; // L: 4528
@@ -774,8 +774,8 @@ public class ServerPacket {
 		int var12;
 		int var13;
 		for (var12 = 0; var12 < 5; ++var12) { // L: 4553
-			if (Client.field743[var12]) { // L: 4554
-				var13 = (int)(Math.random() * (double)(Client.field762[var12] * 2 + 1) - (double)Client.field762[var12] + Math.sin((double)Client.field537[var12] / 100.0D * (double)Client.field747[var12]) * (double)Client.field745[var12]); // L: 4555
+			if (Client.cameraShaking[var12]) { // L: 4554
+				var13 = (int)(Math.random() * (double)(Client.cameraShakeIntensity[var12] * 2 + 1) - (double)Client.cameraShakeIntensity[var12] + Math.sin((double)Client.cameraShakeSpeed[var12] / 100.0D * (double)Client.cameraShakeCycle[var12]) * (double)Client.cameraMoveIntensity[var12]); // L: 4555
 				if (var12 == 0) { // L: 4556
 					class18.cameraX += var13;
 				}

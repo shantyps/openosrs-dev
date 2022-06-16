@@ -11,7 +11,8 @@ public class MidiPcmStream extends PcmStream {
 	@ObfuscatedGetter(
 		intValue = 1365503093
 	)
-	static int field3231;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 	@ObfuscatedName("c")
 	@ObfuscatedSignature(
 		descriptor = "Lpm;"

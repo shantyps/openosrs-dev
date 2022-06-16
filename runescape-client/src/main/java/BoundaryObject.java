@@ -166,6 +166,6 @@ public final class BoundaryObject {
 		garbageValue = "-2059501837"
 	)
 	static long method4536() {
-		return Client.field612; // L: 2945
+		return Client.userRegistrationId; // L: 2945
 	}
 }

@@ -14,10 +14,11 @@ public final class NPC extends Actor {
 	@Export("definition")
 	NPCComposition definition;
 	@ObfuscatedName("v")
-	String field1261;
+	@Export("nameChange")
+	String nameChange;
 
 	NPC() {
-		this.field1261 = ""; // L: 11
+		this.nameChange = ""; // L: 11
 	} // L: 13
 
 	@ObfuscatedName("c")
@@ -26,7 +27,7 @@ public final class NPC extends Actor {
 		garbageValue = "-1916980767"
 	)
 	void method2373(String var1) {
-		this.field1261 = var1 == null ? "" : var1; // L: 16
+		this.nameChange = var1 == null ? "" : var1; // L: 16
 	} // L: 17
 
 	@ObfuscatedName("v")
@@ -60,11 +61,11 @@ public final class NPC extends Actor {
 					var3.isSingleTile = true;
 				}
 
-				if (super.field1133 != 0 && Client.cycle >= super.field1189 && Client.cycle < super.field1135) { // L: 112
-					var3.overrideHue = super.field1191; // L: 113
-					var3.overrideSaturation = super.field1192; // L: 114
-					var3.overrideLuminance = super.field1193; // L: 115
-					var3.overrideAmount = super.field1133; // L: 116
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) { // L: 112
+					var3.overrideHue = super.recolourHue; // L: 113
+					var3.overrideSaturation = super.recolourSaturation; // L: 114
+					var3.overrideLuminance = super.recolourLuminance; // L: 115
+					var3.overrideAmount = super.recolourAmount; // L: 116
 				} else {
 					var3.overrideAmount = 0; // L: 119
 				}
@@ -80,8 +81,8 @@ public final class NPC extends Actor {
 		garbageValue = "56"
 	)
 	final String method2360() {
-		if (!this.field1261.isEmpty()) { // L: 20
-			return this.field1261; // L: 21
+		if (!this.nameChange.isEmpty()) { // L: 20
+			return this.nameChange; // L: 21
 		} else {
 			NPCComposition var1 = this.definition; // L: 23
 			if (var1.transforms != null) { // L: 24
@@ -100,7 +101,8 @@ public final class NPC extends Actor {
 		descriptor = "(ILgn;I)V",
 		garbageValue = "376054191"
 	)
-	final void method2361(int var1, class192 var2) {
+	@Export("move")
+	final void move(int var1, MoveSpeed var2) {
 		int var3 = super.pathX[0];
 		int var4 = super.pathY[0];
 		if (var1 == 0) {
@@ -184,7 +186,7 @@ public final class NPC extends Actor {
 
 				super.pathX[0] = var1; // L: 80
 				super.pathY[0] = var2; // L: 81
-				super.pathTraversed[0] = class192.field2212; // L: 82
+				super.pathTraversed[0] = MoveSpeed.field2212; // L: 82
 				return; // L: 83
 			}
 		}

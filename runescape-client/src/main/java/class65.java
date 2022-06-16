@@ -28,18 +28,18 @@ public class class65 {
 				var0.sequenceFrame = 0; // L: 4347
 				var0.sequenceFrameCycle = 0; // L: 4348
 				var0.sequenceDelay = var2; // L: 4349
-				var0.field1190 = 0; // L: 4350
+				var0.currentSequenceFrameIndex = 0; // L: 4350
 			}
 
 			if (var3 == 2) { // L: 4352
-				var0.field1190 = 0; // L: 4353
+				var0.currentSequenceFrameIndex = 0; // L: 4353
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || ScriptFrame.SequenceDefinition_get(var1).field2183 >= ScriptFrame.SequenceDefinition_get(var0.sequence).field2183) { // L: 4356
 			var0.sequence = var1; // L: 4357
 			var0.sequenceFrame = 0; // L: 4358
 			var0.sequenceFrameCycle = 0; // L: 4359
 			var0.sequenceDelay = var2; // L: 4360
-			var0.field1190 = 0; // L: 4361
+			var0.currentSequenceFrameIndex = 0; // L: 4361
 			var0.field1203 = var0.pathLength; // L: 4362
 		}
 
