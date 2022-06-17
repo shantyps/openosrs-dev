@@ -32,6 +32,14 @@ import static net.runelite.api.Constants.ROOF_FLAG_HOVERED;
 import static net.runelite.api.Constants.ROOF_FLAG_POSITION;
 
 import net.runelite.api.*;
+import net.runelite.api.DecorativeObject;
+import net.runelite.api.GroundObject;
+import net.runelite.api.Perspective;
+import net.runelite.api.Renderable;
+import net.runelite.api.SceneTileModel;
+import net.runelite.api.SceneTilePaint;
+import net.runelite.api.Tile;
+import net.runelite.api.WallObject;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.hooks.DrawCallbacks;
@@ -1306,5 +1314,19 @@ public abstract class RSSceneMixin implements RSScene
 	@Inject
 	public void onBOundaryObjectAccess(int var1, int var2, int var3) {
 		client.getCallbacks().post(GetDynamicObjectForAnimationEvent.INSTANCE);
+	}
+
+	@Inject
+	public static void renderDraw(Renderable renderable, int orientation, int pitchSin, int pitchCos, int yawSin, int yawCos, int x, int y, int z, long hash)
+	{
+		DrawCallbacks drawCallbacks = client.getDrawCallbacks();
+		if (drawCallbacks != null)
+		{
+			drawCallbacks.draw(renderable, orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
+		}
+		else
+		{
+			renderable.draw(orientation, pitchSin, pitchCos, yawSin, yawCos, x, y, z, hash);
+		}
 	}
 }

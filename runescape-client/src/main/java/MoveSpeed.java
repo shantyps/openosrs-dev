@@ -3,37 +3,34 @@ import net.runelite.mapping.Implements;
 import net.runelite.mapping.ObfuscatedName;
 import net.runelite.mapping.ObfuscatedSignature;
 
-@ObfuscatedName("gd")
+@ObfuscatedName("gn")
 @Implements("MoveSpeed")
 public enum MoveSpeed implements MouseWheel {
-	@ObfuscatedName("o")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
-		descriptor = "Lgd;"
+		descriptor = "Lgn;"
 	)
-	field2250((byte)-1),
+	field2208((byte)-1),
+	@ObfuscatedName("v")
+	@ObfuscatedSignature(
+		descriptor = "Lgn;"
+	)
+	field2209((byte)0),
 	@ObfuscatedName("q")
 	@ObfuscatedSignature(
-		descriptor = "Lgd;"
+		descriptor = "Lgn;"
 	)
-	field2249((byte)0),
-	@ObfuscatedName("l")
+	field2212((byte)1),
+	@ObfuscatedName("f")
 	@ObfuscatedSignature(
-		descriptor = "Lgd;"
+		descriptor = "Lgn;"
 	)
-	field2251((byte)1),
-	@ObfuscatedName("k")
-	@ObfuscatedSignature(
-		descriptor = "Lgd;"
-	)
-	field2248((byte)2);
+	field2211((byte)2);
 
-	@ObfuscatedName("x")
-	@ObfuscatedSignature(
-		descriptor = "Lcc;"
-	)
-	@Export("loginScreenRunesAnimation")
-	static LoginScreenAnimation loginScreenRunesAnimation;
-	@ObfuscatedName("a")
+	@ObfuscatedName("ao")
+	@Export("fontHelvetica13")
+	static java.awt.Font fontHelvetica13;
+	@ObfuscatedName("j")
 	@Export("speed")
 	public byte speed;
 
@@ -41,35 +38,13 @@ public enum MoveSpeed implements MouseWheel {
 		this.speed = var3; // L: 14
 	} // L: 15
 
-	@ObfuscatedName("o")
+	@ObfuscatedName("c")
 	@ObfuscatedSignature(
 		descriptor = "(B)I",
-		garbageValue = "30"
+		garbageValue = "-100"
 	)
 	@Export("rsOrdinal")
 	public int rsOrdinal() {
 		return this.speed; // L: 19
 	}
-
-	@ObfuscatedName("ld")
-	@ObfuscatedSignature(
-		descriptor = "(Lki;II)Ljava/lang/String;",
-		garbageValue = "-1588715753"
-	)
-	static String method3801(Widget var0, int var1) {
-		if (!MenuAction.method1880(UrlRequester.getWidgetFlags(var0), var1) && var0.onOp == null) { // L: 12513
-			return null;
-		} else {
-			return var0.actions != null && var0.actions.length > var1 && var0.actions[var1] != null && var0.actions[var1].trim().length() != 0 ? var0.actions[var1] : null; // L: 12514 12515 12517
-		}
-	}
-
-	@ObfuscatedName("ls")
-	@ObfuscatedSignature(
-		descriptor = "(II)V",
-		garbageValue = "-540726719"
-	)
-	static void method3800(int var0) {
-		Client.oculusOrbState = var0; // L: 12665
-	} // L: 12666
 }
