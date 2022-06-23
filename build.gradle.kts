@@ -32,12 +32,14 @@ buildscript {
         maven(url = "https://raw.githubusercontent.com/open-osrs/hosting/master")
     }
     dependencies {
-        classpath("org.ajoberstar.grgit:grgit-core:4.1.1")
+        classpath("org.ajoberstar.grgit:grgit-core:4.1.0")
+        classpath("com.openosrs:script-assembler-plugin:1.0.0")
+        classpath("com.openosrs:injector-plugin:2.0.1")
     }
 }
 
 plugins {
-    id("org.ajoberstar.grgit") version "4.1.1"
+    id("org.ajoberstar.grgit") version "4.1.0"
 
     application
 }
@@ -163,7 +165,7 @@ subprojects {
             exclude("**/RoomType.java")
         }
 
-        withType<Jar> {
+        /*withType<Jar> {
             doLast {
                 // sign jar
                 if (System.getProperty("signKeyStore") != null) {
@@ -185,7 +187,7 @@ subprojects {
                     }
                 }
             }
-        }
+        }*/
     }
 
     configurations.compileOnly.get().extendsFrom(configurations["annotationProcessor"])
