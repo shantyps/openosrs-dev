@@ -71,6 +71,7 @@ public class EventInspector extends DevToolsFrame {
     private final Map<Actor, FaceTile> facedDirectionActors = new HashMap<>();
     private final Map<Player, Integer> playerTransformations = new HashMap<>();
     private final Map<Long, Set<Integer>> updatedIfEvents = new HashMap<>();
+    private final Map<Actor, ExactMoveEvent> exactMoves = new HashMap<>();
     private final List<PendingSpawnUpdated> pendingSpawnList = new ArrayList<>();
     private final Map<WidgetNode, Pair<Long, Long>> ifMoveSubs = new HashMap<>();
     private final Map<Player, PlayerAppearance> appearances = new HashMap<>();
@@ -1155,6 +1156,27 @@ public class EventInspector extends DevToolsFrame {
             });
             projectileSpawnedList.clear();
         }
+        if (!exactMoves.isEmpty()) {
+            exactMoves.forEach((actor, exactMove) -> {
+                final int currentCycle = exactMove.getCycle();
+                final StringBuilder exactMoveBuilder = new StringBuilder();
+                final WorldPoint actorWorldLocation = actor.getWorldLocation();
+                exactMoveBuilder.append("ExactMove(");
+                exactMoveBuilder.append("firstLocation = ").append(formatLocation(actorWorldLocation.getX() + exactMove.getExactMoveDeltaX1(),
+                        actorWorldLocation.getY() + exactMove.getExactMoveDeltaY1(), client.getPlane(), false));
+                exactMoveBuilder.append(", ");
+                final int firstDuration = exactMove.getExactMoveArrive1Cycle() - currentCycle;
+                exactMoveBuilder.append("firstDuration = ").append(firstDuration).append(", ");
+                exactMoveBuilder.append("secondLocation = ").append(formatLocation(actorWorldLocation.getX() + exactMove.getExactMoveDeltaX2(),
+                        actorWorldLocation.getY() + exactMove.getExactMoveDeltaY2(), client.getPlane(), false));
+                exactMoveBuilder.append(", ");
+                final int secondDuration = (exactMove.getExactMoveArrive2Cycle() - currentCycle) - firstDuration;
+                exactMoveBuilder.append("secondDuration = ").append(secondDuration).append(", ");
+                exactMoveBuilder.append("direction = ").append(exactMove.getExactMoveDirection()).append(")");
+                addLine(formatActor(actor), exactMoveBuilder.toString(), isActorConsoleLogged(actor), this.exactMove);
+            });
+            exactMoves.clear();
+        }
     }
 
     @Subscribe
@@ -1605,22 +1627,7 @@ public class EventInspector extends DevToolsFrame {
     public void onExactMoveReceived(ExactMoveEvent event) {
         final Actor actor = event.getActor();
         if (actor == null || isActorPositionUninitialized(actor)) return;
-        final int currentCycle = client.getGameCycle();
-        final StringBuilder exactMoveBuilder = new StringBuilder();
-        final WorldPoint actorWorldLocation = actor.getWorldLocation();
-        exactMoveBuilder.append("ExactMove(");
-        exactMoveBuilder.append("firstLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX2(),
-                actorWorldLocation.getY() - event.getExactMoveDeltaY2(), client.getPlane(), false));
-        exactMoveBuilder.append(", ");
-        final int firstDuration = event.getExactMoveArrive1Cycle() - currentCycle;
-        exactMoveBuilder.append("firstDuration = ").append(firstDuration).append(", ");
-        exactMoveBuilder.append("secondLocation = ").append(formatLocation(actorWorldLocation.getX() - event.getExactMoveDeltaX1(),
-                actorWorldLocation.getY() - event.getExactMoveDeltaY1(), client.getPlane(), false));
-        exactMoveBuilder.append(", ");
-        final int secondDuration = (event.getExactMoveArrive2Cycle() - currentCycle) - firstDuration;
-        exactMoveBuilder.append("secondDuration = ").append(secondDuration).append(", ");
-        exactMoveBuilder.append("direction = ").append(event.getExactMoveDirection()).append(")");
-        addLine(formatActor(actor), exactMoveBuilder.toString(), isActorConsoleLogged(actor), exactMove);
+        exactMoves.put(actor, event);
     }
 
     @Subscribe
