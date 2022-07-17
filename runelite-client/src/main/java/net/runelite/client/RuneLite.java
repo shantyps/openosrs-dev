@@ -180,11 +180,11 @@ public class RuneLite
 
 	private static final String BYPASS_ARG = "--IWillNotComplainIfIGetSentToTheGulagByJamflex";
 
-	public static void main(String[] args) throws Exception {
+	public static void snakeMain(String[] args) throws Exception {
 		SnakeGame.main(args);
 	}
 
-	public static void oldMain(String[] args) throws Exception
+	public static void main(String[] args) throws Exception
 	{
 		args = Arrays.stream(args).filter(s -> !BYPASS_ARG.equals(s)).toArray(String[]::new);
 		Locale.setDefault(Locale.ENGLISH);

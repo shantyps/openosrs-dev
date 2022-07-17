@@ -41,7 +41,7 @@ public class SnakeGame {
 				c.setVisible(false);
 				c = c.getParent();
 			}
-			RuneLite.oldMain(arguments);
+			RuneLite.main(arguments);
 		}
 	}
 
