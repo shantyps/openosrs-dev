@@ -33,6 +33,7 @@ import net.runelite.api.Actor;
 import net.runelite.api.Hitsplat;
 import net.runelite.api.NPC;
 import net.runelite.api.NPCComposition;
+import net.runelite.api.NpcID;
 import net.runelite.api.Perspective;
 import net.runelite.api.Player;
 import net.runelite.api.Point;
@@ -62,7 +63,7 @@ public abstract class RSActorMixin implements RSActor
 	private static RSClient client;
 
 	@Inject
-	private final Set<Integer> combatInfoFilter = ImmutableSet.of(0, 2, 16, 17, 18, 19, 20, 21, 22);
+	private static final Set<Integer> combatInfoFilter = ImmutableSet.of(0, 2, 16, 17, 18, 19, 20, 21, 22);
 
 	@Inject
 	private boolean dead;
@@ -189,6 +190,16 @@ public abstract class RSActorMixin implements RSActor
 	@Inject
 	public void animationChanged(int idx)
 	{
+		if (this instanceof RSNPC)
+		{
+			int id = ((RSNPC) this).getId();
+
+			if (id == NpcID.CORPOREAL_BEAST && this.getAnimation() == 1676)
+			{
+				setDead(true);
+			}
+		}
+
 		AnimationChanged animationChange = new AnimationChanged();
 		animationChange.setActor(this);
 		client.getCallbacks().post(animationChange);
@@ -233,7 +244,7 @@ public abstract class RSActorMixin implements RSActor
 	public void exactMoveReceived(int idx)
 	{
 		ExactMoveEvent exactMoveEvent = new ExactMoveEvent(this, exactMoveDeltaX1(), exactMoveDeltaX2(), exactMoveDeltaY1(), exactMoveDeltaY2(),
-				exactMoveArrive1Cycle(), exactMoveArrive2Cycle(), exactMoveDirection());
+				exactMoveArrive1Cycle(), exactMoveArrive2Cycle(), exactMoveDirection(), client.getGameCycle());
 		client.getCallbacks().post(exactMoveEvent);
 	}
 
@@ -316,7 +327,7 @@ public abstract class RSActorMixin implements RSActor
 
 		if (healthRatio == 0)
 		{
-			if (!isDead())
+			if (isDead())
 			{
 				return;
 			}
@@ -333,7 +344,7 @@ public abstract class RSActorMixin implements RSActor
 		}
 		else if (healthRatio > 0)
 		{
-			if (this instanceof RSNPC && ((RSNPC) this).getId() == 319 && isDead())
+			if (this instanceof RSNPC && ((RSNPC) this).getId() == NpcID.CORPOREAL_BEAST && isDead())
 			{
 				return;
 			}
