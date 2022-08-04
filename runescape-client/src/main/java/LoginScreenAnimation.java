@@ -10,7 +10,8 @@ import net.runelite.mapping.Export;
 public class LoginScreenAnimation {
 	@ObfuscatedName("tt")
 	@ObfuscatedGetter(intValue = -179224576)
-	static int field1233;
+	@Export("cameraLookAtY")
+	static int cameraLookAtY;
 
 	@ObfuscatedName("pz")
 	@ObfuscatedGetter(intValue = -1154483311)

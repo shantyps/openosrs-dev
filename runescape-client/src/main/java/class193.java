@@ -221,9 +221,9 @@ public class class193 {
 					var0.false0 = false;
 				}
 			}
-			if (var0.field1164 != -1 && (var0.pathLength == 0 || var0.field1142 > 0)) {
-				var0.orientation = var0.field1164;
-				var0.field1164 = -1;
+			if (var0.facedDirection != -1 && (var0.pathLength == 0 || var0.field1142 > 0)) {
+				var0.orientation = var0.facedDirection;
+				var0.facedDirection = -1;
 			}
 			int var4 = var0.orientation - var0.rotation & 2047;
 			if (var4 == 0 && var0.false0) {
@@ -234,13 +234,13 @@ public class class193 {
 				++var0.field1196;
 				boolean var6;
 				if (var4 > 1024) {
-					var0.rotation -= (var0.field1152) ? var4 : var0.field1197;
+					var0.rotation -= (var0.instantTurn) ? var4 : var0.field1197;
 					var6 = true;
 					if (var4 < var0.field1197 || var4 > 2048 - var0.field1197) {
 						var0.rotation = var0.orientation;
 						var6 = false;
 					}
-					if (!var0.field1152 && var0.movementSequence == var0.idleSequence && (var0.field1196 > 25 || var6)) {
+					if (!var0.instantTurn && var0.movementSequence == var0.idleSequence && (var0.field1196 > 25 || var6)) {
 						if (var0.turnLeftSequence != -1) {
 							var0.movementSequence = var0.turnLeftSequence;
 						} else {
@@ -248,13 +248,13 @@ public class class193 {
 						}
 					}
 				} else {
-					var0.rotation += (var0.field1152) ? var4 : var0.field1197;
+					var0.rotation += (var0.instantTurn) ? var4 : var0.field1197;
 					var6 = true;
 					if (var4 < var0.field1197 || var4 > 2048 - var0.field1197) {
 						var0.rotation = var0.orientation;
 						var6 = false;
 					}
-					if (!var0.field1152 && var0.idleSequence == var0.movementSequence && (var0.field1196 > 25 || var6)) {
+					if (!var0.instantTurn && var0.idleSequence == var0.movementSequence && (var0.field1196 > 25 || var6)) {
 						if (var0.turnRightSequence != -1) {
 							var0.movementSequence = var0.turnRightSequence;
 						} else {
@@ -263,7 +263,7 @@ public class class193 {
 					}
 				}
 				var0.rotation &= 2047;
-				var0.field1152 = false;
+				var0.instantTurn = false;
 			} else {
 				var0.field1196 = 0;
 			}

@@ -87,10 +87,10 @@ public abstract class AbstractByteArrayCopier {
 	@ObfuscatedSignature(descriptor = "(Lcs;II)V", garbageValue = "-757589871")
 	@Export("updateActorSequence")
 	static final void updateActorSequence(Actor var0, int var1) {
-		if (var0.field1194 >= Client.cycle) {
+		if (var0.exactMoveArrive1Cycle >= Client.cycle) {
 			Tiles.method2114(var0);
-		} else if (var0.field1166 >= Client.cycle) {
-			boolean var2 = var0.field1166 == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0;
+		} else if (var0.exactMoveArrive2Cycle >= Client.cycle) {
+			boolean var2 = var0.exactMoveArrive2Cycle == Client.cycle || var0.sequence == -1 || var0.sequenceDelay != 0;
 			int var4;
 			if (!var2) {
 				SequenceDefinition var3 = class14.SequenceDefinition_get(var0.sequence);
@@ -98,17 +98,17 @@ public abstract class AbstractByteArrayCopier {
 				var2 = var0.sequenceFrameCycle + 1 > var4;
 			}
 			if (var2) {
-				int var9 = var0.field1166 - var0.field1194;
-				var4 = Client.cycle - var0.field1194;
-				int var5 = var0.field1177 * 128 + var0.field1202 * 64;
-				int var6 = var0.field1182 * 128 + var0.field1202 * 64;
-				int var7 = var0.field1188 * 128 + var0.field1202 * 64;
-				int var8 = var0.field1183 * 128 + var0.field1202 * 64;
+				int var9 = var0.exactMoveArrive2Cycle - var0.exactMoveArrive1Cycle;
+				var4 = Client.cycle - var0.exactMoveArrive1Cycle;
+				int var5 = var0.exactMoveDeltaX1 * 128 + var0.field1202 * 64;
+				int var6 = var0.exactMoveDeltaY1 * 128 + var0.field1202 * 64;
+				int var7 = var0.exactMoveDeltaX2 * 128 + var0.field1202 * 64;
+				int var8 = var0.exactMoveDeltaY2 * 128 + var0.field1202 * 64;
 				var0.x = (var4 * var7 + var5 * (var9 - var4)) / var9;
 				var0.y = (var8 * var4 + var6 * (var9 - var4)) / var9;
 			}
 			var0.field1142 = 0;
-			var0.orientation = var0.field1186;
+			var0.orientation = var0.exactMoveDirection;
 			var0.rotation = var0.orientation;
 		} else {
 			class131.method2913(var0);
@@ -116,8 +116,8 @@ public abstract class AbstractByteArrayCopier {
 		if (var0.x < 128 || var0.y < 128 || var0.x >= 13184 || var0.y >= 13184) {
 			var0.sequence = -1;
 			var0.spotAnimation = -1;
-			var0.field1194 = 0;
-			var0.field1166 = 0;
+			var0.exactMoveArrive1Cycle = 0;
+			var0.exactMoveArrive2Cycle = 0;
 			var0.x = var0.pathX[0] * 128 + var0.field1202 * 64;
 			var0.y = var0.pathY[0] * 128 + var0.field1202 * 64;
 			var0.method2252();
@@ -125,8 +125,8 @@ public abstract class AbstractByteArrayCopier {
 		if (class28.localPlayer == var0 && (var0.x < 1536 || var0.y < 1536 || var0.x >= 11776 || var0.y >= 11776)) {
 			var0.sequence = -1;
 			var0.spotAnimation = -1;
-			var0.field1194 = 0;
-			var0.field1166 = 0;
+			var0.exactMoveArrive1Cycle = 0;
+			var0.exactMoveArrive2Cycle = 0;
 			var0.x = var0.pathX[0] * 128 + var0.field1202 * 64;
 			var0.y = var0.pathY[0] * 128 + var0.field1202 * 64;
 			var0.method2252();

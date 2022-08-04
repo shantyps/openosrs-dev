@@ -244,13 +244,13 @@ public final class Player extends Actor {
 		if (Client.gameBuild == 0 && Client.staffModLevel >= 2) {
 			this.isHidden = false;
 		}
-		PlayerCompositionColorTextureOverride[] var25 = null;
+		PlayerEquipmentItem[] var25 = null;
 		boolean var26 = false;
 		var8 = var1.readUnsignedShort();
 		var26 = (var8 >> 15 & 1) == 1;
 		int var9;
 		if (var8 > 0 && var8 != 32768) {
-			var25 = new PlayerCompositionColorTextureOverride[12];
+			var25 = new PlayerEquipmentItem[12];
 			for (var9 = 0; var9 < 12; ++var9) {
 				int var10 = var8 >> 12 - var9 & 1;
 				if (var10 == 1) {
@@ -258,7 +258,7 @@ public final class Player extends Actor {
 					int var15 = var1.readUnsignedByte();
 					boolean var16 = (var15 & 1) != 0;
 					boolean var17 = (var15 & 2) != 0;
-					PlayerCompositionColorTextureOverride var18 = new PlayerCompositionColorTextureOverride(var14);
+					PlayerEquipmentItem var18 = new PlayerEquipmentItem(var14);
 					int var19;
 					int[] var20;
 					boolean var21;
@@ -267,12 +267,12 @@ public final class Player extends Actor {
 					if (var16) {
 						var19 = var1.readUnsignedByte();
 						var20 = new int[]{ var19 & 15, var19 >> 4 & 15 };
-						var21 = var18.playerCompositionRecolorTo != null && var20.length == var18.playerCompositionRecolorTo.length;
+						var21 = var18.recolorTo != null && var20.length == var18.recolorTo.length;
 						for (var22 = 0; var22 < 2; ++var22) {
 							if (var20[var22] != 15) {
 								var23 = ((short) (var1.readUnsignedShort()));
 								if (var21) {
-									var18.playerCompositionRecolorTo[var20[var22]] = var23;
+									var18.recolorTo[var20[var22]] = var23;
 								}
 							}
 						}
@@ -280,12 +280,12 @@ public final class Player extends Actor {
 					if (var17) {
 						var19 = var1.readUnsignedByte();
 						var20 = new int[]{ var19 & 15, var19 >> 4 & 15 };
-						var21 = var18.playerCompositionRetextureTo != null && var20.length == var18.playerCompositionRetextureTo.length;
+						var21 = var18.retextureTo != null && var20.length == var18.retextureTo.length;
 						for (var22 = 0; var22 < 2; ++var22) {
 							if (var20[var22] != 15) {
 								var23 = ((short) (var1.readUnsignedShort()));
 								if (var21) {
-									var18.playerCompositionRetextureTo[var20[var22]] = var23;
+									var18.retextureTo[var20[var22]] = var23;
 								}
 							}
 						}
@@ -364,11 +364,11 @@ public final class Player extends Actor {
 					}
 				}
 				var3.isSingleTile = true;
-				if (super.field1184 != 0 && Client.cycle >= super.field1189 && Client.cycle < super.field1136) {
-					var3.overrideHue = super.field1191;
-					var3.overrideSaturation = super.field1168;
-					var3.overrideLuminance = super.field1193;
-					var3.overrideAmount = super.field1184;
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) {
+					var3.overrideHue = super.recolourHue;
+					var3.overrideSaturation = super.recolourSaturation;
+					var3.overrideLuminance = super.recolourLuminance;
+					var3.overrideAmount = super.recolourAmount;
 					var3.field2516 = ((short) (var4));
 				} else {
 					var3.overrideAmount = 0;
@@ -464,16 +464,17 @@ public final class Player extends Actor {
 
 	@ObfuscatedName("g")
 	@ObfuscatedSignature(descriptor = "(IILgl;I)V", garbageValue = "-1350620380")
-	final void method2230(int var1, int var2, class192 var3) {
+	@Export("move")
+	final void move(int var1, int var2, MoveSpeed var3) {
 		if (super.sequence != -1 && class14.SequenceDefinition_get(super.sequence).field2156 == 1) {
 			super.sequence = -1;
 		}
-		super.field1164 = -1;
+		super.facedDirection = -1;
 		if (var1 >= 0 && var1 < 104 && var2 >= 0 && var2 < 104) {
 			if (super.pathX[0] >= 0 && super.pathX[0] < 104 && super.pathY[0] >= 0 && super.pathY[0] < 104) {
-				if (var3 == class192.field2197) {
+				if (var3 == MoveSpeed.field2197) {
 					Player var4 = this;
-					class192 var5 = class192.field2197;
+					MoveSpeed var5 = MoveSpeed.field2197;
 					int var6 = super.pathX[0];
 					int var7 = super.pathY[0];
 					int var8 = this.transformedSize();
@@ -907,7 +908,7 @@ public final class Player extends Actor {
 
 	@ObfuscatedName("b")
 	@ObfuscatedSignature(descriptor = "(IILgl;I)V", garbageValue = "985982243")
-	final void method2205(int var1, int var2, class192 var3) {
+	final void method2205(int var1, int var2, MoveSpeed var3) {
 		if (super.pathLength < 9) {
 			++super.pathLength;
 		}

@@ -38,7 +38,7 @@ public class class129 extends class128 {
 		Players.Players_count = 0;
 		for (int var0 = 0; var0 < 2048; ++var0) {
 			Players.field1295[var0] = null;
-			Players.field1294[var0] = class192.field2194;
+			Players.field1294[var0] = MoveSpeed.field2194;
 		}
 	}
 

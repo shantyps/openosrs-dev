@@ -8,7 +8,8 @@ import net.runelite.mapping.Export;
 public class SoundCache {
 	@ObfuscatedName("tf")
 	@ObfuscatedGetter(intValue = -1221572665)
-	static int field325;
+	@Export("cameraMoveToAcceleration")
+	static int cameraMoveToAcceleration;
 
 	@ObfuscatedName("qw")
 	@ObfuscatedSignature(descriptor = "Loy;")

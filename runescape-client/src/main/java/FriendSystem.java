@@ -375,37 +375,37 @@ public class FriendSystem {
 	@ObfuscatedSignature(descriptor = "(IIIB)V", garbageValue = "32")
 	static final void method1764(int var0, int var1, int var2) {
 		if (WorldMapLabelSize.cameraX < var0) {
-			WorldMapLabelSize.cameraX = (var0 - WorldMapLabelSize.cameraX) * SoundCache.field325 / 1000 + WorldMapLabelSize.cameraX + class115.field1419;
+			WorldMapLabelSize.cameraX = (var0 - WorldMapLabelSize.cameraX) * SoundCache.cameraMoveToAcceleration / 1000 + WorldMapLabelSize.cameraX + class115.cameraMoveToSpeed;
 			if (WorldMapLabelSize.cameraX > var0) {
 				WorldMapLabelSize.cameraX = var0;
 			}
 		}
 		if (WorldMapLabelSize.cameraX > var0) {
-			WorldMapLabelSize.cameraX -= (WorldMapLabelSize.cameraX - var0) * SoundCache.field325 / 1000 + class115.field1419;
+			WorldMapLabelSize.cameraX -= (WorldMapLabelSize.cameraX - var0) * SoundCache.cameraMoveToAcceleration / 1000 + class115.cameraMoveToSpeed;
 			if (WorldMapLabelSize.cameraX < var0) {
 				WorldMapLabelSize.cameraX = var0;
 			}
 		}
 		if (class123.cameraY < var1) {
-			class123.cameraY = (var1 - class123.cameraY) * SoundCache.field325 / 1000 + class123.cameraY + class115.field1419;
+			class123.cameraY = (var1 - class123.cameraY) * SoundCache.cameraMoveToAcceleration / 1000 + class123.cameraY + class115.cameraMoveToSpeed;
 			if (class123.cameraY > var1) {
 				class123.cameraY = var1;
 			}
 		}
 		if (class123.cameraY > var1) {
-			class123.cameraY -= (class123.cameraY - var1) * SoundCache.field325 / 1000 + class115.field1419;
+			class123.cameraY -= (class123.cameraY - var1) * SoundCache.cameraMoveToAcceleration / 1000 + class115.cameraMoveToSpeed;
 			if (class123.cameraY < var1) {
 				class123.cameraY = var1;
 			}
 		}
 		if (Widget.cameraZ < var2) {
-			Widget.cameraZ = (var2 - Widget.cameraZ) * SoundCache.field325 / 1000 + Widget.cameraZ + class115.field1419;
+			Widget.cameraZ = (var2 - Widget.cameraZ) * SoundCache.cameraMoveToAcceleration / 1000 + Widget.cameraZ + class115.cameraMoveToSpeed;
 			if (Widget.cameraZ > var2) {
 				Widget.cameraZ = var2;
 			}
 		}
 		if (Widget.cameraZ > var2) {
-			Widget.cameraZ -= (Widget.cameraZ - var2) * SoundCache.field325 / 1000 + class115.field1419;
+			Widget.cameraZ -= (Widget.cameraZ - var2) * SoundCache.cameraMoveToAcceleration / 1000 + class115.cameraMoveToSpeed;
 			if (Widget.cameraZ < var2) {
 				Widget.cameraZ = var2;
 			}

@@ -290,7 +290,7 @@ public class ChatChannel {
 					}
 				}
 			}
-			if (var0.overheadText != null && (var1 >= var75 || !var0.field1151 && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player) (var0)).isFriend())))) {
+			if (var0.overheadText != null && (var1 >= var75 || !var0.showPublicPlayerChat && (Client.publicChatMode == 4 || !var0.isAutoChatting && (Client.publicChatMode == 0 || Client.publicChatMode == 3 || Client.publicChatMode == 1 && ((Player) (var0)).isFriend())))) {
 				ObjectSound.method1776(var0, var0.defaultHeight);
 				if (Client.viewportTempX > -1 && Client.overheadTextCount < Client.overheadTextLimit) {
 					Client.overheadTextXOffsets[Client.overheadTextCount] = class116.fontBold12.stringWidth(var0.overheadText) / 2;

@@ -38,7 +38,7 @@ public abstract class class165 {
 
 	@ObfuscatedName("u")
 	@ObfuscatedSignature(descriptor = "(I)[Lgl;", garbageValue = "-1890926612")
-	public static class192[] method3305() {
-		return new class192[]{ class192.field2201, class192.field2195, class192.field2197, class192.field2194 };
+	public static MoveSpeed[] method3305() {
+		return new MoveSpeed[]{ MoveSpeed.field2201, MoveSpeed.field2195, MoveSpeed.field2197, MoveSpeed.field2194 };
 	}
 }

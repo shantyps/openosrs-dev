@@ -408,17 +408,17 @@ public class PcmPlayer {
 						var3.sequenceFrame = 0;
 						var3.sequenceFrameCycle = 0;
 						var3.sequenceDelay = var6;
-						var3.field1174 = 0;
+						var3.currentSequenceFrameIndex = 0;
 					}
 					if (var7 == 2) {
-						var3.field1174 = 0;
+						var3.currentSequenceFrameIndex = 0;
 					}
 				} else if (var5 == -1 || var3.sequence == -1 || class14.SequenceDefinition_get(var5).field2168 >= class14.SequenceDefinition_get(var3.sequence).field2168) {
 					var3.sequence = var5;
 					var3.sequenceFrame = 0;
 					var3.sequenceFrameCycle = 0;
 					var3.sequenceDelay = var6;
-					var3.field1174 = 0;
+					var3.currentSequenceFrameIndex = 0;
 					var3.field1203 = var3.pathLength;
 				}
 			}
@@ -443,12 +443,12 @@ public class PcmPlayer {
 				var5 = var0.readUnsignedShortLE();
 				var6 = var0.readUnsignedShortLE();
 				if (ScriptFrame.field462) {
-					var3.field1152 = var0.readUnsignedByte() == 1;
+					var3.instantTurn = var0.readUnsignedByte() == 1;
 				}
 				var7 = var3.x - (var5 - class300.baseX * 8 - class300.baseX * 8) * 64;
 				var8 = var3.y - (var6 - Message.baseY * 64 - Message.baseY * 64) * 64;
 				if (var7 != 0 || var8 != 0) {
-					var3.field1164 = ((int) (Math.atan2(((double) (var7)), ((double) (var8))) * 325.949)) & 2047;
+					var3.facedDirection = ((int) (Math.atan2(((double) (var7)), ((double) (var8))) * 325.949)) & 2047;
 				}
 			}
 			if ((var4 & 128) != 0) {
@@ -496,10 +496,10 @@ public class PcmPlayer {
 				var3.spotAnimation = var0.readUnsignedShortLE();
 				var5 = var0.readUnsignedIntIME();
 				var3.spotAnimationHeight = var5 >> 16;
-				var3.field1178 = (var5 & '￿') + Client.cycle;
+				var3.spotAnimationStartCycle = (var5 & '￿') + Client.cycle;
 				var3.spotAnimationFrame = 0;
 				var3.spotAnimationFrameCycle = 0;
-				if (var3.field1178 > Client.cycle) {
+				if (var3.spotAnimationStartCycle > Client.cycle) {
 					var3.spotAnimationFrame = -1;
 				}
 				if (var3.spotAnimation == 65535) {
@@ -507,30 +507,30 @@ public class PcmPlayer {
 				}
 			}
 			if ((var4 & 1024) != 0) {
-				var3.field1189 = Client.cycle + var0.readUnsignedShortLE();
-				var3.field1136 = Client.cycle + var0.readUnsignedShort();
-				var3.field1191 = var0.readByteAdd();
-				var3.field1168 = var0.readByte();
-				var3.field1193 = var0.readByte();
-				var3.field1184 = ((byte) (var0.readUnsignedByteAdd()));
+				var3.recolourStartCycle = Client.cycle + var0.readUnsignedShortLE();
+				var3.recolourEndCycle = Client.cycle + var0.readUnsignedShort();
+				var3.recolourHue = var0.readByteAdd();
+				var3.recolourSaturation = var0.readByte();
+				var3.recolourLuminance = var0.readByte();
+				var3.recolourAmount = ((byte) (var0.readUnsignedByteAdd()));
 			}
 			if (ScriptFrame.field462 && (var4 & 512) != 0 || !ScriptFrame.field462 && (var4 & 2) != 0) {
-				var3.field1177 = var0.readByteNeg();
-				var3.field1182 = var0.readByteSub();
-				var3.field1188 = var0.readByteNeg();
-				var3.field1183 = var0.readByte();
-				var3.field1194 = var0.readUnsignedShortAddLE() + Client.cycle;
-				var3.field1166 = var0.readUnsignedShortAddLE() + Client.cycle;
-				var3.field1186 = var0.readUnsignedShortAddLE();
+				var3.exactMoveDeltaX1 = var0.readByteNeg();
+				var3.exactMoveDeltaY1 = var0.readByteSub();
+				var3.exactMoveDeltaX2 = var0.readByteNeg();
+				var3.exactMoveDeltaY2 = var0.readByte();
+				var3.exactMoveArrive1Cycle = var0.readUnsignedShortAddLE() + Client.cycle;
+				var3.exactMoveArrive2Cycle = var0.readUnsignedShortAddLE() + Client.cycle;
+				var3.exactMoveDirection = var0.readUnsignedShortAddLE();
 				var3.pathLength = 1;
 				var3.field1203 = 0;
-				var3.field1177 += var3.pathX[0];
-				var3.field1182 += var3.pathY[0];
-				var3.field1188 += var3.pathX[0];
-				var3.field1183 += var3.pathY[0];
+				var3.exactMoveDeltaX1 += var3.pathX[0];
+				var3.exactMoveDeltaY1 += var3.pathY[0];
+				var3.exactMoveDeltaX2 += var3.pathX[0];
+				var3.exactMoveDeltaY2 += var3.pathY[0];
 			}
 			if ((var4 & 2048) != 0) {
-				var3.field1204 = var0.readUnsignedIntIME();
+				var3.combatLevelChange = var0.readUnsignedIntIME();
 			}
 		}
 	}

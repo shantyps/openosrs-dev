@@ -33,7 +33,7 @@ public class ClanChannelMember {
 		int var3;
 		if (var0 == 3500) {
 			var3 = Interpreter.Interpreter_intStack[--TaskHandler.Interpreter_intStackSize];
-			Interpreter.Interpreter_intStack[++TaskHandler.Interpreter_intStackSize - 1] = (class192.method3904(var3)) ? 1 : 0;
+			Interpreter.Interpreter_intStack[++TaskHandler.Interpreter_intStackSize - 1] = (MoveSpeed.method3904(var3)) ? 1 : 0;
 			return 1;
 		} else if (var0 == 3501) {
 			var3 = Interpreter.Interpreter_intStack[--TaskHandler.Interpreter_intStackSize];
@@ -150,7 +150,7 @@ public class ClanChannelMember {
 						var9 = var1.readUnsignedShortAdd();
 						if (var7 >= 0 && var8 >= 0 && var7 < 103 && var8 < 103) {
 							if (var5 == 0) {
-								BoundaryObject var36 = Decimator.scene.method4129(FriendSystem.Client_plane, var7, var8);
+								BoundaryObject var36 = Decimator.scene.getBoundaryObject(FriendSystem.Client_plane, var7, var8);
 								if (var36 != null) {
 									var11 = class141.Entity_unpackID(var36.tag);
 									if (var3 == 2) {
@@ -162,7 +162,7 @@ public class ClanChannelMember {
 								}
 							}
 							if (var5 == 1) {
-								WallDecoration var42 = Decimator.scene.method4130(FriendSystem.Client_plane, var7, var8);
+								WallDecoration var42 = Decimator.scene.getWallObject(FriendSystem.Client_plane, var7, var8);
 								if (var42 != null) {
 									var11 = class141.Entity_unpackID(var42.tag);
 									if (var3 != 4 && var3 != 5) {

@@ -91,8 +91,8 @@ public final class WorldMapRectangle {
 			} else {
 				var3.itemQuantityMode = 2;
 			}
-			if (var3.field3421 > 0) {
-				var3.modelZoom = var3.modelZoom * 32 / var3.field3421;
+			if (var3.modelRotation > 0) {
+				var3.modelZoom = var3.modelZoom * 32 / var3.modelRotation;
 			} else if (var3.rawWidth > 0) {
 				var3.modelZoom = var3.modelZoom * 32 / var3.rawWidth;
 			}

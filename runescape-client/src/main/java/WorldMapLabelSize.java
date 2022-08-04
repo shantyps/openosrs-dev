@@ -9,7 +9,8 @@ import net.runelite.mapping.Export;
 public class WorldMapLabelSize {
 	@ObfuscatedName("tx")
 	@ObfuscatedGetter(intValue = 250890624)
-	static int field2673;
+	@Export("cameraLookAtX")
+	static int cameraLookAtX;
 
 	@ObfuscatedName("o")
 	@ObfuscatedSignature(descriptor = "Lhy;")

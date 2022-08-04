@@ -108,7 +108,7 @@ public class class145 {
 						Client.npcIndices[++Client.npcCount - 1] = var5;
 						var13.npcCycle = Client.cycle;
 						var9 = var2.readBits(3);
-						var13.method2414(var9, class192.field2194);
+						var13.move(var9, MoveSpeed.field2194);
 						var10 = var2.readBits(1);
 						if (var10 == 1) {
 							Client.field729[++Client.field541 - 1] = var5;
@@ -118,12 +118,12 @@ public class class145 {
 						var13.npcCycle = Client.cycle;
 						if (var2.readBits(1) == 1) {
 							var9 = var2.readBits(3);
-							var13.method2414(var9, class192.field2197);
+							var13.move(var9, MoveSpeed.field2197);
 							var10 = var2.readBits(3);
-							var13.method2414(var10, class192.field2197);
+							var13.move(var10, MoveSpeed.field2197);
 						} else {
 							var9 = var2.readBits(3);
-							var13.method2414(var9, class192.field2195);
+							var13.move(var9, MoveSpeed.field2195);
 						}
 						var9 = var2.readBits(1);
 						if (var9 == 1) {

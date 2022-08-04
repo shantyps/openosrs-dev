@@ -127,8 +127,8 @@ public class class259 {
 				throw new RuntimeException();
 			} else {
 				Players.Players_regions[var1] = (var4.plane << 28) + (Message.baseY * 64 + var4.pathY[0] >> 13) + (class300.baseX * 8 + var4.pathX[0] >> 13 << 14);
-				if (var4.field1164 != -1) {
-					Players.Players_orientations[var1] = var4.field1164;
+				if (var4.facedDirection != -1) {
+					Players.Players_orientations[var1] = var4.facedDirection;
 				} else {
 					Players.Players_orientations[var1] = var4.orientation;
 				}
@@ -176,7 +176,7 @@ public class class259 {
 					var4.tileY = var7;
 				} else {
 					var4.field1111 = false;
-					var4.method2230(var6, var7, Players.field1294[var1]);
+					var4.move(var6, var7, Players.field1294[var1]);
 				}
 			} else if (var3 == 2) {
 				var5 = var0.readBits(4);
@@ -234,7 +234,7 @@ public class class259 {
 						var4.tileY = var7;
 					} else {
 						var4.field1111 = false;
-						var4.method2230(var6, var7, Players.field1294[var1]);
+						var4.move(var6, var7, Players.field1294[var1]);
 					}
 				} else {
 					var4.resetPath(var6, var7);
@@ -268,7 +268,7 @@ public class class259 {
 						var4.tileY = var11;
 					} else {
 						var4.field1111 = false;
-						var4.method2230(var10, var11, Players.field1294[var1]);
+						var4.move(var10, var11, Players.field1294[var1]);
 					}
 					var4.plane = ((byte) (var7 + var4.plane & 3));
 					if (Client.localPlayerIndex == var1) {
@@ -288,7 +288,7 @@ public class class259 {
 							var4.tileY = var11;
 						} else {
 							var4.field1111 = false;
-							var4.method2230(var10, var11, Players.field1294[var1]);
+							var4.move(var10, var11, Players.field1294[var1]);
 						}
 					} else {
 						var4.resetPath(var10, var11);
@@ -365,7 +365,7 @@ public class class259 {
 				var0.movementSequence = -1;
 			}
 		}
-		if (var0.spotAnimation != -1 && Client.cycle >= var0.field1178) {
+		if (var0.spotAnimation != -1 && Client.cycle >= var0.spotAnimationStartCycle) {
 			if (var0.spotAnimationFrame < 0) {
 				var0.spotAnimationFrame = 0;
 			}
@@ -399,7 +399,7 @@ public class class259 {
 		}
 		if (var0.sequence != -1 && var0.sequenceDelay <= 1) {
 			var1 = class14.SequenceDefinition_get(var0.sequence);
-			if (var1.field2173 == 1 && var0.field1203 > 0 && var0.field1194 <= Client.cycle && var0.field1166 < Client.cycle) {
+			if (var1.field2173 == 1 && var0.field1203 > 0 && var0.exactMoveArrive1Cycle <= Client.cycle && var0.exactMoveArrive2Cycle < Client.cycle) {
 				var0.sequenceDelay = 1;
 				return;
 			}
@@ -416,8 +416,8 @@ public class class259 {
 					}
 					if (var0.sequenceFrame >= var1.frameIds.length) {
 						var0.sequenceFrame -= var1.frameCount;
-						++var0.field1174;
-						if (var0.field1174 >= var1.field2166) {
+						++var0.currentSequenceFrameIndex;
+						if (var0.currentSequenceFrameIndex >= var1.field2166) {
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var1.frameIds.length) {
 							class93.method2443(var1, var0.sequenceFrame, var0.x, var0.y);
@@ -433,8 +433,8 @@ public class class259 {
 						AttackOption.method2468(var1, var0.sequenceFrame, var0.x, var0.y);
 					} else {
 						var0.sequenceFrame -= var1.frameCount;
-						++var0.field1174;
-						if (var0.field1174 >= var1.field2166) {
+						++var0.currentSequenceFrameIndex;
+						if (var0.currentSequenceFrameIndex >= var1.field2166) {
 							var0.sequence = -1;
 						} else if (var0.sequenceFrame >= 0 && var0.sequenceFrame < var2) {
 							AttackOption.method2468(var1, var0.sequenceFrame, var0.x, var0.y);

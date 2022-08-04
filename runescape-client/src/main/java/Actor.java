@@ -118,7 +118,8 @@ public abstract class Actor extends Renderable {
 	boolean isAutoChatting;
 
 	@ObfuscatedName("bs")
-	boolean field1151 = false;
+	@Export("showPublicPlayerChat")
+	boolean showPublicPlayerChat = false;
 
 	@ObfuscatedName("bg")
 	@ObfuscatedGetter(intValue = 1475462461)
@@ -175,10 +176,12 @@ public abstract class Actor extends Renderable {
 
 	@ObfuscatedName("bx")
 	@ObfuscatedGetter(intValue = 1521222287)
-	int field1164 = -1;
+	@Export("facedDirection")
+	int facedDirection = -1;
 
 	@ObfuscatedName("bb")
-	boolean field1152;
+	@Export("instantTurn")
+	boolean instantTurn;
 
 	@ObfuscatedName("by")
 	@ObfuscatedGetter(intValue = 1451144151)
@@ -221,7 +224,8 @@ public abstract class Actor extends Renderable {
 
 	@ObfuscatedName("bi")
 	@ObfuscatedGetter(intValue = 143630735)
-	int field1174 = 0;
+	@Export("currentSequenceFrameIndex")
+	int currentSequenceFrameIndex = 0;
 
 	@ObfuscatedName("ch")
 	@ObfuscatedGetter(intValue = -1452307989)
@@ -239,7 +243,8 @@ public abstract class Actor extends Renderable {
 
 	@ObfuscatedName("cp")
 	@ObfuscatedGetter(intValue = 1536058191)
-	int field1178;
+	@Export("spotAnimationStartCycle")
+	int spotAnimationStartCycle;
 
 	@ObfuscatedName("cg")
 	@ObfuscatedGetter(intValue = -70635727)
@@ -247,31 +252,38 @@ public abstract class Actor extends Renderable {
 
 	@ObfuscatedName("cj")
 	@ObfuscatedGetter(intValue = -104406783)
-	int field1177;
+	@Export("exactMoveDeltaX1")
+	int exactMoveDeltaX1;
 
 	@ObfuscatedName("cz")
 	@ObfuscatedGetter(intValue = -315753795)
-	int field1188;
+	@Export("exactMoveDeltaX2")
+	int exactMoveDeltaX2;
 
 	@ObfuscatedName("ck")
 	@ObfuscatedGetter(intValue = 270849611)
-	int field1182;
+	@Export("exactMoveDeltaY1")
+	int exactMoveDeltaY1;
 
 	@ObfuscatedName("cs")
 	@ObfuscatedGetter(intValue = -1487251973)
-	int field1183;
+	@Export("exactMoveDeltaY2")
+	int exactMoveDeltaY2;
 
 	@ObfuscatedName("ca")
 	@ObfuscatedGetter(intValue = -1502544871)
-	int field1194;
+	@Export("exactMoveArrive1Cycle")
+	int exactMoveArrive1Cycle;
 
 	@ObfuscatedName("cq")
 	@ObfuscatedGetter(intValue = -104818359)
-	int field1166;
+	@Export("exactMoveArrive2Cycle")
+	int exactMoveArrive2Cycle;
 
 	@ObfuscatedName("cy")
 	@ObfuscatedGetter(intValue = 217964137)
-	int field1186;
+	@Export("exactMoveDirection")
+	int exactMoveDirection;
 
 	@ObfuscatedName("cw")
 	@ObfuscatedGetter(intValue = 329688161)
@@ -285,23 +297,29 @@ public abstract class Actor extends Renderable {
 
 	@ObfuscatedName("cr")
 	@ObfuscatedGetter(intValue = -1545212437)
-	int field1189 = -1;
+	@Export("recolourStartCycle")
+	int recolourStartCycle = -1;
 
 	@ObfuscatedName("ct")
 	@ObfuscatedGetter(intValue = 370010675)
-	int field1136 = -1;
+	@Export("recolourEndCycle")
+	int recolourEndCycle = -1;
 
 	@ObfuscatedName("cl")
-	byte field1191;
+	@Export("recolourHue")
+	byte recolourHue;
 
 	@ObfuscatedName("cn")
-	byte field1168;
+	@Export("recolourSaturation")
+	byte recolourSaturation;
 
 	@ObfuscatedName("cu")
-	byte field1193;
+	@Export("recolourLuminance")
+	byte recolourLuminance;
 
 	@ObfuscatedName("ce")
-	byte field1184;
+	@Export("recolourAmount")
+	byte recolourAmount;
 
 	@ObfuscatedName("cv")
 	@ObfuscatedGetter(intValue = 877961797)
@@ -332,7 +350,7 @@ public abstract class Actor extends Renderable {
 	@ObfuscatedName("dz")
 	@ObfuscatedSignature(descriptor = "[Lgl;")
 	@Export("pathTraversed")
-	class192[] pathTraversed = new class192[10];
+	MoveSpeed[] pathTraversed = new MoveSpeed[10];
 
 	@ObfuscatedName("dc")
 	@ObfuscatedGetter(intValue = 532547773)
@@ -344,7 +362,8 @@ public abstract class Actor extends Renderable {
 
 	@ObfuscatedName("dt")
 	@ObfuscatedGetter(intValue = -2087702069)
-	int field1204 = -1;
+	@Export("combatLevelChange")
+	int combatLevelChange = -1;
 
 	Actor() {
 	}

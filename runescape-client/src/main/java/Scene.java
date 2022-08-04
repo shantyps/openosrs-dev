@@ -681,14 +681,16 @@ public class Scene {
 
 	@ObfuscatedName("s")
 	@ObfuscatedSignature(descriptor = "(III)Lhl;")
-	public BoundaryObject method4129(int var1, int var2, int var3) {
+	@Export("getBoundaryObject")
+	public BoundaryObject getBoundaryObject(int var1, int var2, int var3) {
 		Tile var4 = this.tiles[var1][var2][var3];
 		return var4 == null ? null : var4.boundaryObject;
 	}
 
 	@ObfuscatedName("i")
 	@ObfuscatedSignature(descriptor = "(III)Lhv;")
-	public WallDecoration method4130(int var1, int var2, int var3) {
+	@Export("getWallObject")
+	public WallDecoration getWallObject(int var1, int var2, int var3) {
 		Tile var4 = this.tiles[var1][var2][var3];
 		return var4 == null ? null : var4.wallDecoration;
 	}

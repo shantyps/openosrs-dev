@@ -9,7 +9,8 @@ import net.runelite.mapping.Export;
 public class UrlRequest {
 	@ObfuscatedName("tz")
 	@ObfuscatedGetter(intValue = 99769733)
-	static int field1350;
+	@Export("cameraLookAtHeight")
+	static int cameraLookAtHeight;
 
 	@ObfuscatedName("lb")
 	@ObfuscatedSignature(descriptor = "Lhm;")

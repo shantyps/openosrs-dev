@@ -70,7 +70,8 @@ public class MouseRecorder implements Runnable {
 
 	@ObfuscatedName("gf")
 	@ObfuscatedSignature(descriptor = "(III)V", garbageValue = "-1517499028")
-	static void method2170(int var0, int var1) {
+	@Export("playJingle")
+	static void playJingle(int var0, int var1) {
 		if (class260.clientPreferences.method2335() != 0 && var0 != -1) {
 			FriendsChat.method6678(WorldMapRegion.field2708, var0, 0, class260.clientPreferences.method2335(), false);
 			Client.playingJingle = true;

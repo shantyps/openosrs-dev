@@ -132,12 +132,12 @@ public final class Tiles {
 	@ObfuscatedName("gw")
 	@ObfuscatedSignature(descriptor = "(Lcs;B)V", garbageValue = "35")
 	static final void method2114(Actor var0) {
-		int var1 = Math.max(1, var0.field1194 - Client.cycle);
-		int var2 = var0.field1177 * 128 + var0.field1202 * 64;
-		int var3 = var0.field1182 * 128 + var0.field1202 * 64;
+		int var1 = Math.max(1, var0.exactMoveArrive1Cycle - Client.cycle);
+		int var2 = var0.exactMoveDeltaX1 * 128 + var0.field1202 * 64;
+		int var3 = var0.exactMoveDeltaY1 * 128 + var0.field1202 * 64;
 		var0.x += (var2 - var0.x) / var1;
 		var0.y += (var3 - var0.y) / var1;
 		var0.field1142 = 0;
-		var0.orientation = var0.field1186;
+		var0.orientation = var0.exactMoveDirection;
 	}
 }

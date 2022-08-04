@@ -117,26 +117,26 @@ public class NetCache {
 			if ((var4 & 32) != 0) {
 				var4 += var0.readUnsignedByte() << 8;
 			}
-			byte var5 = class192.field2201.field2196;
+			byte var5 = MoveSpeed.field2201.speed;
 			if ((var4 & 256) != 0) {
-				var3.field1177 = var0.readByteSub();
-				var3.field1182 = var0.readByteNeg();
-				var3.field1188 = var0.readByte();
-				var3.field1183 = var0.readByteAdd();
-				var3.field1194 = var0.readUnsignedShortAdd() + Client.cycle;
-				var3.field1166 = var0.readUnsignedShortAddLE() + Client.cycle;
-				var3.field1186 = var0.readUnsignedShortLE();
+				var3.exactMoveDeltaX1 = var0.readByteSub();
+				var3.exactMoveDeltaY1 = var0.readByteNeg();
+				var3.exactMoveDeltaX2 = var0.readByte();
+				var3.exactMoveDeltaY2 = var0.readByteAdd();
+				var3.exactMoveArrive1Cycle = var0.readUnsignedShortAdd() + Client.cycle;
+				var3.exactMoveArrive2Cycle = var0.readUnsignedShortAddLE() + Client.cycle;
+				var3.exactMoveDirection = var0.readUnsignedShortLE();
 				if (var3.field1111) {
-					var3.field1177 += var3.tileX;
-					var3.field1182 += var3.tileY;
-					var3.field1188 += var3.tileX;
-					var3.field1183 += var3.tileY;
+					var3.exactMoveDeltaX1 += var3.tileX;
+					var3.exactMoveDeltaY1 += var3.tileY;
+					var3.exactMoveDeltaX2 += var3.tileX;
+					var3.exactMoveDeltaY2 += var3.tileY;
 					var3.pathLength = 0;
 				} else {
-					var3.field1177 += var3.pathX[0];
-					var3.field1182 += var3.pathY[0];
-					var3.field1188 += var3.pathX[0];
-					var3.field1183 += var3.pathY[0];
+					var3.exactMoveDeltaX1 += var3.pathX[0];
+					var3.exactMoveDeltaY1 += var3.pathY[0];
+					var3.exactMoveDeltaX2 += var3.pathX[0];
+					var3.exactMoveDeltaY2 += var3.pathY[0];
 					var3.pathLength = 1;
 				}
 				var3.field1203 = 0;
@@ -166,7 +166,7 @@ public class NetCache {
 						var3.overheadTextEffect = var6 & 255;
 						var3.overheadTextCyclesRemaining = 150;
 						var3.isAutoChatting = var8;
-						var3.field1151 = var3 != class28.localPlayer && var7.isUser && "" != Client.field719 && var12.toLowerCase().indexOf(Client.field719) == -1;
+						var3.showPublicPlayerChat = var3 != class28.localPlayer && var7.isUser && "" != Client.field719 && var12.toLowerCase().indexOf(Client.field719) == -1;
 						if (var7.isPrivileged) {
 							var13 = (var8) ? 91 : 1;
 						} else {
@@ -188,7 +188,7 @@ public class NetCache {
 				}
 			}
 			if ((var4 & 2048) != 0) {
-				Players.field1294[var2] = ((class192) (class271.findEnumerated(class165.method3305(), var0.readByteNeg())));
+				Players.field1294[var2] = ((MoveSpeed) (class271.findEnumerated(class165.method3305(), var0.readByteNeg())));
 			}
 			int var14;
 			if ((var4 & 2) != 0) {
@@ -200,12 +200,12 @@ public class NetCache {
 				Strings.performPlayerAnimation(var3, var6, var14);
 			}
 			if ((var4 & 8192) != 0) {
-				var3.field1189 = Client.cycle + var0.readUnsignedShortAdd();
-				var3.field1136 = Client.cycle + var0.readUnsignedShortAddLE();
-				var3.field1191 = var0.readByteNeg();
-				var3.field1168 = var0.readByteNeg();
-				var3.field1193 = var0.readByteSub();
-				var3.field1184 = ((byte) (var0.readUnsignedByteSub()));
+				var3.recolourStartCycle = Client.cycle + var0.readUnsignedShortAdd();
+				var3.recolourEndCycle = Client.cycle + var0.readUnsignedShortAddLE();
+				var3.recolourHue = var0.readByteNeg();
+				var3.recolourSaturation = var0.readByteNeg();
+				var3.recolourLuminance = var0.readByteSub();
+				var3.recolourAmount = ((byte) (var0.readUnsignedByteSub()));
 			}
 			if ((var4 & 512) != 0) {
 				for (var6 = 0; var6 < 3; ++var6) {
@@ -227,10 +227,10 @@ public class NetCache {
 				var3.spotAnimation = var0.readUnsignedShortLE();
 				var6 = var0.readUnsignedIntIME();
 				var3.spotAnimationHeight = var6 >> 16;
-				var3.field1178 = (var6 & '￿') + Client.cycle;
+				var3.spotAnimationStartCycle = (var6 & '￿') + Client.cycle;
 				var3.spotAnimationFrame = 0;
 				var3.spotAnimationFrameCycle = 0;
-				if (var3.field1178 > Client.cycle) {
+				if (var3.spotAnimationStartCycle > Client.cycle) {
 					var3.spotAnimationFrame = -1;
 				}
 				if (var3.spotAnimation == 65535) {
@@ -238,10 +238,10 @@ public class NetCache {
 				}
 			}
 			if ((var4 & 8) != 0) {
-				var3.field1164 = var0.readUnsignedShortLE();
+				var3.facedDirection = var0.readUnsignedShortLE();
 				if (var3.pathLength == 0) {
-					var3.orientation = var3.field1164;
-					var3.field1164 = -1;
+					var3.orientation = var3.facedDirection;
+					var3.facedDirection = -1;
 				}
 			}
 			if ((var4 & 1) != 0) {
@@ -302,13 +302,13 @@ public class NetCache {
 				if (var5 == 127) {
 					var3.resetPath(var3.tileX, var3.tileY);
 				} else {
-					class192 var16;
-					if (var5 != class192.field2201.field2196) {
-						var16 = ((class192) (class271.findEnumerated(class165.method3305(), var5)));
+					MoveSpeed var16;
+					if (var5 != MoveSpeed.field2201.speed) {
+						var16 = ((MoveSpeed) (class271.findEnumerated(class165.method3305(), var5)));
 					} else {
 						var16 = Players.field1294[var2];
 					}
-					var3.method2230(var3.tileX, var3.tileY, var16);
+					var3.move(var3.tileX, var3.tileY, var16);
 				}
 			}
 		}

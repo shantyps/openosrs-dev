@@ -5,7 +5,8 @@ import net.runelite.mapping.Export;
 public class class457 {
 	@ObfuscatedName("sj")
 	@ObfuscatedGetter(intValue = 47935360)
-	static int field4811;
+	@Export("cameraMoveToX")
+	static int cameraMoveToX;
 
 	@ObfuscatedName("o")
 	@ObfuscatedGetter(intValue = 177598951)

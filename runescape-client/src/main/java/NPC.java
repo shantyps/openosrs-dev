@@ -8,7 +8,8 @@ import net.runelite.mapping.Export;
 public final class NPC extends Actor {
 	@ObfuscatedName("su")
 	@ObfuscatedGetter(intValue = -153857664)
-	static int field1261;
+	@Export("cameraMoveToY")
+	static int cameraMoveToY;
 
 	@ObfuscatedName("o")
 	@ObfuscatedSignature(descriptor = "Lfx;")
@@ -16,7 +17,8 @@ public final class NPC extends Actor {
 	NPCComposition definition;
 
 	@ObfuscatedName("q")
-	String field1259 = "";
+	@Export("nameChange")
+	String nameChange = "";
 
 	NPC() {
 	}
@@ -24,7 +26,7 @@ public final class NPC extends Actor {
 	@ObfuscatedName("o")
 	@ObfuscatedSignature(descriptor = "(Ljava/lang/String;B)V", garbageValue = "-61")
 	void method2412(String var1) {
-		this.field1259 = (var1 == null) ? "" : var1;
+		this.nameChange = (var1 == null) ? "" : var1;
 	}
 
 	@ObfuscatedName("q")
@@ -54,11 +56,11 @@ public final class NPC extends Actor {
 				if (this.definition.size == 1) {
 					var3.isSingleTile = true;
 				}
-				if (super.field1184 != 0 && Client.cycle >= super.field1189 && Client.cycle < super.field1136) {
-					var3.overrideHue = super.field1191;
-					var3.overrideSaturation = super.field1168;
-					var3.overrideLuminance = super.field1193;
-					var3.overrideAmount = super.field1184;
+				if (super.recolourAmount != 0 && Client.cycle >= super.recolourStartCycle && Client.cycle < super.recolourEndCycle) {
+					var3.overrideHue = super.recolourHue;
+					var3.overrideSaturation = super.recolourSaturation;
+					var3.overrideLuminance = super.recolourLuminance;
+					var3.overrideAmount = super.recolourAmount;
 					var3.field2516 = ((short) (var4));
 				} else {
 					var3.overrideAmount = 0;
@@ -71,8 +73,8 @@ public final class NPC extends Actor {
 	@ObfuscatedName("f")
 	@ObfuscatedSignature(descriptor = "(B)Ljava/lang/String;", garbageValue = "124")
 	final String method2413() {
-		if (!this.field1259.isEmpty()) {
-			return this.field1259;
+		if (!this.nameChange.isEmpty()) {
+			return this.nameChange;
 		} else {
 			NPCComposition var1 = this.definition;
 			if (var1.transforms != null) {
@@ -87,7 +89,8 @@ public final class NPC extends Actor {
 
 	@ObfuscatedName("c")
 	@ObfuscatedSignature(descriptor = "(ILgl;I)V", garbageValue = "-177937130")
-	final void method2414(int var1, class192 var2) {
+	@Export("move")
+	final void move(int var1, MoveSpeed var2) {
 		int var3 = super.pathX[0];
 		int var4 = super.pathY[0];
 		if (var1 == 0) {
@@ -154,7 +157,7 @@ public final class NPC extends Actor {
 				}
 				super.pathX[0] = var1;
 				super.pathY[0] = var2;
-				super.pathTraversed[0] = class192.field2194;
+				super.pathTraversed[0] = MoveSpeed.field2194;
 				return;
 			}
 		}

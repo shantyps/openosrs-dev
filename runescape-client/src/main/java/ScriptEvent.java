@@ -8,7 +8,8 @@ import net.runelite.mapping.Export;
 public class ScriptEvent extends Node {
 	@ObfuscatedName("th")
 	@ObfuscatedGetter(intValue = -2039005153)
-	static int field1052;
+	@Export("cameraMoveToHeight")
+	static int cameraMoveToHeight;
 
 	@ObfuscatedName("at")
 	protected static String field1045;

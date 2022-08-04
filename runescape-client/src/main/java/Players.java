@@ -16,7 +16,7 @@ public class Players {
 
 	@ObfuscatedName("u")
 	@ObfuscatedSignature(descriptor = "[Lgl;")
-	static class192[] field1294 = new class192[2048];
+	static MoveSpeed[] field1294 = new MoveSpeed[2048];
 
 	@ObfuscatedName("c")
 	@ObfuscatedSignature(descriptor = "[Lqw;")

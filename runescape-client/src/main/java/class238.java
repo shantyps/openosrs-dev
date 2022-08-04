@@ -68,7 +68,7 @@ public class class238 {
 				var9 = Character.toLowerCase(((char) (var9)));
 				var10 = Character.toLowerCase(((char) (var10)));
 				if (var10 != var9) {
-					return PlayerCompositionColorTextureOverride.lowercaseChar(((char) (var9)), var2) - PlayerCompositionColorTextureOverride.lowercaseChar(((char) (var10)), var2);
+					return PlayerEquipmentItem.lowercaseChar(((char) (var9)), var2) - PlayerEquipmentItem.lowercaseChar(((char) (var10)), var2);
 				}
 			}
 		} 
@@ -89,7 +89,7 @@ public class class238 {
 				var11 = Character.toLowerCase(((char) (var11)));
 				var12 = Character.toLowerCase(var12);
 				if (var11 != var12) {
-					return PlayerCompositionColorTextureOverride.lowercaseChar(((char) (var11)), var2) - PlayerCompositionColorTextureOverride.lowercaseChar(var12, var2);
+					return PlayerEquipmentItem.lowercaseChar(((char) (var11)), var2) - PlayerEquipmentItem.lowercaseChar(var12, var2);
 				}
 			}
 		}
@@ -101,7 +101,7 @@ public class class238 {
 				var12 = var0.charAt(var11);
 				char var13 = var1.charAt(var11);
 				if (var12 != var13) {
-					return PlayerCompositionColorTextureOverride.lowercaseChar(var12, var2) - PlayerCompositionColorTextureOverride.lowercaseChar(var13, var2);
+					return PlayerEquipmentItem.lowercaseChar(var12, var2) - PlayerEquipmentItem.lowercaseChar(var13, var2);
 				}
 			}
 			return 0;

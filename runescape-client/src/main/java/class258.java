@@ -75,7 +75,8 @@ public class class258 {
 
 	@ObfuscatedName("kn")
 	@ObfuscatedSignature(descriptor = "(IIII)Lcd;", garbageValue = "177968651")
-	static final InterfaceParent method5185(int var0, int var1, int var2) {
+	@Export("ifOpenSub")
+	static final InterfaceParent ifOpenSub(int var0, int var1, int var2) {
 		InterfaceParent var3 = new InterfaceParent();
 		var3.group = var1;
 		var3.type = var2;

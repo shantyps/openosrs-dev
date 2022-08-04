@@ -190,13 +190,13 @@ public enum WorldMapSectionType implements MouseWheel {
 			var0 = 383;
 		}
 		if (UserComparator9.cameraPitch < var0) {
-			UserComparator9.cameraPitch = (var0 - UserComparator9.cameraPitch) * ScriptFrame.field459 / 1000 + UserComparator9.cameraPitch + class83.field1082;
+			UserComparator9.cameraPitch = (var0 - UserComparator9.cameraPitch) * ScriptFrame.cameraLookAtAcceleration / 1000 + UserComparator9.cameraPitch + class83.cameraLookAtSpeed;
 			if (UserComparator9.cameraPitch > var0) {
 				UserComparator9.cameraPitch = var0;
 			}
 		}
 		if (UserComparator9.cameraPitch > var0) {
-			UserComparator9.cameraPitch -= (UserComparator9.cameraPitch - var0) * ScriptFrame.field459 / 1000 + class83.field1082;
+			UserComparator9.cameraPitch -= (UserComparator9.cameraPitch - var0) * ScriptFrame.cameraLookAtAcceleration / 1000 + class83.cameraLookAtSpeed;
 			if (UserComparator9.cameraPitch < var0) {
 				UserComparator9.cameraPitch = var0;
 			}
@@ -209,11 +209,11 @@ public enum WorldMapSectionType implements MouseWheel {
 			var2 += 2048;
 		}
 		if (var2 > 0) {
-			PendingSpawn.cameraYaw = var2 * ScriptFrame.field459 / 1000 + PendingSpawn.cameraYaw + class83.field1082;
+			PendingSpawn.cameraYaw = var2 * ScriptFrame.cameraLookAtAcceleration / 1000 + PendingSpawn.cameraYaw + class83.cameraLookAtSpeed;
 			PendingSpawn.cameraYaw &= 2047;
 		}
 		if (var2 < 0) {
-			PendingSpawn.cameraYaw -= class83.field1082 + -var2 * ScriptFrame.field459 / 1000;
+			PendingSpawn.cameraYaw -= class83.cameraLookAtSpeed + -var2 * ScriptFrame.cameraLookAtAcceleration / 1000;
 			PendingSpawn.cameraYaw &= 2047;
 		}
 		int var3 = var1 - PendingSpawn.cameraYaw;

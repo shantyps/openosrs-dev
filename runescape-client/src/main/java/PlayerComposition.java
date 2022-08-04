@@ -34,7 +34,6 @@ public class PlayerComposition {
 	@ObfuscatedGetter(intValue = -1435368141)
 	@Export("npcTransformId")
 	public int npcTransformId;
-
 	@ObfuscatedName("c")
 	@ObfuscatedGetter(longValue = -8544801709963043315L)
 	@Export("hash")
@@ -47,15 +46,15 @@ public class PlayerComposition {
 	@ObfuscatedName("z")
 	@ObfuscatedSignature(descriptor = "[Lfy;")
 	@Export("playerCompositionColorTextureOverrides")
-	PlayerCompositionColorTextureOverride[] playerCompositionColorTextureOverrides;
+	PlayerEquipmentItem[] playerEquipmentItems;
 
 	@ObfuscatedName("j")
 	boolean field3334 = false;
 
 	@ObfuscatedName("o")
 	@ObfuscatedSignature(descriptor = "([I[Lfy;Z[IZII)V", garbageValue = "997871682")
-	public void method5572(int[] var1, PlayerCompositionColorTextureOverride[] var2, boolean var3, int[] var4, boolean var5, int var6) {
-		this.playerCompositionColorTextureOverrides = var2;
+	public void method5572(int[] var1, PlayerEquipmentItem[] var2, boolean var3, int[] var4, boolean var5, int var6) {
+		this.playerEquipmentItems = var2;
 		this.field3334 = var3;
 		this.update(var1, var4, var5, var6);
 	}
@@ -259,18 +258,18 @@ public class PlayerComposition {
 							ItemComposition var22 = class258.ItemDefinition_get(var13 - 512);
 							ModelData var15 = var22.method3710(this.isFemale);
 							if (var15 != null) {
-								if (this.playerCompositionColorTextureOverrides != null) {
-									PlayerCompositionColorTextureOverride var16 = this.playerCompositionColorTextureOverrides[var12];
+								if (this.playerEquipmentItems != null) {
+									PlayerEquipmentItem var16 = this.playerEquipmentItems[var12];
 									if (var16 != null) {
 										int var17;
-										if (var16.playerCompositionRecolorTo != null && var22.recolorFrom != null && var16.playerCompositionRecolorTo.length == var22.recolorTo.length) {
+										if (var16.recolorTo != null && var22.recolorFrom != null && var16.recolorTo.length == var22.recolorTo.length) {
 											for (var17 = 0; var17 < var22.recolorFrom.length; ++var17) {
-												var15.recolor(var22.recolorTo[var17], var16.playerCompositionRecolorTo[var17]);
+												var15.recolor(var22.recolorTo[var17], var16.recolorTo[var17]);
 											}
 										}
-										if (var16.playerCompositionRetextureTo != null && var22.retextureFrom != null && var16.playerCompositionRetextureTo.length == var22.retextureTo.length) {
+										if (var16.retextureTo != null && var22.retextureFrom != null && var16.retextureTo.length == var22.retextureTo.length) {
 											for (var17 = 0; var17 < var22.retextureFrom.length; ++var17) {
-												var15.retexture(var22.retextureTo[var17], var16.playerCompositionRetextureTo[var17]);
+												var15.retexture(var22.retextureTo[var17], var16.retextureTo[var17]);
 											}
 										}
 									}

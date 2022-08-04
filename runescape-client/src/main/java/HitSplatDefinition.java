@@ -369,8 +369,8 @@ public class HitSplatDefinition extends DualNode {
 				class258.method5186(22050, !Client.isLowDetail, 2);
 				MidiPcmStream var28 = new MidiPcmStream();
 				var28.method5277(9, 128);
-				class192.pcmPlayer0 = MusicPatch.method5443(GameEngine.taskHandler, 0, 22050);
-				class192.pcmPlayer0.setStream(var28);
+				MoveSpeed.pcmPlayer0 = MusicPatch.method5443(GameEngine.taskHandler, 0, 22050);
+				MoveSpeed.pcmPlayer0.setStream(var28);
 				var30 = WorldMapRegion.archive15;
 				var2 = InvDefinition.archive14;
 				var22 = WorldMapArchiveLoader.archive4;
@@ -485,7 +485,7 @@ public class HitSplatDefinition extends DualNode {
 							Archive var15 = class1.archive13;
 							class228.Widget_archive = var12;
 							class7.Widget_modelsArchive = var13;
-							class192.Widget_spritesArchive = var14;
+							MoveSpeed.Widget_spritesArchive = var14;
 							JagexCache.Widget_fontsArchive = var15;
 							Widget.Widget_interfaceComponents = new Widget[class228.Widget_archive.getGroupCount()][];
 							GameObject.Widget_loadedInterfaces = new boolean[class228.Widget_archive.getGroupCount()];

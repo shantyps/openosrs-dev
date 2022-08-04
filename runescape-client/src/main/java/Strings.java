@@ -82,17 +82,17 @@ public class Strings {
 				var0.sequenceFrame = 0;
 				var0.sequenceFrameCycle = 0;
 				var0.sequenceDelay = var2;
-				var0.field1174 = 0;
+				var0.currentSequenceFrameIndex = 0;
 			}
 			if (var3 == 2) {
-				var0.field1174 = 0;
+				var0.currentSequenceFrameIndex = 0;
 			}
 		} else if (var1 == -1 || var0.sequence == -1 || class14.SequenceDefinition_get(var1).field2168 >= class14.SequenceDefinition_get(var0.sequence).field2168) {
 			var0.sequence = var1;
 			var0.sequenceFrame = 0;
 			var0.sequenceFrameCycle = 0;
 			var0.sequenceDelay = var2;
-			var0.field1174 = 0;
+			var0.currentSequenceFrameIndex = 0;
 			var0.field1203 = var0.pathLength;
 		}
 	}

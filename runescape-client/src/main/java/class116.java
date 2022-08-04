@@ -76,16 +76,16 @@ public enum class116 implements MouseWheel {
 		if (WorldMapLabelSize.cameraX == Tiles.field993 && ScriptFrame.field461 == class123.cameraY && Widget.cameraZ == class122.field1500 && Canvas.field164 == UserComparator9.cameraPitch && class263.field3029 == PendingSpawn.cameraYaw) {
 			Client.field745 = false;
 			Client.isCameraLocked = false;
-			WorldMapLabelSize.field2673 = 0;
-			LoginScreenAnimation.field1233 = 0;
-			UrlRequest.field1350 = 0;
-			class83.field1082 = 0;
-			ScriptFrame.field459 = 0;
-			SoundCache.field325 = 0;
-			class115.field1419 = 0;
-			class457.field4811 = 0;
-			NPC.field1261 = 0;
-			ScriptEvent.field1052 = 0;
+			WorldMapLabelSize.cameraLookAtX = 0;
+			LoginScreenAnimation.cameraLookAtY = 0;
+			UrlRequest.cameraLookAtHeight = 0;
+			class83.cameraLookAtSpeed = 0;
+			ScriptFrame.cameraLookAtAcceleration = 0;
+			SoundCache.cameraMoveToAcceleration = 0;
+			class115.cameraMoveToSpeed = 0;
+			class457.cameraMoveToX = 0;
+			NPC.cameraMoveToY = 0;
+			ScriptEvent.cameraMoveToHeight = 0;
 		}
 	}
 

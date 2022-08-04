@@ -156,7 +156,7 @@ public class class131 {
 			} else if (var2 > var4) {
 				var0.orientation = 0;
 			}
-			class192 var5 = var0.pathTraversed[var0.pathLength - 1];
+			MoveSpeed var5 = var0.pathTraversed[var0.pathLength - 1];
 			if (var3 - var10 <= 256 && var3 - var10 >= -256 && var4 - var2 <= 256 && var4 - var2 >= -256) {
 				int var6 = var0.orientation - var0.rotation & 2047;
 				if (var6 > 1024) {
@@ -205,9 +205,9 @@ public class class131 {
 						--var0.field1142;
 					}
 				}
-				if (var5 == class192.field2197) {
+				if (var5 == MoveSpeed.field2197) {
 					var8 <<= 1;
-				} else if (var5 == class192.field2195) {
+				} else if (var5 == MoveSpeed.field2195) {
 					var8 >>= 1;
 				}
 				if (var8 >= 8) {

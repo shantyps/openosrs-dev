@@ -325,7 +325,8 @@ public class Widget extends Node {
 
 	@ObfuscatedName("cy")
 	@ObfuscatedGetter(intValue = 1530325059)
-	public int field3421;
+	@Export("modelRotation")
+	public int modelRotation;
 
 	@ObfuscatedName("cw")
 	@ObfuscatedGetter(intValue = -620853285)
@@ -746,7 +747,7 @@ public class Widget extends Node {
 		this.modelAngleY = 0;
 		this.modelAngleZ = 0;
 		this.modelZoom = 100;
-		this.field3421 = 0;
+		this.modelRotation = 0;
 		this.field3422 = 0;
 		this.modelOrthog = false;
 		this.modelTransparency = false;
@@ -1064,7 +1065,7 @@ public class Widget extends Node {
 			this.modelOrthog = var1.readUnsignedByte() == 1;
 			var1.readUnsignedShort();
 			if (this.widthAlignment != 0) {
-				this.field3421 = var1.readUnsignedShort();
+				this.modelRotation = var1.readUnsignedShort();
 			}
 			if (this.heightAlignment != 0) {
 				var1.readUnsignedShort();
@@ -1203,7 +1204,7 @@ public class Widget extends Node {
 			if (var6 != null) {
 				return var6;
 			} else {
-				var6 = SoundSystem.SpriteBuffer_getSprite(class192.Widget_spritesArchive, var7, 0);
+				var6 = SoundSystem.SpriteBuffer_getSprite(MoveSpeed.Widget_spritesArchive, var7, 0);
 				if (var6 == null) {
 					field3363 = true;
 					return null;
@@ -1292,7 +1293,7 @@ public class Widget extends Node {
 			if (var1 != null) {
 				return var1;
 			} else {
-				AbstractArchive var3 = class192.Widget_spritesArchive;
+				AbstractArchive var3 = MoveSpeed.Widget_spritesArchive;
 				AbstractArchive var4 = JagexCache.Widget_fontsArchive;
 				int var5 = this.fontId;
 				byte[] var7 = var3.takeFile(var5, 0);
@@ -1333,7 +1334,7 @@ public class Widget extends Node {
 				if (var3 != null) {
 					return var3;
 				} else {
-					var3 = SoundSystem.SpriteBuffer_getSprite(class192.Widget_spritesArchive, var2, 0);
+					var3 = SoundSystem.SpriteBuffer_getSprite(MoveSpeed.Widget_spritesArchive, var2, 0);
 					if (var3 != null) {
 						Widget_cachedSprites.put(var3, ((long) (var2)));
 					} else {

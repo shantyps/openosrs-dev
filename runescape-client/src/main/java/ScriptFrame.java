@@ -9,7 +9,8 @@ import net.runelite.mapping.Export;
 public class ScriptFrame {
 	@ObfuscatedName("tp")
 	@ObfuscatedGetter(intValue = -2138418185)
-	static int field459;
+	@Export("cameraLookAtAcceleration")
+	static int cameraLookAtAcceleration;
 
 	@ObfuscatedName("tu")
 	@ObfuscatedGetter(intValue = 658947165)

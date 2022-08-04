@@ -152,8 +152,8 @@ class class12 extends SSLSocket {
 		if (SequenceDefinition.pcmPlayer1 != null) {
 			SequenceDefinition.pcmPlayer1.run();
 		}
-		if (class192.pcmPlayer0 != null) {
-			class192.pcmPlayer0.run();
+		if (MoveSpeed.pcmPlayer0 != null) {
+			MoveSpeed.pcmPlayer0.run();
 		}
 	}
 

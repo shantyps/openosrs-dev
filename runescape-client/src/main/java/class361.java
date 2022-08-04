@@ -96,7 +96,7 @@ class class361 implements Comparator {
 			return 1;
 		} else if (var0 == ScriptOpcodes.SOUND_JINGLE) {
 			TaskHandler.Interpreter_intStackSize -= 2;
-			MouseRecorder.method2170(Interpreter.Interpreter_intStack[TaskHandler.Interpreter_intStackSize], Interpreter.Interpreter_intStack[TaskHandler.Interpreter_intStackSize + 1]);
+			MouseRecorder.playJingle(Interpreter.Interpreter_intStack[TaskHandler.Interpreter_intStackSize], Interpreter.Interpreter_intStack[TaskHandler.Interpreter_intStackSize + 1]);
 			return 1;
 		} else {
 			class83 var3;

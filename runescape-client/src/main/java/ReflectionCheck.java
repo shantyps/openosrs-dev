@@ -126,8 +126,8 @@ public class ReflectionCheck extends Node {
 		if (Client.field581 / 256 > var4) {
 			var4 = Client.field581 / 256;
 		}
-		if (Client.field678[4] && Client.field654[4] + 128 > var4) {
-			var4 = Client.field654[4] + 128;
+		if (Client.cameraShaking[4] && Client.cameraMoveIntensity[4] + 128 > var4) {
+			var4 = Client.cameraMoveIntensity[4] + 128;
 		}
 		int var35 = Client.camAngleY & 2047;
 		var6 = ObjectSound.oculusOrbFocalPointX;
@@ -293,8 +293,8 @@ public class ReflectionCheck extends Node {
 		var15 = UserComparator9.cameraPitch;
 		var16 = PendingSpawn.cameraYaw;
 		for (var17 = 0; var17 < 5; ++var17) {
-			if (Client.field678[var17]) {
-				var18 = ((int) (Math.random() * ((double) (Client.field747[var17] * 2 + 1)) - ((double) (Client.field747[var17])) + Math.sin(((double) (Client.field749[var17])) / 100.0 * ((double) (Client.field653[var17]))) * ((double) (Client.field654[var17]))));
+			if (Client.cameraShaking[var17]) {
+				var18 = ((int) (Math.random() * ((double) (Client.cameraShakeIntensity[var17] * 2 + 1)) - ((double) (Client.cameraShakeIntensity[var17])) + Math.sin(((double) (Client.cameraShakeSpeed[var17])) / 100.0 * ((double) (Client.cameraShakeCycle[var17]))) * ((double) (Client.cameraMoveIntensity[var17]))));
 				if (var17 == 0) {
 					WorldMapLabelSize.cameraX += var18;
 				}

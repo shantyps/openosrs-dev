@@ -85,8 +85,8 @@ public class WorldMapIcon_0 extends AbstractWorldMapIcon {
 						String var5 = var0.method2413();
 						int var6;
 						int var9;
-						if (var4.combatLevel != 0 && var0.field1204 != 0) {
-							var6 = (var0.field1204 != -1) ? var0.field1204 : var4.combatLevel;
+						if (var4.combatLevel != 0 && var0.combatLevelChange != 0) {
+							var6 = (var0.combatLevelChange != -1) ? var0.combatLevelChange : var4.combatLevel;
 							var9 = class28.localPlayer.combatLevel;
 							int var10 = var9 - var6;
 							String var8;

@@ -26,7 +26,8 @@ public enum class83 implements MouseWheel {
 	field1078(5, 6);
 	@ObfuscatedName("tj")
 	@ObfuscatedGetter(intValue = -1155769579)
-	static int field1082;
+	@Export("cameraLookAtSpeed")
+	static int cameraLookAtSpeed;
 
 	@ObfuscatedName("t")
 	@ObfuscatedSignature(descriptor = "Liw;")

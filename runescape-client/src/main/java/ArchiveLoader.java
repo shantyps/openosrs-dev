@@ -56,7 +56,7 @@ public class ArchiveLoader {
 	@ObfuscatedName("fg")
 	@ObfuscatedSignature(descriptor = "(I)J", garbageValue = "-1129495977")
 	static long method2130() {
-		return Client.field614;
+		return Client.userRegistrationId;
 	}
 
 	@ObfuscatedName("is")
