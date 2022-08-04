@@ -450,5 +450,13 @@ public interface Actor extends Renderable, Locatable
 	 */
 	boolean isDead();
 
+	/**
+	 * Sets the dead status of this actor
+	 *
+	 * @param dead
+	 * @see #isDead()
+	 */
+	void setDead(boolean dead);
+
 	boolean isMoving();
 }
