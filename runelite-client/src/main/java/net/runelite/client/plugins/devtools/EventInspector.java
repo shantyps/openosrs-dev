@@ -743,16 +743,15 @@ public class EventInspector extends DevToolsFrame {
 
     @Subscribe
     public void cameraLookAtEvent(CameraLookAtEvent event) {
-        final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraLookAtX(), event.getCameraLookAtY());
+        final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraLookAtX() >> 7 & 0xFF, event.getCameraLookAtY() >> 14 & 0xFF);
         final WorldPoint worldPoint = fromLocal(client, localPoint);
-
         addLine("Camera look at",
                 "CamLookAt(" + formatLocation(worldPoint) + ", " + "height = " + event.getCameraLookAtHeight() + ", speed = " + event.getCameraLookAtSpeed() + ", " + "acceleration = " + event.getCameraLookAtAcceleration() + ")", true, camera);
     }
 
     @Subscribe
     public void cameraMoveToEvent(CameraMoveToEvent event) {
-        final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraMoveToX(), event.getCameraMoveToY());
+        final LocalPoint localPoint = LocalPoint.fromScene(event.getCameraMoveToX() >> 7 & 0xFF, event.getCameraMoveToY() >> 7 & 0xFF);
         final WorldPoint worldPoint = fromLocal(client, localPoint);
         addLine("Camera move to",
                 "CamMoveTo(" + formatLocation(worldPoint) + ", " + "height = " + event.getCameraMoveToHeight() + ", speed = " + event.getCameraMoveToSpeed() + ", " + "acceleration = " + event.getCameraMoveToAcceleration() + ")", true, camera);
